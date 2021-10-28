@@ -37,7 +37,7 @@ public class MemberPageController {
 	@GetMapping("/")
 	public String home() {
 		System.out.println("透過頁面控制器進入首頁");
-		return "index";
+		return "index";	
 	}
 	
 	@GetMapping("/addMember")

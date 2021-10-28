@@ -31,7 +31,13 @@
 <link rel="stylesheet" href="css/vertical-layout-light/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="images/favicon.png" />
-
+<script type="text/javascript">
+	function nofind(){
+		var img=event.srcElement;
+		img.src="images/default.jpg"; //替換的圖片
+		img.onerror=null; //控制不要一直觸發錯誤
+	  }
+	  </script>
 </head>
 
 <body>
@@ -115,7 +121,7 @@
 						</div></li>
 					<li class="nav-item nav-profile dropdown"><a
 						class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-						id="profileDropdown"> <img src="images/faces/face28.jpg"
+						id="profileDropdown"> <img src="images/Members/${memberData.id}.jpg"
 							alt="profile" />
 					</a>
 						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -430,7 +436,7 @@
 											</thead>
 											<c:forEach  var='theMember' items='${members}'>
 												<tr>
-													<td><img src="images/Members/${theMember.id}.jpg" alt="" onerror="nofind();"></td>
+													<td><img src="images/Members/${theMember.id}.jpg" alt="" onerror="nofind()"></td>
 													<td>${theMember.id}</td>
 													<td>${theMember.name}</td>
 													<td>${theMember.status}</td>
@@ -474,13 +480,7 @@
 				<!-- endinject -->
 				<!-- Custom js for this page-->
 				<!-- End custom js for this page-->
-				<script type="text/javascript">
-				function nofind(){
-					var img=event.srcElement;
-					img.src="images/default.jpg"; //替換的圖片
-					img.onerror=null; //控制不要一直觸發錯誤
-				  }
-				  </script>
+				
 				<script>
 		function deleteOrder(deleteId) {
             $.ajax({
