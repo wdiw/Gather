@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -43,10 +44,21 @@ public class SponsorshipController {
 		this.servletContext = servletContext;
 	}
 
-	@GetMapping("/s")
+	@GetMapping("/addorder")
 	public String addJsp(Model model) {
 		return "Sponsorship/addOrder";
 
+	}
+
+	@GetMapping("/redirectAll")
+	public String redirectrders() {
+		return "redirect:/orders";
+
+	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "Sponsorship/index";
 	}
 	
 	// 查詢所有訂單
@@ -58,10 +70,12 @@ public class SponsorshipController {
 		return "Sponsorship/orders";
 	}
 
-//	// 查單筆
-	@GetMapping("/test")
-	public String TestBean() {
-		return "Sponsorship/orders";
+	// 查單筆
+	@GetMapping("/order/{sID}")
+	public String order(@PathVariable("sID") Integer sID, Model model) {
+		SponsorshipBean sBean = sponsorshipService.getOrderByID(sID);
+		model.addAttribute("sBean", sBean);
+		return "Sponsorship/updateOrder";
 	}
 
 	// 新增訂單
@@ -92,48 +106,80 @@ public class SponsorshipController {
 
 	// 刪除訂單
 
-	@DeleteMapping("/order/{sID}")
+	@DeleteMapping("/order/delete/{sID}")
 	@ResponseBody
 	public ResponseEntity<String> getDeleteNewOrderForm(@PathVariable("sID") int sID) {
 		sponsorshipService.deleteOrderByOrderID(sID);
-		return  new ResponseEntity<String>(HttpStatus.OK);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
+
+//	@PostMapping("/order/{sID}")
+//	@ResponseBody
+//	public ResponseEntity<String> addUpdateOrderInfo(@PathVariable("sID") int sID,
+//			@RequestParam("sName") String sName,
+//			@RequestParam("sPID") int sPID,
+//			 
+//			 @RequestParam("sPName") String sPName,
+//			  
+//			 @RequestParam("sAmount") int sAmount,
+//			  
+//			  @RequestParam(required = false, name = "projectImage") MultipartFile photo
+//			  )
+//			{
+//		System.out.println("郭童童");
+//		System.out.println(sName);
+//		System.out.println(sPID);
+//		System.out.println(sPName);
+//		System.out.println(sAmount);
+//		System.out.println(photo);
+//		return new ResponseEntity<String>(HttpStatus.OK);
+//	}
 
 	// 修改訂單
 
-	@PutMapping(path = "/order/{sID}", consumes = { "multipart/form-data" })
+	@PostMapping("/order/{sID}")
+
 	@ResponseBody
-	public ResponseEntity<String> addUpdateOrderInfo(HttpServletRequest request, @PathVariable("sID") int sID,
-			@RequestParam("sName") String sName, @RequestParam("sPID") int sPID, @RequestParam("sPName") String sPName,
-			@RequestParam("sAmount") int sAmount, @RequestParam("image") MultipartFile photo) throws IOException {
+	public ResponseEntity<String> addUpdateOrderInfo(@PathVariable("sID") int sID,
 
-		SponsorshipBean sBean = sponsorshipService.getOrderByID(sID);
+			@RequestParam("sName") String sName,
+
+			@RequestParam("sPID") int sPID,
+
+			@RequestParam("sPName") String sPName,
+
+			@RequestParam("sAmount") int sAmount,
+
+			@RequestParam(required = false, name = "projectImage") MultipartFile photo) throws IOException {
+
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
 		byte[] image = new byte[1024];
-		InputStream is = sBean.getPhoto().getInputStream();
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-		int length;
-		while ((length = is.read(image)) != -1) {
-			baos.write(image, 0, length);
+		if (photo.isEmpty()) {
+			SponsorshipBean sBean = sponsorshipService.getOrderByID(sID);
+			image = sBean.getImage();
+		} else {
+			InputStream is = photo.getInputStream();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			
+			int length;
+			while ((length = is.read(image)) != -1) {
+				baos.write(image, 0, length);
+			}
+			
+			image = baos.toByteArray();
 		}
-
-		image = baos.toByteArray();
-
-		sBean.setImage(image);
-		sBean.setsName(sName);
-		sBean.setsID(sID);
-		sBean.setsPID(sPID);
-		sBean.setsPName(sPName);
-		sBean.setsAmount(sAmount);
+		
+		String base64String = Base64.getEncoder().encodeToString(image);
+		SponsorshipBean sBean = new SponsorshipBean(sID, sName, sPID, sPName, sAmount, base64String, image);
 
 		sponsorshipService.updateOrder(sBean);
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
-		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(sBean));
+		return new ResponseEntity<String>(HttpStatus.OK);
+
 	}
 
 	// 圖片從資料庫輸出
+
 	@GetMapping("/getPicture/{sID}")
 	public ResponseEntity<byte[]> getPicture(HttpServletResponse resp, @PathVariable Integer sID) {
 		HttpHeaders headers = new HttpHeaders();

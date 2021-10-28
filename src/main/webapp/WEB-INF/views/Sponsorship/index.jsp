@@ -1,47 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
-</script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Gather Admin</title>
   <!-- plugins:css -->
-  <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
   <link rel="stylesheet" href="vendors/feather/feather.css">
   <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="vendors/select2/select2.min.css">
-  <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+  <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
-
 <body>
   <div class="container-scroller">
-    <!-- partial:../../partials/_navbar.html -->
+    <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../index.html"><img src="images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -136,7 +124,7 @@
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:../../partials/_settings-panel.html -->
+      <!-- partial:partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
         <div id="theme-settings" class="settings-panel">
@@ -250,7 +238,7 @@
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="../../images/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="images/faces/face1.jpg" alt="image"><span class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
                   <p>Available</p>
@@ -306,11 +294,11 @@
         </div>
       </div>
       <!-- partial -->
-      <!-- partial:../../partials/_sidebar.html -->
+      <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../../index.html">
+            <a class="nav-link" href="index.html">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -376,76 +364,23 @@
               </ul>
             </div>
           </li>
+         
         </ul>
       </nav>
-      <!-- partial -->
-      <div class="main-panel">        
-        <div class="content-wrapper">
-     
-           
-            
-            <div class="col-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">新增訂單</h4>
-                  <p class="card-description">
-                    Add Order
-                  </p>
-                  <form  id="form" class="forms-sample">
-                    <div class="form-group">
-                      <label for="exampleInputName1">贊助者</label>
-                      <input type="text" class="form-control" name="sName" id="st1" placeholder="請輸入贊助者名稱">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail3">專案編號</label>
-                      <input type="text" class="form-control" name="sPID" id="st1" placeholder="請輸入專案編號">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword4">專案名稱</label>
-                      <input type="text" class="form-control" name="sPName" id="st1" placeholder="請輸入專案名稱">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword4">贊助金額</label>
-                      <input type="text" class="form-control" name="sAmount" id="st1" placeholder="請輸入贊助金額">
-                    </div>
-                    <div class="form-group">
-                      <label>上傳圖片</label>
-                      <input type="file" name="projectImage" class="file-upload-default" id="projectImage">
-                      <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="上傳圖片" >
-                        <span class="input-group-append">
-                          <button class="file-upload-browse btn btn-primary" type="button">上傳</button>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="form-group">
-					
-						<img style="position: relative; left: 250px" src=" " width="350"
-							height="300" alt="請選擇照片" id="showPic" class="img-rounded">
-					</div>
-                    <button id="btnAdd" type='submit' name='submit' class="btn btn-primary mr-2">送出</button>
-                    <button class="btn btn-light">取消</button>
-                  </form>
-                </div>
-              
-            </div>
-       
-        <!-- content-wrapper ends -->
-        <!-- partial:../../partials/_footer.html -->
         
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+
   <!-- plugins:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
-  <script src="vendors/select2/select2.min.js"></script>
+  <script src="vendors/chart.js/Chart.min.js"></script>
+  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="js/dataTables.select.min.js"></script>
+
   <!-- End plugin js for this page -->
   <!-- inject:js -->
   <script src="js/off-canvas.js"></script>
@@ -455,115 +390,10 @@
   <script src="js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="js/file-upload.js"></script>
-  <script src="js/typeahead.js"></script>
-  <script src="js/select2.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
-  
-  <script>
-	var pic;
-		$('#projectImage').change(function() {
-			var projectImage = $("#projectImage")[0].files[0];
-			var reader = new FileReader;	
-			reader.onload = function(e) {
-				$('#showPic').attr('src', e.target.result);
-				pic=e.target.result;
-// 				console.log(e.target.result);
-			}
-			reader.readAsDataURL(projectImage);
-			console.log(projectImage);
-		})
-
-
-        var form = document.getElementById("form");
-        $("#form").on("submit", function(e){
-            /* =====for formData&MultipartFile =====*/
-            var formData = new FormData(form);
-            
-            /* =====for JSON =====*/
-            
-            var html = "";
-            var inputData = $(".st1").slice(0, 5);
-            // html += + "name" + $("#name").val() + "<br/>";
-            for (let i = 0; i < inputData.length; i++) {
-                let name = inputData.eq(i).attr("name");
-                let value = (inputData.eq(i).val() != "") ? inputData.eq(i).val() : "無";
-                html += name+": "+value+"</br>";
-            }
-            console.log(html);
-            
-            //改用ajax傳送 棄用原本的form傳送
-            e.preventDefault();
-            
-       	
-           
-            Swal.fire({
-                title: '您確定要送出嗎？',
-                icon: 'question',
-                html: html,
-                imageUrl: pic,
-                imageWidth: 400,
-                imageHeight: 200,
-                showCancelButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type:"post",
-                        url:"orders",
-                        data: formData,
-        //                 data: json,
-        //                 dataType:"json",
-        //                 contentType: "application/json; charset=utf-8",
-                        contentType: false, //required
-                        processData: false, // required
-                        /*一定要加*/
-                        mimeType: 'multipart/form-data', //有圖片就要加這行
-                        /*一定要加*/
-                        success: function(data){
-                            var jsonData = JSON.parse(data);
-                            console.log("Success:" + "\sID:" +jsonData.sID + "\sName:" +jsonData.sName) ;
-
-                            var html1 = "";
-                            for (const key in jsonData) {
-                                let val = (jsonData[key] != "") ? jsonData[key] : "無";
-                                if (!(key == "image" || key == "base64String")) {
-//                                 console.log(key);
-//                                 console.log(jsonData[key]);
-                                    html1 += key+": "+val;
-                                    html1 += "<br/>";
-                                } 
-//                                 else if (key == "base64String"){
-//                                     html += "<img src='data:image;base64,"+jsonData.base64String+"'/>";
-//                                 }
-                            };
-                            // console.log(html);
-
-                            Swal.fire({
-                                title: '已新增成功！',
-                                icon: 'success',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.href= "<c:url value='/orders'/>";
-                                  }
-                                })
-                                    
-                        },
-                        error: function(e, text){
-                            console.log(e.status);
-                            console.log(text);
-                        }
-                    })
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: '已取消送出請求',
-                        text: '您的變更將不會被儲存!'
-                    })
-                }
-            })
-        })
-    </script>
-  
 </body>
 
 </html>
+

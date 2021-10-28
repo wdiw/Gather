@@ -25,8 +25,7 @@ public class SponsorshipServiceImpl implements SponsorshipService {
 	}
 
 	@Override
-	@Query("FROM SponsorshipBean S WHERE S.sID = :sID ")
-	public SponsorshipBean getOrderByID(@Param("sID") Integer sID) {
+	public SponsorshipBean getOrderByID(Integer sID) {
 		SponsorshipBean sBean = sponsorshipRepository.getById(sID);
 		return sBean;
 	}
@@ -43,7 +42,7 @@ public class SponsorshipServiceImpl implements SponsorshipService {
 
 	@Override
 	public SponsorshipBean updateOrder(SponsorshipBean sBean) {
-		return sponsorshipRepository.save(sBean);
+		return sponsorshipRepository.saveAndFlush(sBean);
 	}
 
 	@Override

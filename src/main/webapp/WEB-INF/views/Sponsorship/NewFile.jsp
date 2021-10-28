@@ -387,26 +387,30 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">新增訂單</h4>
+                  <h4 class="card-title">修改訂單</h4>
                   <p class="card-description">
-                    Add Order
+                    Edit Order
                   </p>
                   <form  id="form" class="forms-sample">
                     <div class="form-group">
-                      <label for="exampleInputName1">贊助者</label>
-                      <input type="text" class="form-control" name="sName" id="st1" placeholder="請輸入贊助者名稱">
+                      <label for='sID'>訂單編號</label>
+                      <input name="sID" id="sID" value="${sBean.sID}" readonly="readonly">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail3">專案編號</label>
-                      <input type="text" class="form-control" name="sPID" id="st1" placeholder="請輸入專案編號">
+                      <label for="sName">贊助者</label>
+                      <input id="sName" name="sName" value="${sBean.sName}" type='text'>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword4">專案名稱</label>
-                      <input type="text" class="form-control" name="sPName" id="st1" placeholder="請輸入專案名稱">
+                      <label for="sPID">專案編號</label>
+                      <input id="sPID" name="sPID" value="${sBean.sPID}" type='text'>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword4">贊助金額</label>
-                      <input type="text" class="form-control" name="sAmount" id="st1" placeholder="請輸入贊助金額">
+                      <label for="sPName">專案名稱</label>
+                      <input id="sPName" name="sPName" value="${sBean.sPName}"  type='text'>
+                    </div>
+                    <div class="form-group">
+                      <label for="sAmount">贊助金額</label>
+                      <input id="sAmount" name="sAmount" value="${sBean.sAmount}"  type='text'>
                     </div>
                     <div class="form-group">
                       <label>上傳圖片</label>
@@ -420,10 +424,10 @@
                     </div>
                     <div class="form-group">
 					
-						<img style="position: relative; left: 250px" src=" " width="350"
+						<img style="position: relative; left: 250px" src="<c:url value='/getPicture/${sBean.sID}'/>" width="350"
 							height="300" alt="請選擇照片" id="showPic" class="img-rounded">
 					</div>
-                    <button id="btnAdd" type='submit' name='submit' class="btn btn-primary mr-2">送出</button>
+                    <button id="btnAdd" type='button' name='submit' class="btn btn-primary mr-2" onclick="update(${sBean.sID})">送出</button>
                     <button class="btn btn-light">取消</button>
                   </form>
                 </div>
@@ -431,9 +435,7 @@
             </div>
        
         <!-- content-wrapper ends -->
-        <!-- partial:../../partials/_footer.html -->
-        
-        <!-- partial -->
+       
       </div>
       <!-- main-panel ends -->
     </div>
@@ -460,110 +462,65 @@
   <script src="js/select2.js"></script>
   <!-- End custom js for this page-->
   
-  <script>
-	var pic;
+  <script type="text/javascript">
 		$('#projectImage').change(function() {
 			var projectImage = $("#projectImage")[0].files[0];
-			var reader = new FileReader;	
+			var reader = new FileReader;
 			reader.onload = function(e) {
 				$('#showPic').attr('src', e.target.result);
-				pic=e.target.result;
-// 				console.log(e.target.result);
 			}
 			reader.readAsDataURL(projectImage);
-			console.log(projectImage);
 		})
+		
+		function update(updateId){
+		var form = document.getElementById("form")
+// 		var data = {
+//        	  sName:$('#sName').val(),
+//        	  sPID:$('#sPID').val(),
+//        	  sPName:$('#sPName').val(),
+//        	  sAmount:$('#sAmount').val(),
+//        	  projectImage:$('#projectImage')[0].files[0]
+//         };
+		 var formData = new FormData(form);
+		 $.ajax({
+               url: "<spring:url value='/order/"+updateId+"'/>",
+              type: 'POST',
+               contentType: "application/json; charset=utf-8",
+              data: formData,
+             contentType: false, //required
+              processData: false, // required
+              mimeType: 'multipart/form-data',
+              success: function (data) {
+                Swal.fire({
+                  title: '更新成功',
+                  icon: 'success',
+                  text: "已經更新！",
+                  position: 'center',
 
-
-        var form = document.getElementById("form");
-        $("#form").on("submit", function(e){
-            /* =====for formData&MultipartFile =====*/
-            var formData = new FormData(form);
-            
-            /* =====for JSON =====*/
-            
-            var html = "";
-            var inputData = $(".st1").slice(0, 5);
-            // html += + "name" + $("#name").val() + "<br/>";
-            for (let i = 0; i < inputData.length; i++) {
-                let name = inputData.eq(i).attr("name");
-                let value = (inputData.eq(i).val() != "") ? inputData.eq(i).val() : "無";
-                html += name+": "+value+"</br>";
-            }
-            console.log(html);
-            
-            //改用ajax傳送 棄用原本的form傳送
-            e.preventDefault();
-            
-       	
-           
-            Swal.fire({
-                title: '您確定要送出嗎？',
-                icon: 'question',
-                html: html,
-                imageUrl: pic,
-                imageWidth: 400,
-                imageHeight: 200,
-                showCancelButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type:"post",
-                        url:"orders",
-                        data: formData,
-        //                 data: json,
-        //                 dataType:"json",
-        //                 contentType: "application/json; charset=utf-8",
-                        contentType: false, //required
-                        processData: false, // required
-                        /*一定要加*/
-                        mimeType: 'multipart/form-data', //有圖片就要加這行
-                        /*一定要加*/
-                        success: function(data){
-                            var jsonData = JSON.parse(data);
-                            console.log("Success:" + "\sID:" +jsonData.sID + "\sName:" +jsonData.sName) ;
-
-                            var html1 = "";
-                            for (const key in jsonData) {
-                                let val = (jsonData[key] != "") ? jsonData[key] : "無";
-                                if (!(key == "image" || key == "base64String")) {
-//                                 console.log(key);
-//                                 console.log(jsonData[key]);
-                                    html1 += key+": "+val;
-                                    html1 += "<br/>";
-                                } 
-//                                 else if (key == "base64String"){
-//                                     html += "<img src='data:image;base64,"+jsonData.base64String+"'/>";
-//                                 }
-                            };
-                            // console.log(html);
-
-                            Swal.fire({
-                                title: '已新增成功！',
-                                icon: 'success',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.href= "<c:url value='/orders'/>";
-                                  }
-                                })
-                                    
-                        },
-                        error: function(e, text){
-                            console.log(e.status);
-                            console.log(text);
-                        }
-                    })
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                      location.href= "<c:url value='/orders'/>";
+                    }
+                  })
+                },
+                  error: function (xhr, text) {
+                    console.log("status code: " + xhr.status);
+                    console.log("error message: " + text);
                     Swal.fire({
-                        icon: 'error',
-                        title: '已取消送出請求',
-                        text: '您的變更將不會被儲存!'
+                      title: '更新失敗',
+                      icon: 'error',
+                      text: "此筆ID" + $("#id").val() + "不存在，請檢查後重試！",
                     })
-                }
-            })
-        })
-    </script>
-  
+//                     .then((result) => {
+//                         if (result.isConfirmed) {
+//                             location.href= "<c:url value='/order/" + updateId +"'/>";
+//                           }
+//                         })
+                  }
+            });
+		};
+		
+	</script>
 </body>
 
 </html>

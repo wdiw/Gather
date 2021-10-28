@@ -9233,8 +9233,9 @@ pre code {
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: -15cm;
+  margin-left: -15cm;
+  justify-content: center
 }
 
 .no-gutters {
@@ -19779,6 +19780,7 @@ code {
   align-items: stretch;
   -webkit-justify-content: stretch;
   justify-content: stretch;
+  width: 10000px;
 }
 
 .stretch-card > .card {

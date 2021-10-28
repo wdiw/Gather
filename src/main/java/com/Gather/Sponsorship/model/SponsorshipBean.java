@@ -61,6 +61,30 @@ public class SponsorshipBean {
 		this.sAmount = sAmount;
 		this.image = image;
 	}
+	
+
+	
+	public SponsorshipBean(Integer sID, String sName, Integer sPID, String sPName, Integer sAmount,
+			MultipartFile photo) {
+		this.sID = sID;
+		this.sName = sName;
+		this.sPID = sPID;
+		this.sPName = sPName;
+		this.sAmount = sAmount;
+		this.photo = photo;
+	}
+
+	
+	public SponsorshipBean(Integer sID, String sName, Integer sPID, String sPName, Integer sAmount, String base64String,
+			byte[] image) {
+		this.sID = sID;
+		this.sName = sName;
+		this.sPID = sPID;
+		this.sPName = sPName;
+		this.sAmount = sAmount;
+		this.base64String = base64String;
+		this.image = image;
+	}
 
 	public Integer getsID() {
 		return sID;
