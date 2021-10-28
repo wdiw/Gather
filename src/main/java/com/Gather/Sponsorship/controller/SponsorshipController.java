@@ -56,10 +56,7 @@ public class SponsorshipController {
 
 	}
 	
-	@GetMapping("/test")
-	public String test() {
-		return "Sponsorship/index";
-	}
+
 	
 	// 查詢所有訂單
 

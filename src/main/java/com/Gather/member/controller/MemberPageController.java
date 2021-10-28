@@ -23,6 +23,11 @@ public class MemberPageController {
 		return "index";
 	}
 
+	@GetMapping("/backend")
+	public String test() {
+		return "backend";
+	}
+	
 	@GetMapping("/showLogin")
 	public String showLogin() {
 		System.out.println("透過頁面控制器，進入登入頁面");
@@ -84,11 +89,13 @@ public class MemberPageController {
 	    		  + "Member" + File.separator
 	    		  + fileName;
 	      */
-	      String destFileName = req.getServletContext().getRealPath("") 
-	    		  + "uploaded" + File.separator 
+	      String rootDirectory = req.getServletContext().getRealPath("/").replace("webapp", "resources"); 
+	      String destFileName = rootDirectory+"static\\images\\Members\\"
 	    		  + theMember.getId()+".jpg";
+	      
 	      //4.第一次執行的時候，這個檔案所在的目錄往往是不存在的，這裡需要建立一下目錄（建立到了webapp下uploaded資料夾下）
 	      File destFile = new File(destFileName);
+	      System.out.println(destFileName);
 	      destFile.getParentFile().mkdirs();
 	      //5.把瀏覽器上傳的檔案複製到希望的位置
 	      file.transferTo(destFile);

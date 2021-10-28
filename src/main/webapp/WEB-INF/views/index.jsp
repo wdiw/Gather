@@ -55,10 +55,10 @@
 					Member memberData= (Member)session.getAttribute("memberData");
 					if (memberData == null) {
 					%>
-					<a href="showRegister">
+					<a href="pages/member/register.html">
 						<button class="btn btn-outline-secondary" type="button">註冊</button>
 					</a> 
-					<a href="showLogin">
+					<a href="pages/member/login.html">
 						<button class="btn btn-outline-danger" type="button">登入</button>
 					</a>
 					
@@ -67,24 +67,10 @@
 					} else {
 						
 						if(memberData.getStatus().equals("管理員")){%>
+						<a href="backend">
+						<button class="btn btn-outline-warning" type="button">管理員後台</button>
+						</a>
 						
-						
-						<div class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							管理員選項 </a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="showMemberAdminCenter">會員管理</a></li>
-							<li><a class="dropdown-item" href="/Gather/Sponsorship/CRUD.html">贊助金流管理</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<!-- 
-							
-							<li><a class="dropdown-item" href="#">一個空位</a>
-							</li>
-							 -->
-						</ul>
-					</div>
-						<%-- --%>
 						<%}%>
 					
 					<div class="nav-item dropdown">

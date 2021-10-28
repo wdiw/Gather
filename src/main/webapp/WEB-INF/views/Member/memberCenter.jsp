@@ -59,8 +59,7 @@ img{
 
 	
 	
-	<img src="./uploaded/${memberData.id}.jpg"
-	 alt="">
+	<img src="images/Members/${memberData.id}.jpg" alt="profile">
 
 
 	<%--
