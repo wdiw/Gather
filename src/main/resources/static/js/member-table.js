@@ -1,52 +1,27 @@
 $(function () {
-    //清除
-    $('#clear').click(()=>$('#orders').empty());
-
-    //查詢
-    $('#viewAll').click(function () {
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/Gather/api/members/",
-            dataType: "json",
-            success: function (data) {
-                //console.log('success', response); 顯示的是array
-                //為了要顯示，所以使用each拉出來
-                console.log(data);
-                for (var each in data) {
-                    $('#orders').append(
-                        "<tr>"+
-                        "<td class=py-1>"+
-                        `<img src='../../images/Members/${String(data[each].id)}.jpg'`+"</td>"+
-                        "<td>"+ data[each].name + "</td>"+
-                        "<td>"+ data[each].status + "</td>"+
-                        "<td>"+ data[each].account + "</td>"+
-                        "<td>"+ data[each].password + "</td>"+
-                        "</tr>"
-
-                        /*
-                        "<tr>"+
-                        "<td "+
-                          "<img src='images/Member/'+id+'.jpg'" alt="image"/>
-                        </td>
-                        <!--姓名-->
-                        <td>Herman Beck</td>
-                        <!--進度-->
-                        <td>
-                          <div class="progress">
-                            <!--bg-success,dange,warning-->
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <!--金額-->
-                        <td>$ 77.99</td>
-                        <!--期限-->
-                        <td>May 15, 2015</td>
-                      </tr>
-                      */
-                    )
-                }
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/Gather/api/members/",
+        dataType: "json",
+        success: function (data) {
+        //console.log('success', response); 顯示的是array
+        //為了要顯示，所以使用each拉出來
+        console.log(data);
+            for (var each in data) {
+                $('#orders').append(
+                    "<tr>"+
+                    "<td class=py-1>"+
+                    `<img src='../../images/Members/${String(data[each].id)}.jpg'`+"</td>"+
+                    "<td>"+ data[each].id + "</td>"+
+                    "<td>"+ data[each].name + "</td>"+
+                    "<td>"+ data[each].status + "</td>"+
+                    "<td>"+ data[each].account + "</td>"+
+                    "<td>"+ data[each].password + "</td>"+
+                    "</tr>"
+                )
             }
-        })
+        }
+
     })
 
     //新增
