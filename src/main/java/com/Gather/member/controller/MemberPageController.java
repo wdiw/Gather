@@ -39,7 +39,12 @@ public class MemberPageController {
 		System.out.println("透過頁面控制器進入首頁");
 		return "index";
 	}
-
+	
+	@GetMapping("/addMember")
+	public String addMember() {
+		System.out.println("透過頁面控制器進入新增會員頁面");
+		return "Member/addMember";
+	}
 	@GetMapping("/backend")
 	public String test() {
 		return "backend";

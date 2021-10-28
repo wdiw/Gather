@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="css/vertical-layout-light/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="images/favicon.png" />
+
 </head>
 
 <body>
@@ -350,6 +351,8 @@
 							<ul class="nav flex-column sub-menu">
 								<li class="nav-item"><a class="nav-link"
 									href="pages/ui-features/buttons.html">會員管理</a></li>
+								<li class="nav-item"><a class="nav-link"
+										href="./addMember">新增會員</a></li>	
 							</ul>
 						</div></li>
 					<li class="nav-item"><a class="nav-link"
