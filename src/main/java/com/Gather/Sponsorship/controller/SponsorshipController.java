@@ -1,0 +1,148 @@
+package com.Gather.Sponsorship.controller;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.Gather.Sponsorship.model.SponsorshipBean;
+import com.Gather.Sponsorship.service.SponsorshipService;
+import com.google.gson.Gson;
+
+@Controller
+public class SponsorshipController {
+
+	SponsorshipService sponsorshipService;
+	ServletContext servletContext;
+
+	@Autowired
+	public SponsorshipController(SponsorshipService sponsorshipService, ServletContext servletContext) {
+		this.sponsorshipService = sponsorshipService;
+		this.servletContext = servletContext;
+	}
+
+	@GetMapping("/s")
+	public String addJsp(Model model) {
+		return "Sponsorship/addOrder";
+
+	}
+	
+	// 查詢所有訂單
+
+	@GetMapping("/orders")
+	public String list(Model model) {
+		List<SponsorshipBean> sBeans = sponsorshipService.getOrders();
+		model.addAttribute("orders", sBeans);
+		return "Sponsorship/orders";
+	}
+
+//	// 查單筆
+	@GetMapping("/test")
+	public String TestBean() {
+		return "Sponsorship/orders";
+	}
+
+	// 新增訂單
+
+	@PostMapping("/orders")
+	@ResponseBody
+	public ResponseEntity<String> getAddNewOrderForm(@RequestParam("sName") String sName,
+			@RequestParam("sPID") int sPID, @RequestParam("sPName") String sPName, @RequestParam("sAmount") int sAmount,
+			@RequestParam(required = false, name = "projectImage") MultipartFile photo) throws IOException {
+		byte[] image = new byte[1024];
+		InputStream is = photo.getInputStream();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		int length;
+		while ((length = is.read(image)) != -1) {
+			baos.write(image, 0, length);
+		}
+
+		image = baos.toByteArray();
+		String base64String = Base64.getEncoder().encodeToString(image);
+		SponsorshipBean sBean = new SponsorshipBean(sName, sPID, sPName, sAmount, image, base64String);
+		sponsorshipService.insertOrder(sBean);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(sBean));
+	}
+
+	// 刪除訂單
+
+	@DeleteMapping("/order/{sID}")
+	@ResponseBody
+	public ResponseEntity<String> getDeleteNewOrderForm(@PathVariable("sID") int sID) {
+		sponsorshipService.deleteOrderByOrderID(sID);
+		return  new ResponseEntity<String>(HttpStatus.OK);
+	}
+
+	// 修改訂單
+
+	@PutMapping(path = "/order/{sID}", consumes = { "multipart/form-data" })
+	@ResponseBody
+	public ResponseEntity<String> addUpdateOrderInfo(HttpServletRequest request, @PathVariable("sID") int sID,
+			@RequestParam("sName") String sName, @RequestParam("sPID") int sPID, @RequestParam("sPName") String sPName,
+			@RequestParam("sAmount") int sAmount, @RequestParam("image") MultipartFile photo) throws IOException {
+
+		SponsorshipBean sBean = sponsorshipService.getOrderByID(sID);
+		byte[] image = new byte[1024];
+		InputStream is = sBean.getPhoto().getInputStream();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		int length;
+		while ((length = is.read(image)) != -1) {
+			baos.write(image, 0, length);
+		}
+
+		image = baos.toByteArray();
+
+		sBean.setImage(image);
+		sBean.setsName(sName);
+		sBean.setsID(sID);
+		sBean.setsPID(sPID);
+		sBean.setsPName(sPName);
+		sBean.setsAmount(sAmount);
+
+		sponsorshipService.updateOrder(sBean);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(sBean));
+	}
+
+	// 圖片從資料庫輸出
+	@GetMapping("/getPicture/{sID}")
+	public ResponseEntity<byte[]> getPicture(HttpServletResponse resp, @PathVariable Integer sID) {
+		HttpHeaders headers = new HttpHeaders();
+
+		SponsorshipBean sBean = sponsorshipService.getOrderByID(sID);
+		byte[] image = sBean.getImage();
+
+		ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(image, headers, HttpStatus.OK);
+		return responseEntity;
+	}
+
+}
