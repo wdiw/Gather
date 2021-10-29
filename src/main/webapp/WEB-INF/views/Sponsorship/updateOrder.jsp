@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="../vendors/select2/select2.min.css">
   <link rel="stylesheet" href="../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
   <!-- End plugin css for this page -->
+  <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css">
   <!-- inject:css -->
   <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
   <!-- endinject -->
@@ -109,8 +110,8 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
-              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="../images/faces/face28.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -387,32 +388,38 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">修改訂單</h4>
-                  <p class="card-description">
+                  <h4 class="card-title" style="text-align: center;">修改訂單</h4>
+                  <p class="card-description" style="text-align: center;">
                     Edit Order
                   </p>
                   <form  id="form" class="forms-sample">
                     <div class="form-group">
+                    <i class="mdi mdi-nutrition"></i>
                       <label for='sID'>訂單編號</label>
                       <input name="sID" id="sID" class="form-control" value="${sBean.sID}" readonly="readonly">
                     </div>
                     <div class="form-group">
+                    <i class="mdi mdi-account-star"></i> 
                       <label for="sName">贊助者</label>
                       <input id="sName" name="sName" class="form-control" value="${sBean.sName}" type='text'>
                     </div>
                     <div class="form-group">
+                    <i class="mdi mdi-counter"></i>
                       <label for="sPID">專案編號</label>
                       <input id="sPID" name="sPID" class="form-control" value="${sBean.sPID}" type='text'>
                     </div>
                     <div class="form-group">
+                    <i class="mdi mdi-book"></i>
                       <label for="sPName">專案名稱</label>
                       <input id="sPName" name="sPName" class="form-control" value="${sBean.sPName}"  type='text'>
                     </div>
                     <div class="form-group">
+                    <i class="mdi mdi-coin"></i>
                       <label for="sAmount">贊助金額</label>
                       <input id="sAmount" name="sAmount" class="form-control" value="${sBean.sAmount}"  type='text'>
                     </div>
                     <div class="form-group">
+                    <i class="mdi mdi-file-image"></i>
                       <label>上傳圖片</label>
                       <input type="file" name="projectImage" class="file-upload-default" id="projectImage">
                       <div class="input-group col-xs-12">

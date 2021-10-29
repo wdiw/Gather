@@ -114,7 +114,7 @@
 						</div></li>
 					<li class="nav-item nav-profile dropdown"><a
 						class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-						id="profileDropdown"> <img src="images/Members/${memberData.id}.jpg"
+						id="profileDropdown"> <img src="images/faces/face28.jpg"
 							alt="profile" />
 					</a>
 						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -407,12 +407,12 @@
 						<div class="col-lg-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">贊助訂單</h4>
+									<h4 class="card-title" style="text-align: center;">贊助訂單</h4>
 									<!--                   <p class="card-description"> -->
 									<%--                     Add class <code>.table-hover</code> --%>
 									<!--                   </p> -->
 									<div class="table-responsive">
-										<table class="table table-hover">
+										<table class="table table-hover" style="text-align: center;">
 											<thead>
 												<tr>
 													<th>訂單編號</th>
