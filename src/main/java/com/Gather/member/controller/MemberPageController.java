@@ -40,6 +40,12 @@ public class MemberPageController {
 		return "index";	
 	}
 	
+	@GetMapping("/sample")
+	public String sample() {
+		System.out.println("透過頁面控制器進入首頁");
+		return "sample";	
+	}
+	
 	@GetMapping("/addMember")
 	public String addMember() {
 		System.out.println("透過頁面控制器進入新增會員頁面");

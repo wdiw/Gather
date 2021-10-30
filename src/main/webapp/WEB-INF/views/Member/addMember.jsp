@@ -407,7 +407,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">密碼</label>
-                      <input type="text" class="form-control"  id="text_password" >
+                      <input type="password" class="form-control"  id="text_password" >
                     </div>
 				
                     <button id="add" type='button' name='submit' class="btn btn-primary mr-2">送出</button>
