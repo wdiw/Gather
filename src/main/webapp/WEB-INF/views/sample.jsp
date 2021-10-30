@@ -1,343 +1,348 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.Gather.member.entity.Member" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+  import="com.Gather.member.entity.Member" %>
+  <!DOCTYPE html>
+  <html lang="en">
 
   <head>
-
-    <meta charset="UTF-8">
+    <title>Minishop - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="images/favicon.png" />
-    <title>會員中心</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
 
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/animated.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/templatemo-digimedia-v2.css">
-    <!--
-  -->
-    
-<!--
-
-TemplateMo 568 DigiMedia
-
-https://templatemo.com/tm-568-digimedia
-
--->
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
 
-<body>
-
-  <!-- ***** Preloader Start ***** -->
-  <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-      <span class="dot"></span>
-      <div class="dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </div>
-  <!-- ***** Preloader End ***** -->
-
-  <!-- Pre-header Starts -->
-  <!--
-    
-    <div class="pre-header">
+  <body class="goto-here">
+    <div class="py-1 bg-black">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-sm-8 col-7">
-            <ul class="info">
-              <li><a href="#"><i class="fa fa-envelope"></i>digimedia@company.com</a></li>
-              <li><a href="#"><i class="fa fa-phone"></i>010-020-0340</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-4 col-sm-4 col-5">
-            <ul class="social-media">
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fa fa-behance"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
--->
-  <!-- Pre-header End -->
-
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <nav class="main-nav">
-            <!-- ***** Logo Start ***** -->
-            <a href="./" class="logo">
-              <img src="assets/images/logo-v2.svg" alt="">
-            </a>
-            <!-- ***** Logo End ***** -->
-            <!-- ***** Menu Start ***** -->
-            <ul class="nav">
-              <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-              <li class="scroll-to-section"><a href="#about">About</a></li>
-              <li class="scroll-to-section"><a href="#portfolio">Projects</a></li>
-              <li class="scroll-to-section"><a href="#Blog">Forum</a></li>
-              <%
-					Member memberData= (Member)session.getAttribute("memberData");
-					if (memberData == null) {
-					%>
-              	  <li class="scroll-to-section"><a href="pages/member/register.html">Register</a></li> 
-            	  <li class="scroll-to-section"><div class="border-first-button"><a href="pages/member/login.html">Login</a></div></li> 
-            	  					<%
-					} else {
-						
-						if(!memberData.getStatus().equals("管理員")){%>
-							<li class="scroll-to-section"><a href="showMemberCenter">MemberCenter</a></li>
-							<a href="showLogout"><button class="btn btn-outline-danger" type="button">Logout</button></a>
-						<%}else%>
-							<li class="scroll-to-section"><a href="showMemberCenter">MemberCenter</a></li>
-							<a href="showLogout"><button class="btn btn-outline-danger" type="button">Logout</button></a>
-						<a href="backend">
-						<button class="btn btn-outline-warning" type="button">Admin</button>
-						</a>
-							
-					<%
-					}
-					%>
-            </ul>        
-            <a class='menu-trigger'>
-                <span>Menu</span>
-            </a>
-            <!-- ***** Menu End ***** -->
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
-  <!-- 網頁內容開始，要改的地方-->
-  
-  <div id="services" class="services section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
-            <h6>Member Center</h6>
-            <h4>會員中心</h4>
-            <img src="/Gather/images/Members/${memberData.id}.jpg" style="width: 15%;border-radius: 20%;"><br><br>
-
-            <h6>
-              <em>
-              您:${memberData.name}
-              身分為${memberData.status}
-              </em>
-            </h6>
-            <div class="line-dec">
-
-
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-12">
-          <div class="naccs">
-            <div class="grid">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="menu">
-                    <div class="first-thumb active">
-                      <div class="thumb">
-                        <span class="icon"><img src="assets/images/service-icon-01.png" alt=""></span>
-                        我的提案
-                      </div>
-                    </div>
-                    <div>
-                      <div class="thumb">                 
-                        <span class="icon"><img src="assets/images/service-icon-02.png" alt=""></span>
-                        上傳大頭貼&amp;
-                      </div>
-                    </div>
-                    <div>
-                      <div class="thumb">                 
-                        <span class="icon"><img src="assets/images/service-icon-03.png" alt=""></span>
-                        修改會員資料
-                      </div>
-                    </div>
-                    <div>
-                      <div class="thumb">                 
-                        <span class="icon"><img src="assets/images/service-icon-04.png" alt=""></span>
-                        我的贊助
-                      </div>
-                    </div>
-                    <div class="last-thumb">
-                      <div class="thumb">                 
-                        <span class="icon"><img src="assets/images/service-icon-01.png" alt=""></span>
-                        討論區
-                      </div>
-                    </div>
-                  </div>
-                </div> 
-                <div class="col-lg-12">
-                  <ul class="nacc">
-                    <li class="active">
-                      <div>
-                        <div class="thumb">
-                          <div class="row">
-                            <div class="col-lg-6 align-self-center">
-                              <div class="left-text">
-                                <h4>文章區塊</h4>
-                                <p>這邊可以輸入一段文章</p>
-                                <div class="ticks-list"><span><i class="fa fa-check"></i> Optimized Template</span> <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span>
-                                  <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span> <span><i class="fa fa-check"></i> Optimized Template</span></div>
-                                <p>這裡輸入另外一段文字</p>
-                              </div>
-                            </div>
-                            <div class="col-lg-6 align-self-center">
-                              <div class="right-image">
-                                <img src="assets/images/services-image.jpg" alt="">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <div class="thumb">
-                          <div class="row">
-                            <div class="col-lg-6 align-self-center">
-                              <div class="left-text">
-                                <h4>Healthy Food &amp; Life</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt ut labore et dolore kengan darwin doerski token.
-                                  dover lipsum lorem and the others.</p>
-                                <div class="ticks-list"><span><i class="fa fa-check"></i> Optimized Template</span> <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span>
-                                  <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span> <span><i class="fa fa-check"></i> Optimized Template</span></div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt.</p>
-                              </div>
-                            </div>
-                            <div class="col-lg-6 align-self-center">
-                              <div class="right-image">
-                                <img src="assets/images/services-image-02.jpg" alt="">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <div class="thumb">
-                          <div class="row">
-                            <div class="col-lg-6 align-self-center">
-                              <div class="left-text">
-                                <h4>Car Re-search &amp; Transport</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt ut labore et dolore kengan darwin doerski token.
-                                  dover lipsum lorem and the others.</p>
-                                <div class="ticks-list"><span><i class="fa fa-check"></i> Optimized Template</span> <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span>
-                                  <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span> <span><i class="fa fa-check"></i> Optimized Template</span></div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt.</p>
-                              </div>
-                            </div>
-                            <div class="col-lg-6 align-self-center">
-                              <div class="right-image">
-                                <img src="assets/images/services-image-03.jpg" alt="">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <div class="thumb">
-                          <div class="row">
-                            <div class="col-lg-6 align-self-center">
-                              <div class="left-text">
-                                <h4>Online Shopping &amp; Tracking ID</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt ut labore et dolore kengan darwin doerski token.
-                                  dover lipsum lorem and the others.</p>
-                                <div class="ticks-list"><span><i class="fa fa-check"></i> Optimized Template</span> <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span>
-                                  <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span> <span><i class="fa fa-check"></i> Optimized Template</span></div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt.</p>
-                              </div>
-                            </div>
-                            <div class="col-lg-6 align-self-center">
-                              <div class="right-image">
-                                <img src="assets/images/services-image-04.jpg" alt="">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <div class="thumb">
-                          <div class="row">
-                            <div class="col-lg-6 align-self-center">
-                              <div class="left-text">
-                                <h4>Enjoy &amp; Travel</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt ut labore et dolore kengan darwin doerski token.
-                                  dover lipsum lorem and the others.</p>
-                                <div class="ticks-list"><span><i class="fa fa-check"></i> Optimized Template</span> <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span>
-                                  <span><i class="fa fa-check"></i> Data Info</span> <span><i class="fa fa-check"></i> SEO Analysis</span> <span><i class="fa fa-check"></i> Optimized Template</span></div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedr do eiusmod deis tempor incididunt.</p>
-                              </div>
-                            </div>
-                            <div class="col-lg-6 align-self-center">
-                              <div class="right-image">
-                                <img src="assets/images/services-image.jpg" alt="">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>          
+        <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+          <div class="col-lg-12 d-block">
+            <div class="row d-flex">
+              <div class="col-md pr-4 d-flex topper align-items-center">
+                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
+                    class="icon-phone2"></span></div>
+                <span class="text">+ 1235 2355 98</span>
+              </div>
+              <div class="col-md pr-4 d-flex topper align-items-center">
+                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
+                    class="icon-paper-plane"></span></div>
+                <span class="text">youremail@email.com</span>
+              </div>
+              <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+                <span class="text">3-5 Business days delivery &amp; Free Returns</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Minishop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+          aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="oi oi-menu"></span> Menu
+        </button>
 
-  
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">Catalog</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item" href="shop.html">Shop</a>
+                <a class="dropdown-item" href="product-single.html">Single Product</a>
+                <a class="dropdown-item" href="cart.html">Cart</a>
+                <a class="dropdown-item" href="checkout.html">Checkout</a>
+              </div>
+            </li>
+            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+            <li class="nav-item active"><a href="blog.html" class="nav-link">Blog</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span
+                  class="icon-shopping_cart"></span>[0]</a></li>
 
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Copyright © 2022 DigiMedia Co., Ltd. All Rights Reserved. 
-          <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
-          <br>Distributed By: <a href="https://themewagon.com" target="_blank" title="free css templates">ThemeWagon</a>
-        </p>
+          </ul>
         </div>
       </div>
+    </nav>
+    <!-- END nav -->
+
+    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-0 bread">Member Center</h1>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </footer>
+
+    <section class="ftco-section contact-section bg-light">
+      <div class="container">
+
+        <div class="row d-flex mb-5 contact-info">
+          <div class="w-100"></div>
+          <div class="col-md-3 d-flex">
+            <!--照片顯示 開頭-->
+            <div class="carousel-testimony owl-carousel ftco-animate">
+              <div class="item">
+                <div class="testimony-wrap">
+                  <div class="user-img mb-4" style="background-image: url(/Gather/images/Members/${memberData.id}.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--照片顯示 結尾-->
+          </div>
+          <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <h5>基本資料</h5>
+              <p><span>姓名:</span> ${memberData.name}</p>
+              <p><span>身分:</span> ${memberData.status}</p>
+            </div>
+          </div>
+          
+          <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <h5>會員功能</h5>
+              <p><span>我的提案(按鈕)</span> </p>
+              <p><span>贊助紀錄(按鈕)</span> </p>
+            </div>
+          </div>
+          <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <h5>會員設定</h5>
+              <p><span>修改密碼(連結)</span></p>
+              <p><span>意見提交(連結)</span></p>
+            </div>
+          </div>
+        </div>
+        <h5>意見反應</h5>
+        <div class="row block-9">
+          <div class="col-md-6 order-md-last d-flex">
+            <form action="#" class="bg-white p-5 contact-form">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Your Name">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Your Email">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Subject">
+              </div>
+              <div class="form-group">
+                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+              </div>
+            </form>
+
+          </div>
+          <!--
+            
+            <div class="col-md-6 d-flex">
+              <div id="map" class="bg-white"></div>
+            </div>
+          -->
+        </div>
+      </div>
+    </section>
+    <section class="ftco-gallery ftco-section ftco-no-pb">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 heading-section text-center mb-4 ftco-animate">
+            <h2 class="mb-4">Follow Us On Instagram</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
+              blind texts. Separated they live in</p>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid px-0">
+        <div class="row no-gutters">
+          <div class="col-md-4 col-lg-2 ftco-animate">
+            <a href="images/gallery-1.jpg" class="gallery image-popup img d-flex align-items-center"
+              style="background-image: url(images/gallery-1.jpg);">
+              <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                <span class="icon-instagram"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 col-lg-2 ftco-animate">
+            <a href="images/gallery-2.jpg" class="gallery image-popup img d-flex align-items-center"
+              style="background-image: url(images/gallery-2.jpg);">
+              <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                <span class="icon-instagram"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 col-lg-2 ftco-animate">
+            <a href="images/gallery-3.jpg" class="gallery image-popup img d-flex align-items-center"
+              style="background-image: url(images/gallery-3.jpg);">
+              <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                <span class="icon-instagram"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 col-lg-2 ftco-animate">
+            <a href="images/gallery-4.jpg" class="gallery image-popup img d-flex align-items-center"
+              style="background-image: url(images/gallery-4.jpg);">
+              <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                <span class="icon-instagram"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 col-lg-2 ftco-animate">
+            <a href="images/gallery-5.jpg" class="gallery image-popup img d-flex align-items-center"
+              style="background-image: url(images/gallery-5.jpg);">
+              <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                <span class="icon-instagram"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 col-lg-2 ftco-animate">
+            <a href="images/gallery-6.jpg" class="gallery image-popup img d-flex align-items-center"
+              style="background-image: url(images/gallery-6.jpg);">
+              <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                <span class="icon-instagram"></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="ftco-footer ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="mouse">
+            <a href="#" class="mouse-icon">
+              <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+            </a>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Minishop</h2>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Menu</h2>
+              <ul class="list-unstyled">
+                <li><a href="#" class="py-2 d-block">Shop</a></li>
+                <li><a href="#" class="py-2 d-block">About</a></li>
+                <li><a href="#" class="py-2 d-block">Journal</a></li>
+                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Help</h2>
+              <div class="d-flex">
+                <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+                  <li><a href="#" class="py-2 d-block">Shipping Information</a></li>
+                  <li><a href="#" class="py-2 d-block">Returns &amp; Exchange</a></li>
+                  <li><a href="#" class="py-2 d-block">Terms &amp; Conditions</a></li>
+                  <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
+                </ul>
+                <ul class="list-unstyled">
+                  <li><a href="#" class="py-2 d-block">FAQs</a></li>
+                  <li><a href="#" class="py-2 d-block">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Have a Questions?</h2>
+              <div class="block-23 mb-3">
+                <ul>
+                  <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San
+                      Francisco, California, USA</span></li>
+                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a>
+                  </li>
+                  <li><a href="#"><span class="icon icon-envelope"></span><span
+                        class="text">info@yourdomain.com</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              Copyright &copy;
+              <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+              with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                target="_blank">Colorlib</a>. Downloaded from <a href="https://themeslab.org/"
+                target="_blank">Themeslab</a>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
 
 
-  <!-- Scripts -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/animation.js"></script>
-  <script src="assets/js/imagesloaded.js"></script>
-  <script src="assets/js/custom.js"></script>
 
-</body>
-</html>
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+          stroke="#F96D00" />
+      </svg></div>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/main.js"></script>
+
+  </body>
+
+  </html>
