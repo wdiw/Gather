@@ -118,7 +118,7 @@
 									<li class="nav-item nav-profile dropdown">
 										<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 											id="profileDropdown">
-											<img src="../images/faces/face28.jpg" alt="profile" />
+											<img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile" />
 										</a>
 										<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
 											aria-labelledby="profileDropdown">
@@ -341,7 +341,7 @@
 							<nav class="sidebar sidebar-offcanvas" id="sidebar">
 								<ul class="nav">
 									<li class="nav-item">
-										<a class="nav-link" href="../../index.html">
+										<a class="nav-link" href="/Gather/backend">
 											<i class="icon-grid menu-icon"></i>
 											<span class="menu-title">Dashboard</span>
 										</a>
@@ -407,13 +407,13 @@
 										<a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
 											aria-controls="icons">
 											<i class="icon-contract menu-icon"></i>
-											<span class="menu-title">AD</span>
+											<span class="menu-title">Forum</span>
 											<i class="menu-arrow"></i>
 										</a>
 										<div class="collapse" id="icons">
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"> <a class="nav-link"
-														href="../pages/icons/mdi.html">廣告管理</a></li>
+														href="/Gather/Forum/adMain">討論區管理</a></li>
 											</ul>
 										</div>
 									</li>
@@ -597,12 +597,12 @@
 
 
 									swalWithBootstrapButtons.fire({
-										title: 'Are you sure?',
-										text: "You won't be able to revert this!",
+										title: '確定刪除?',
+										text: "你將刪除此計畫!",
 										icon: 'warning',
 										showCancelButton: true,
-										confirmButtonText: 'Yes, delete it!',
-										cancelButtonText: 'No, cancel!',
+										confirmButtonText: '刪除!',
+										cancelButtonText: '取消!',
 										reverseButtons: true
 									}).then((result) => {
 										if (result.isConfirmed) {
@@ -610,38 +610,46 @@
 											var url = "<spring:url value='/Project/theProject/" + deleteId + "'/>";
 
 											$.ajax({
-										url: url,
-										type: 'DELETE',
-										data: {},
-										
-										success: function (data) {
-											strapButtons.fire(
-												'刪除成功!',
-												'已成功刪除計畫.',
-												'success'
-											)
-										},
-										error: function (xhr, text) {
-											
+												url: url,
+												type: 'DELETE',
+												data: {},
+
+												success: function (data) {
+													Swal.fire({
+														position: 'center',
+														icon: 'success',
+														title: '刪除成功',
+													
+														timer: 3000,
+														timerProgressBar: true,
+														showConfirmButton: false,
+													})
+													location.href = "<c:url value='/Project/allproject'/>";
+												},
+												error: function (xhr, text) {
+													swalWithBootstrapButtons.fire(
+														'失敗',
+														'刪除失敗，請確認有此紀錄 ',
+														'error'
+													)
+												}
+											})
+
+
 										}
-									});
-											
-										
-										} 
-										
+
 										else if (
 											/* Read more about handling dismissals below */
 											result.dismiss === Swal.DismissReason.cancel
 										) {
 											swalWithBootstrapButtons.fire(
-												'Cancelled',
-												'Your imaginary file is safe ',
-												'error'
+												'取消',
+												'已取消刪除 ',
+												'success'
 											)
 										}
 									})
-
-
+								}
 
 							</script>
 				</body>

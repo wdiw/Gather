@@ -109,15 +109,15 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
-              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
+            <a class="nav-link dropdown-toggle" href="/Gather/images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
+              <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="/Gather/showMemberCenter">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="/Gather/showLogout">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -310,7 +310,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../../index.html">
+            <a class="nav-link" href="/Gather/backend">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
