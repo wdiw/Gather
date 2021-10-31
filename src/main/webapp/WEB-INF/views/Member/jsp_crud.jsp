@@ -417,10 +417,12 @@
 						<div class="col-lg-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">會員管理</h4>
-									<!--                   <p class="card-description"> -->
-									<%--                     Add class <code>.table-hover</code> --%>
-									<!--                   </p> -->
+									<h2 class="card-title">
+										<b style="font-size: 20px;">會員管理</b>
+										<div style="float: right; color: white;">.........</div>
+										<button class="btn btn-inverse-success btn-fw" style="float:right;">新增</button>
+									</h2>
+									
 									<div class="table-responsive">
 										<table class="table table-hover">
 											<thead>

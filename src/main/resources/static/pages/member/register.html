@@ -29,30 +29,35 @@
               <div class="brand-logo">
                 <img src="../../images/logo.svg" alt="logo">
               </div>
-              <h4>New here?</h4>
-              <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+              <h4>註冊頁面</h4>
+              <h6 class="font-weight-light">只需簡單幾個步驟，輕鬆成為Gather會員~!</h6>
               <form class="pt-3">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="text_name" placeholder="Username">
+                  姓名:<input type="text" class="form-control form-control-lg" id="text_name" placeholder="請輸入姓名">
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="text_account" placeholder="Email">
+                  性別:
+                  <div>
+                    <input type="radio" value="男" name="sex"> 男
+                    <input type="radio" value="女" name="sex"> 女
+                  </div>
                 </div>
-                <!--TODO: 選擇縣市-->
+                
                 <div class="form-group">
-                  <select class="form-control form-control-lg" id="exampleFormControlSelect2">
-                    <option>Country</option>
-                    <option>United States of America</option>
-                    <option>United Kingdom</option>
-                    <option>India</option>
-                    <option>Germany</option>
-                    <option>Argentina</option>
-                  </select>
+                  帳號:<input type="email" class="form-control form-control-lg" id="text_account" placeholder="請輸入Email">
                 </div>
-                <!--TODO: 選擇縣市-->
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="text_password" placeholder="Password">
+                  密碼:<input type="password" class="form-control form-control-lg" id="text_password" placeholder="請輸入密碼">
                 </div>
+                <!--TODO: 輸入生日-->
+                <div class="form-group">
+                  生日:<input type="date" id="text_birthday" name="birthday"  />
+                </div>
+                <!--TODO: 輸入地址-->
+                <div class="form-group">
+                  地址:<input type="text" class="form-control form-control-lg" id="text_address" placeholder="請輸入地址">
+                </div>
+
                 <div class="mb-4">
                   <div class="form-check">
                     <label class="form-check-label text-muted">
