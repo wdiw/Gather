@@ -118,7 +118,7 @@
 									<li class="nav-item nav-profile dropdown">
 										<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 											id="profileDropdown">
-											<img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile" />
+											<img src="../images/faces/face28.jpg" alt="profile" />
 										</a>
 										<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
 											aria-labelledby="profileDropdown">
@@ -341,7 +341,7 @@
 							<nav class="sidebar sidebar-offcanvas" id="sidebar">
 								<ul class="nav">
 									<li class="nav-item">
-										<a class="nav-link" href="/Gather/backend">
+										<a class="nav-link" href="../../index.html">
 											<i class="icon-grid menu-icon"></i>
 											<span class="menu-title">Dashboard</span>
 										</a>
@@ -407,13 +407,13 @@
 										<a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
 											aria-controls="icons">
 											<i class="icon-contract menu-icon"></i>
-											<span class="menu-title">Forum</span>
+											<span class="menu-title">AD</span>
 											<i class="menu-arrow"></i>
 										</a>
 										<div class="collapse" id="icons">
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"> <a class="nav-link"
-														href="/Gather/Forum/adMain">討論區管理</a></li>
+														href="../pages/icons/mdi.html">廣告管理</a></li>
 											</ul>
 										</div>
 									</li>
@@ -445,16 +445,25 @@
 															value="${project.pName}" type='text'>
 													</div>
 													<div class="form-group">
-														<label for="pTarget">計畫目標</label>
+														<label for="pTarget">計畫目標金額</label>
 														<input id="pTarget" name="pTarget" class="form-control"
 															value="${project.pTarget}" type='text'>
 													</div>
 
+
+
 													<div class="form-group">
-														<label for="pDescribe">計畫描述</label>
-														<textarea rows="4" cols="50" id="pDescribe" name="pDescribe"
-															class="form-control">${project.pDescribe}</textarea>
+														<label for="pSDate">計畫開始日期</label>
+														<input id="pSDate" name="pSDate" class="form-control"
+															value="${project.pSDate}" type='Date'>
 													</div>
+
+													<div class="form-group">
+														<label for="pEDate">計畫結束日期</label>
+														<input id="pEDate" name="pEDate" class="form-control"
+															value="${project.pEDate}" type='Date'>
+													</div>
+
 
 													<div class="form-group">
 														<label>更換封面</label>
@@ -473,7 +482,6 @@
 													</div>
 
 
-
 													<div class="form-group">
 
 														<img style="position: relative; left: 250px"
@@ -481,6 +489,28 @@
 															alt="請選擇照片" id="pImageCover" name="pImageCover"
 															class="img-rounded">
 													</div>
+
+													<div class="form-group">
+														<label for="pDescribe">計畫描述</label>
+														<textarea rows="4" cols="50" id="pDescribe" name="pDescribe"
+															class="form-control">${project.pDescribe}</textarea>
+													</div>
+
+													<div class="form-group">
+														<label for="pContent">計畫完整內容</label>
+														<textarea rows="4" cols="50" id="pContent" name="pContent"
+															class="form-control">${project.pContent}</textarea>
+													</div>
+
+
+													<div class="form-group">
+														<label for="pStatus">狀態</label>
+														<input id="pStatus" name="pName" class="form-control"
+															value="${project.pStatus}" type='text' >
+													</div>
+
+
+
 
 													<button id="updateButton" type='button' name='updateButton'
 														class="btn btn-primary mr-2"
@@ -532,6 +562,19 @@
 
 
 							<script type="text/javascript">
+
+								$(document).ready(function(){
+								var pStatus = $("#pStatus").val();
+									if(pStatus!='未送出'){
+										$("#deleteButton").hide();
+									}
+
+								
+
+
+
+
+								})
 
 								//當更換圖片
 								$("#changeImageCover").on("change", function () {
@@ -619,7 +662,7 @@
 														position: 'center',
 														icon: 'success',
 														title: '刪除成功',
-													
+
 														timer: 3000,
 														timerProgressBar: true,
 														showConfirmButton: false,

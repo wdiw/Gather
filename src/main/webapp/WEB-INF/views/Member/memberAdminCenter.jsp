@@ -20,7 +20,7 @@
 			姓名:<input type="text" id="text_name"><br>
 			身分:<input type="text" id="text_status"><br>
 			帳號:<input type="text" id="text_account"><br>
-			密碼:<input type="password" id="text_password"><br>
+			密碼:<input type="text" id="text_password"><br>
 			<br><input type="button" value="新增" id="add">
 			<input type="button" value="用編號找會員，修改" id="change">
 			<br><input type="button" value="用編號找會員，刪除" id="delete">

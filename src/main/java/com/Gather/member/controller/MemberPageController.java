@@ -17,42 +17,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.Gather.Project.model.ProjectBean;
-import com.Gather.Project.service.ProjectService;
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
 
 @Controller
 public class MemberPageController {
 	private MemberService memberService;
-	private ProjectService projectService;
+
 	@Autowired
-	public MemberPageController(MemberService memberService, ProjectService projectService) {
+	public MemberPageController(MemberService memberService) {
 		super();
 		this.memberService = memberService;
-		this.projectService = projectService;
 	}
-	
-	
+
 	@GetMapping("/")
 	public String home() {
 		System.out.println("透過頁面控制器進入首頁");
 		return "index";	
-	}
-	
-
-	@GetMapping("/sample")
-	public String sample(Model model) {
-		System.out.println("透過頁面控制器進入首頁");
-		List<ProjectBean> result = projectService.getAllProject();
-		System.out.println("sdasdasdasdsa"+result);
-		model.addAttribute("allproject", result);
-		return "sample";	
 	}
 	
 	@GetMapping("/addMember")
@@ -79,19 +64,25 @@ public class MemberPageController {
 		return "Member/updateMember";
 	}
 
-	// 修改會員資料
+	// 修改訂單
 
 	@PostMapping("/memberUpdate/{id}")
 	@ResponseBody
-	public ResponseEntity<String> addUpdateOrderInfo(
-			@RequestBody Member theMember,
+	public ResponseEntity<String> addUpdateOrderInfo(@PathVariable("id") Integer id, @RequestParam("name") String name,
+
+			@RequestParam("status") String status,
+
+			@RequestParam("account") String account,
+
+			@RequestParam("password") String password,
+
 			@RequestParam(required = false, name = "memberImage") MultipartFile photo, HttpServletRequest req) throws IOException {
 
 		// 從request中獲取輸入流資訊 把來源變成IS => ok
 		InputStream is = photo.getInputStream();
 		// 建立儲存在伺服器的路徑資訊 (這邊我要指到那個地點)
 		String rootDirectory = req.getServletContext().getRealPath("/").replace("webapp", "resources");
-		String destFileName = rootDirectory + "static\\images\\Members\\" + theMember.getId() + ".jpg";
+		String destFileName = rootDirectory + "static\\images\\Members\\" + id + ".jpg";
 		System.out.println("debug:destFileName"+destFileName);
 		// outPutStream輸出流指向臨時檔案
 		FileOutputStream outputStream = new FileOutputStream(new File(destFileName));
@@ -101,7 +92,7 @@ public class MemberPageController {
 		while ((n = is.read(b)) != -1) {
 			outputStream.write(b, 0, n);
 		}
-		memberService.addMember(theMember);
+		memberService.addMember(new Member(id, name, status, account, password));
 		return new ResponseEntity<String>(HttpStatus.OK);
 
 	}
@@ -156,6 +147,9 @@ public class MemberPageController {
 
 	@PostMapping("/upload") // 等價於 @RequestMapping(value = "/upload",method = RequestMethod.POST)
 	public String uplaod(HttpServletRequest req, @RequestParam("file") MultipartFile file, Model m) {// 1. 接受上傳的檔案
+																										// @RequestParam("file")
+																										// MultipartFile
+																										// file
 		try {
 			// 2.根據時間戳建立新的檔名，這樣即便是第二次上傳相同名稱的檔案，也不會把第一次的檔案覆蓋了
 			Member theMember = (Member) req.getSession().getAttribute("memberData");

@@ -59,7 +59,7 @@ img{
 
 	
 	
-	<img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile">
+	<img src="images/Members/${memberData.id}.jpg" alt="profile">
 
 
 	<%--

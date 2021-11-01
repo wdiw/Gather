@@ -1,4 +1,4 @@
-	package com.Gather.Project.controller;
+package com.Gather.Project.controller;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.service.ProjectService;
+import com.Gather.member.entity.Member;
 
 import javassist.expr.NewArray;
 
@@ -97,11 +98,20 @@ public class ProjectController {
 	@PostMapping(path = "/Project/addProject")
 	@ResponseBody
 	public ResponseEntity<String> addProject(@RequestParam("pName") String pName, @RequestParam("pTarget") int pTarget,
-			@RequestParam("pDescribe") String pDescribe, @RequestParam("pImage") MultipartFile pImage,
-			HttpServletRequest request
+			@RequestParam("pSDate") String pSDate,@RequestParam("pEDate") String pEDate,
+			@RequestParam("pDescribe") String pDescribe,@RequestParam("pContent") String pContent, 
+			@RequestParam("pImage") MultipartFile pImage,HttpServletRequest request
 
 	) throws MalformedURLException {
-
+		System.out.println(pSDate);
+		System.out.println(pEDate);
+		System.out.println(pContent);
+		
+		
+		
+		Member attribute = (Member)request.getSession().getAttribute("memberData");
+		Integer mID = attribute.getId();
+		
 		// 處理圖片
 		String originalFilename = pImage.getOriginalFilename();// 得到原始名稱，如xxx.jpg
 		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
@@ -124,7 +134,7 @@ public class ProjectController {
 		}
 
 		filePath += pName + "/" + pName + "_Cover" + ext;
-		ProjectBean pBean = new ProjectBean(pName, pTarget, pDescribe, filePath);// 存到資料庫
+		ProjectBean pBean = new ProjectBean(pName, pTarget,pSDate,pEDate, filePath,pDescribe,pContent,mID,"未送出");// 存到資料庫，目前會員ID先死
 		projectService.addProject(pBean);
 
 		return new ResponseEntity<String>("Y", HttpStatus.OK);

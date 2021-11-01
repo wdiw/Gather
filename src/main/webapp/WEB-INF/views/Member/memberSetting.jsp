@@ -45,9 +45,9 @@
     <body>
         <h1>修改密碼</h1>
 
-        舊密碼:<input type="password" id="text_old_password"><br>
-        新密碼:<input type="password" id="text_new_password"><br>
-        確認新密碼:<input type="password" id="text_check_password"><br>
+        舊密碼:<input type="text" id="text_old_password"><br>
+        新密碼:<input type="text" id="text_new_password"><br>
+        確認新密碼:<input type="text" id="text_check_password"><br>
         <input type="button" value="提交" id="change">
         <a href="./"><input type="button" value="回到首頁"></a>
         

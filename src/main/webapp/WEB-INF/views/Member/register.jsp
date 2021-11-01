@@ -65,7 +65,7 @@ img {
 	<br>註冊表單:<br>
 		姓名:<input type="text" id="text_name"><br>
 		帳號:<input type="text" id="text_account"><br>
-		密碼:<input type="password" id="text_password"><br>
+		密碼:<input type="text" id="text_password"><br>
 		<br><input type="button" value="新增" id="add"><br><br>
 		<a href="./"><input type="button" value="回到首頁"/></a>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
