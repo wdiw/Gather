@@ -39,6 +39,7 @@ public class MemberRESTController {
 	@Autowired
 	public MemberRESTController(MemberService memberService) {
 		this.memberService = memberService;
+		System.out.println("哈哈哈");
 	}
 
 	@PostMapping("/login")
