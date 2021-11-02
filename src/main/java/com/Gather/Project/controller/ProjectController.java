@@ -50,18 +50,25 @@ public class ProjectController {
 	@ResponseBody
 	public ResponseEntity<String> updateProjectById(@PathVariable("pID") int pID, @RequestParam("pName") String pName,
 			@RequestParam("pDescribe") String pDescribe, @RequestParam("pTarget") int pTarget,
+			@RequestParam("pSDate") String pSDate,@RequestParam("pEDate") String pEDate,
+			@RequestParam("pContent") String pContent,@RequestParam("pStatus") String pStatus,  
 			@RequestParam(name = "changeImageCover", required = false) MultipartFile pImage, HttpServletRequest request
 
 	) throws MalformedURLException {
-
+		Member memberData = (Member)request.getSession().getAttribute("memberData");
+		Integer mID = memberData.getId();
 		// 如果圖片沒有換掉，先把原路徑抓出來，再丟回去
 		if (pImage.isEmpty()) {
 
+			System.out.println("狀態為:"+pStatus);
+			System.out.println("會員編碼"+mID);
 			String filePath=projectService.getProjectById(pID).getpImageCover();
-			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pDescribe,filePath);
+			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pSDate,pEDate,filePath,pDescribe,pContent,mID,pStatus);
 			projectService.updateProject(pBean);
 
 		} else {
+			System.out.println("狀態為:"+pStatus);
+			System.out.println("會員編碼"+mID);
 			// 處理圖片
 			String originalFilename = pImage.getOriginalFilename();// 得到原始名稱，如xxx.jpg
 			String ext = originalFilename.substring(originalFilename.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
@@ -84,7 +91,7 @@ public class ProjectController {
 			}
 
 			filePath += pName + "/" + pName + "_Cover" + ext;
-			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pDescribe, filePath);
+			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pSDate,pEDate,filePath,pDescribe,pContent,mID,pStatus);
 			projectService.updateProject(pBean);
 		}
 
@@ -109,8 +116,8 @@ public class ProjectController {
 		
 		
 		
-		Member attribute = (Member)request.getSession().getAttribute("memberData");
-		Integer mID = attribute.getId();
+		Member memberData = (Member)request.getSession().getAttribute("memberData");
+		Integer mID = memberData.getId();
 		
 		// 處理圖片
 		String originalFilename = pImage.getOriginalFilename();// 得到原始名稱，如xxx.jpg
@@ -134,7 +141,7 @@ public class ProjectController {
 		}
 
 		filePath += pName + "/" + pName + "_Cover" + ext;
-		ProjectBean pBean = new ProjectBean(pName, pTarget,pSDate,pEDate, filePath,pDescribe,pContent,mID,"未送出");// 存到資料庫，目前會員ID先死
+		ProjectBean pBean = new ProjectBean(pName, pTarget,pSDate,pEDate, filePath,pDescribe,pContent,mID,"未審核");// 存到資料庫，目前會員ID先死
 		projectService.addProject(pBean);
 
 		return new ResponseEntity<String>("Y", HttpStatus.OK);

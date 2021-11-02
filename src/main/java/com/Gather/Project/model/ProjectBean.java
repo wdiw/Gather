@@ -32,20 +32,27 @@ public class ProjectBean implements Serializable {
 
 	}
 
-	// 更新的建構子(有換掉圖片)
-	public ProjectBean(Integer pID, String pName, Integer pTarget, String pDescribe, String pImageCover) {
+	// 更新的建構子
+	public ProjectBean(Integer pID, String pName, Integer pTarget, String pSDate,String pEDate,
+			String pImageCover,String pDescribe, String pContent, Integer mID,String pStatus) {
+	
 		this.pID = pID;
 		this.pName = pName;
-		this.pDescribe = pDescribe;
 		this.pTarget = pTarget;
+		this.pDescribe = pDescribe;
 		this.pImageCover = pImageCover;
+		this.pContent = pContent;
+		this.pSDate = pSDate;
+		this.pEDate = pEDate;
+		this.mID = mID;
+		this.pStatus=pStatus;
 	}
 
 	
 	
 	// 新增的建構子
-	public ProjectBean(String pName, Integer pTarget, String pSDate,String pEDate,String pImageCover,String pDescribe,  String pContent,
-			  Integer mID,String pStatus) {
+	public ProjectBean(String pName, Integer pTarget, String pSDate,String pEDate,
+			String pImageCover,String pDescribe,  String pContent,Integer mID,String pStatus) {
 		super();
 		this.pName = pName;
 		this.pTarget = pTarget;

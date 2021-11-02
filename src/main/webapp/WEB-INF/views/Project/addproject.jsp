@@ -556,6 +556,7 @@
 
 								$("#form").on("submit", function (e) {
 									e.preventDefault();
+									
 
 									var form = document.getElementById("form");
 									var formData = new FormData(form);//把表單的資料裝成data

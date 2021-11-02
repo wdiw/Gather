@@ -505,11 +505,9 @@
 
 													<div class="form-group">
 														<label for="pStatus">狀態</label>
-														<input id="pStatus" name="pName" class="form-control"
+														<input id="pStatus" name="pStatus" class="form-control"
 															value="${project.pStatus}" type='text' >
 													</div>
-
-
 
 
 													<button id="updateButton" type='button' name='updateButton'
@@ -521,9 +519,9 @@
 														onclick="deleteBtn(${project.pID})">刪除</button>
 
 
-
-
-
+														<button id="sentButton" type='button' name='sentButton'
+														class="btn btn-danger"
+														onclick="sentBtn(${project.pID})">送出審核</button>
 
 
 
@@ -569,12 +567,9 @@
 										$("#deleteButton").hide();
 									}
 
-								
-
-
-
-
 								})
+
+
 
 								//當更換圖片
 								$("#changeImageCover").on("change", function () {
@@ -692,6 +687,76 @@
 											)
 										}
 									})
+								}
+
+
+								function sentBtn(sendId){
+									const swalWithBootstrapButtons = Swal.mixin({
+										customClass: {
+											confirmButton: 'btn btn-success',
+											cancelButton: 'btn btn-danger'
+										},
+										buttonsStyling: false
+									})
+
+
+									swalWithBootstrapButtons.fire({
+										title: '確定送出審核?',
+										text: "你將送出此計畫進行審核，送出後只能變更計畫封面與內容，其餘部分無法變動!",
+										icon: 'warning',
+										showCancelButton: true,
+										confirmButtonText: '送出審核!',
+										cancelButtonText: '取消!',
+										reverseButtons: true
+									}).then((result) => {
+										if (result.isConfirmed) {
+											
+											$("#pStatus").val("待審核");
+											var url = "<spring:url value='/Project/theProject/" + sendId + "'/>";
+
+											$.ajax({
+												url: url,
+												type: 'PUT',
+												data: {},
+
+												success: function (data) {
+													Swal.fire({
+														position: 'center',
+														icon: 'success',
+														title: '送出成功，待審核',
+
+														timer: 3000,
+														timerProgressBar: true,
+														showConfirmButton: false,
+													})
+													location.href = "<c:url value='/Project/allproject'/>";
+												},
+												error: function (xhr, text) {
+													swalWithBootstrapButtons.fire(
+														'失敗',
+														'刪除失敗，請確認有此紀錄 ',
+														'error'
+													)
+												}
+											})
+
+
+										}
+
+										else if (
+											/* Read more about handling dismissals below */
+											result.dismiss === Swal.DismissReason.cancel
+										) {
+											swalWithBootstrapButtons.fire(
+												'取消',
+												'已取消刪除 ',
+												'success'
+											)
+										}
+									})
+									
+
+
 								}
 
 							</script>

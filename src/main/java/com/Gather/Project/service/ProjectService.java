@@ -21,4 +21,6 @@ public interface ProjectService {
 	
 	//修改
 	public void updateProject(ProjectBean pBean);
+	
+	List<ProjectBean> getAllProjectBymID(Integer mID);
 }

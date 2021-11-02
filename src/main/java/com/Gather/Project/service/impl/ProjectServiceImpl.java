@@ -56,4 +56,10 @@ public class ProjectServiceImpl implements ProjectService {
 		 projectRepository.deleteById(pID);;
 	}
 
+	//透過會員ID找到他的所有專案
+	@Override
+	public List<ProjectBean> getAllProjectBymID(Integer mID) {
+		return projectRepository.findBymID(mID);
+	}
+
 }
