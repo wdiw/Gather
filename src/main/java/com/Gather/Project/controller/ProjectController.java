@@ -39,7 +39,7 @@ public class ProjectController {
 	@DeleteMapping(path = "/Project/theProject/{pID}")
 	@ResponseBody
 	public String deleteProjectById(@PathVariable("pID") int pID) {
-		System.out.println("要刪除的ID" + pID);
+		System.out.println("欲要刪除的ID" + pID);
 		projectService.deleteProjectById(pID);
 		return "Delete OK";
 	}
