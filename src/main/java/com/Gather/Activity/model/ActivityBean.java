@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,15 +21,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "Activity")
-@Component
 public class ActivityBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 
 
-	@Id
+	@Id@Column(name="activityid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer activityid;
+	
 	private String name;
 	private String description;
 	private String beginDate;
@@ -44,7 +45,7 @@ public class ActivityBean implements Serializable {
 	private String base64String;
 	private byte[] image;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Activity", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ActivityBean",cascade = CascadeType.ALL)
 	private Set<ActivityParticipationBean> activityParticipation = new HashSet<ActivityParticipationBean>(0);
 	
 	
