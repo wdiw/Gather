@@ -15,7 +15,7 @@ public class GatherApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GatherApplication.class, args);
-		System.out.println("test");
+		System.out.println("push test");
 	}
 
 	@Bean
