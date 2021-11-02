@@ -47,11 +47,11 @@ public class MemberPageController {
 	
 
 	@GetMapping("/sample")
-	public String sample(Model model) {
+	public String sample(HttpServletRequest req,Model model) {
 		System.out.println("透過頁面控制器進入首頁");
-		List<ProjectBean> result = projectService.getAllProject();
-		System.out.println("sdasdasdasdsa"+result);
-		model.addAttribute("allproject", result);
+		Member theMember = (Member)req.getSession().getAttribute("memberData");
+		System.out.println("debug: id為"+theMember.getId());
+		model.addAttribute("allproject", projectService.getAllProjectBymID(theMember.getId()));
 		return "sample";	
 	}
 	
