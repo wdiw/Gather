@@ -24,24 +24,16 @@ public class ActivityPageController {
 	
 	
 	// 查詢所有提案
-		@GetMapping("/Activity/sapage")
-		public String sapage(Model model) {
+		@GetMapping("/Activity/selectall")
+		public String list(Model model) {
 			List<ActivityBean> result = activityService.getAllActivity();
 			model.addAttribute("activities", result);
-			return "/Activity/sapage";
-
-		}
-		
-		@GetMapping("/Activity/userpage")
-		public String userpage(Model model) {
-			List<ActivityBean> result = activityService.getAllActivity();
-			model.addAttribute("activities", result);
-			return "/Activity/userpage";
+			return "/Activity/selectall";
 
 		}
 
 		// By Id 找尋單一資料並且跳轉
-		@GetMapping("/Activity/activity")
+		@GetMapping("/activity")
 		public String getProjectById(@RequestParam("id") Integer id, Model model) {
 			
 			model.addAttribute("activity", activityService.getActivityById(id));// 注意 是product 不是products

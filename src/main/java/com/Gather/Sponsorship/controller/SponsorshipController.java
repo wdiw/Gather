@@ -138,17 +138,12 @@ public class SponsorshipController {
 
 	@ResponseBody
 	public ResponseEntity<String> addUpdateOrderInfo(@PathVariable("sID") int sID,
-
 			@RequestParam("sName") String sName,
-
 			@RequestParam("sPID") int sPID,
-
 			@RequestParam("sPName") String sPName,
-
 			@RequestParam("sAmount") int sAmount,
-
 			@RequestParam(required = false, name = "projectImage") MultipartFile photo) throws IOException {
-
+		
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
 		byte[] image = new byte[1024];

@@ -2,17 +2,13 @@ package com.Gather.Activity.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
+
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import org.springframework.stereotype.Component;
@@ -21,83 +17,52 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "Activity")
+@Component
 public class ActivityBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-
-
-	@Id@Column(name="activityid")
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer activityid;
-	
+	private Integer id;
 	private String name;
 	private String description;
+	private Blob image;
 	private String beginDate;
 	private String endDate;
 	private String fileName;
-	private String postDate;
-
-
 
 	@Transient
-	private MultipartFile photo;
-	@Transient
-	private String base64String;
-	private byte[] image;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ActivityBean",cascade = CascadeType.ALL)
-	private Set<ActivityParticipationBean> activityParticipation = new HashSet<ActivityParticipationBean>(0);
+	private MultipartFile projectImage;
 	
 	
 	
-	 public ActivityBean( String name, String description,String beginDate,String endDate,String postDate) {
+	 public ActivityBean( String name, String description,String beginDate,String endDate) {
 			this.name = name;
 			this.description = description;
 			this.beginDate=beginDate;
 			this.endDate=endDate;
-			this.postDate=postDate;
 		}
 		
-	 public ActivityBean( Integer activityid,String name, String description,String beginDate,String endDate,String postDate) {
-		    this.activityid=activityid;
+	 public ActivityBean( Integer id,String name, String description,String beginDate,String endDate) {
+		    this.id=id;
 			this.name = name;
 			this.description = description;
 			this.beginDate=beginDate;
 			this.endDate=endDate;
-			this.postDate=postDate;
-			
 		}
 	 
 	 
 
-	 public ActivityBean( String name, String description,String beginDate,String endDate, String postDate,byte[] image,
-				String base64String) {
+	 public ActivityBean( String name, String description,String beginDate,String endDate,Blob image,String fileName,MultipartFile projectImage) {
 			this.name = name;
 			this.description = description;
 			this.beginDate=beginDate;
 			this.endDate=endDate;
-			this.postDate=postDate;
-			this.image = image;
-			this.base64String = base64String;
-			
-			
+			this.image=image;
+			this.fileName=fileName;
+			this.projectImage=projectImage;
 	 }
 	 
-
-	 public ActivityBean( Integer activityid,String name, String description,String beginDate,String endDate, String postDate,String base64String,
-			 byte[] image		) {
-		    this.activityid=activityid;
-			this.name = name;
-			this.description = description;
-			this.beginDate=beginDate;
-			this.endDate=endDate;
-			this.postDate=postDate;
-			this.base64String = base64String;
-			this.image = image;
-			
-			
-			
-	 }
+	
 
 
 	
@@ -110,32 +75,24 @@ public class ActivityBean implements Serializable {
 		this.fileName = fileName;
 	}
 
-
-	
-
-	public MultipartFile getPhoto() {
-		return photo;
+	public MultipartFile getProjectImage() {
+		return projectImage;
 	}
 
-	public void setPhoto(MultipartFile photo) {
-		this.photo = photo;
+	public void setProjectImage(MultipartFile projectImage) {
+		this.projectImage = projectImage;
 	}
 
-	public String getBase64String() {
-		return base64String;
-	}
-
-	public void setBase64String(String base64String) {
-		this.base64String = base64String;
-	}
-
-	public byte[] getImage() {
+	public Blob getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(Blob image) {
 		this.image = image;
 	}
+
+
+	
 
 	public String getBeginDate() {
 		return beginDate;
@@ -157,14 +114,12 @@ public class ActivityBean implements Serializable {
 	}
 
 
-	
-
-	public Integer getActivityid() {
-		return activityid;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setActivityid(Integer activityid) {
-		this.activityid = activityid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -182,26 +137,10 @@ public class ActivityBean implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getPostDate() {
-		return postDate;
-	}
-
-	public void setPostDate(String postDate) {
-		this.postDate = postDate;
-	}
    
 
 	public ActivityBean() {
 
-	}
-	
-
-	public Set<ActivityParticipationBean> getActivityParticipation() {
-		return activityParticipation;
-	}
-
-	public void setActivityParticipation(Set<ActivityParticipationBean> activityParticipation) {
-		this.activityParticipation = activityParticipation;
 	}
 
 }

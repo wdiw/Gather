@@ -26,10 +26,6 @@ public class ProjectBean implements Serializable {
 
 	}
 
-	
-
-	
-
 	//更新的建構子(有換掉圖片)
 	public ProjectBean(Integer pID, String pName, Integer pTarget, String pDescribe,String pImageCover) {
 		this.pID = pID;
@@ -39,10 +35,6 @@ public class ProjectBean implements Serializable {
 		this.pImageCover=pImageCover;
 	}
 	
-	
-	
-	
-
 	// 新增的建構子
 	public ProjectBean(String pName, Integer pTarget, String pDescribe,String pImageCover) {
 
@@ -55,7 +47,6 @@ public class ProjectBean implements Serializable {
 	public Integer getpID() {
 		return pID;
 	}
-
 	public void setpID(Integer pID) {
 		this.pID = pID;
 	}
@@ -63,7 +54,6 @@ public class ProjectBean implements Serializable {
 	public String getpName() {
 		return pName;
 	}
-
 	public void setpName(String pName) {
 		this.pName = pName;
 	}
@@ -71,7 +61,6 @@ public class ProjectBean implements Serializable {
 	public String getpDescribe() {
 		return pDescribe;
 	}
-
 	public void setpDescribe(String pDescribe) {
 		this.pDescribe = pDescribe;
 	}
@@ -79,7 +68,6 @@ public class ProjectBean implements Serializable {
 	public Integer getpTarget() {
 		return pTarget;
 	}
-
 	public void setpTarget(Integer pTarget) {
 		this.pTarget = pTarget;
 	}
@@ -87,15 +75,10 @@ public class ProjectBean implements Serializable {
 	public String getpImageCover() {
 		return pImageCover;
 	}
-
-
 	public void setpImageCover(String pImageCover) {
 		this.pImageCover = pImageCover;
 	}
 
-	
-	
-	
 
 	@Override
 	public String toString() {
