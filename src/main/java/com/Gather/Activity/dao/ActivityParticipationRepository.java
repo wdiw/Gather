@@ -1,0 +1,10 @@
+package com.Gather.Activity.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+import com.Gather.Activity.model.ActivityParticipationBean;
+
+public interface ActivityParticipationRepository extends JpaRepository<ActivityParticipationBean,Integer > {
+
+}
