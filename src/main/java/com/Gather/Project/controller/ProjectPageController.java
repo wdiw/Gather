@@ -36,6 +36,7 @@ public class ProjectPageController {
 				//會員
 				List<ProjectBean> result = projectService.getAllProjectBymID(memberData.getId());
 				model.addAttribute("allproject", result);
+				
 			}else {
 				//管理者
 				List<ProjectBean> result = projectService.getAllProject();

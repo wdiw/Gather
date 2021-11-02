@@ -562,10 +562,14 @@
 							<script type="text/javascript">
 
 								$(document).ready(function(){
-								var pStatus = $("#pStatus").val();
-									if(pStatus!='未送出'){
-										$("#deleteButton").hide();
-									}
+								// var pStatus = $("#pStatus").val();
+								// 	if(pStatus!='未送出'){
+								// 		$("#deleteButton").hide();
+								// 	}
+								var a= "${sessionScope.memberData.status}";
+									
+								//alert("${sessionScope.memberData.status}");
+								alert(a)
 
 								})
 
