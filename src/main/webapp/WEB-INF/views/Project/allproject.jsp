@@ -414,6 +414,7 @@
 																	<!-- <th>計畫圖片</th> -->
 																	<th>計畫目標</th>
 																	<th>計劃描述</th>
+																	<th>計劃狀態</th>
 																	<th>詳細資料</th>
 																</tr>
 															</thead>
@@ -424,8 +425,10 @@
 																	<!-- <td><img width='50' height='50'
 																			src="../${project.pImageCover}"
 																			class="img-rounded" /></td> -->
+																		
 																	<td>${project.pTarget}</td>
 																	<td>${project.pDescribe}</td>
+																	<td>${project.pStatus}</td>
 
 																	<td>
 																		<button type="button" id="update"

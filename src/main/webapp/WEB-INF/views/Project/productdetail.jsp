@@ -476,7 +476,7 @@
 
 															<span class="input-group-append">
 																<button class="file-upload-browse btn btn-primary"
-																	type="button">上傳</button>
+																	type="button" id="coverImageUpload">上傳</button>
 															</span>
 														</div>
 													</div>
@@ -506,24 +506,24 @@
 													<div class="form-group">
 														<label for="pStatus">狀態</label>
 														<input id="pStatus" name="pStatus" class="form-control"
-															value="${project.pStatus}" type='text' >
+															value="${project.pStatus}" type='text'>
 													</div>
 
 
-													<button id="updateButton" type='button' name='updateButton'
-														class="btn btn-primary mr-2"
-														onclick="update(${project.pID})">存檔</button>
 
-													<button id="deleteButton" type='button' name='deleteButton'
-														class="btn btn-danger"
-														onclick="deleteBtn(${project.pID})">刪除</button>
+													<!-- 以下為按鈕 -->
+													<button id="sendButton" type='button' name='updateButton'
+														class="btn btn-primary mr-2">送出審核</button>
 
 
-														<button id="sentButton" type='button' name='sentButton'
-														class="btn btn-danger"
-														onclick="sentBtn(${project.pID})">送出審核</button>
+													<button id="passButton" type='button' name='passButton'
+														class="btn btn-danger">通過</button>
 
+														<button id="NotPassButton" type='button' name='NotPassButton'
+														class="btn btn-danger">不通過</button>
 
+													 <!-- <button id="deleteButton" type='button' name='deleteButton'
+														class="btn btn-danger">刪除</button>  -->
 
 												</form>
 											</div>
@@ -561,207 +561,248 @@
 
 							<script type="text/javascript">
 
-								$(document).ready(function(){
-								// var pStatus = $("#pStatus").val();
-								// 	if(pStatus!='未送出'){
-								// 		$("#deleteButton").hide();
-								// 	}
-								var a= "${sessionScope.memberData.status}";
-									
-								//alert("${sessionScope.memberData.status}");
-								alert(a)
+								$(document).ready(function () {
+									var projectID = ${ project.pID };//抓專案ID
+									var mStatus="${sessionScope.memberData.status}"//取得會員身分
 
-								})
+									$(".form-control").attr("disabled",true)
+									if(mStatus=='管理員'){
+										//管理員身分
+										$("#passButton").show();
+										$("#NotPassButton").show();
+										$("#sendButton").hide();
 
+										$("#coverImageUpload").attr("disabled", true);//上傳按鈕封掉
 
-
-								//當更換圖片
-								$("#changeImageCover").on("change", function () {
-									var changeImageCover = $("#changeImageCover")[0].files[0];
-									var reader = new FileReader;
-									reader.onload = function (e) {
-										$('#pImageCover').attr('src', e.target.result);
+										
+									}else{
+										//會員身分
+										$("#sendButton").show();
+										$("#passButton").hide();
+										$("#NotPassButton").hide();
+										$("#pDescribe").attr("disabled", false);
+										$("#pContent").attr("disabled", false);
 									}
-									reader.readAsDataURL(changeImageCover);
-
-								});
-
-
-
-								function update(updateId) {
-									// alert(updateId);
-									var form = document.getElementById("form")
-									var formData = new FormData(form);
-									var url = "<spring:url value='/Project/theProject/" + updateId + "'/>";
-
-									$.ajax({
-										url: url,
-										type: 'PUT',
-										data: formData,
-										contentType: false, //required
-										processData: false, // required
-										mimeType: 'multipart/form-data',
-										success: function (data) {
-											Swal.fire({
-												title: '更新成功',
-												icon: 'success',
-												text: "已經更新！",
-												position: 'center',
-
-											}).then((result) => {
-												if (result.isConfirmed) {
-													location.href = "<c:url value='/Project/allproject'/>";
-												}
-											})
-										},
-										error: function (xhr, text) {
-											console.log("status code: " + xhr.status);
-											console.log("error message: " + text);
-											Swal.fire({
-												title: '更新失敗',
-												icon: 'error',
-												text: "更新失敗",
-											})
-										}
-									});
-								};
-
-
-								function deleteBtn(deleteId) {
-
-									const swalWithBootstrapButtons = Swal.mixin({
-										customClass: {
-											confirmButton: 'btn btn-success',
-											cancelButton: 'btn btn-danger'
-										},
-										buttonsStyling: false
-									})
-
-
-									swalWithBootstrapButtons.fire({
-										title: '確定刪除?',
-										text: "你將刪除此計畫!",
-										icon: 'warning',
-										showCancelButton: true,
-										confirmButtonText: '刪除!',
-										cancelButtonText: '取消!',
-										reverseButtons: true
-									}).then((result) => {
-										if (result.isConfirmed) {
-
-											var url = "<spring:url value='/Project/theProject/" + deleteId + "'/>";
-
-											$.ajax({
-												url: url,
-												type: 'DELETE',
-												data: {},
-
-												success: function (data) {
-													Swal.fire({
-														position: 'center',
-														icon: 'success',
-														title: '刪除成功',
-
-														timer: 3000,
-														timerProgressBar: true,
-														showConfirmButton: false,
-													})
-													location.href = "<c:url value='/Project/allproject'/>";
-												},
-												error: function (xhr, text) {
-													swalWithBootstrapButtons.fire(
-														'失敗',
-														'刪除失敗，請確認有此紀錄 ',
-														'error'
-													)
-												}
-											})
-
-
-										}
-
-										else if (
-											/* Read more about handling dismissals below */
-											result.dismiss === Swal.DismissReason.cancel
-										) {
-											swalWithBootstrapButtons.fire(
-												'取消',
-												'已取消刪除 ',
-												'success'
-											)
-										}
-									})
-								}
-
-
-								function sentBtn(sendId){
-									const swalWithBootstrapButtons = Swal.mixin({
-										customClass: {
-											confirmButton: 'btn btn-success',
-											cancelButton: 'btn btn-danger'
-										},
-										buttonsStyling: false
-									})
-
-
-									swalWithBootstrapButtons.fire({
-										title: '確定送出審核?',
-										text: "你將送出此計畫進行審核，送出後只能變更計畫封面與內容，其餘部分無法變動!",
-										icon: 'warning',
-										showCancelButton: true,
-										confirmButtonText: '送出審核!',
-										cancelButtonText: '取消!',
-										reverseButtons: true
-									}).then((result) => {
-										if (result.isConfirmed) {
-											
-											$("#pStatus").val("待審核");
-											var url = "<spring:url value='/Project/theProject/" + sendId + "'/>";
-
-											$.ajax({
-												url: url,
-												type: 'PUT',
-												data: {},
-
-												success: function (data) {
-													Swal.fire({
-														position: 'center',
-														icon: 'success',
-														title: '送出成功，待審核',
-
-														timer: 3000,
-														timerProgressBar: true,
-														showConfirmButton: false,
-													})
-													location.href = "<c:url value='/Project/allproject'/>";
-												},
-												error: function (xhr, text) {
-													swalWithBootstrapButtons.fire(
-														'失敗',
-														'刪除失敗，請確認有此紀錄 ',
-														'error'
-													)
-												}
-											})
-
-
-										}
-
-										else if (
-											/* Read more about handling dismissals below */
-											result.dismiss === Swal.DismissReason.cancel
-										) {
-											swalWithBootstrapButtons.fire(
-												'取消',
-												'已取消刪除 ',
-												'success'
-											)
-										}
-									})
 									
 
 
-								}
+									//當更換圖片
+									$("#changeImageCover").on("change", function () {
+										var changeImageCover = $("#changeImageCover")[0].files[0];
+										var reader = new FileReader;
+										reader.onload = function (e) {
+											$('#pImageCover').attr('src', e.target.result);
+										}
+										reader.readAsDataURL(changeImageCover);
+
+									});
+
+
+									//管理者按通過
+									$("#passButton").click(function () {
+										alert("按下通過按鈕")
+										$("#pStatus").val("通過");//把狀態改為通過
+										var pStatus = $("#pStatus").val();
+										alert(pStatus)
+
+										var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
+										$.ajax({
+											url: url,
+											type: 'PUT',
+											data: { pStatus: pStatus },
+											success: function (data) {
+												Swal.fire({
+													title: '更新成功',
+													icon: 'success',
+													text: "已經更新！",
+													position: 'center',
+
+												}).then((result) => {
+													if (result.isConfirmed) {
+														location.href = "<c:url value='/Project/allproject'/>";
+													}
+												})
+											},
+											error: function (xhr, text) {
+												console.log("status code: " + xhr.status);
+												console.log("error message: " + text);
+												Swal.fire({
+													title: '更新失敗',
+													icon: 'error',
+													text: "更新失敗",
+												})
+											}
+
+										})
+									})
+
+
+									
+									//管理者按不通過
+									$("#NotPassButton").click(function () {
+										alert("按下不通過按鈕")
+										$("#pStatus").val("未通過");//把狀態改為未通過
+										var pStatus = $("#pStatus").val();
+										alert(pStatus)
+
+										var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
+										$.ajax({
+											url: url,
+											type: 'PUT',
+											data: { pStatus: pStatus },
+											success: function (data) {
+												Swal.fire({
+													title: '更新成功',
+													icon: 'success',
+													text: "已經更新！",
+													position: 'center',
+
+												}).then((result) => {
+													if (result.isConfirmed) {
+														location.href = "<c:url value='/Project/allproject'/>";
+													}
+												})
+											},
+											error: function (xhr, text) {
+												console.log("status code: " + xhr.status);
+												console.log("error message: " + text);
+												Swal.fire({
+													title: '更新失敗',
+													icon: 'error',
+													text: "更新失敗",
+												})
+											}
+
+										})
+									})//NotPassButton 結束
+
+
+
+
+
+									//使用者按送出審核
+									$("#sendButton").click(function () {
+										$(".form-control").attr("disabled",false);//送出前必須把所有input欄位解開，不然table取不到值
+										var pStatus = $("#pStatus").val("待審核");//把狀態改為待審核
+										var form = document.getElementById("form")
+										var formData = new FormData(form);
+										var url = "<spring:url value='/Project/theProject/" + projectID + "'/>";
+
+
+										$.ajax({
+											url: url,
+											type: 'PUT',
+											data: formData,
+											contentType: false, //required
+											processData: false, // required
+											mimeType: 'multipart/form-data',
+											success: function (data) {
+												Swal.fire({
+													title: '更新成功',
+													icon: 'success',
+													text: "已經送出審核！",
+													position: 'center',
+
+												}).then((result) => {
+													if (result.isConfirmed) {
+														location.href = "<c:url value='/Project/allproject'/>";
+													}
+												})
+											},
+											error: function (xhr, text) {
+												console.log("status code: " + xhr.status);
+												console.log("error message: " + text);
+												Swal.fire({
+													title: '更新失敗',
+													icon: 'error',
+													text: "送出審核失敗",
+												})
+											}
+										});
+									})
+
+
+
+
+									//刪除按鈕
+									$("#deleteButton").click(function () {
+
+										const swalWithBootstrapButtons = Swal.mixin({
+											customClass: {
+												confirmButton: 'btn btn-success',
+												cancelButton: 'btn btn-danger'
+											},
+											buttonsStyling: false
+										})
+
+
+										swalWithBootstrapButtons.fire({
+											title: '確定刪除?',
+											text: "你將刪除此計畫!",
+											icon: 'warning',
+											showCancelButton: true,
+											confirmButtonText: '刪除!',
+											cancelButtonText: '取消!',
+											reverseButtons: true
+										}).then((result) => {
+											if (result.isConfirmed) {
+
+												var url = "<spring:url value='/Project/theProject/" + projectID + "'/>";
+
+												$.ajax({
+													url: url,
+													type: 'DELETE',
+													data: {},
+
+													success: function (data) {
+														Swal.fire({
+															position: 'center',
+															icon: 'success',
+															title: '刪除成功',
+
+															timer: 3000,
+															timerProgressBar: true,
+															showConfirmButton: false,
+														})
+														location.href = "<c:url value='/Project/allproject'/>";
+													},
+													error: function (xhr, text) {
+														swalWithBootstrapButtons.fire(
+															'失敗',
+															'刪除失敗，請確認有此紀錄 ',
+															'error'
+														)
+													}
+												})
+
+
+											}
+
+											else if (
+												/* Read more about handling dismissals below */
+												result.dismiss === Swal.DismissReason.cancel
+											) {
+												swalWithBootstrapButtons.fire(
+													'取消',
+													'已取消刪除 ',
+													'success'
+												)
+											}
+										})
+									})//刪除按鈕結束
+
+
+
+
+
+
+								})//read function 結束
+
+
+
+
+
+
 
 							</script>
 				</body>
