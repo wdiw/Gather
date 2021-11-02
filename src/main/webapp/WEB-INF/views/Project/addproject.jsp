@@ -422,19 +422,12 @@
 							<!-- partial -->
 							<div class="main-panel">
 								<div class="content-wrapper">
-
-
-
 									<div class="col-12 grid-margin stretch-card">
 										<div class="card">
 											<div class="card-body">
 												<h4 class="card-title">提出計畫</h4>
-												<p class="card-description">
-
-												</p>
+												<p class="card-description"></p>
 												<form id="form" class="forms-sample">
-
-
 													<div class="form-group">
 														<label for="pName">計畫名稱</label>
 														<input id="pName" name="pName" class="form-control" type='text'>

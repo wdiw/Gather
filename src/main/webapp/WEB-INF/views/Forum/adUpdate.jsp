@@ -110,7 +110,7 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
+              <img src="images/faces/face28.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -385,9 +385,22 @@
 	<tr>
 		<td width="350">
 			<form action="/Gather/Forum/update" method="POST">		
-				文章編號: <input type="text" name="id" placeholder="請輸入編號"/><br>
-				文章標題: <input type="text" name="name" placeholder="請輸入標題"/><br>
-				文章內容: <input type="text" name="post" placeholder="請輸入內容"/><br><br>	
+<!-- 				文章編號: <input type="text" name="id" placeholder="請輸入編號"/><br> -->
+<!-- 				文章標題: <input type="text" name="name" placeholder="請輸入標題"/><br> -->
+<!-- 				文章內容: <input type="text" name="post" placeholder="請輸入內容"/><br><br> -->
+				<div class="form-group">
+					<label for="id">文章編號</label>
+					<input id="id" name="id" class="form-control" type='text' placeholder="請輸入編號">
+				</div>
+				
+				<div class="form-group">
+					<label for="name">文章標題</label>
+					<input id="name" name="name" class="form-control" type='text'>
+				</div>
+				<div class="form-group">
+					<label for="post">文章內容:</label>
+					<textarea id="post" name="post" rows="4" cols="50" class="form-control"></textarea>
+				</div>
 				<input type="submit" value="修改文章"  class="btn btn-primary mr-2"><br>
 			</form>
 		</td>
@@ -406,6 +419,7 @@
 	<tr>
 		<td width="350">
 			<p align="center">
+			<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">回討論區</a><br><br>
 			<a href="<c:url value='/' />"class="btn btn-primary">回首頁</a><br>
 			</p><br>
 		</td>

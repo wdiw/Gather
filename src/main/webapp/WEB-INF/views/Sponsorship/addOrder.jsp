@@ -387,24 +387,26 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">新增活動</h4>
-                 
+                  <h4 class="card-title">新增訂單</h4>
+                  <p class="card-description">
+                    Add Order
+                  </p>
                   <form  id="form" class="forms-sample">
                     <div class="form-group">
-                      <label for="exampleInputName1">活動名稱</label>
-                      <input type="text" class="form-control" name="name" id="st1" placeholder="請輸入活動名稱">
+                      <label for="exampleInputName1">贊助者</label>
+                      <input type="text" class="form-control" name="sName" id="st1" placeholder="請輸入贊助者名稱">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail3">活動開始日期</label>
-                      <input type="date" class="form-control" name="beginDate" id="st1" >
+                      <label for="exampleInputEmail3">專案編號</label>
+                      <input type="text" class="form-control" name="sPID" id="st1" placeholder="請輸入專案編號">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">專案名稱</label>
-                      <input type="date" class="form-control" name="endDate" id="st1" >
+                      <input type="text" class="form-control" name="sPName" id="st1" placeholder="請輸入專案名稱">
                     </div>
                     <div class="form-group">
-                      <label>活動內容</label>
-                      <textarea name="description" id="st1" cols="100" rows="10" placeholder="請輸入活動詳情"></textarea>
+                      <label for="exampleInputPassword4">贊助金額</label>
+                      <input type="text" class="form-control" name="sAmount" id="st1" placeholder="請輸入贊助金額">
                     </div>
                     <div class="form-group">
                       <label>上傳圖片</label>
@@ -507,7 +509,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type:"post",
-                        url:"<spring:url value='/Activity/add'/>",
+                        url:"orders",
                         data: formData,
         //                 data: json,
         //                 dataType:"json",
@@ -519,7 +521,7 @@
                         /*一定要加*/
                         success: function(data){
                             var jsonData = JSON.parse(data);
-                            
+                            console.log("Success:" + "\sID:" +jsonData.sID + "\sName:" +jsonData.sName) ;
 
                             var html1 = "";
                             for (const key in jsonData) {
@@ -541,7 +543,7 @@
                                 icon: 'success',
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    location.href= "<spring:url value='/Activity/selectall'/>";
+                                    location.href= "<c:url value='/orders'/>";
                                   }
                                 })
                                     

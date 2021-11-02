@@ -428,7 +428,6 @@
 							height="300" alt="請選擇照片" id="showPic" class="img-rounded">
 					</div>
                     <button id="btnAdd" type='button' name='submit' class="btn btn-primary mr-2" onclick="update(${sBean.sID})">送出</button>
-                    <button id='inputalldata'class="btn btn-light">一鑑輸入</button>
                     <button class="btn btn-light">取消</button>
                   </form>
                 </div>
@@ -472,13 +471,6 @@
 			}
 			reader.readAsDataURL(projectImage);
 		})
-		
-		
-		$('#inputalldata').click(function(e) {
-    $('#st1').val("11111111");
-    
-    e.preventDefault();
-});
 		
 		function update(updateId){
 		var form = document.getElementById("form")

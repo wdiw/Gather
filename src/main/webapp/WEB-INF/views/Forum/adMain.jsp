@@ -110,7 +110,7 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
+              <img src="images/faces/face28.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -379,16 +379,24 @@
         </ul>
       </nav>
       <!-- partial -->
-      <div class="main-panel">        
-        <div class="content-wrapper">
-<table class="table table-hover">
+<!--       <div class="main-panel">         -->
+<!--         <div class="content-wrapper"> -->
+
+
+<form id="form" class="forms-sample">
+<!-- <table class="table table-hover"> -->
 	<tr>
 		<td width="350">
-			<form action="/Gather/Forum/add" method="POST">
-				文章標題: <input type="text" name="name" placeholder="請輸入標題"/><br><br>
-				文章內容: <input type="text" name="post" placeholder="請輸入內容"/><br><br>
-				<input type="submit" value="新增文章" class="btn btn-primary mr-2"><br>
-			</form>
+			<div class="form-group">
+					<label for="name">文章標題</label>
+					<input id="name" name="name" class="form-control" type='text' placeholder="請輸入標題">
+			</div>
+			<div class="form-group">
+				<label for="post">文章內容:</label>
+				<textarea id="post" name="post" rows="4" cols="50" class="form-control" placeholder="請輸入內容"></textarea>
+			</div>
+			<input type="submit" value="新增文章" class="btn btn-primary mr-2"><br>
+			<button id="btnAdd" type='submit' name='submit' class="btn btn-primary mr-2">送出</button>
 		</td>
 	</tr>
 	
@@ -405,13 +413,76 @@
 	<tr>
 		<td width="350">
 			<p align="center">
+			<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">回討論區</a><br><br>
 			<a href="<c:url value='/' />"class="btn btn-primary">回首頁</a><br>
 			</p><br>
 		</td>
 	</tr>
+<!-- </table> -->
+</form>
 
+<script src="vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
+<script src="vendors/select2/select2.min.js"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="../js/off-canvas.js"></script>
+<script src="../js/hoverable-collapse.js"></script>
+<script src="../js/template.js"></script>
+<script src="../js/settings.js"></script>
+<script src="../js/todolist.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="../js/file-upload.js"></script>
+<script src="../js/typeahead.js"></script>
+<script src="../js/select2.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+
+// $(document).ready(function(){
+// 	$("#btnAdd").click(function () {
+// 	$(#submit).on('click', function(){
+	$("#form").on("submit", function (e) {
+		e.preventDefault();
+		
+		var form = document.getElementById("form");
+		var formData = new FormData(form);//把表單的資料裝成data
+		var url = "<spring:url value='/Forum/add'/>"
+		
+		$.ajax({
+			
+			contentType: false, //required
+			processData: false, // required
+			url: url,
+			type: "POST",
+			data: formData,
+			
+			success: function (data) {
+				location.replace("<spring:url value='/Forum/queryAll'/>");  
+			},
+			error: function (response) {
+				alert('response status: ' + response.status);
+			}
+			
+		})
+		
+		
+		
+		
+	})
 	
 	
-</table>
+	
+	
+)}
+	
+	
+</script>
+
 </body>
 </html>

@@ -110,7 +110,7 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
+              <img src="images/faces/face28.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -384,10 +384,19 @@
 <table class="table table-hover">
 	<tr>
 		<td width="350">
-			<form action="/Gather/Forum/delete" method="POST">
-				文章編號: <input type="text" name="id" placeholder="請輸入編號"/><br><br>
-				<input type="submit" value="刪除文章" class="btn btn-primary mr-2"><br>
-			</form>
+<%-- 			<form action="/Gather/Forum/delete" method="POST"> --%>
+<%-- 			<form id="form" class="forms-sample"> --%>
+<!-- 				文章編號: <input type="text" name="id" placeholder="請輸入編號"/><br><br> -->
+<!-- 				<input type="submit" value="刪除文章" class="btn btn-primary mr-2"><br> -->
+<%-- 			</form> --%>
+				<div class="form-group">
+					<label for='id'>編號</label>
+					<input name="id" id="id" class="form-control" >
+				</div>
+<!-- 			<a id="deleteButton" class="btn btn-default"> -->
+<!-- 				<span class="glyphicon-hand-left glyphicon"></span>刪除 -->
+<!-- 			</a> -->
+			<button type="button" id="deleteButton" class="btn btn-inverse-danger btn-fw">刪除</button>
 		</td>
 	</tr>
 	
@@ -404,13 +413,43 @@
 	<tr>
 		<td width="350">
 			<p align="center">
+			<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">回討論區</a><br><br>
 			<a href="<c:url value='/' />"class="btn btn-primary">回首頁</a><br>
 			</p><br>
 		</td>
 	</tr>
-
-	
 	
 </table>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		
+		//點刪除按鈕時，透過id刪除資料
+		$("#deleteButton").on('click',function () {
+			
+			var id = $("#id").val();
+			
+			$.ajax({
+				url: "<spring:url value='/Forum/delete/" + id + "'/>",
+				type: "DELETE",
+				// data: { pID: pID },//前面是標籤，後面是值
+				data: { id: id },//前面是標籤，後面是值，回傳
+				success: function (data) {
+					alert("文章編號:"+id+"刪除成功，跳轉回文章清單");
+					location.href="<spring:url value='/Forum/queryAll'/>"
+
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					alert("刪除失敗");
+				}
+			})
+
+		});
+		
+	})
+
+	</script>
+
 </body>
 </html>

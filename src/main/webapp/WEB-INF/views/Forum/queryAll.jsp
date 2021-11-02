@@ -110,7 +110,7 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
+              <img src="images/faces/face28.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -379,35 +379,42 @@
         </ul>
       </nav>
       
-    	
-   
-    <table class="table table-hover">
-    
-											<thead>
-												<tr>
-													<th>文章編號</th>
-													<th>文章標題</th>
-													<th>文章內容</th>
-													
-													
-												</tr>
-											</thead>
-											<c:forEach items='${AllForum}' var='forum' >
-												<tr>
-													<td>${forum.id}</td>
-													<td>${forum.name}</td>								
-													<td>${forum.post}</td>
-												
-													
-													
-												</tr>
-											</c:forEach>
-										</table>
+      
+      <div class="table-responsive">
+      <table class="table table-hover">
+      
+    	<thead>
+    		<tr>
+    			<th>文章編號</th>
+				<th>文章標題</th>
+				<th>文章內容</th>
+				<th>發文時間</th>
+				<th>最後修改時間</th>
+			</tr>
+		</thead>
+		<c:forEach items='${AllForum}' var='forum' >
+			<tr>
+				<td>${forum.id}</td>
+				<td>${forum.name}</td>
+				<td>
+					<div style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;">
+						${forum.post}
+					</div>
+				</td>
+				<td>${forum.postTime}</td>
+				<td>${forum.postUpdateTime}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	</div>
+	
+	
     <div align='center'>
     	<br>
     	<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">發表文章</a><br><br>
     	<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">文章刪除</a><br><br>
     	<a href="<c:url value='/Forum/adUpdate' />" class="btn btn-primary">文章修改</a><br><br>
+    	<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">回論壇首頁</a><br><br>
     	<a href="<c:url value='/' />" class="btn btn-primary">回首頁</a><br><br>
     </div>
     
