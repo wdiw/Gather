@@ -74,7 +74,7 @@
 						<%}%>
 					
 					<div class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					<a class="nav-link dropdown-toggle" href="images/Members/${memberData.id}.jpg"id="navbarDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							會員中心 </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">

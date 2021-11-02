@@ -8,8 +8,8 @@ import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,10 +20,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,9 +53,12 @@ public class SponsorshipController {
 		return "redirect:/orders";
 
 	}
-	
 
-	
+	@GetMapping("/test")
+	public String test() {
+		return "Sponsorship/index";
+	}
+
 	// 查詢所有訂單
 
 	@GetMapping("/orders")
@@ -100,6 +101,38 @@ public class SponsorshipController {
 		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
 		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(sBean));
 	}
+
+//	@PostMapping("/orders")
+//	@ResponseBody
+//	public ResponseEntity<String> getAddNewOrderForm(@RequestParam("sName") String sName,
+//			@RequestParam("sPID") int sPID, @RequestParam("sPName") String sPName, @RequestParam("sAmount") int sAmount,
+//			@RequestParam(required = false, name = "projectImage") MultipartFile photo,@ModelAttribute SponsorshipBean sBean1,BindingResult bindingResult) throws IOException {
+//		byte[] image = new byte[1024];
+//		InputStream is = photo.getInputStream();
+//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//
+//		int length;
+//		while ((length = is.read(image)) != -1) {
+//			baos.write(image, 0, length);
+//		}
+//
+//		image = baos.toByteArray();
+//		String base64String = Base64.getEncoder().encodeToString(image);
+//		SponsorshipBean sBean = new SponsorshipBean(sName, sPID, sPName, sAmount, image, base64String);
+//		new SponsorshipValidator().validate(sBean1, bindingResult);
+//		if(bindingResult.hasErrors()) {
+//			return ResponseEntity.status(HttpStatus.CREATED).body(sBean.getsName());
+//		}
+//		else {
+//			sponsorshipService.insertOrder(sBean);
+//			HttpHeaders responseHeaders = new HttpHeaders();
+//			responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//			responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+//			return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(sBean));
+//			
+//		}
+		
+//	}
 
 	// 刪除訂單
 
@@ -158,15 +191,15 @@ public class SponsorshipController {
 		} else {
 			InputStream is = photo.getInputStream();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			
+
 			int length;
 			while ((length = is.read(image)) != -1) {
 				baos.write(image, 0, length);
 			}
-			
+
 			image = baos.toByteArray();
 		}
-		
+
 		String base64String = Base64.getEncoder().encodeToString(image);
 		SponsorshipBean sBean = new SponsorshipBean(sID, sName, sPID, sPName, sAmount, base64String, image);
 

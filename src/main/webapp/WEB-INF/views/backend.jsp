@@ -97,7 +97,7 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+            <a class="nav-link dropdown-toggle" href="images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
               <img src="images/Members/${memberData.id}.jpg" alt="profile">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
@@ -298,12 +298,6 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
               <span class="menu-title">Member</span>
@@ -311,7 +305,7 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/member/member-table.html">會員管理</a></li>
+                <li class="nav-item"> <a class="nav-link" href="showAllMember">會員管理</a></li>
               </ul>
             </div>
           </li>
@@ -348,7 +342,7 @@
             </a>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">專案管理</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Project/allproject">專案管理</a></li>
               </ul>
             </div>
           </li>

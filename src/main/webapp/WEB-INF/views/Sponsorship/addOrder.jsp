@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
+<!-- <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"> -->
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <head>
@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="vendors/select2/select2.min.css">
   <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
   <!-- End plugin css for this page -->
+   <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
   <!-- inject:css -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
   <!-- endinject -->
@@ -110,7 +111,7 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
+              <img src="images/faces/face28.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -387,26 +388,34 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">新增活動</h4>
-                 
-                  <form  id="form" class="forms-sample">
+                  <h4 class="card-title" style="text-align: center;">新增訂單</h4>
+                  <p class="card-description" style="text-align: center;">
+                    Add Order
+                  </p>
+                  <form  id="form" class="forms-sample" method="post" modelAttribute="sBean1" action="orders">
                     <div class="form-group">
-                      <label for="exampleInputName1">活動名稱</label>
-                      <input type="text" class="form-control" name="name" id="st1" placeholder="請輸入活動名稱">
+               		<i class="mdi mdi-account-star"></i> 
+                      <label for="exampleInputName1">贊助者</label>
+                      <input type="text" class="form-control" name="sName" id="st1" placeholder="請輸入贊助者名稱" path="sName"/>&nbsp;
+<%-- 						    <form:errors path="sName" cssClass="error" /> --%>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail3">活動開始日期</label>
-                      <input type="date" class="form-control" name="beginDate" id="st1" >
+                    <i class="mdi mdi-counter"></i>
+                      <label for="exampleInputEmail3">專案編號</label>
+                      <input type="text" class="form-control" name="sPID" id="st1" placeholder="請輸入專案編號" path="sPID">
                     </div>
                     <div class="form-group">
+                    <i class="mdi mdi-book"></i> 
                       <label for="exampleInputPassword4">專案名稱</label>
-                      <input type="date" class="form-control" name="endDate" id="st1" >
+                      <input type="text" class="form-control" name="sPName" id="st1" placeholder="請輸入專案名稱" path="sPName">
                     </div>
                     <div class="form-group">
-                      <label>活動內容</label>
-                      <textarea name="description" id="st1" cols="100" rows="10" placeholder="請輸入活動詳情"></textarea>
+                    <i class="mdi mdi-coin"></i>
+                      <label for="exampleInputPassword4">贊助金額</label>
+                      <input type="text" class="form-control" name="sAmount" id="st1" placeholder="請輸入贊助金額" path="sAmount">
                     </div>
                     <div class="form-group">
+                     <i class="mdi mdi-file-image"></i>
                       <label>上傳圖片</label>
                       <input type="file" name="projectImage" class="file-upload-default" id="projectImage">
                       <div class="input-group col-xs-12">
@@ -459,6 +468,7 @@
   <!-- End custom js for this page-->
   
   <script>
+  $("#showPic").hide();
 	var pic;
 		$('#projectImage').change(function() {
 			var projectImage = $("#projectImage")[0].files[0];
@@ -469,6 +479,7 @@
 // 				console.log(e.target.result);
 			}
 			reader.readAsDataURL(projectImage);
+			$("#showPic").show();
 			console.log(projectImage);
 		})
 
@@ -507,7 +518,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type:"post",
-                        url:"<spring:url value='/Activity/add'/>",
+                        url:"orders",
                         data: formData,
         //                 data: json,
         //                 dataType:"json",
@@ -519,7 +530,7 @@
                         /*一定要加*/
                         success: function(data){
                             var jsonData = JSON.parse(data);
-                            
+                            console.log("Success:" + "\sID:" +jsonData.sID + "\sName:" +jsonData.sName) ;
 
                             var html1 = "";
                             for (const key in jsonData) {
@@ -541,7 +552,7 @@
                                 icon: 'success',
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    location.href= "<spring:url value='/Activity/selectall'/>";
+                                    location.href= "<c:url value='/orders'/>";
                                   }
                                 })
                                     

@@ -40,8 +40,8 @@
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -109,7 +109,7 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+            <a class="nav-link dropdown-toggle" href="images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
               <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
@@ -258,7 +258,7 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="../images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -269,7 +269,7 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="../images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="images/faces/face3.jpg" alt="image"><span class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -277,7 +277,7 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="../images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -328,14 +328,14 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+            <a class="nav-link" data-toggle="collapse" href="<spring:url value='/Activity/selectall' />" aria-expanded="false" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>
               <span class="menu-title">Activity</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">全部活動</a></li>
+                <li class="nav-item"><a class="nav-link" href="<spring:url value='/Activity/selectall' />">全部活動</a></li>
               </ul>
             </div>
           </li>
@@ -387,46 +387,36 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">新增活動</h4>
-                 
-                  <form  id="form" class="forms-sample">
+                  <h2 class="card-title">新增活動</h2>
+               
+                  <form  id='form' name="form" action="" method="POST" enctype="multipart/form-data" >
                     <div class="form-group">
-                      <label for="exampleInputName1">活動名稱</label>
-                      <input type="text" class="form-control" name="name" id="name" placeholder="請輸入活動名稱">
+                      <label for="exampleInputName1">活動名稱:</label>
+                      <input type="text" id="name" name="name" placeholder="請輸入活動名稱" size="15"
+                      autocomplete="off" autofocus />
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail3">活動開始日期</label>
-                      <input type="date" class="form-control" name="beginDate" id="st1" >
+                      <label for="exampleInputEmail3">活動開始日期:</label>
+                      <input type="date" id="beginDate" name="beginDate"  />
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword4">活動結束日期</label>
-                      <input type="date" class="form-control" name="endDate" id="st1" >
+                      <label>活動結束日期:</label>
+                      <input type="date" id="endDate" name="endDate"  />
                     </div>
                     <div class="form-group">
-                      <label>活動內容</label>
-                      <textarea name="description" id="description" cols="100" rows="7" placeholder="請輸入活動詳情"></textarea>
+                      <label>活動內容:</label>
+                      <textarea name="description" id="description" cols="40" rows="5" placeholder="請輸入活動詳情"></textarea>
                     </div>
-                    <div class="form-group">
-                      <label>上傳圖片</label>
-                      <input type="file" name="projectImage" class="file-upload-default" id="projectImage">
-                      <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="上傳圖片" >
-                        <span class="input-group-append">
-                          <button  class="file-upload-browse btn btn-primary" type="button">上傳</button>
-                        </span>
-                      </div>
-                    </div>
+           
                     <div class="form-group">
 					
-						<img style="position: relative; left: 250px" src=" " width="350"
-							height="300" alt="請選擇照片" id="showPic" class="img-rounded">
+					
 					</div>
-					<button id="btnAdd" type='submit' name='submit' class="btn btn-primary mr-2">送出</button>
-					
-                    <a href="<spring:url value='/Activity/sapage' />" class="btn btn-primary mr-2">
-						返回
-					</a>
-					<button id='inputalldata'class="btn btn-light">一鑑輸入</button>
+          <input  name="addActivity" type="submit" value="送出" class="btn btn-primary mr-2"/> 
+          
+          
+          <a href="<c:url value='/Activity/selectall' />"class="btn btn-primary">回活動清單</a>
+      
                   </form>
                 </div>
               
@@ -450,132 +440,56 @@
   <script src="vendors/select2/select2.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- inject:js -->
-  <script src="../js/off-canvas.js"></script>
-  <script src="../js/hoverable-collapse.js"></script>
-  <script src="../js/template.js"></script>
-  <script src="../js/settings.js"></script>
-  <script src="../js/todolist.js"></script>
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/template.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="../js/file-upload.js"></script>
-  <script src="../js/typeahead.js"></script>
-  <script src="../js/select2.js"></script>
+  <script src="js/file-upload.js"></script>
+  <script src="js/typeahead.js"></script>
+  <script src="js/select2.js"></script>
   <!-- End custom js for this page-->
   
   <script>
+    $("#form").submit(function(e) {
 
-  
+var form = $(this);
 
 
-  
-$('#inputalldata').click(function(e) {
-    $('#name').val("慶祝Gather官網改版!  11/1即日起限時提供領取免運券!");
-    $('#description').val("只要於活動期間於活動頁面登錄，即可以獲得全館免運券(不限贊助金額皆可用)，這麼好康的活動，趕緊樓上揪樓下，阿爸揪阿母一起來領券，支持每個富有理想的提案者吧!");
-    e.preventDefault();
+$.ajax({
+type: "POST",
+url: "<spring:url value='/Activity/add'/>",
+data: form.serialize(), // serializes the form's elements.
+success: function(data)
+{
+
+      if(data=='Y'){
+        console.log("jdifjidf")
+        alert("活動新增成功，將跳轉回活動清單");
+        location.href="<spring:url value='/Activity/selectall'/>"
+                  }
+
+                  if(data=='N'){
+                    alert("活動新增失敗");;
+                  }
+
+
+}
 });
-  
-  
-  
-  
-	var pic;
-		$('#projectImage').change(function() {
-			var projectImage = $("#projectImage")[0].files[0];
-			var reader = new FileReader;	
-			reader.onload = function(e) {
-				$('#showPic').attr('src', e.target.result);
-				pic=e.target.result;
-// 				console.log(e.target.result);
-			}
-			reader.readAsDataURL(projectImage);
-			console.log(projectImage);
-		})
+
+e.preventDefault(); // avoid to execute the actual submit of the form.
+});
 
 
-        var form = document.getElementById("form");
-		
-		
-		
-		 $("#btnAdd").click(function () {
-        $("#form").on("submit", function(e){
-            /* =====for formData&MultipartFile =====*/
-            var formData = new FormData(form);
-            
-            /* =====for JSON =====*/
-            
-          
-            
-            //改用ajax傳送 棄用原本的form傳送
-            e.preventDefault();
-            
-       	
-           
-            Swal.fire({
-                title: '您確定要送出嗎？',
-                icon: 'question',
-                imageUrl: pic,
-                imageWidth: 400,
-                imageHeight: 200,
-                showCancelButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type:"post",
-                        url:"<spring:url value='/Activity/add'/>",
-                        data: formData,
-        //                 data: json,
-        //                 dataType:"json",
-        //                 contentType: "application/json; charset=utf-8",
-                        contentType: false, //required
-                        processData: false, // required
-                        /*一定要加*/
-                        mimeType: 'multipart/form-data', //有圖片就要加這行
-                        /*一定要加*/
-                        success: function(data){
-                            var jsonData = JSON.parse(data);
-                            
 
-                            var html1 = "";
-                            for (const key in jsonData) {
-                                let val = (jsonData[key] != "") ? jsonData[key] : "無";
-                                if (!(key == "image" || key == "base64String")) {
-//                                 console.log(key);
-//                                 console.log(jsonData[key]);
-                                    html1 += key+": "+val;
-                                    html1 += "<br/>";
-                                } 
-//                                 else if (key == "base64String"){
-//                                     html += "<img src='data:image;base64,"+jsonData.base64String+"'/>";
-//                                 }
-                            };
-                            // console.log(html);
 
-                            Swal.fire({
-                                title: '已新增成功！',
-                                icon: 'success',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.href= "<spring:url value='/Activity/sapage'/>";
-                                  }
-                                })
-                                    
-                        },
-                        error: function(e, text){
-                            console.log(e.status);
-                            console.log(text);
-                        }
-                    })
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: '已取消送出請求',
-                        text: '您的變更將不會被儲存!'
-                    })
-                }
-            })
-        })
-        
-		 })
-    </script>
+
+
+
+
+</script>
   
 </body>
 

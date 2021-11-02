@@ -27,6 +27,7 @@
 <!-- endinject -->
 <!-- Plugin css for this page -->
 <!-- End plugin css for this page -->
+  <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
 <!-- inject:css -->
 <link rel="stylesheet" href="css/vertical-layout-light/style.css">
 <!-- endinject -->
@@ -114,7 +115,7 @@
 						</div></li>
 					<li class="nav-item nav-profile dropdown"><a
 						class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-						id="profileDropdown"> <img src="images/Members/${memberData.id}.jpg"
+						id="profileDropdown"> <img src="images/faces/face28.jpg"
 							alt="profile" />
 					</a>
 						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -407,22 +408,22 @@
 						<div class="col-lg-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">贊助訂單</h4>
+									<h2 class="card-title" style="text-align: center;">贊助訂單</h2>
 									<!--                   <p class="card-description"> -->
 									<%--                     Add class <code>.table-hover</code> --%>
 									<!--                   </p> -->
 									<div class="table-responsive">
-										<table class="table table-hover">
+										<table class="table table-hover" style="text-align: center;">
 											<thead>
 												<tr>
-													<th>訂單編號</th>
-													<th>贊助人</th>
-													<th>專案圖片</th>
-													<th>專案編號</th>
-													<th>專案名稱</th>
-													<th>贊助金額</th>
-													<th>修改</th>
-													<th>刪除</th>
+													<th><i class="mdi mdi-nutrition"></i>訂單編號</th>
+													<th><i class="mdi mdi-account-star"></i> 贊助人</th>
+													<th> <i class="mdi mdi-file-image"></i> 專案圖片</th>
+													<th><i class="mdi mdi-counter"></i>專案編號</th>
+													<th><i class="mdi mdi-book"></i>專案名稱</th>
+													<th><i class="mdi mdi-coin"></i>贊助金額</th>
+													<th><i class="mdi mdi-pencil"></i></th>
+													<th><i class="mdi mdi-delete"></i></th>
 												</tr>
 											</thead>
 											<c:forEach items='${orders}' var='order'>

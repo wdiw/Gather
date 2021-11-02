@@ -5,8 +5,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
-</script>
+<!-- <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"> -->
+<!-- </script> -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <head>
   <!-- Required meta tags -->
@@ -109,7 +109,7 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+            <a class="nav-link dropdown-toggle" href="images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
               <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">

@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
+<!-- <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"> -->
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <head>
@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="../vendors/select2/select2.min.css">
   <link rel="stylesheet" href="../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
   <!-- End plugin css for this page -->
+  <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css">
   <!-- inject:css -->
   <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
   <!-- endinject -->
@@ -387,32 +388,38 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">修改訂單</h4>
-                  <p class="card-description">
+                  <h4 class="card-title" style="text-align: center;">修改訂單</h4>
+                  <p class="card-description" style="text-align: center;">
                     Edit Order
                   </p>
                   <form  id="form" class="forms-sample">
                     <div class="form-group">
+                    <i class="mdi mdi-nutrition"></i>
                       <label for='sID'>訂單編號</label>
                       <input name="sID" id="sID" class="form-control" value="${sBean.sID}" readonly="readonly">
                     </div>
                     <div class="form-group">
+                    <i class="mdi mdi-account-star"></i> 
                       <label for="sName">贊助者</label>
                       <input id="sName" name="sName" class="form-control" value="${sBean.sName}" type='text'>
                     </div>
                     <div class="form-group">
+                    <i class="mdi mdi-counter"></i>
                       <label for="sPID">專案編號</label>
                       <input id="sPID" name="sPID" class="form-control" value="${sBean.sPID}" type='text'>
                     </div>
                     <div class="form-group">
+                    <i class="mdi mdi-book"></i>
                       <label for="sPName">專案名稱</label>
                       <input id="sPName" name="sPName" class="form-control" value="${sBean.sPName}"  type='text'>
                     </div>
                     <div class="form-group">
+                    <i class="mdi mdi-coin"></i>
                       <label for="sAmount">贊助金額</label>
                       <input id="sAmount" name="sAmount" class="form-control" value="${sBean.sAmount}"  type='text'>
                     </div>
                     <div class="form-group">
+                    <i class="mdi mdi-file-image"></i>
                       <label>上傳圖片</label>
                       <input type="file" name="projectImage" class="file-upload-default" id="projectImage">
                       <div class="input-group col-xs-12">
@@ -428,7 +435,6 @@
 							height="300" alt="請選擇照片" id="showPic" class="img-rounded">
 					</div>
                     <button id="btnAdd" type='button' name='submit' class="btn btn-primary mr-2" onclick="update(${sBean.sID})">送出</button>
-                    <button id='inputalldata'class="btn btn-light">一鑑輸入</button>
                     <button class="btn btn-light">取消</button>
                   </form>
                 </div>
@@ -464,6 +470,7 @@
   <!-- End custom js for this page-->
   
   <script type="text/javascript">
+  
 		$('#projectImage').change(function() {
 			var projectImage = $("#projectImage")[0].files[0];
 			var reader = new FileReader;
@@ -471,14 +478,8 @@
 				$('#showPic').attr('src', e.target.result);
 			}
 			reader.readAsDataURL(projectImage);
+			  
 		})
-		
-		
-		$('#inputalldata').click(function(e) {
-    $('#st1').val("11111111");
-    
-    e.preventDefault();
-});
 		
 		function update(updateId){
 		var form = document.getElementById("form")
