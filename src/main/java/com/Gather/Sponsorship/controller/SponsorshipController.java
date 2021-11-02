@@ -40,6 +40,7 @@ public class SponsorshipController {
 	public SponsorshipController(SponsorshipService sponsorshipService, ServletContext servletContext) {
 		this.sponsorshipService = sponsorshipService;
 		this.servletContext = servletContext;
+		System.out.println("123");
 	}
 
 	@GetMapping("/addorder")
