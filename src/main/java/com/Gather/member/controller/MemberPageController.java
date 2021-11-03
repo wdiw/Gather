@@ -26,40 +26,43 @@ import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
+import com.Gather.util.Mail;
 
 @Controller
 public class MemberPageController {
 	private MemberService memberService;
 	private ProjectService projectService;
+
 	@Autowired
 	public MemberPageController(MemberService memberService, ProjectService projectService) {
 		super();
 		this.memberService = memberService;
 		this.projectService = projectService;
 	}
-	
-	
+
 	@GetMapping("/")
 	public String home() {
 		System.out.println("透過頁面控制器進入首頁");
-		return "index";	
+		return "index";
 	}
+
 	
 
 	@GetMapping("/sample")
 	public String sample(Model model) {
 		System.out.println("透過頁面控制器進入首頁");
 		List<ProjectBean> result = projectService.getAllProject();
-		System.out.println("sdasdasdasdsa"+result);
+		System.out.println("sdasdasdasdsa" + result);
 		model.addAttribute("allproject", result);
-		return "sample";	
+		return "sample";
 	}
-	
+
 	@GetMapping("/addMember")
 	public String addMember() {
 		System.out.println("透過頁面控制器進入新增會員頁面");
 		return "Member/addMember";
 	}
+
 	@GetMapping("/backend")
 	public String test() {
 		return "backend";
@@ -83,16 +86,16 @@ public class MemberPageController {
 
 	@PostMapping("/memberUpdate/{id}")
 	@ResponseBody
-	public ResponseEntity<String> addUpdateOrderInfo(
-			@RequestBody Member theMember,
-			@RequestParam(required = false, name = "memberImage") MultipartFile photo, HttpServletRequest req) throws IOException {
+	public ResponseEntity<String> addUpdateOrderInfo(@RequestBody Member theMember,
+			@RequestParam(required = false, name = "memberImage") MultipartFile photo, HttpServletRequest req)
+			throws IOException {
 
 		// 從request中獲取輸入流資訊 把來源變成IS => ok
 		InputStream is = photo.getInputStream();
 		// 建立儲存在伺服器的路徑資訊 (這邊我要指到那個地點)
 		String rootDirectory = req.getServletContext().getRealPath("/").replace("webapp", "resources");
 		String destFileName = rootDirectory + "static\\images\\Members\\" + theMember.getId() + ".jpg";
-		System.out.println("debug:destFileName"+destFileName);
+		System.out.println("debug:destFileName" + destFileName);
 		// outPutStream輸出流指向臨時檔案
 		FileOutputStream outputStream = new FileOutputStream(new File(destFileName));
 		// 每次讀取檔案位元組

@@ -29,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
+import com.Gather.util.Mail;
 
 @RestController
 @RequestMapping("/api")
@@ -56,16 +57,54 @@ public class MemberRESTController {
 			return new ResponseEntity<String>("N", HttpStatus.OK);
 		}
 	}
+	// 註冊認證
+		@PostMapping("/register")
+		public ResponseEntity<String> register(@RequestBody Member theMember, HttpServletRequest req) {
+			// 清洗前端資料，確保ID為0或null，使insertOrUpdate成功判斷
+			// 但因為我這邊使用的是Integer，所以不能用0 要用null
+			theMember.setId(null);
+			// 產生這次帳號認證碼
+			int MAX = 999999;
+			int min = 100000;
+			int random = (int) (Math.random() * (MAX - min + 1)) + min;
+			// 將帳號認證碼，放入session
+			req.getSession().setAttribute("registerData_valid_code", random);
+			System.out.println("認證碼是"+random);
+			
+			//判斷會員的性別
+			String gender=" ";
+			if (theMember.getSexual().equals("男")) {
+				gender = " 先生";
+			}else {
+				gender = " 女士";
+			}
+			// 編寫認證信件的內容，裡面要含有會員認證連結
+			String message = theMember.getName()+gender+ "您好!歡迎您使用Gather，以下是您的認證碼" + random;
+			// 寄信
+			Mail.SendGmail("Gather.WebService@gmail.com", theMember.getAccount(), "Gather募資平台-帳號驗證", message);
+			System.out.println("成功寄信");
+			// 將會員資料先預存在session 等待加入
+			req.getSession().setAttribute("registerData", theMember);
+			return new ResponseEntity<String>("Y", HttpStatus.OK);
+		}
 
-	@PostMapping("/register")
-	public Member register(@RequestBody Member theMember) {
-		// 清洗前端資料，確保ID為0或null，使insertOrUpdate成功判斷
-		// 但因為我這邊使用的是Integer，所以不能用0 要用null
-		theMember.setId(null);
-		theMember.setStatus("會員");
-		System.out.println(theMember);
-		memberService.addMember(theMember);
-		return theMember;
+	// 使用者在驗證頁面輸入認證碼，提交於此，判斷認證碼是否正確。
+	// 如果正確，就跳出sweat alert 並跳去首頁
+	// 如果不正確，就跳出失敗sweat alert 並停留在此頁面
+	@GetMapping("/register/{rigister_mail_code}")
+	public ResponseEntity<String> registerActive(@PathVariable int rigister_mail_code, HttpServletRequest req) {
+		System.out.println("認證碼"+rigister_mail_code);
+		int register_valid_code = (int) req.getSession().getAttribute("registerData_valid_code");
+		if (rigister_mail_code == register_valid_code) {
+			System.out.println("驗證成功，準備加入資料庫");
+			Member theMember = (Member) req.getSession().getAttribute("registerData");
+			theMember.setStatus("會員");//賦予會員的身分
+			memberService.addMember(theMember);
+			System.out.println("會員資料加入資料庫成功");
+			return new ResponseEntity<String>("Y", HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("N", HttpStatus.OK);
+
 	}
 
 	@GetMapping("/members")
@@ -115,6 +154,4 @@ public class MemberRESTController {
 		return "The member\t" + memberId + "\thas been deleted!";
 	}
 
-	
-	
 }
