@@ -63,6 +63,12 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectBean> getAllProjectBymID(Integer mID) {
 		return projectRepository.findBymID(mID);
 	}
+
+	@Override
+	public void updateStatusBypID(Integer pID, String pStatus) {
+		projectRepository.updateStatusBypID(pID, pStatus);
+		
+	}
 	
 	
 	

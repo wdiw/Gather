@@ -25,5 +25,5 @@ public interface ProjectService {
 	//找Project By mID
 	List<ProjectBean> getAllProjectBymID(Integer mID);
 	
-//	public void updateStatusBypID(Integer pID,String pStatus );
+	public void updateStatusBypID(Integer pID,String pStatus );
 }

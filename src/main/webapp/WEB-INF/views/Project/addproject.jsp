@@ -554,8 +554,6 @@
 								});
 
 
-
-
 								$("#form").on("submit", function (e) {
 									e.preventDefault();
 
@@ -575,16 +573,41 @@
 										type: "POST",
 
 										data: formData,
+										// success: function (data) {
+
+										// 	location.replace("<spring:url value='/Project/allproject'/>");  
+										// },
+										// error: function (response) {
+										// 	alert('response status: ' + response.status);
+										// }
 										success: function (data) {
-											location.replace("<spring:url value='/Project/allproject'/>");  
-										},
-										error: function (response) {
-											alert('response status: ' + response.status);
-										}
+												Swal.fire({
+													title: '提交成功',
+													icon: 'success',
+													text: "已經提交計畫，請待管理員審核！",
+													position: 'center',
+
+												}).then((result) => {
+													if (result.isConfirmed) {
+														location.href = "<c:url value='/Project/allproject'/>";
+													}
+												})
+											},
+											error: function (xhr, text) {
+												console.log("status code: " + xhr.status);
+												console.log("error message: " + text);
+												Swal.fire({
+													title: '提交失敗',
+													icon: 'error',
+													text: "計畫提交失敗",
+												})
+											}
+	
+
 
 									})
 
-									// console.log("ajax結束")
+								
 								})
 
 
