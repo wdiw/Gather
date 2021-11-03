@@ -39,4 +39,9 @@ public class SponsorOrderServiceImpl implements SponsorOrderService {
 		return sponsorOrderRepository.findAll();
 	}
 
+	@Override
+	public List<SponsorOrderBean> getOrdersByProposerID(Integer proposerID) {
+		return sponsorOrderRepository.findAll();
+	}
+
 }

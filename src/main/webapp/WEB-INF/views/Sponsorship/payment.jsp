@@ -437,6 +437,7 @@
 			    
 				$("#submit").click(function(){
 				
+					
 						let sPID=${pBean.pID};
 						let sPName="${pBean.pName}";
 						let projectImage=$('#projectImage').attr("src");
@@ -449,6 +450,7 @@
 						let sAmount="300";
 						let sDiscount=$('#sDiscount').val();
 						let radio=document.getElementsByName("paymentMethod");
+						let proposerID=${pBean.mID};
 						 var radioLength = radio.length;
 						   for(var i =0;i < radioLength;i++){
 						    if(radio[i].checked)
@@ -471,7 +473,8 @@
 		        	  sEmail:sEmail,
 		        	  sAmount:sAmount,
 		        	  sDiscount:sDiscount,
-		        	  paymentMethod:paymentMethod
+		        	  paymentMethod:paymentMethod,
+		        	  proposerID:proposerID
 		         	};
 					 $.ajax({
 						 url: "./newOrder",

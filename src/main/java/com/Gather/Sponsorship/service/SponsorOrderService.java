@@ -10,4 +10,5 @@ public interface SponsorOrderService {
 	List<SponsorOrderBean> getOrders();
 	List<SponsorOrderBean> getOrdersByMemberID(Integer mID);
 	SponsorOrderBean insertOrder(SponsorOrderBean sBean);
+	List<SponsorOrderBean> getOrdersByProposerID(Integer proposerID);
 }

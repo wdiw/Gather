@@ -31,17 +31,16 @@ public class SponsorOrderBean {
 	private String sPhone;
 	private String sEmail;
 	private Integer sTotal;
+	private Integer proposerID;
 
 	public SponsorOrderBean() {
 	}
 
 
 
-
-
 	public SponsorOrderBean(Integer sID, Integer mID, Integer sPID, String sName, String sPName, String status,
 			String paymentMethod, Integer sAmount, Integer sDiscount, Integer sBonus, String sTime, String projectImage,
-			String sAddress, String sPhone, String sEmail,Integer sTotal) {
+			String sAddress, String sPhone, String sEmail,Integer sTotal,Integer proposerID) {
 		super();
 		this.sID = sID;
 		this.mID = mID;
@@ -59,13 +58,14 @@ public class SponsorOrderBean {
 		this.sPhone = sPhone;
 		this.sEmail = sEmail;
 		this.sTotal = sTotal;
+		this.proposerID=proposerID;
 	}
 
 
 
 	public SponsorOrderBean( Integer mID, Integer sPID, String sName, String sPName, String paymentMethod,
 			Integer sAmount, Integer sDiscount, Integer sBonus, String projectImage, String sAddress, String sPhone,
-			String sEmail,Integer sTotal) {
+			String sEmail,Integer sTotal,Integer proposerID) {
 		super();
 		
 		this.mID = mID;
@@ -81,6 +81,7 @@ public class SponsorOrderBean {
 		this.sPhone = sPhone;
 		this.sEmail = sEmail;
 		this.sTotal = sTotal;
+		this.proposerID = proposerID;
 	}
 
 
@@ -311,6 +312,18 @@ public class SponsorOrderBean {
 
 	public void setsTotal(Integer sTotal) {
 		this.sTotal = sTotal;
+	}
+
+
+
+	public Integer getProposerID() {
+		return proposerID;
+	}
+
+
+
+	public void setProposerID(Integer proposerID) {
+		this.proposerID = proposerID;
 	}
 	
 	

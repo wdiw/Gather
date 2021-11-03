@@ -74,14 +74,15 @@ public class SponsorshipUserController {
 			@RequestParam("sName") String sName, @RequestParam("sPhone") String sPhone,
 			@RequestParam("sBonus") String sBonus, @RequestParam("sAddress") String sAddress,
 			@RequestParam("sEmail") String sEmail, @RequestParam("sAmount") String sAmount,
-			@RequestParam("sDiscount") String sDiscount, @RequestParam("paymentMethod") String paymentMethod
+			@RequestParam("sDiscount") String sDiscount, @RequestParam("paymentMethod") String paymentMethod,
+			@RequestParam("proposerID") String proposerID
 
 	) throws IOException {
 
 		Integer sTotal = Integer.parseInt(sAmount) - Integer.parseInt(sDiscount) + Integer.parseInt(sBonus);
 		SponsorOrderBean sBean = new SponsorOrderBean(Integer.parseInt(mID), Integer.parseInt(sPID), sName, sPName,
 				paymentMethod, Integer.parseInt(sAmount), Integer.parseInt(sDiscount), Integer.parseInt(sBonus),
-				projectImage, sAddress, sPhone, sEmail, sTotal);
+				projectImage, sAddress, sPhone, sEmail, sTotal,Integer.parseInt(proposerID));
 
 		Long timeStamp = System.currentTimeMillis();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -105,13 +106,16 @@ public class SponsorshipUserController {
 		return "Sponsorship/sponsorshipInfo";
 	}
 
-	// 查詢被贊助訂單
+	// 查詢及管理被贊助訂單
 
 	@GetMapping("/sponsoredInfo")
-	public String sponsoredInfo(Model model) {
-		List<SponsorOrderBean> sBeans = sponsorOrderService.getOrders();
-		model.addAttribute("sBeans", sBeans);
-		return "Sponsorship/orders";
+	public String sponsoredInfo(HttpServletRequest reg, HttpServletRequest request) {
+		Member member = (Member) reg.getSession().getAttribute("memberData");
+		Member mBean = memberService.getMemberInfoByID(member.getId());
+		List<ProjectBean> pBean= projectService.getAllProjectBymID(mBean.getId());
+		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByProposerID(pBean.get(0).getmID());
+		request.getSession().setAttribute("sBean", sBean);
+		return "Sponsorship/sponsoredInfo";
 	}
 
 }

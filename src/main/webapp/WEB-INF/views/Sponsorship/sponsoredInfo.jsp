@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>贊助訂單</title>
+    <title>被贊助訂單</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -99,7 +99,7 @@
 
     <section class="ftco-section ftco-cart" >
     <div>
-    <p class="text-center"><a href="sponsoredInfo" class="btn btn-primary py-3 px-4">被贊助清單</a></p>
+    <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">被贊助清單</a></p>
     
     </div>
 
@@ -110,12 +110,16 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
-						        <th>方案名稱</th>
+						        <th width="25%">方案名稱</th>
 						        <th>贊助方案</th>
-						        <th style="width:40px">贊助金額</th>
-						        <th style="width:100px">付款方式</th>
-						        <th style="width:100px">訂單狀態</th>
+						        <th style="width:1px">贊助人</th>
+						        <th>連絡電話</th>
+						        <th>寄送地址</th>
+						        <th>贊助金額</th>
+						        <th>付款方式</th>
+						        <th>訂單狀態</th>
 						        <th>訂單時間</th>
+						        <th>修改</th>
 						      </tr>
 						    </thead>
 						    <tbody>
@@ -126,8 +130,16 @@
 						        <td class="image-prod"><img width='80' height='80'
 														src="${sBean.projectImage}"
 														class="img-circle" /></td>
-						        
+						        <td class="price">
+						        	${sBean.sName}
+						        </td>
+						        <td class="price">
+						        	${sBean.sPhone}
+						        </td>
 						        <td class="product-name">
+						        	${sBean.sAddress}
+						        </td>
+						        <td class="price">
 						        	$${sBean.sTotal}
 						        </td>
 						        <td class="price">${sBean.paymentMethod}</td>
@@ -136,6 +148,9 @@
 						        
 						        <td class="quantity">
 						        	${sBean.sTime}
+					          </td>
+					           <td class="quantity">
+						        	<p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">修改</a></p>
 					          </td>
 						        
 						    
