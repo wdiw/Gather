@@ -66,7 +66,7 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item" href="shop.html">Shop</a>
                 <a class="dropdown-item" href="showProject/131">Single Product</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
+                <a class="dropdown-item" href="sponsorshipInfo">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
               </div>
             </li>
