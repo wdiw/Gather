@@ -25,11 +25,12 @@ public class SponsorOrderBean {
 	private Integer sAmount;
 	private Integer sDiscount;
 	private Integer sBonus;
-	private Date sTime;
+	private String sTime;
 	private String projectImage;
 	private String sAddress;
 	private String sPhone;
 	private String sEmail;
+	private Integer sTotal;
 
 	public SponsorOrderBean() {
 	}
@@ -39,8 +40,8 @@ public class SponsorOrderBean {
 
 
 	public SponsorOrderBean(Integer sID, Integer mID, Integer sPID, String sName, String sPName, String status,
-			String paymentMethod, Integer sAmount, Integer sDiscount, Integer sBonus, Date sTime, String projectImage,
-			String sAddress, String sPhone, String sEmail) {
+			String paymentMethod, Integer sAmount, Integer sDiscount, Integer sBonus, String sTime, String projectImage,
+			String sAddress, String sPhone, String sEmail,Integer sTotal) {
 		super();
 		this.sID = sID;
 		this.mID = mID;
@@ -57,15 +58,16 @@ public class SponsorOrderBean {
 		this.sAddress = sAddress;
 		this.sPhone = sPhone;
 		this.sEmail = sEmail;
+		this.sTotal = sTotal;
 	}
 
 
 
-	public SponsorOrderBean(Integer sID, Integer mID, Integer sPID, String sName, String sPName, String paymentMethod,
+	public SponsorOrderBean( Integer mID, Integer sPID, String sName, String sPName, String paymentMethod,
 			Integer sAmount, Integer sDiscount, Integer sBonus, String projectImage, String sAddress, String sPhone,
-			String sEmail) {
+			String sEmail,Integer sTotal) {
 		super();
-		this.sID = sID;
+		
 		this.mID = mID;
 		this.sPID = sPID;
 		this.sName = sName;
@@ -78,6 +80,7 @@ public class SponsorOrderBean {
 		this.sAddress = sAddress;
 		this.sPhone = sPhone;
 		this.sEmail = sEmail;
+		this.sTotal = sTotal;
 	}
 
 
@@ -85,8 +88,8 @@ public class SponsorOrderBean {
 
 
 	public SponsorOrderBean(Integer sID, Integer mID, Integer sPID, String sName, String sPName, String paymentMethod,
-			Integer sAmount, Integer sDiscount, Integer sBonus, Date sTime, String projectImage, String sAddress,
-			String sPhone, String sEmail) {
+			Integer sAmount, Integer sDiscount, Integer sBonus, String sTime, String projectImage, String sAddress,
+			String sPhone, String sEmail,Integer sTotal) {
 		super();
 		this.sID = sID;
 		this.mID = mID;
@@ -102,6 +105,7 @@ public class SponsorOrderBean {
 		this.sAddress = sAddress;
 		this.sPhone = sPhone;
 		this.sEmail = sEmail;
+		this.sTotal = sTotal;
 	}
 
 
@@ -165,11 +169,11 @@ public class SponsorOrderBean {
 		this.sDiscount = sDiscount;
 	}
 
-	public Date getsTime() {
+	public String getsTime() {
 		return sTime;
 	}
 
-	public void setsTime(Date sTime) {
+	public void setsTime(String sTime) {
 		this.sTime = sTime;
 	}
 
@@ -291,6 +295,22 @@ public class SponsorOrderBean {
 
 	public void setsAddress(String sAddress) {
 		this.sAddress = sAddress;
+	}
+
+
+
+
+
+	public Integer getsTotal() {
+		return sTotal;
+	}
+
+
+
+
+
+	public void setsTotal(Integer sTotal) {
+		this.sTotal = sTotal;
 	}
 	
 	

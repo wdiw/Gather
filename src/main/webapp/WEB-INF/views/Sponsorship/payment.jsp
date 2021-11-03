@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +10,15 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <link rel="stylesheet"
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
@@ -128,15 +140,14 @@
 									<div class="col-lg-6 mb-5 ftco-animate">
 										<a
 											href="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg"
-											class="image-popup prod-img-bg">
-											<img
+											class="image-popup prod-img-bg"> <img
 											src="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg"
 											class="img-fluid" alt="Colorlib Template" id="projectImage"></a>
-									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="lastname">${pBean.pName}</label>
 										</div>
+									</div>
 									</div>
 								</div>
 							</div>
@@ -145,11 +156,13 @@
 								style="position: absolute; top: 0; right: 0">
 								<div class="form-group">
 									<label for="postcodezip">贊助者</label> <input type="text"
-										class="form-control" placeholder="" value="${mBean.name}" name="sName" id="sName">
+										class="form-control" placeholder="" value="${mBean.name}"
+										name="sName" id="sName">
 								</div>
 								<div class="form-group">
 									<label for="postcodezip">連絡電話</label> <input type="text"
-										class="form-control" placeholder="" value="0935623709" name="sPhone" id="sPhone">
+										class="form-control" placeholder="" value="0935623709"
+										name="sPhone" id="sPhone">
 								</div>
 							</div>
 
@@ -162,7 +175,8 @@
 										<i class="fas fa-dollar-sign"
 											style="position: absolute; left: 10px; top: 18px; font-size: 22px; text-align: center;"></i>
 										<input type="number" class="form-control" placeholder="0"
-											style="padding-left: 32PX; font-size: 20px; padding-bottom: 8px" name="sBonus" id="sBonus">
+											style="padding-left: 32PX; font-size: 20px; padding-bottom: 8px"
+											name="sBonus" id="sBonus">
 									</div>
 								</div>
 							</div>
@@ -180,78 +194,80 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="phone">回饋優惠</label> <input type="text"
-										class="form-control" placeholder="" name="sDiscount" id="sDiscount">
+										class="form-control" placeholder="" name="sDiscount"
+										id="sDiscount">
 								</div>
 							</div>
 
 
 							<div class="col-md-6">
-								<div class="form-group" >
+								<div class="form-group">
 									<label for="towncity">地址</label> <input type="text"
-										class="form-control" placeholder="" value="桃園市中壢區中央路300號" name="sAddress" id="sAddress">
+										class="form-control" placeholder="" value="桃園市中壢區中央路300號"
+										name="sAddress" id="sAddress">
 								</div>
-							</div>
-							</div>
-							<div class="row mt-5 pt-3 d-flex" align="center">
-						<div class="col-md-6 d-flex" >
-							<div class="cart-detail cart-total bg-light p-3 p-md-4" style="width:450px">
-								<h3 class="billing-heading mb-4">贊助總額</h3>
-								<p class="d-flex">
-									<span>方案金額</span> <span>$20.60</span>
-								</p>
-								<p class="d-flex">
-									<span>加碼贊助</span> <span>$0.00</span>
-								</p>
-								<p class="d-flex">
-									<span>回饋金折抵</span> <span>$3.00</span>
-								</p>
-								<hr>
-								<p class="d-flex total-price">
-									<span>總金額</span> <span>$17.60</span>
-								</p>
 							</div>
 						</div>
-						<div class="col-md-6" style="width:450px" >
-							<div class="cart-detail bg-light p-3 p-md-4">
-								<h3 class="billing-heading mb-4">付款方式</h3>
-								<div class="form-group">
-									<div class="col-md-12">
-										<div class="radio">
-											<label><input type="radio" name="paymentMethod"
-												class="mr-2">銀行轉帳</label>
-										</div>
-									</div>
+						<div class="row mt-5 pt-3 d-flex" align="center">
+							<div class="col-md-6 d-flex">
+								<div class="cart-detail cart-total bg-light p-3 p-md-4"
+									style="width: 450px">
+									<h3 class="billing-heading mb-4">贊助總額</h3>
+									<p class="d-flex">
+										<span>方案金額</span> <span>$20.60</span>
+									</p>
+									<p class="d-flex">
+										<span>加碼贊助</span> <span>$0.00</span>
+									</p>
+									<p class="d-flex">
+										<span>回饋金折抵</span> <span>$3.00</span>
+									</p>
+									<hr>
+									<p class="d-flex total-price">
+										<span>總金額</span> <span>$17.60</span>
+									</p>
 								</div>
-								<div class="form-group">
-									<div class="col-md-12">
-										<div class="radio">
-											<label><input type="radio" name="paymentMethod"
-												class="mr-2">信用卡</label>
-										</div>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-md-12">
-										<div class="radio">
-											<label><input type="radio" name="paymentMethod"
-												class="mr-2">Line Pay</label>
-										</div>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-md-12">
-										<div class="checkbox">
-											<label><input type="checkbox" value="" class="mr-2">
-												我已閱讀並接受條款和條件</label>
-										</div>
-									</div>
-								</div>
-								<p>
-									<button class="btn btn-primary py-3 px-4" type="submit" >立刻贊助</button>
-								</p>
 							</div>
-						</div>
-			
+							<div class="col-md-6" style="width: 450px">
+								<div class="cart-detail bg-light p-3 p-md-4">
+									<h3 class="billing-heading mb-4">付款方式</h3>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="radio">
+												<label><input type="radio" name="paymentMethod" 
+													class="mr-2" value="銀行轉帳">銀行轉帳</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="radio">
+												<label><input type="radio" name="paymentMethod" 
+													class="mr-2" value="信用卡">信用卡</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="radio">
+												<label><input type="radio" name="paymentMethod" 
+													class="mr-2" value="Line Pay">Line Pay</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="checkbox">
+												<label><input type="checkbox" value="" class="mr-2">
+													我已閱讀並接受條款和條件</label>
+											</div>
+										</div>
+									</div>
+									<p>
+										<button class="btn btn-primary py-3 px-4" type="button" name="submit" id="submit" >立刻贊助</button>
+									</p>
+								</div>
+							</div>
 					</form>
 				</div>
 				<!-- .col-md-8 -->
@@ -405,75 +421,93 @@
 
 			});
 
-			$('.quantity-left-minus').click(function(e) {
-				// Stop acting like a button
-				e.preventDefault();
-				// Get the field name
-				var quantity = parseInt($('#quantity').val());
+			 $('.quantity-left-minus').click(function(e){
+			        // Stop acting like a button
+			        e.preventDefault();
+			        // Get the field name
+			        var quantity = parseInt($('#quantity').val());
+			        
+			        // If is not undefined
+			      
+			            // Increment
+			            if(quantity>0){
+			            $('#quantity').val(quantity - 1);
+			            }
+			    });
+			    
+				$("#submit").click(function(){
+				
+						let sPID=${pBean.pID};
+						let sPName="${pBean.pName}";
+						let projectImage=$('#projectImage').attr("src");
+						let mID="${sessionScope.memberData.id}";
+						let sName="${sessionScope.memberData.name}"
+						let sPhone=$('#sPhone').val();
+						let sBonus=$('#sBonus').val();
+						let sAddress=$('#sAddress').val();
+						let sEmail="${sessionScope.memberData.account}";
+						let sAmount="300";
+						let sDiscount=$('#sDiscount').val();
+						let radio=document.getElementsByName("paymentMethod");
+						 var radioLength = radio.length;
+						   for(var i =0;i < radioLength;i++){
+						    if(radio[i].checked)
+						     var paymentMethod = radio[i].value;
+							  
+						   }
+						   
+					
 
-				// If is not undefined
 
-				// Increment
-				if (quantity > 0) {
-					$('#quantity').val(quantity - 1);
-				}
-			});
-			
-			
-// 				var form = document.getElementById("form");
-       			 $("#form").on("submit", function(e){
-		 		var data = {
-		        	  sPID:${pBean.pID},
-		        	  sPName:${pBean.pName},
-		        	  projectImage:$('#projectImage').attr("src"),
-		        	  mID:${mBean.id}
-		        	  sName:${mBean.name},
-		        	  sPhone:$('#sPhone').val(),
-		        	  sBonus:$('#sBonus').val(),
-		        	  sAddress:$('#sAddress').val(),
-		        	  sEmail:${mBean.account}
-		        	  sAmount:"300",
-		        	  sDiscount:$('#sDiscount').val(),
-		        	  paymentMethod:$('.radio').val()
-		         };
-				 var formData = new FormData(form);
-				 $.ajax({
-		               url: "<spring:url value='/newOrder'>",
+					var data = {
+		        	  sPID:sPID,
+		        	  sPName:sPName,
+		        	  projectImage:projectImage,
+		        	  mID:mID,
+		        	  sName:sName,
+		        	  sPhone:sPhone,
+		        	  sBonus:sBonus,
+		        	  sAddress:sAddress,
+		        	  sEmail:sEmail,
+		        	  sAmount:sAmount,
+		        	  sDiscount:sDiscount,
+		        	  paymentMethod:paymentMethod
+		         	};
+					 $.ajax({
+						 url: "./newOrder",
 		              type: 'POST',
-		               contentType: "application/json; charset=utf-8",
-		              data: formData,
-		             contentType: false, //required
-		              processData: false, // required
-		              mimeType: 'multipart/form-data',
-		              success: function (data) {
-		                Swal.fire({
-		                  title: '訂單成立',
-		                  icon: 'success',
-		                  text: "已經新增贊助！",
-		                  position: 'center',
+					  data:data,
+					   success: function (data) {
+						   Swal.fire({
+				                  title: '訂單成立',
+				                  icon: 'success',
+				                  text: "已經新增贊助！",
+				                  position: 'center',
 
-		                }).then((result) => {
-		                    if (result.isConfirmed) {
-		                      location.href= "<c:url value='/'/>";
-		                    }
-		                  })
-		                },
-		                  error: function (xhr, text) {
-		                    console.log("status code: " + xhr.status);
+				                }).then((result) => {
+				                    if (result.isConfirmed) {
+				                      location.href= "<c:url value='/'/>";
+				                    }
+				                  })
+					   },error: function (xhr, text) {
+						   console.log("status code: " + xhr.status);
 		                    console.log("error message: " + text);
 		                    Swal.fire({
 		                      title: '新增失敗',
 		                      icon: 'error',
-		                      text: "此筆ID" + $("#id").val() + "不存在，請檢查後重試！",
+		                      text: "失敗",
 		                    })
-//		                     .then((result) => {
-//		                         if (result.isConfirmed) {
-//		                             location.href= "<c:url value='/order/" + updateId +"'/>";
-//		                           }
-//		                         })
-		                  }
-		            });
-				};
+					   }
+					 })
+				})
+
+
+       			
+				    
+			});
+			
+			
+		
 	</script>
 
 </body>

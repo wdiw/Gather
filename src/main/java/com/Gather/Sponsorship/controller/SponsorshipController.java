@@ -26,7 +26,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.Gather.Sponsorship.model.SponsorOrderBean;
 import com.Gather.Sponsorship.model.SponsorshipBean;
+import com.Gather.Sponsorship.service.SponsorOrderService;
 import com.Gather.Sponsorship.service.SponsorshipService;
 import com.google.gson.Gson;
 
@@ -34,13 +36,15 @@ import com.google.gson.Gson;
 public class SponsorshipController {
 
 	SponsorshipService sponsorshipService;
+	SponsorOrderService sponsorOrderService;
 	ServletContext servletContext;
 
 	@Autowired
-	public SponsorshipController(SponsorshipService sponsorshipService, ServletContext servletContext) {
+	public SponsorshipController(SponsorshipService sponsorshipService, ServletContext servletContext, SponsorOrderService sponsorOrderService) {
 		this.sponsorshipService = sponsorshipService;
 		this.servletContext = servletContext;
-		System.out.println("123");
+		this.sponsorOrderService = sponsorOrderService;
+		
 	}
 
 	@GetMapping("/addorder")
@@ -64,7 +68,7 @@ public class SponsorshipController {
 
 	@GetMapping("/orders")
 	public String list(Model model) {
-		List<SponsorshipBean> sBeans = sponsorshipService.getOrders();
+		List<SponsorOrderBean> sBeans = sponsorOrderService.getOrders();
 		model.addAttribute("orders", sBeans);
 		return "Sponsorship/orders";
 	}

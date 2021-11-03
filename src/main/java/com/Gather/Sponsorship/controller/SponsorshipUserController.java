@@ -3,14 +3,17 @@ package com.Gather.Sponsorship.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Date;
 
 import javax.print.attribute.standard.Sides;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +30,7 @@ import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.Sponsorship.model.SponsorOrderBean;
 import com.Gather.Sponsorship.model.SponsorshipBean;
+import com.Gather.Sponsorship.service.SponsorOrderService;
 import com.Gather.Sponsorship.service.SponsorshipService;
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
@@ -36,18 +41,20 @@ public class SponsorshipUserController {
 
 	ProjectService projectService;
 	MemberService memberService;
-	SponsorshipService sponsorshipService;
-
+	SponsorOrderService sponsorOrderService;
 	@Autowired
-	public SponsorshipUserController(ProjectService projectService, MemberService memberService) {
+	public SponsorshipUserController(
+			ProjectService projectService,
+			MemberService memberService,
+			SponsorOrderService sponsorOrderService) {
 		this.projectService = projectService;
 		this.memberService = memberService;
+		this.sponsorOrderService = sponsorOrderService;
 	}
 
 	@GetMapping("/showProject/{pID}")
-	public String showProject(@PathVariable("pID") Integer pID, Model model, HttpServletRequest request) {
+	public String showProject(@PathVariable("pID") Integer pID, HttpServletRequest request) {
 		ProjectBean pBean = projectService.getProjectById(pID);
-		model.addAttribute("pBean", pBean);
 		request.getSession().setAttribute("pBean", pBean);
 		return "Sponsorship/project";
 	}
@@ -60,32 +67,38 @@ public class SponsorshipUserController {
 		return"Sponsorship/payment";
 	}
 	
+	
 	@PostMapping("/newOrder")
 	@ResponseBody
 	public ResponseEntity<String> newOrder(
-			@RequestParam("sPID") Integer sPID,
+			@RequestParam("sPID") String sPID,
 			@RequestParam("sPName") String sPName,
 			@RequestParam("projectImage") String projectImage,
-			@RequestParam("mID") Integer mID,
+			@RequestParam("mID") String mID,
 			@RequestParam("sName") String sName,
 			@RequestParam("sPhone") String sPhone,
-			@RequestParam("sBonus") Integer sBonus,
+			@RequestParam("sBonus") String sBonus,
 			@RequestParam("sAddress") String sAddress,
 			@RequestParam("sEmail") String sEmail,
-			@RequestParam("sAmount") Integer sAmount,
-			@RequestParam("sDiscount") Integer sDiscount,
-			@RequestParam("paymentMethod") String paymentMethod,
-			@RequestParam("sID") Integer sID
+			@RequestParam("sAmount") String sAmount,
+			@RequestParam("sDiscount") String sDiscount,
+			@RequestParam("paymentMethod") String paymentMethod
 			
 			) throws IOException {
 		
-		SponsorOrderBean sBean = new SponsorOrderBean(sID,mID,sPID, sName,sPName, paymentMethod,sAmount, sDiscount, sBonus, projectImage,sAddress,sPhone,
-				sEmail);
+		Integer sTotal = Integer.parseInt(sAmount)-Integer.parseInt(sDiscount)+Integer.parseInt(sBonus);
+		SponsorOrderBean sBean = new SponsorOrderBean(Integer.parseInt(mID),Integer.parseInt(sPID), sName,sPName, paymentMethod,Integer.parseInt(sAmount), Integer.parseInt(sDiscount), Integer.parseInt(sBonus), projectImage,sAddress,sPhone,
+				sEmail,sTotal);
 		
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
-		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(sBean));
+		Long timeStamp = System.currentTimeMillis(); 
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sd = sdf.format(new Date(Long.parseLong(String.valueOf(timeStamp))));
+        
+        sBean.setsTime(sd);
+        sBean.setStatus("待付款");
+        sponsorOrderService.insertOrder(sBean);
+		
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 }
