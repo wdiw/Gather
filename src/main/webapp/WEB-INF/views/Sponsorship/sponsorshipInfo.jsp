@@ -91,7 +91,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span></p>
-            <h1 class="mb-0 bread">My Wishlist</h1>
+            <h1 class="mb-0 bread">贊助清單</h1>
           </div>
         </div>
       </div>
@@ -110,11 +110,11 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
-						        <th>方案名稱</th>
+						        <th width="18%">方案名稱</th>
 						        <th>贊助方案</th>
-						        <th style="width:40px">贊助金額</th>
-						        <th style="width:100px">付款方式</th>
-						        <th style="width:100px">訂單狀態</th>
+						        <th>贊助金額</th>
+						        <th>付款方式</th>
+						        <th>訂單狀態</th>
 						        <th>訂單時間</th>
 						      </tr>
 						    </thead>
@@ -253,6 +253,7 @@
   <script>
 		$(document).ready(function(){
 
+		
 		var quantitiy=0;
 		   $('.quantity-right-plus').click(function(e){
 		        

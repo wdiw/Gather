@@ -99,10 +99,9 @@
 
     <section class="ftco-section ftco-cart" >
     <div>
-    <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">被贊助清單</a></p>
+    <p class="text-center"><a href="sponsorshipInfo" class="btn btn-primary py-3 px-4">贊助清單</a></p>
     
     </div>
-
 			<div class="container">
 				<div class="row">
     			<div class="col-md-12 ftco-animate">
@@ -123,36 +122,35 @@
 						      </tr>
 						    </thead>
 						    <tbody>
-						    <c:forEach items='${sBean}' var='sBean'>
-						      <tr class="text-center">
-						        <td class="product-remove">${sBean.sPName}</td>
+						    <c:forEach items='${sBean}' var='sBean' varStatus="status">
+								
+						     	<tr class="text-center">
+						      	<td class="sID" style="display:none">${sBean.sID}</td>
+						        <td class="product-remove sPName">${sBean.sPName}</td>
 						        
-						        <td class="image-prod"><img width='80' height='80'
+						        <td class="image-prod projectImage"><img width='80' height='80'
 														src="${sBean.projectImage}"
 														class="img-circle" /></td>
-						        <td class="price">
-						        	${sBean.sName}
-						        </td>
-						        <td class="price">
-						        	${sBean.sPhone}
-						        </td>
-						        <td class="product-name">
-						        	${sBean.sAddress}
-						        </td>
-						        <td class="price">
-						        	$${sBean.sTotal}
-						        </td>
-						        <td class="price">${sBean.paymentMethod}</td>
+						        <td class="price sName">${sBean.sName}</td>
+						        <td class="price sPhone">${sBean.sPhone}</td>
+						        <td class="product-name sAddress">${sBean.sAddress}</td>
+						        <td class="price sTotal">${sBean.sTotal}</td>
+						        <td class="price paymentMethod">${sBean.paymentMethod}</td>
 						        
-						        <td class="price">${sBean.status}</td>
+								<td class="price ">
+									<select class="status" name="status" >
+									<option value="" selected >${sBean.status}</option>
+									<option value="已付款">已付款</option>
+									<option value="待出貨">待出貨</option>
+									<option value="已出貨">已出貨</option>
+									<option value="訂單已完成">訂單已完成</option>
+									</select>
+						        </td>
 						        
-						        <td class="quantity">
-						        	${sBean.sTime}
-					          </td>
-					           <td class="quantity">
-						        	<p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">修改</a></p>
-					          </td>
-						        
+						        <td class="quantity" id="sTime">${sBean.sTime}</td>
+					           	<td class="quantity">
+						        	<button type='button' class="btn btn-primary py-3 px-4" id="button" onclick="edit(${status.index})">修改</button>
+						        </td>
 						    
 						      </tr><!-- END TR-->
 
@@ -268,8 +266,8 @@
   <script>
 		$(document).ready(function(){
 
-		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
+			var quantitiy=0;
+			$('.quantity-right-plus').click(function(e){
 		        
 		        // Stop acting like a button
 		        e.preventDefault();
@@ -285,7 +283,7 @@
 		        
 		    });
 
-		     $('.quantity-left-minus').click(function(e){
+			$('.quantity-left-minus').click(function(e){
 		        // Stop acting like a button
 		        e.preventDefault();
 		        // Get the field name
@@ -298,8 +296,29 @@
 		            $('#quantity').val(quantity - 1);
 		            }
 		    });
-		    
 		});
+
+		function edit(index){ 
+			
+			var data = {
+					
+				sID:$('.sID').eq(index).text(),
+				status:$('.status').eq(index).val(),
+			
+			}
+			console.log(data)
+			$.ajax({
+				url: "<c:url value='/editOrder/'/>"+$('.sID').eq(index).text(),
+				type: 'POST',
+					
+				data:data,
+				success: function (data) {
+					alert("已完成訂單狀態修改🎊")
+					location.reload();
+				
+				},
+			});
+		};
 	</script>
     
   </body>

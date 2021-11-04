@@ -23,10 +23,9 @@ public class SponsorOrderServiceImpl implements SponsorOrderService {
 	public SponsorOrderServiceImpl(SponsorOrderRepository sponsorOrderRepository) {
 		this.sponsorOrderRepository = sponsorOrderRepository;
 	}
-
 	@Override
 	public List<SponsorOrderBean> getOrdersByMemberID(Integer mID) {
-		return sponsorOrderRepository.findAll();
+		return sponsorOrderRepository.findBymID(mID);
 	}
 
 	@Override
@@ -41,7 +40,15 @@ public class SponsorOrderServiceImpl implements SponsorOrderService {
 
 	@Override
 	public List<SponsorOrderBean> getOrdersByProposerID(Integer proposerID) {
-		return sponsorOrderRepository.findAll();
+		return sponsorOrderRepository.findByproposerID(proposerID);
+	}
+	@Override
+	public SponsorOrderBean updateOrder(SponsorOrderBean sBean) {
+		return sponsorOrderRepository.save(sBean);
+	}
+	@Override
+	public SponsorOrderBean getOrderBySponsorshipID(Integer sID) {
+		return sponsorOrderRepository.findBysID(sID);
 	}
 
 }

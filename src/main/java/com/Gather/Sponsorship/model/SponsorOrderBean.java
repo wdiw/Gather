@@ -110,7 +110,20 @@ public class SponsorOrderBean {
 	}
 
 
-
+	public SponsorOrderBean(Integer sID, Integer mID, String sName, String sPName, String status, String paymentMethod, String sTime,
+			String projectImage, String sAddress, String sPhone, Integer sTotal) {
+		this.sID = sID;
+		this.mID = mID;
+		this.sName = sName;
+		this.sPName = sPName;
+		this.status = status;
+		this.paymentMethod = paymentMethod;
+		this.sTime = sTime;
+		this.projectImage = projectImage;
+		this.sAddress = sAddress;
+		this.sPhone = sPhone;
+		this.sTotal = sTotal;
+	}
 
 
 
