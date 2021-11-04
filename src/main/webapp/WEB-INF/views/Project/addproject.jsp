@@ -443,7 +443,7 @@
 													<div class="form-group">
 														<label for="pTarget">計畫目標金額</label>
 														<input id="pTarget" name="pTarget" class="form-control"
-															type='text'>
+															type='number' value="10000" min="100" step="100" >
 
 													</div>
 
@@ -494,9 +494,142 @@
 															class="form-control"></textarea>
 													</div>
 
-												
+													<!--回饋方案一-->
+													<div class="form-group">
+														<label for="projectPlanPrice1">回饋方案金額(一)</label>
+														<input id="projectPlanPrice1" name="projectPlanPrice1" class="form-control"
+															type='number' value="10000" min="100" step="100" >
+
+													</div>
+
+													<div class="form-group">
+														<label for="ETA1">回饋預計實現時間(一)</label>
+														<input id="ETA1" name="ETA1" class="form-control"
+															type='month'>
+													</div>
+
+													<div class="form-group">
+														<label for="projectPlanContent1">回饋內容(一)</label>
+														<textarea rows="4" cols="50" id="projectPlanContent1" name="projectPlanContent1"
+															class="form-control"></textarea>
+													</div>
+
+
+													<div class="form-group">
+														<label>回饋選項照片(一)</label>
+														<input type="file" name="projectPlanImage1" class="file-upload-default"
+															id="projectPlanImage1">
+													<div class="input-group col-xs-12">
+														<input type="text" class="form-control file-upload-info"
+															disabled placeholder="上傳圖片">
+
+														<span class="input-group-append">
+															<button class="file-upload-browse btn btn-primary"
+																type="button">上傳</button>
+														</span>
+													</div>
+												</div>
+
+												<div class="form-group">
+
+													<img style="position: relative; left: 250px" src="" width="350"
+														height="300" alt="請選擇照片" id="projectPlanImageCover1" name="projectPlanImageCover1"
+														class="img-rounded">
+												</div>
+
+
+
+												<!--回饋方案二-->
+												<div class="form-group"	>
+													<label for="projectPlanPrice2">回饋方案金額(二)</label>
+													<input id="projectPlanPrice2" name="projectPlanPrice2" class="form-control"
+														type='number'  min="100" step="100" >
+
+												</div>
+
+												<div class="form-group">
+													<label for="ETA2">回饋預計實現時間(二)</label>
+													<input id="ETA2" name="ETA2" class="form-control"
+														type='month'>
+												</div>
+
+												<div class="form-group">
+													<label for="projectPlanContent2">回饋內容(二)</label>
+													<textarea rows="4" cols="50" id="projectPlanContent2" name="projectPlanContent2"
+														class="form-control"></textarea>
+												</div>
+
+
+												<div class="form-group">
+													<label>回饋選項照片(二)</label>
+													<input type="file" name="projectPlanImage2" class="file-upload-default"
+														id="projectPlanImage2">
+												<div class="input-group col-xs-12">
+													<input type="text" class="form-control file-upload-info"
+														disabled placeholder="上傳圖片">
+
+													<span class="input-group-append">
+														<button class="file-upload-browse btn btn-primary"
+															type="button">上傳</button>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+
+												<img style="position: relative; left: 250px" src="" width="350"
+													height="300" alt="請選擇照片" id="projectPlanImageCover2" name="projectPlanImageCover2"
+													class="img-rounded">
+											</div>
+
+
+											<!--回饋方案三-->
+											<div class="form-group"	>
+												<label for="projectPlanPrice3">回饋方案金額(三)</label>
+												<input id="projectPlanPrice3" name="projectPlanPrice3" class="form-control"
+													type='number'  min="100" step="100" >
+
+											</div>
+
+											<div class="form-group">
+												<label for="ETA3">回饋預計實現時間(三)</label>
+												<input id="ETA3" name="ETA3" class="form-control"
+													type='month'>
+											</div>
+
+											<div class="form-group">
+												<label for="projectPlanContent3">回饋內容(三)</label>
+												<textarea rows="4" cols="50" id="projectPlanContent3" name="projectPlanContent3"
+													class="form-control"></textarea>
+											</div>
+
+
+											<div class="form-group">
+												<label>回饋選項照片(三)</label>
+												<input type="file" name="projectPlanImage3" class="file-upload-default"
+													id="projectPlanImage3">
+											<div class="input-group col-xs-12">
+												<input type="text" class="form-control file-upload-info"
+													disabled placeholder="上傳圖片">
+
+												<span class="input-group-append">
+													<button class="file-upload-browse btn btn-primary"
+														type="button">上傳</button>
+												</span>
+											</div>
+										</div>
+
+										<div class="form-group">
+
+											<img style="position: relative; left: 250px" src="" width="350"
+												height="300" alt="請選擇照片" id="projectPlanImageCover3" name="projectPlanImageCover3"
+												class="img-rounded">
+										</div>
 
 														
+													
+
+
 
 													<button id="addProject" type='submit' name='addProject'
 														class="btn btn-primary mr-2">送出</button>
@@ -540,8 +673,11 @@
 								
 
 								$("#pImageCover").hide();//一開始圖片隱藏
+								$("#projectPlanImageCover1").hide();//一開始圖片隱藏
+								$("#projectPlanImageCover2").hide();//一開始圖片隱藏
+								$("#projectPlanImageCover3").hide();//一開始圖片隱藏
 
-								//當更換圖片
+								//當更換封面
 								$("#pImage").on("change", function () {
 									var changeImageCover = $("#pImage")[0].files[0];
 									var reader = new FileReader;
@@ -553,7 +689,45 @@
 
 								});
 
+								//當更換回饋一圖片
+								$("#projectPlanImage1").on("change", function () {
+									var changeImageCover = $("#projectPlanImage1")[0].files[0];
+									var reader = new FileReader;
+									reader.onload = function (e) {
+										$('#projectPlanImageCover1').attr('src', e.target.result);
+									}
+									reader.readAsDataURL(changeImageCover);
+									$("#projectPlanImageCover1").show();//圖片顯示
 
+								});
+
+									//當更換回饋二圖片
+									$("#projectPlanImage2").on("change", function () {
+									var changeImageCover = $("#projectPlanImage2")[0].files[0];
+									var reader = new FileReader;
+									reader.onload = function (e) {
+										$('#projectPlanImageCover2').attr('src', e.target.result);
+									}
+									reader.readAsDataURL(changeImageCover);
+									$("#projectPlanImageCover2").show();//圖片顯示
+
+								});
+
+									//當更換回饋一圖片
+									$("#projectPlanImage3").on("change", function () {
+									var changeImageCover = $("#projectPlanImage3")[0].files[0];
+									var reader = new FileReader;
+									reader.onload = function (e) {
+										$('#projectPlanImageCover3').attr('src', e.target.result);
+									}
+									reader.readAsDataURL(changeImageCover);
+									$("#projectPlanImageCover3").show();//圖片顯示
+
+								});
+
+
+
+								//送出
 								$("#form").on("submit", function (e) {
 									e.preventDefault();
 

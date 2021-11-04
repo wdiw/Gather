@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,8 +33,12 @@ public class ProjectBean implements Serializable {
 	private Integer mID;//會員ID
 	private String pStatus;//專案狀態
 	
-//	@OneToMany(mappedBy = "projectBean",fetch = FetchType.EAGER)
-//	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
+	@OneToMany(mappedBy = "projectBean",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
+
+	
+	
+	
 
 	// 空的建構子
 	public ProjectBean() {
@@ -153,6 +158,14 @@ public class ProjectBean implements Serializable {
 
 	public void setpStatus(String pStatus) {
 		this.pStatus = pStatus;
+	}
+	
+	public Set<ProjectPlanBean> getProjectPlanBeans() {
+		return projectPlanBeans;
+	}
+
+	public void setProjectPlanBeans(Set<ProjectPlanBean> projectPlanBeans) {
+		this.projectPlanBeans = projectPlanBeans;
 	}
 
 	@Override
