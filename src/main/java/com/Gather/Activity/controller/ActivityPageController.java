@@ -1,6 +1,9 @@
 package com.Gather.Activity.controller;
 
+import java.net.http.HttpRequest;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,11 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Gather.Activity.model.ActivityBean;
+import com.Gather.Activity.service.ActivityParticipationService;
 import com.Gather.Activity.service.ActivityService;
+import com.Gather.member.entity.Member;
 
 @Controller
 public class ActivityPageController {
-
+    ActivityParticipationService activityParticipationService;
 	ActivityService activityService;
 
 	@Autowired
@@ -51,10 +56,13 @@ public class ActivityPageController {
 		}
 		
 		@GetMapping("/Activity/activitylogin")
-		public String actvityLogin(@RequestParam("id") Integer id, Model model) {
-			
-			model.addAttribute("activity", activityService.getActivityById(id));
+		public String actvityLogin(@RequestParam("id") Integer id, Model model,HttpServletRequest request) {
+			Member memberData = (Member)request.getSession().getAttribute("memberData");
+			  Integer mID = memberData.getId();
+			  ActivityBean activityBean=activityService.getActivityById(id);
+			model.addAttribute("activity", activityBean);
 			model.addAttribute("activityid", id);
+			model.addAttribute("activitylogin",activityParticipationService.findByM_IDAndActivityBean(mID, activityBean));
 			return "/Activity/activitylogin";
 
 		}

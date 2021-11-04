@@ -148,7 +148,6 @@ public class ActivityAjaxController {
 		@PutMapping(path = "/Activity/login/{id}")
 	    public ResponseEntity<String> processUserActivityLogin( @PathVariable("id") int activityid,@RequestParam("memberid") int memberid){
 
-				
 		
 				ActivityBean activity=activityService.getActivityById(activityid);	
 				Date now= new Date();

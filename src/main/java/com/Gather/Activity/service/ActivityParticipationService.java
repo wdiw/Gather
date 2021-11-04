@@ -22,7 +22,7 @@ public interface ActivityParticipationService {
 	public void updateActivityParticipation(ActivityParticipationBean activityParticipationBean);
 	
 	//用活動編號、會員編號查詢有無登錄活動
-	public ActivityParticipationBean searchloginrecord(Integer activityid,Integer memberid);
+	 ActivityParticipationBean findByM_IDAndActivityBean(Integer memberid,ActivityBean activityBean);
 	
 	//用會員編號查詢該會員的登錄活動
 		public List<ActivityParticipationBean> memberloginrecord(Integer memberid);

@@ -119,37 +119,51 @@
 	
 	
 	$("#activitylogin").click(function () {
+	
 		
-		var id= '${activity.id}';
-		var memberid='${memberData.id}';
-		alert(id+"+"+memberid);
-		
-		
-		
-		
-		
-		
-		$.ajax({
-			url: "<spring:url value='/Activity/login/" + id + "'/>",
-			type: "Put",
+		if('${activitylogin}'!=null){
 			
-			data: {id:id,memberid:memberid},//前面是標籤，後面是值
-			success: function (data) {
-				 Swal.fire({
-                     title: '活動登錄成功！',
-                     icon: 'success',
-                     imageUrl: "<c:url value='/ActivitygetPicture/${activity.id}'/>",
-                     imageWidth: 400,
-                     imageHeight: 200,
-                 })
-                 
-                 location.href= "<spring:url value='/Activity/userpage'/>";
+			 Swal.fire({
+                 title: '你已登錄過此活動！',
+                 icon: 'fail',
+                 imageUrl: "<c:url value='/ActivitygetPicture/${activity.id}'/>",
+                 imageWidth: 400,
+                 imageHeight: 200,
+             })
+             
+             location.href= "<spring:url value='/Activity/userpage'/>";
+			
+			
+		}else{
+			
+			var id= '${activity.id}';
+			var memberid='${memberData.id}';
+	
+			$.ajax({
+				url: "<spring:url value='/Activity/login/" + id + "'/>",
+				type: "Put",
+				
+				data: {id:id,memberid:memberid},//前面是標籤，後面是值
+				success: function (data) {
+					 Swal.fire({
+	                     title: '活動登錄成功！',
+	                     icon: 'success',
+	                     imageUrl: "<c:url value='/ActivitygetPicture/${activity.id}'/>",
+	                     imageWidth: 400,
+	                     imageHeight: 200,
+	                 })
+	                 
+	                 location.href= "<spring:url value='/Activity/userpage'/>";
 
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				alert("活動登錄失敗");
-			}
-		})
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					alert("活動登錄失敗");
+				}
+			})
+			
+		}
+		
+		
 
 	});
 	

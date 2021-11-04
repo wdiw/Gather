@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.Gather.Activity.dao.ActivityParticipationRepository;
+import com.Gather.Activity.model.ActivityBean;
 import com.Gather.Activity.model.ActivityParticipationBean;
 import com.Gather.Activity.service.ActivityParticipationService;
 
@@ -60,13 +61,12 @@ public class ActivityParticipationServiceImpl implements ActivityParticipationSe
 	
 	//用活動編號、會員編號查詢有無登錄活動
 	@Override
-	public ActivityParticipationBean searchloginrecord(Integer activityid,Integer memberid) {
+	public  ActivityParticipationBean findByM_IDAndActivityBean(Integer memberid,ActivityBean activityBean) {
 		
-		ActivityParticipationBean activityParticipationBean=activityParticipationRepository.searchloginrecord(activityid, memberid);
+	ActivityParticipationBean Bean=activityParticipationRepository.findByM_IDAndActivityBean(memberid,activityBean);
 		
 		
-		
-		return activityParticipationBean;
+		return Bean;
 	}
 	
 	
