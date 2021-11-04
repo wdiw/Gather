@@ -19,7 +19,7 @@ public interface ActivityParticipationRepository extends JpaRepository<ActivityP
 	
 	 
 	 
-	 ActivityParticipationBean findByM_IDAndActivityBean(Integer memberid,ActivityBean activityBean);
+//	 ActivityParticipationBean findByM_IDAndActivityBean(Integer memberid,ActivityBean activityBean);
 	
 
 	 @Query(value = "SELECT * FROM ActivityParticipationBean u WHERE  u.m_id =?1",nativeQuery = true)
