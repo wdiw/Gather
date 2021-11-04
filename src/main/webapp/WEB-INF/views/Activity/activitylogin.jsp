@@ -113,23 +113,27 @@
 	
 	
 	
-	
+
 	
 	
 	
 	
 	$("#activitylogin").click(function () {
-		
+	
 		var id= '${activity.id}';
 		var memberid='${memberData.id}';
-		alert(id+"+"+memberid);
+		var memberlogin='${activitylogin}';
+    var m_id="${activitylogin.m_id}";
+    var logintime="${activitylogin.logintime}";
+    var activityloginbean='${activitylogin.activityBean}'
+    var activitybean='${activity}'
+    
+
+    
 		
+		if(activityloginbean!=activitybean){
 		
-		
-		
-		
-		
-		$.ajax({
+			$.ajax({
 			url: "<spring:url value='/Activity/login/" + id + "'/>",
 			type: "Put",
 			
@@ -150,6 +154,28 @@
 				alert("活動登錄失敗");
 			}
 		})
+		
+		
+	}else{
+
+    Swal.fire({
+                     title: '你已登錄過此活動！無法再登錄!',
+                     icon: 'success',
+                     imageUrl: "<c:url value='/ActivitygetPicture/${activity.id}'/>",
+                     imageWidth: 400,
+                     imageHeight: 200,
+                 })
+                 
+                 location.href= "<spring:url value='/Activity/userpage'/>";
+
+
+  }
+		
+		
+		
+		
+		
+	
 
 	});
 	

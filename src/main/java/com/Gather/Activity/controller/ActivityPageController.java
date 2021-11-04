@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Gather.Activity.model.ActivityBean;
+import com.Gather.Activity.model.ActivityParticipationBean;
 import com.Gather.Activity.service.ActivityParticipationService;
 import com.Gather.Activity.service.ActivityService;
 import com.Gather.member.entity.Member;
@@ -21,9 +22,11 @@ public class ActivityPageController {
 	ActivityService activityService;
 
 	@Autowired
-	public ActivityPageController(ActivityService activityService) {
+	public ActivityPageController(ActivityService activityService,ActivityParticipationService activityParticipationService) {
 		super();
 		this.activityService=activityService;
+		this.activityParticipationService=activityParticipationService;
+		
 	}
 	
 	
@@ -58,10 +61,24 @@ public class ActivityPageController {
 		public String actvityLogin(@RequestParam("id") Integer id, Model model,HttpServletRequest request) {
 			Member memberData = (Member)request.getSession().getAttribute("memberData");
 			  Integer mID = memberData.getId();
-			model.addAttribute("activity", activityService.getActivityById(id));
+			  ActivityBean activityBean=activityService.getActivityById(id);
+			model.addAttribute("activity", activityBean);
 			model.addAttribute("activityid", id);
-			model.addAttribute("activitylogin",activityParticipationService.findUserByM_idAndActivityId(id, mID));
-			return "/Activity/activitylogin";
+			System.out.println("會員編號:"+mID);
+			System.out.println("活動編號:"+id);
+             
+        
+			
+		
+			if (activityParticipationService.findActivityParticipationByM_idAndActivityId(activityBean, mID)!=null)
+           {
+			  ActivityParticipationBean activityParticipationBean=activityParticipationService.findActivityParticipationByM_idAndActivityId(activityBean, mID);
+        	   model.addAttribute("activitylogin",activityParticipationBean );
+				return "/Activity/activitylogin";
+			} else {
+				return "/Activity/activitylogin";
+			}
+			
 
 		}
 		

@@ -10,11 +10,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.Gather.Activity.dao.ActivityParticipationRepository;
+import com.Gather.Activity.model.ActivityBean;
 import com.Gather.Activity.model.ActivityParticipationBean;
 import com.Gather.Activity.service.ActivityParticipationService;
 
-@Transactional
 @Repository
+@Transactional
 public class ActivityParticipationServiceImpl implements ActivityParticipationService{
 	
 	ActivityParticipationRepository activityParticipationRepository;
@@ -62,16 +63,16 @@ public class ActivityParticipationServiceImpl implements ActivityParticipationSe
 	
 	//用活動編號、會員編號查詢有無登錄活動
 	
-	@Query("SELECT u FROM ActivityParticipationBean u WHERE u.activityid = :activityid and u.m_id = :m_id")
-	public ActivityParticipationBean findUserByM_idAndActivityId(
-	  @Param("activityid") Integer activityid, 
-	  @Param("m_id") Integer m_id) {
-		
-		ActivityParticipationBean activityParticipationBean=activityParticipationRepository.findUserByM_idAndActivityId(activityid, m_id);
-		return activityParticipationBean;
-		
-	}
-	
+//	@Query("SELECT u FROM ActivityParticipationBean u WHERE u.activityid = :activityid and u.m_id = :m_id")
+//	public ActivityParticipationBean findUserByM_idAndActivityId(
+//	  @Param("activityid") Integer activityid, 
+//	  @Param("m_id") Integer m_id) {
+//		
+//		ActivityParticipationBean activityParticipationBean=activityParticipationRepository.findUserByM_idAndActivityId(activityid, m_id);
+//		return activityParticipationBean;
+//		
+//	}
+//	
 	
 	
 	//用會員編號查詢該會員的登錄活動
@@ -83,5 +84,14 @@ public class ActivityParticipationServiceImpl implements ActivityParticipationSe
 //			return list;
 //		}
 //	
+	
+	
+	
+	public ActivityParticipationBean findActivityParticipationByM_idAndActivityId(ActivityBean activityBean ,Integer m_id) {
+		return activityParticipationRepository.findActivityParticipationByM_idAndActivityId(activityBean, m_id);
+	}
+	
+	
+	
 	
 }
