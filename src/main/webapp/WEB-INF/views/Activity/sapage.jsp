@@ -98,6 +98,9 @@
 										<i class="ti-settings mx-0"></i>
 									</div>
 								</div>
+								 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="images/Members/${memberData.id}.jpg" alt="profile">
+            </a>
 								<div class="preview-item-content">
 									<h6 class="preview-subject font-weight-normal">Settings</h6>
 									<p class="font-weight-light small-text mb-0 text-muted">
@@ -117,11 +120,9 @@
 								</div>
 							</a>
 						</div></li>
-					<li class="nav-item nav-profile dropdown"><a
-						class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-						id="profileDropdown"> <img src="../images/faces/face28.jpg"
-							alt="profile" />
-					</a>
+					<li class="nav-item nav-profile dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="../images/Members/${memberData.id}.jpg" alt="profile">
+            </a>
 						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
 							aria-labelledby="profileDropdown">
 							<a class="dropdown-item"> <i class="ti-settings text-primary"></i>

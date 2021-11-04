@@ -83,7 +83,7 @@
                     </div>
                     <div class="form-group">
 					
-						<img style="position: relative; left: 250px" src="<c:url value='/getPicture/${activity.id}'/>" width="350"
+						<img style="position: relative; left: 250px" src="<c:url value='/ActivitygetPicture/${activity.id}'/>" width="350"
 							height="300" alt="請選擇照片" id="showPic" class="img-rounded">
 					</div>
                     

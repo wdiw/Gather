@@ -117,11 +117,9 @@
 								</div>
 							</a>
 						</div></li>
-					<li class="nav-item nav-profile dropdown"><a
-						class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-						id="profileDropdown"> <img src="../images/faces/face28.jpg"
-							alt="profile" />
-					</a>
+					<li class="nav-item nav-profile dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="../images/Members/${memberData.id}.jpg" alt="profile">
+            </a>
 						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
 							aria-labelledby="profileDropdown">
 							<a class="dropdown-item"> <i class="ti-settings text-primary"></i>
@@ -433,7 +431,7 @@
 											
 											<c:forEach items='${activities}' var='activity' >
 												<tr>
-													<td>${activity.id}</td>
+													<td><p id="activityId"> ${activity.id}</p></td>
 													<td><div class="warp">${activity.name}</div></td>
 													<td><img width='50' height='50'
 														src="<c:url value='/ActivitygetPicture/${activity.id}'/>"
@@ -445,7 +443,11 @@
 												
 													<td>
 													
-															<button class="btn btn-primary">活動登錄</button>
+															
+															<a href="<spring:url value='/Activity/activitylogin?id=${activity.id}' />"
+								                                	class="btn btn-primary">活動登錄
+							                                             	</a>
+										
 													</td>
 												</tr>
 											</c:forEach>
@@ -461,21 +463,34 @@
 					<!-- page-body-wrapper ends -->
 				</div>
 				<!-- container-scroller -->
-				<!-- plugins:js -->
-				<script src="vendors/js/vendor.bundle.base.js"></script>
-				<!-- endinject -->
-				<!-- Plugin js for this page -->
-				<!-- End plugin js for this page -->
-				<!-- inject:js -->
-				<script src="js/off-canvas.js"></script>
-				<script src="js/hoverable-collapse.js"></script>
-				<script src="js/template.js"></script>
-				<script src="js/settings.js"></script>
-				<script src="js/todolist.js"></script>
-				<!-- endinject -->
-				<!-- Custom js for this page-->
-				<!-- End custom js for this page-->
+ <script src="../vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../vendors/typeahead.js/typeahead.bundle.min.js"></script>
+  <script src="../vendors/select2/select2.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../js/file-upload.js"></script>
+  <script src="../js/typeahead.js"></script>
+  <script src="../js/select2.js"></script>
+<script>
 
+
+
+
+
+
+
+
+
+</script>
 
 		
 </body>

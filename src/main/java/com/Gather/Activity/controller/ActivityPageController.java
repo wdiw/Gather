@@ -49,6 +49,21 @@ public class ActivityPageController {
 			return "Activity/activitydetail";
 
 		}
+		
+		@GetMapping("/Activity/activitylogin")
+		public String actvityLogin(@RequestParam("id") Integer id, Model model) {
+			
+			model.addAttribute("activity", activityService.getActivityById(id));
+			model.addAttribute("activityid", id);
+			return "/Activity/activitylogin";
+
+		}
+		
+		
+		
+		
+		
+		
 
 		// 跳轉到新增專案
 		@GetMapping("/Activity/add")

@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +31,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Gather.Activity.model.ActivityBean;
+import com.Gather.Activity.model.ActivityParticipationBean;
+import com.Gather.Activity.service.ActivityParticipationService;
 import com.Gather.Activity.service.ActivityService;
 import com.Gather.Sponsorship.model.SponsorshipBean;
+import com.Gather.member.entity.Member;
+import com.Gather.member.service.MemberService;
 import com.google.gson.Gson;
 
 import org.springframework.http.ResponseEntity;
@@ -38,7 +44,8 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 public class ActivityAjaxController {
-
+    ActivityParticipationService activityParticipationService;
+    MemberService memberService;
 	ActivityService activityService;
 	ServletContext servletContext;// servletContext.getRealPath() 需要用
 
@@ -137,8 +144,38 @@ public class ActivityAjaxController {
 			return responseEntity;
 		}
 			
+		
+		@PutMapping(path = "/Activity/login/{id}")
+	    public ResponseEntity<String> processUserActivityLogin( @PathVariable("id") int activityid,@RequestParam("memberid") int memberid){
+
+				
+		
+				ActivityBean activity=activityService.getActivityById(activityid);	
+				Date now= new Date();
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String loginTime=sdf.format(now);		
+				ActivityParticipationBean activityParticipationBean=new ActivityParticipationBean();
+				activityParticipationBean.setActivityBean(activity);
+	            activityParticipationBean.setM_id(memberid);
+				activityParticipationBean.setLogintime(loginTime);
+				Set<ActivityParticipationBean> activityParticipationBeans = new LinkedHashSet<ActivityParticipationBean>();
+				activityParticipationBeans.add(activityParticipationBean);
+				activity.setActivityParticipation(activityParticipationBeans);
+
+				activityService.addActivity(activity);
+				
+				
+				return new ResponseEntity<String>(HttpStatus.OK);}
+				
 			
 			
-	
+			
+			
+			
+			
+			
+		
+			
+
 
 }

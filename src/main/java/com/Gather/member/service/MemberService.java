@@ -18,5 +18,7 @@ public interface MemberService {
 	void deleteMemberById(Integer theMemberId);
 	
 	Member getMemberByAccountAndPassword(Member theMember);
+	
+	Member getMemberById(Integer theMemberId);
 
 }

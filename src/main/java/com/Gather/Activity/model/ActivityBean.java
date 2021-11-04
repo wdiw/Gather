@@ -26,9 +26,9 @@ public class ActivityBean implements Serializable {
 	
 
 
-	@Id@Column(name="activityid")
+	@Id@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer activityid;
+	private Integer id;
 	
 	private String name;
 	private String description;
@@ -45,7 +45,8 @@ public class ActivityBean implements Serializable {
 	private String base64String;
 	private byte[] image;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ActivityBean",cascade = CascadeType.ALL)
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "activityBean",cascade = CascadeType.ALL)
 	private Set<ActivityParticipationBean> activityParticipation = new HashSet<ActivityParticipationBean>(0);
 	
 	
@@ -58,8 +59,8 @@ public class ActivityBean implements Serializable {
 			this.postDate=postDate;
 		}
 		
-	 public ActivityBean( Integer activityid,String name, String description,String beginDate,String endDate,String postDate) {
-		    this.activityid=activityid;
+	 public ActivityBean( Integer id,String name, String description,String beginDate,String endDate,String postDate) {
+		    this.id=id;
 			this.name = name;
 			this.description = description;
 			this.beginDate=beginDate;
@@ -84,9 +85,9 @@ public class ActivityBean implements Serializable {
 	 }
 	 
 
-	 public ActivityBean( Integer activityid,String name, String description,String beginDate,String endDate, String postDate,String base64String,
+	 public ActivityBean( Integer id,String name, String description,String beginDate,String endDate, String postDate,String base64String,
 			 byte[] image		) {
-		    this.activityid=activityid;
+		    this.id=id;
 			this.name = name;
 			this.description = description;
 			this.beginDate=beginDate;
@@ -159,12 +160,21 @@ public class ActivityBean implements Serializable {
 
 	
 
-	public Integer getActivityid() {
-		return activityid;
+	
+	public Integer getId() {
+		return id;
 	}
 
-	public void setActivityid(Integer activityid) {
-		this.activityid = activityid;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Set<ActivityParticipationBean> getActivityParticipation() {
+		return activityParticipation;
+	}
+
+	public void setActivityParticipation(Set<ActivityParticipationBean> activityParticipation) {
+		this.activityParticipation = activityParticipation;
 	}
 
 	public String getName() {
@@ -196,12 +206,12 @@ public class ActivityBean implements Serializable {
 	}
 	
 
-	public Set<ActivityParticipationBean> getActivityParticipation() {
-		return activityParticipation;
-	}
-
-	public void setActivityParticipation(Set<ActivityParticipationBean> activityParticipation) {
-		this.activityParticipation = activityParticipation;
-	}
+//	public Set<ActivityParticipationBean> getActivityParticipation() {
+//		return activityParticipation;
+//	}
+//
+//	public void setActivityParticipation(Set<ActivityParticipationBean> activityParticipation) {
+//		this.activityParticipation = activityParticipation;
+//	}
 
 }

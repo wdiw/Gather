@@ -7,7 +7,7 @@ import com.Gather.Activity.model.ActivityParticipationBean;
 
 public interface ActivityParticipationService {
 	//找所有計畫資料
-    List<ActivityParticipationBean> ActivityParticipationBean();
+    List<ActivityParticipationBean> getAllActivityParticipationBean();
 	
     //依據id 找單筆資料
 	public ActivityParticipationBean getActivityParticipationBeanById(Integer id);
@@ -16,8 +16,14 @@ public interface ActivityParticipationService {
 	public void deleteActivityParticipationById(Integer id);
 	
 	//新增
-	public void addActivityParticipation(ActivityBean activityBean);
+	public void addActivityParticipation(ActivityParticipationBean activityParticipationBean);
 	
 	//修改
-	public void updateActivityParticipation(ActivityBean activityBean);
+	public void updateActivityParticipation(ActivityParticipationBean activityParticipationBean);
+	
+	//用活動編號、會員編號查詢有無登錄活動
+	public ActivityParticipationBean searchloginrecord(Integer activityid,Integer memberid);
+	
+	//用會員編號查詢該會員的登錄活動
+		public List<ActivityParticipationBean> memberloginrecord(Integer memberid);
 }

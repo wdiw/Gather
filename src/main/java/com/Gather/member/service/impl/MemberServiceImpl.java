@@ -71,6 +71,13 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.findByAccountAndPassword(theMember.getAccount(), theMember.getPassword());
 	}
 	
+	@Override
+	public Member getMemberById(Integer theMemberId) {
+		return memberRepository.getById(theMemberId);
+		
+		
+	}
+	
 	
 
 }

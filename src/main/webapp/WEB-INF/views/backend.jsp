@@ -323,7 +323,7 @@
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="Activity/selectall">全部活動</a></li>
+                <li class="nav-item"><a class="nav-link" href="Activity/sapage">全部活動</a></li>
               </ul>
             </div>
           </li>
