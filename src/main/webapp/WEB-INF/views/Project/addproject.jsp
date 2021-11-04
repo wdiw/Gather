@@ -118,7 +118,7 @@
 									<li class="nav-item nav-profile dropdown">
 										<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 											id="profileDropdown">
-											<img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile" />
+											<img src="../images/faces/face28.jpg" alt="profile" />
 										</a>
 										<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
 											aria-labelledby="profileDropdown">
@@ -341,7 +341,7 @@
 							<nav class="sidebar sidebar-offcanvas" id="sidebar">
 								<ul class="nav">
 									<li class="nav-item">
-										<a class="nav-link" href="/Gather/backend">
+										<a class="nav-link" href="../../index.html">
 											<i class="icon-grid menu-icon"></i>
 											<span class="menu-title">Dashboard</span>
 										</a>
@@ -407,13 +407,13 @@
 										<a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
 											aria-controls="icons">
 											<i class="icon-contract menu-icon"></i>
-											<span class="menu-title">Forum</span>
+											<span class="menu-title">AD</span>
 											<i class="menu-arrow"></i>
 										</a>
 										<div class="collapse" id="icons">
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"> <a class="nav-link"
-														href="/Gather/Forum/adMain">討論區管理</a></li>
+														href="../pages/icons/mdi.html">廣告管理</a></li>
 											</ul>
 										</div>
 									</li>
@@ -441,42 +441,62 @@
 													</div>
 
 													<div class="form-group">
-														<label for="pTarget">計畫目標</label>
+														<label for="pTarget">計畫目標金額</label>
 														<input id="pTarget" name="pTarget" class="form-control"
 															type='text'>
 
 													</div>
 
 													<div class="form-group">
-														<label for="pDescribe">計畫描述</label>
+														<label for="pSDate">計畫開始日期</label>
+														<input id="pSDate" name="pSDate" class="form-control"
+															type='Date'>
+													</div>
+
+													<div class="form-group">
+														<label for="pEDate">計畫結束日期</label>
+														<input id="pEDate" name="pEDate" class="form-control"
+															type='Date'>
+													</div>
+	
+													<div class="form-group">
+														<label>計畫封面</label>
+														<input type="file" name="pImage" class="file-upload-default"
+															id="pImage">
+													<div class="input-group col-xs-12">
+														<input type="text" class="form-control file-upload-info"
+															disabled placeholder="上傳圖片">
+
+														<span class="input-group-append">
+															<button class="file-upload-browse btn btn-primary"
+																type="button">上傳</button>
+														</span>
+													</div>
+												</div>
+
+												<div class="form-group">
+
+													<img style="position: relative; left: 250px" src="" width="350"
+														height="300" alt="請選擇照片" id="pImageCover" name="pImageCover"
+														class="img-rounded">
+												</div>
+
+
+													<div class="form-group">
+														<label for="pDescribe">計畫簡述</label>
 														<textarea rows="4" cols="50" id="pDescribe" name="pDescribe"
 															class="form-control"></textarea>
 													</div>
 
 													<div class="form-group">
-														<label>上傳圖片</label>
-														<input type="file" name="pImage" class="file-upload-default"
-															id="pImage">
-
-														<div class="input-group col-xs-12">
-															<input type="text" class="form-control file-upload-info"
-																disabled placeholder="上傳圖片">
-
-															<span class="input-group-append">
-																<button class="file-upload-browse btn btn-primary"
-																	type="button">上傳</button>
-															</span>
-														</div>
+														<label for="pContent">計畫完整內容</label>
+														<textarea rows="4" cols="50" id="pContent" name="pContent"
+															class="form-control"></textarea>
 													</div>
 
+												
 
-
-													<div class="form-group">
-
-														<img style="position: relative; left: 250px" src="" width="350"
-															height="300" alt="請選擇照片" id="pImageCover" name="pImageCover"
-															class="img-rounded">
-													</div>
+														
 
 													<button id="addProject" type='submit' name='addProject'
 														class="btn btn-primary mr-2">送出</button>
@@ -517,6 +537,8 @@
 
 							<script>
 
+								
+
 								$("#pImageCover").hide();//一開始圖片隱藏
 
 								//當更換圖片
@@ -532,10 +554,9 @@
 								});
 
 
-
-
 								$("#form").on("submit", function (e) {
 									e.preventDefault();
+
 
 									var form = document.getElementById("form");
 									var formData = new FormData(form);//把表單的資料裝成data
@@ -552,16 +573,41 @@
 										type: "POST",
 
 										data: formData,
+										// success: function (data) {
+
+										// 	location.replace("<spring:url value='/Project/allproject'/>");  
+										// },
+										// error: function (response) {
+										// 	alert('response status: ' + response.status);
+										// }
 										success: function (data) {
-											location.replace("<spring:url value='/Project/allproject'/>");  
-										},
-										error: function (response) {
-											alert('response status: ' + response.status);
-										}
+												Swal.fire({
+													title: '提交成功',
+													icon: 'success',
+													text: "已經提交計畫，請待管理員審核！",
+													position: 'center',
+
+												}).then((result) => {
+													if (result.isConfirmed) {
+														location.href = "<c:url value='/Project/allproject'/>";
+													}
+												})
+											},
+											error: function (xhr, text) {
+												console.log("status code: " + xhr.status);
+												console.log("error message: " + text);
+												Swal.fire({
+													title: '提交失敗',
+													icon: 'error',
+													text: "計畫提交失敗",
+												})
+											}
+	
+
 
 									})
 
-									console.log("ajax結束")
+								
 								})
 
 

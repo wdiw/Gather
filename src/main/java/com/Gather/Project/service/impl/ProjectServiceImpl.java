@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,5 +57,20 @@ public class ProjectServiceImpl implements ProjectService {
 	public void deleteProjectById(Integer pID) {
 		 projectRepository.deleteById(pID);;
 	}
+
+	//透過會員ID找到他的所有專案
+	@Override
+	public List<ProjectBean> getAllProjectBymID(Integer mID) {
+		return projectRepository.findBymID(mID);
+	}
+
+	@Override
+	public void updateStatusBypID(Integer pID, String pStatus) {
+		projectRepository.updateStatusBypID(pID, pStatus);
+		
+	}
+	
+	
+	
 
 }
