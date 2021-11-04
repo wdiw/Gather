@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +28,6 @@ import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
-import com.Gather.util.Mail;
 
 @Controller
 public class MemberPageController {
@@ -43,6 +44,7 @@ public class MemberPageController {
 	@GetMapping("/")
 	public String home() {
 		System.out.println("透過頁面控制器進入首頁");
+		
 		return "index";
 	}
 

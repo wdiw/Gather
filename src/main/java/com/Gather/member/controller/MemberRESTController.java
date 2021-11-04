@@ -1,5 +1,7 @@
 package com.Gather.member.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -57,6 +59,7 @@ public class MemberRESTController {
 			return new ResponseEntity<String>("N", HttpStatus.OK);
 		}
 	}
+	
 	// 註冊認證
 		@PostMapping("/register")
 		public ResponseEntity<String> register(@RequestBody Member theMember, HttpServletRequest req) {
@@ -77,8 +80,9 @@ public class MemberRESTController {
 				gender = " 先生";
 			}else {
 				gender = " 女士";
+				
 			}
-			// 編寫認證信件的內容，裡面要含有會員認證連結
+			// 信件內容，內含認證碼
 			String message = theMember.getName()+gender+ "您好!歡迎您使用Gather，以下是您的認證碼" + random;
 			// 寄信
 			Mail.SendGmail("Gather.WebService@gmail.com", theMember.getAccount(), "Gather募資平台-帳號驗證", message);
@@ -88,6 +92,7 @@ public class MemberRESTController {
 			return new ResponseEntity<String>("Y", HttpStatus.OK);
 		}
 
+		
 	// 使用者在驗證頁面輸入認證碼，提交於此，判斷認證碼是否正確。
 	// 如果正確，就跳出sweat alert 並跳去首頁
 	// 如果不正確，就跳出失敗sweat alert 並停留在此頁面
@@ -101,6 +106,19 @@ public class MemberRESTController {
 			theMember.setStatus("會員");//賦予會員的身分
 			memberService.addMember(theMember);
 			System.out.println("會員資料加入資料庫成功");
+			//使用預設大頭貼
+			String rootDirectory = req.getServletContext().getRealPath("/").replace("webapp", "resources");
+			String destDirectory = rootDirectory + "static\\images\\Members\\";
+			
+			final String INPUT_FILE_PATH = destDirectory+"default.jpg"; // 被複製的檔案路徑及檔名
+			final String OUTPUT_FILE_PATH = destDirectory+theMember.getId()+".jpg"; // 已複製的檔案路徑及檔名
+
+			try ( FileOutputStream fos = new FileOutputStream(new File(OUTPUT_FILE_PATH))) {
+			    Path inputPath = new File(INPUT_FILE_PATH).toPath();
+			    Files.copy(inputPath, fos);
+			} catch (IOException e) {
+			    e.printStackTrace();
+			}
 			return new ResponseEntity<String>("Y", HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("N", HttpStatus.OK);
