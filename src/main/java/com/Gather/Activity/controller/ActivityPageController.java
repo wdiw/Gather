@@ -1,6 +1,5 @@
 package com.Gather.Activity.controller;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,10 +58,9 @@ public class ActivityPageController {
 		public String actvityLogin(@RequestParam("id") Integer id, Model model,HttpServletRequest request) {
 			Member memberData = (Member)request.getSession().getAttribute("memberData");
 			  Integer mID = memberData.getId();
-			  ActivityBean activityBean=activityService.getActivityById(id);
-			model.addAttribute("activity", activityBean);
+			model.addAttribute("activity", activityService.getActivityById(id));
 			model.addAttribute("activityid", id);
-			model.addAttribute("activitylogin",activityParticipationService.findByM_IDAndActivityBean(mID, activityBean));
+			model.addAttribute("activitylogin",activityParticipationService.findUserByM_idAndActivityId(id, mID));
 			return "/Activity/activitylogin";
 
 		}
