@@ -66,6 +66,14 @@
                       <label for="name">活動名稱</label>
                       <input id="name" name="name" disabled="disabled" class="form-control" value="${activity.name}" type='text'>
                     </div>
+                    
+                    <div class="form-group">
+                      <label for="name">參加人數</label>
+                      <input id="activityParticipationCount" name="activityParticipationCount" disabled="disabled" class="form-control" value="${activityParticipationCount}" type='text'>
+                    </div>
+                    
+                    
+                    
                     <div class="form-group">
                       <label for="beginDate">活動開始日期</label>
                       <input id="beginDate" name="beginDate" disabled="disabled" class="form-control" value="${activity.beginDate}" type='date'>
@@ -74,6 +82,11 @@
                       <label for="endDate">活動結束日期</label>
                       <input id="endDate" name="endDate" disabled="disabled" class="form-control" value="${activity.endDate}"  type='date'>
                     </div>
+                    
+                    
+                    
+                    
+                    
                     <div class="form-group">
                       <label for="description">活動內容</label>
                       <textarea name="description" id="description" disabled="disabled" cols="100" rows="10" >${activity.description}</textarea>

@@ -37,9 +37,11 @@ import com.Gather.Activity.service.ActivityService;
 import com.Gather.Sponsorship.model.SponsorshipBean;
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
+import com.Gather.util.Mail;
 import com.google.gson.Gson;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 
 
 @RestController
@@ -50,9 +52,12 @@ public class ActivityAjaxController {
 	ServletContext servletContext;// servletContext.getRealPath() 需要用
 
 	@Autowired
-	public ActivityAjaxController(ActivityService activityService, ServletContext servletContext) {
+	public ActivityAjaxController(ActivityService activityService, ServletContext servletContext,MemberService memberService, ActivityParticipationService activityParticipationService) {
 		this.activityService = activityService;
 		this.servletContext = servletContext;
+		this.activityParticipationService=activityParticipationService;
+		this.memberService=memberService;
+		
 	}
 	
 	
@@ -146,7 +151,7 @@ public class ActivityAjaxController {
 			
 		
 		@PutMapping(path = "/Activity/login/{id}")
-	    public ResponseEntity<String> processUserActivityLogin( @PathVariable("id") int activityid,@RequestParam("memberid") int memberid){
+	    public ResponseEntity<String> processUserActivityLogin( @PathVariable("id") int activityid,@RequestParam("memberid") int memberid,Model model){
 
 				
 		
@@ -161,8 +166,17 @@ public class ActivityAjaxController {
 				Set<ActivityParticipationBean> activityParticipationBeans = new LinkedHashSet<ActivityParticipationBean>();
 				activityParticipationBeans.add(activityParticipationBean);
 				activity.setActivityParticipation(activityParticipationBeans);
-
+				Member member=memberService.getMemberById(memberid);
 				activityService.addActivity(activity);
+				model.addAttribute("activitylogin",activityParticipationBean );
+				
+				
+				
+				String activityLogin=member.getName()+"您好，您已成功登錄活動，活動名稱:"+activity.getName();
+				Mail.SendGmail("Gather.WebService@gmail.com", "ncu104102039@gmail.com", "Gather活動登錄成功通知",activityLogin);
+				
+				
+			
 				
 				
 				return new ResponseEntity<String>(HttpStatus.OK);}

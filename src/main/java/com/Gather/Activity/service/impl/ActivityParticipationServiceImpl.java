@@ -92,6 +92,11 @@ public class ActivityParticipationServiceImpl implements ActivityParticipationSe
 	}
 	
 	
-	
+	public Integer getActivityParticipationCount(ActivityBean activityBean ) {
+		
+		return activityParticipationRepository.getActivityParticipationCount(activityBean);
+		
+		
+	};
 	
 }

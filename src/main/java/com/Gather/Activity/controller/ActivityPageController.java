@@ -66,7 +66,8 @@ public class ActivityPageController {
 			model.addAttribute("activityid", id);
 			System.out.println("會員編號:"+mID);
 			System.out.println("活動編號:"+id);
-             
+			Integer activityParticipationCount=activityParticipationService.getActivityParticipationCount(activityBean);
+			model.addAttribute("activityParticipationCount", activityParticipationCount);
         
 			
 		

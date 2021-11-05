@@ -14,21 +14,15 @@ public interface ActivityParticipationRepository extends JpaRepository<ActivityP
 
 	
 	 
-//	
-//	@Query("SELECT u FROM ActivityParticipationBean u WHERE u.activityid = :activityid and u.m_id = :m_id")
-//	ActivityParticipationBean findUserByM_idAndActivityId(
-//	  @Param("activityid") Integer activityid, 
-//	  @Param("m_id") Integer m_id);
-	
-	
-	 
-//	 @Query(value = "Select a from ActivityParticipationBean as a where a.activityid=?1 and a.m_id=?2",nativeQuery = true)
-//	 ActivityParticipationBean searchloginrecord(Integer activityid,Integer memberid);
+
 	
 
 	@Query("select p from ActivityParticipationBean p where p.activityBean = ?1 and p.m_id = ?2 ")
 	ActivityParticipationBean findActivityParticipationByM_idAndActivityId(ActivityBean activityBean ,Integer m_id);
-
+	
+	
+	@Query("  SELECT COUNT(*) FROM ActivityParticipationBean p WHERE p.activityBean = ?1")
+	Integer getActivityParticipationCount(ActivityBean activityBean );
 
 	 
 }
