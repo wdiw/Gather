@@ -49,5 +49,7 @@ public class SponsorshipServiceImpl implements SponsorshipService {
 	public void deleteOrderByOrderID(int sID) {
 		sponsorshipRepository.deleteById(sID);
 	}
+	
+	
 
 }

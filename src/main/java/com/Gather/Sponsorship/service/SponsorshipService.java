@@ -2,6 +2,7 @@ package com.Gather.Sponsorship.service;
 
 import java.util.List;
 
+
 import com.Gather.Sponsorship.model.SponsorshipBean;
 
 public interface SponsorshipService {
@@ -15,5 +16,5 @@ public interface SponsorshipService {
 	SponsorshipBean updateOrder(SponsorshipBean sBean);
 
 	void deleteOrderByOrderID(int sID);
-
+	
 }

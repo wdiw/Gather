@@ -5,8 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
-<!-- 
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
+<!-- <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"> -->
 </script>
  -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -472,6 +471,7 @@
   <!-- End custom js for this page-->
   
   <script type="text/javascript">
+  
 		$('#projectImage').change(function() {
 			var projectImage = $("#projectImage")[0].files[0];
 			var reader = new FileReader;
@@ -479,6 +479,7 @@
 				$('#showPic').attr('src', e.target.result);
 			}
 			reader.readAsDataURL(projectImage);
+			  
 		})
 		
 		function update(updateId){
