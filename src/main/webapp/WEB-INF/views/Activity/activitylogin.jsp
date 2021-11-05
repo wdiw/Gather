@@ -132,6 +132,8 @@
 	
 	
 	$("#activitylogin").click(function () {
+		
+		$("#activitylogin").hide();//存檔按鈕隱藏
 	
 		var id= '${activity.id}';
 		var memberid='${memberData.id}';
