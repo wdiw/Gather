@@ -47,11 +47,12 @@ public class ProjectController {
 	// 更新
 	@PutMapping(path = "/Project/theProject/{pID}")
 	@ResponseBody
-	public ResponseEntity<String> updateProjectById(@PathVariable("pID") int pID, @RequestParam("pName") String pName,
-			@RequestParam("pDescribe") String pDescribe, @RequestParam("pTarget") int pTarget,
-			@RequestParam(name = "changeImageCover", required = false) MultipartFile pImage, HttpServletRequest request
-
-	) throws MalformedURLException {
+	public ResponseEntity<String> updateProjectById(@PathVariable("pID") int pID, 
+			@RequestParam("pName") String pName, 
+			@RequestParam("pDescribe") String pDescribe, 
+			@RequestParam("pTarget") int pTarget, 
+			@RequestParam(name = "changeImageCover", required = false) MultipartFile pImage, 
+			HttpServletRequest request) throws MalformedURLException {
 
 		// 如果圖片沒有換掉，先把原路徑抓出來，再丟回去
 		if (pImage.isEmpty()) {
@@ -96,11 +97,10 @@ public class ProjectController {
 	// 新增
 	@PostMapping(path = "/Project/addProject")
 	@ResponseBody
-	public ResponseEntity<String> addProject(@RequestParam("pName") String pName, @RequestParam("pTarget") int pTarget,
+	public ResponseEntity<String> addProject(@RequestParam("pName") String pName, 
+			@RequestParam("pTarget") int pTarget,
 			@RequestParam("pDescribe") String pDescribe, @RequestParam("pImage") MultipartFile pImage,
-			HttpServletRequest request
-
-	) throws MalformedURLException {
+			HttpServletRequest request) throws MalformedURLException {
 
 		// 處理圖片
 		String originalFilename = pImage.getOriginalFilename();// 得到原始名稱，如xxx.jpg

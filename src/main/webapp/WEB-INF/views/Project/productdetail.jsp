@@ -422,9 +422,6 @@
 							<!-- partial -->
 							<div class="main-panel">
 								<div class="content-wrapper">
-
-
-
 									<div class="col-12 grid-margin stretch-card">
 										<div class="card">
 											<div class="card-body">
@@ -472,8 +469,6 @@
 														</div>
 													</div>
 
-
-
 													<div class="form-group">
 
 														<img style="position: relative; left: 250px"
@@ -489,14 +484,6 @@
 													<button id="deleteButton" type='button' name='deleteButton'
 														class="btn btn-danger"
 														onclick="deleteBtn(${project.pID})">刪除</button>
-
-
-
-
-
-
-
-
 												</form>
 											</div>
 

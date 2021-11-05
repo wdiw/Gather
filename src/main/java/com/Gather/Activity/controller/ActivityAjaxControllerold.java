@@ -24,13 +24,13 @@ import org.springframework.http.ResponseEntity;
 
 
 @RestController
-public class ActivityAjaxController {
+public class ActivityAjaxControllerold {
 
 	ActivityService activityService;
 	ServletContext servletContext;// servletContext.getRealPath() 需要用
 
 	@Autowired
-	public ActivityAjaxController(ActivityService activityService, ServletContext servletContext) {
+	public ActivityAjaxControllerold(ActivityService activityService, ServletContext servletContext) {
 		this.activityService = activityService;
 		this.servletContext = servletContext;
 	}
