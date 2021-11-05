@@ -138,7 +138,7 @@ public class MemberPageController {
 	@GetMapping("/showMemberCenter")
 	public String showMemberCenter() {
 		System.out.println("透過頁面控制器，進入會員中心");
-		return "Member/memberCenter";
+		return "sample";
 	}
 
 	@GetMapping("/showMemberAdminCenter")
