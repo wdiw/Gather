@@ -48,8 +48,7 @@ public class ProjectPageController {
 		
 		
 		
-		
-
+	
 		// By Id 找尋單一資料並且跳轉
 		@GetMapping("/Project/project")
 		public String getProjectById(@RequestParam("pID") Integer pID, Model model) {
@@ -66,7 +65,6 @@ public class ProjectPageController {
 			return "Project/addproject";
 
 		}
-		
 		
 		//找通過審核的計畫
 		@GetMapping("/Project/allProjectInForestage")
