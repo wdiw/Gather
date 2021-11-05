@@ -14,7 +14,7 @@
 		<h1>執行成功</h1>
     </div>
     <div align='center'>
-    	<a href="<c:url value='/Forum/adMain' />"><button>回留言</button></a>
+    	<a href="<c:url value='/Forum/adMain' />"><button>回論壇首頁</button></a>
     </div><br>
     <div align='center'>
     	<a href="<c:url value='/' />"><button>回首頁</button></a>

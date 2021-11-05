@@ -40,8 +40,8 @@
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="../../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="../../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -109,15 +109,15 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="/Gather/images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
-              <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/>
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="/Gather/showMemberCenter">
+              <a class="dropdown-item">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item" href="/Gather/showLogout">
+              <a class="dropdown-item">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -258,7 +258,7 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="../images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -269,7 +269,7 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="../images/faces/face3.jpg" alt="image"><span class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -277,7 +277,7 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="../images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -310,7 +310,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/Gather/backend">
+            <a class="nav-link" href="../../index.html">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -364,163 +364,144 @@
               </ul>
             </div>
           </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="<spring:url value='/Forum/queryAll' />" aria-expanded="false" aria-controls="icons">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">討論區</span>
+              <span class="menu-title">AD</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<spring:url value='/Forum/queryAll' />">全部文章</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">廣告管理</a></li>
               </ul>
             </div>
           </li>
         </ul>
       </nav>
       
-      
-      
-      <div class="table-responsive">
-      <table class="table table-hover">
-      
-    	<thead>
-    		<tr>
-    			<th>文章編號</th>
-				<th>文章標題</th>
-				<th>文章內容</th>
-				<th>發文時間</th>
-				<th>最後修改時間</th>
-				<th>回覆數</th>
-			</tr>
-		</thead>
-		<c:forEach items='${AllForum}' var='forum' >
-			<tr>
-<!-- 			<tr onclick="test()" > -->
-<%-- 			<tr onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
-<%-- 			value='/Project/project?pID=${project.pID}' --%>
-				<td>缺分類${forum.id}</td>
-				<td style="">
-<%-- 				<td onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
-					<div style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;">
-<%-- 					${forum.name} --%>
-						<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.name}</a>
-					</div>
-				</td>
-				<td onMouseOver="this.style.backgroundColor='pink';" onMouseOut="this.style.backgroundColor='';">
-					<div id="content" class="showcontent" style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;" 
-					onMouseOver="this.style.backgroundColor='orange';" 
-					onMouseOut="this.style.backgroundColor='';">
-					${forum.post}
-<!-- 					<button onclick="init()">全文</button> -->
-					</div>
-				</td>
-				<td>
-				發文者:會員or管理員<br>
-				${forum.postTime}
-				</td>
-				<td>${forum.postUpdateTime}</td>
-				<td>回覆數123</td>
-<!-- 				<td> -->
-<%-- 					<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">編輯</a> --%>
-<%-- 					<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">文章刪除</a> --%>
-<!-- 					<button type="button" id="update" class="btn btn-inverse-warning btn-fw" -->
-<%-- 					onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"'>詳細資料</button> --%>
-<%-- 					<a href="<c:url value='/Forum/adUpdate' />" class="btn btn-primary">文章修改</a><br><br> --%>
-<!-- 				</td> -->
-			</tr>
-		</c:forEach>
-	</table>
-	</div>
-	
-    <div align='center'>
-    	<br>
-<%--     	<a href="<c:url value='/Forum/add1' />" class="btn btn-primary">測試</a><br><br> --%>
-<%--     	<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">發表文章</a><br><br> --%>
-    	<a href="<c:url value='/Forum/add' />" class="btn btn-primary">發表文章add</a><br><br>
-    	<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">文章刪除</a><br><br>
-    	<a href="<c:url value='/Forum/adUpdate' />" class="btn btn-primary">文章修改</a><br><br>
-    	<a href="<c:url value='/Forum/queryAll' />" class="btn btn-primary">回討論區</a><br><br>
-    	<a href="<c:url value='/' />" class="btn btn-primary">回首頁</a><br><br>
+      <!-- partial -->
+      <div class="main-panel">        
+        <div class="content-wrapper">
+     
+           
+            
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">新增文章</h4>
+                  <form  id="form" class="forms-sample">
+                    <div class="form-group">
+                      <label for="exampleInputName1">文章標題</label>
+                      <input type="text" class="form-control" name="name" id="name" >
+                    </div>
+                  
+                    <div class="form-group">
+                      <label>文章內容</label>
+                      <textarea name="post" id="post" cols="100" rows="7" ></textarea>
+                    </div>
+                 
+					<button id="btnAdd" type='submit' name='submit' class="btn btn-primary mr-2">新增文章</button>
+                  </form>
+                </div>
+              
+            </div>
+       
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
     </div>
-    
-    <script>
-    	function test() {
-    		alert("Hello world");
-    	}
-//     	$(document).ready(function(){
-    		
-    	function init(){
-            var len = 20; //預設要顯示的字數
-//             var ctn = document.getElementById("content");  //获取div对象
-//             var ctn = null;
-            var ctn = document.getElementsByClassName("showcontent"); //获取div对象
-//             for (i=0;i<ctn.length;i++){
-            	
-//             ctn = document.getElementsByClassName("showcontent")[i];  //获取div对象
-            ctn = document.getElementsByClassName("showcontent")[0];  //获取div对象
-//             var ctn = document.getElementsByClassName("showcontent").getElementsByTagName("p");  //获取div对象
-            var content = ctn.innerHTML;                   //获取div里的内容
-            //alert(content);
-            var span = document.createElement("span");     //创建<span>元素
-            var a = document.createElement("a");           //创建<a>元素
-            span.innerHTML = content.substring(0,len);     //span里的内容为content的前len个字符
-            a.innerHTML = content.length>len?" 展開全文":"";  //判断显示的字数是否大于默认显示的字数 来设置a的显示
-            a.href = "javascript:void(0)"; //让a链接点击不跳转
-            a.onclick = function(){
-                if(a.innerHTML.indexOf("全文")>0){      //如果a中含有"全文"则显示"收起"
-                  a.innerHTML = "收起";
-                  span.innerHTML = content;
-                }else{
-                    a.innerHTML = " 展開全文";
-                    span.innerHTML = content.substring(0,len);
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
+  <script src="vendors/select2/select2.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../js/file-upload.js"></script>
+  <script src="../js/typeahead.js"></script>
+  <script src="../js/select2.js"></script>
+  <!-- End custom js for this page-->
+  
+  <script>
+
+        var form = document.getElementById("form");
+        $("#btnAdd").click(function () {
+        	$("#form").on("submit", function(e){
+            /* =====for formData&MultipartFile =====*/
+            var formData = new FormData(form);
+            /* =====for JSON =====*/
+            
+            //改用ajax傳送 棄用原本的form傳送
+            alert("123");
+            e.preventDefault();
+            
+            Swal.fire({
+                title: '您確定要送出嗎？',
+                icon: 'question',
+                showCancelButton: true,
+            }).then((result) => {
+            	if (result.isConfirmed) {
+                	$.ajax({
+                        url:"<spring:url value='/Forum/add'/>",
+                        type:"post",
+                        data: formData,
+        //                 data: json,
+        //                 dataType:"json",
+        //                 contentType: "application/json; charset=utf-8",
+                        contentType: false, //required
+                        processData: false, // required
+                        /*一定要加*/
+                        mimeType: 'multipart/form-data', //有圖片就要加這行
+                        
+                        /*一定要加*/
+                        success: function(data){
+                        	
+                            var jsonData = JSON.parse(data);
+                            // console.log(html);
+
+                            Swal.fire({
+                                title: '已新增成功！',
+                                icon: 'success',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.href= "<spring:url value='/Forum/queryAll'/>";
+                                  }
+                                })
+                                    
+                        },
+                        error: function(e, text){
+                        	alert("!!!!!!!!!!!!!!!!!!!!!!");
+                            console.log(e.status);
+                            console.log(text);
+                        }
+                    })
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '已取消送出請求',
+                        text: '您的變更將不會被儲存!'
+                    })
                 }
-            }
-            // 设置div内容为空，span元素 a元素加入到div中
-            ctn.innerHTML = "";
-            ctn.appendChild(span);
-            ctn.appendChild(a);
-//             } //for
-         }
-    	init();
-    		
-    	function init2(){
-            var len = 20; //預設要顯示的字數
-//             var ctn = document.getElementById("content");  //获取div对象
-//             var ctn = null;
-            var ctn = document.getElementsByClassName("showcontent"); //获取div对象
-//             for (i=0;i<ctn.length;i++){
-            	
-//             ctn = document.getElementsByClassName("showcontent")[i];  //获取div对象
-            ctn = document.getElementsByClassName("showcontent")[1];  //获取div对象
-//             var ctn = document.getElementsByClassName("showcontent").getElementsByTagName("p");  //获取div对象
-            var content = ctn.innerHTML;                   //获取div里的内容
-            //alert(content);
-            var span = document.createElement("span");     //创建<span>元素
-            var a = document.createElement("a");           //创建<a>元素
-            span.innerHTML = content.substring(0,len);     //span里的内容为content的前len个字符
-            a.innerHTML = content.length>len?" 展開全文":"";  //判断显示的字数是否大于默认显示的字数 来设置a的显示
-            a.href = "javascript:void(0)"; //让a链接点击不跳转
-            a.onclick = function(){
-                if(a.innerHTML.indexOf("全文")>0){      //如果a中含有"全文"则显示"收起"
-                  a.innerHTML = "收起";
-                  span.innerHTML = content;
-                }else{
-                    a.innerHTML = " 展開全文";
-                    span.innerHTML = content.substring(0,len);
-                }
-            }
-            // 设置div内容为空，span元素 a元素加入到div中
-            ctn.innerHTML = "";
-            ctn.appendChild(span);
-            ctn.appendChild(a);
-//             } //for
-         }
-    	init2();
-    	
-//     	}) //$(document).ready(function(){
+            })
+        })
+        
+		 })
     </script>
-    
+  
 </body>
+
 </html>
-    

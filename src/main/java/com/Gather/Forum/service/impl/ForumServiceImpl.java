@@ -24,31 +24,31 @@ public class ForumServiceImpl implements ForumService {
 	}
 	
 	
-	//查全部
+	//R all
 	@Override
 	public List<ForumBean> getAllForum() {
 		return forumRepository.findAll();
 	}
 	
-	//查ById
+	//R by id
 	@Override
 	public ForumBean getForumById(Integer fID) {
 		return forumRepository.getById(fID);
 	}
 	
-	//新
+	//C
 	@Override
 	public void addForum(ForumBean fBean ) {
 		forumRepository.save(fBean);
 	}
 	
-	//改
+	//U
 	@Override
 	public void updateForum(ForumBean fBean ) {
 		forumRepository.save(fBean);
 	}
 	
-	//刪
+	//D
 	@Override
 	public void deleteForumById(Integer fID) {
 		forumRepository.deleteById(fID);

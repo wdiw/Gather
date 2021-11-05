@@ -384,11 +384,32 @@
 <table class="table table-hover">
 	<tr>
 		<td width="350">
-			<form action="/Gather/Forum/update" method="POST">		
-				文章編號: <input type="text" name="id" placeholder="請輸入編號"/><br>
-				文章標題: <input type="text" name="name" placeholder="請輸入標題"/><br>
-				文章內容: <input type="text" name="post" placeholder="請輸入內容"/><br><br>	
+<%-- 			<form action="/Forum/update" method="POST"> <!-- 跳轉頁面到執行按鈕功能/Forum/update --> --%>
+			<form id="form" class="forms-sample">
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for='id'>計畫編號</label> -->
+<!-- 					<input id="id" name="id" class="form-control"  -->
+<%-- 							value="${forum.id}" disabled> --%>
+<!-- 				</div> -->
+
+<!-- 				文章編號: <input type="text" name="id" placeholder="請輸入編號"/><br> -->
+<!-- 				文章標題: <input type="text" name="name" placeholder="請輸入標題"/><br> -->
+<!-- 				文章內容: <input type="text" name="post" placeholder="請輸入內容"/><br><br> -->
+				<div class="form-group">
+					<label for="id">文章編號</label>
+					<input id="id" name="id" class="form-control" type='text' placeholder="請輸入編號">
+				</div>
+				
+				<div class="form-group">
+					<label for="name">文章標題</label>
+					<input id="name" name="name" class="form-control" type='text'>
+				</div>
+				<div class="form-group">
+					<label for="post">文章內容:</label>
+					<textarea id="post" name="post" rows="4" cols="50" class="form-control"></textarea>
+				</div>
 				<input type="submit" value="修改文章"  class="btn btn-primary mr-2"><br>
+<!-- 				<button id="btnAdd" type='submit' name='submit' class="btn btn-primary mr-2">送出</button> -->
 			</form>
 		</td>
 	</tr>
@@ -406,6 +427,7 @@
 	<tr>
 		<td width="350">
 			<p align="center">
+			<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">回討論區</a><br><br>
 			<a href="<c:url value='/' />"class="btn btn-primary">回首頁</a><br>
 			</p><br>
 		</td>
@@ -414,5 +436,95 @@
 	
 	
 </table>
+	
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
+  <script src="vendors/select2/select2.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../js/file-upload.js"></script>
+  <script src="../js/typeahead.js"></script>
+  <script src="../js/select2.js"></script>
+  <!-- End custom js for this page-->
+  
+  <!-- 要用Swal.fire需要引用下面兩個 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <!-- 若需相容 IE11，要加載 Promise Polyfill-->
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+  
+  
+  <script>
+
+//         var form = document.getElementById("form");
+		
+// 		$("#btnAdd").click(function () {
+			$("#form").on("submit", function(e){
+            /* =====for formData&MultipartFile =====*/
+            e.preventDefault(); //不要按完按鈕就跳頁面
+            var form = document.getElementById("form");
+    		var formData = new FormData(form); //把表單的資料裝成data
+    		var url = "<spring:url value='/Forum/update'/>";
+            Swal.fire({
+                title: '您確定要送出嗎？',
+                icon: 'question',
+                showCancelButton: true,
+                closeOnConfirm: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                	
+                    $.ajax({
+                        type:"post",
+                        url: url, //要放@PostMapping對應的網址
+                        data: formData,
+                        //data: json,
+                        //dataType:"json",
+                        //contentType: "application/json; charset=utf-8",
+                        contentType: false, //required
+                        processData: false, // required
+                        //mimeType: 'multipart/form-data', //有圖片就要一定要加這行
+                        success: function(data){
+                        	
+//                             var jsonData = JSON.parse(data); //會讓下面跳不出來!!!!!!!
+                        
+                            Swal.fire({
+                            	title: '修改完成！',
+                            	icon: 'success',
+                            }).then((result)=>{
+                            	if (result.isConfirmed) {
+                            		location.href= "<spring:url value='/Forum/queryAll'/>";
+                            	}
+                            })
+                            
+                        },
+                        error: function(e, text){
+                            console.log(e.status);
+                            console.log(text);
+                        }
+                    }) //$.ajax({
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '已取消送出請求',
+                        text: '您的變更將不會被儲存!'
+                    })
+                }
+            }) //then((result) => {
+        }) //$("#form").on("submit", function(e){
+        
+// 		 }) //$("#btnAdd").click(function
+				
+    </script>
+
 </body>
 </html>

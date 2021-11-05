@@ -378,6 +378,9 @@
           </li>
         </ul>
       </nav>
+      
+      
+      
       <!-- partial -->
       <div class="main-panel">        
         <div class="content-wrapper">
@@ -387,25 +390,19 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">新增活動</h4>
+                  <h4 class="card-title">新增文章</h4>
                  
                   <form  id="form" class="forms-sample">
                     <div class="form-group">
-                      <label for="exampleInputName1">文章標題</label>
-                      <input type="text" class="form-control" name="name" id="name" >
+                      <label>文章標題</label>
+                      <input type="text" id="name" name="name" class="form-control" placeholder="請輸入文章標題">
                     </div>
-                  
                     <div class="form-group">
                       <label>文章內容</label>
-                      <textarea name="post" id="post" cols="100" rows="7" ></textarea>
+                      <textarea id="post" name="post" cols="100" rows="7" placeholder="請輸入文章內容"></textarea>
                     </div>
-                 
-					<button id="btnAdd" type='submit' name='submit' class="btn btn-primary mr-2">送出</button>
-					
-                    <a href="<spring:url value='/Activity/sapage' />" class="btn btn-primary mr-2">
-						返回
-					</a>
-				
+                    
+					<button type='submit' id="addbtn" name='submit' class="btn btn-primary mr-2">送出</button>
                   </form>
                 </div>
               
@@ -441,78 +438,98 @@
   <script src="../js/select2.js"></script>
   <!-- End custom js for this page-->
   
+  <!-- 要用Swal.fire需要引用下面兩個 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <!-- 若需相容 IE11，要加載 Promise Polyfill-->
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+  
+  
   <script>
-
-  
-
-
-
-  
-  
-  
-  
-
-
 
         var form = document.getElementById("form");
 		
-		
-		
-		 $("#btnAdd").click(function () {
-        $("#form").on("submit", function(e){
+		$("#addbtn").click(function () { //對應button的id屬性值addbtn
+			$("#form").on("submit", function(e){ //對應button的??屬性值??，不是name屬性值
             /* =====for formData&MultipartFile =====*/
-            var formData = new FormData(form);
+            e.preventDefault(); //不要按完按鈕就跳頁面
+//             var form = document.getElementById("form");
+    		var formData = new FormData(form); //把表單的資料裝成data
+    		var url = "<spring:url value='/Forum/add'/>"
             
             /* =====for JSON =====*/
             
-          
-            
             //改用ajax傳送 棄用原本的form傳送
-            e.preventDefault();
+//             alert("123");
             
-       	
-           
+            
+    		//Success
+//     		$.ajax({
+            	
+//             	contentType: false, //required
+//     			processData: false, // required
+//     			url: url,
+//     			type: "POST",
+//     			data: formData,
+    			
+//     			success: function (data) {
+    				
+//     				alert("success");
+//     				location.replace("<spring:url value='/Forum/queryAll'/>");  
+//     			},
+//     			error: function (response) {
+//     				alert('response status: ' + response.status);
+//     			}
+            	
+//             })
+            
+            
             Swal.fire({
                 title: '您確定要送出嗎？',
                 icon: 'question',
-               
                 showCancelButton: true,
+//                 closeOnConfirm: true,
             }).then((result) => {
                 if (result.isConfirmed) {
+                	
                     $.ajax({
                         type:"post",
-                        url:"<spring:url value='/Forum/add'/>",
+                        url:"<spring:url value='/Forum/add'/>", //要放@PostMapping對應的網址
                         data: formData,
-        //                 data: json,
-        //                 dataType:"json",
-        //                 contentType: "application/json; charset=utf-8",
+                        //data: json,
+                        //dataType:"json",
+                        //contentType: "application/json; charset=utf-8",
                         contentType: false, //required
                         processData: false, // required
-                        /*一定要加*/
-                        mimeType: 'multipart/form-data', //有圖片就要加這行
-                        /*一定要加*/
+                        //mimeType: 'multipart/form-data', //有圖片就要一定要加這行
                         success: function(data){
-                            var jsonData = JSON.parse(data);
+//                             var jsonData = JSON.parse(data); //會讓下面跳不出來!!!!!!!
                             
-
-                            
-                            // console.log(html);
-
                             Swal.fire({
-                                title: '已新增成功！',
-                                icon: 'success',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.href= "<spring:url value='/Forum/queryAll'/>";
-                                  }
-                                })
-                                    
+                            	title: '已新增成功！',
+                            	icon: 'success',
+                            }).then((result)=>{
+                            	if (result.isConfirmed) {
+                            		location.href= "<spring:url value='/Forum/queryAll'/>";
+                            	}
+                            })
+                            
                         },
                         error: function(e, text){
+                        	
+                        	Swal.fire({
+                            	title: '新增失敗！',
+                            	icon: 'error',
+                            })
+//                             .then((result)=>{
+//                             	if (result.isConfirmed) {
+//                             		location.href= "<spring:url value='/Forum/queryAll'/>";
+//                             	}
+//                             })
+                        	
                             console.log(e.status);
                             console.log(text);
                         }
-                    })
+                    }) //$.ajax({
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     Swal.fire({
                         icon: 'error',
@@ -520,10 +537,10 @@
                         text: '您的變更將不會被儲存!'
                     })
                 }
-            })
-        })
+            }) //then((result) => {
+        }) //$("#form").on("submit", function(e){
         
-		 })
+		 }) //$("#addbtn").click(function
     </script>
   
 </body>

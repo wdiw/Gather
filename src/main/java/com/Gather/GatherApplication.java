@@ -1,6 +1,5 @@
 package com.Gather;
 
-import java.nio.file.Files;
 
 import javax.servlet.Filter;
 
@@ -10,7 +9,6 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
-import com.Gather.util.Mail;
 
 @SpringBootApplication
 public class GatherApplication {
