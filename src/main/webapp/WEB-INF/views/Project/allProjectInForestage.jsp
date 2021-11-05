@@ -418,7 +418,7 @@
 																	<th>詳細資料</th>
 																</tr>
 															</thead>
-															<c:forEach items='${allproject}' var='project'>
+															<c:forEach items='${allProject}' var='project'>
 																<tr>
 																	<td>${project.pID}</td>
 																	<td>${project.pName}</td>
