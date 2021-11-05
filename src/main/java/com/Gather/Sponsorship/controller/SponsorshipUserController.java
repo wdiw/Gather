@@ -67,6 +67,7 @@ public class SponsorshipUserController {
 		return "Sponsorship/payment";
 	}
 
+	//新增訂單
 	@PostMapping("/newOrder")
 	@ResponseBody
 	public ResponseEntity<String> newOrder(@RequestParam("sPID") String sPID, @RequestParam("sPName") String sPName,
@@ -75,7 +76,7 @@ public class SponsorshipUserController {
 			@RequestParam("sBonus") String sBonus, @RequestParam("sAddress") String sAddress,
 			@RequestParam("sEmail") String sEmail, @RequestParam("sAmount") String sAmount,
 			@RequestParam("sDiscount") String sDiscount, @RequestParam("paymentMethod") String paymentMethod,
-			@RequestParam("proposerID") String proposerID
+			@RequestParam("proposerID") String proposerID,Model model
 
 	) throws IOException {
 
@@ -95,7 +96,7 @@ public class SponsorshipUserController {
 			sBean.setsTime(sd);
 			sBean.setStatus("待付款");
 			sponsorOrderService.insertOrder(sBean);
-
+			model.addAttribute("sID",sBean.getsID()) ;
 			return new ResponseEntity<String>(HttpStatus.OK);
 		}
 

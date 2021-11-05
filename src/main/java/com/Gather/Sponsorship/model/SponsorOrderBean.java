@@ -32,9 +32,36 @@ public class SponsorOrderBean {
 	private String sEmail;
 	private Integer sTotal;
 	private Integer proposerID;
+	private Long eCPay;
 
 	public SponsorOrderBean() {
 	}
+
+
+	public SponsorOrderBean(Integer sID, Integer mID, Integer sPID, String sName, String sPName, String status,
+			String paymentMethod, Integer sAmount, Integer sDiscount, Integer sBonus, String sTime, String projectImage,
+			String sAddress, String sPhone, String sEmail, Integer sTotal, Integer proposerID, Long eCPay) {
+		super();
+		this.sID = sID;
+		this.mID = mID;
+		this.sPID = sPID;
+		this.sName = sName;
+		this.sPName = sPName;
+		this.status = status;
+		this.paymentMethod = paymentMethod;
+		this.sAmount = sAmount;
+		this.sDiscount = sDiscount;
+		this.sBonus = sBonus;
+		this.sTime = sTime;
+		this.projectImage = projectImage;
+		this.sAddress = sAddress;
+		this.sPhone = sPhone;
+		this.sEmail = sEmail;
+		this.sTotal = sTotal;
+		this.proposerID = proposerID;
+		this.eCPay = eCPay;
+	}
+
 
 
 
@@ -250,24 +277,9 @@ public class SponsorOrderBean {
 	}
 
 
-
-
-
-
-
-
-
-
 	public void setsPhone(String sPhone) {
 		this.sPhone = sPhone;
 	}
-
-
-
-
-
-
-
 
 
 
@@ -277,34 +289,14 @@ public class SponsorOrderBean {
 
 
 
-
-
-
-
-
-
-
 	public void setsEmail(String sEmail) {
 		this.sEmail = sEmail;
 	}
 
 
-
-
-
-
-
-
-
-
 	public String getsAddress() {
 		return sAddress;
 	}
-
-
-
-
-
 
 
 	public void setsAddress(String sAddress) {
@@ -338,6 +330,18 @@ public class SponsorOrderBean {
 	public void setProposerID(Integer proposerID) {
 		this.proposerID = proposerID;
 	}
+
+
+	public Long geteCPay() {
+		return eCPay;
+	}
+
+
+	public void seteCPay(Long odno) {
+		this.eCPay = odno;
+	}
+	
+	
 	
 	
 	

@@ -10,9 +10,9 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<link rel="stylesheet"
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -143,11 +143,11 @@
 											class="image-popup prod-img-bg"> <img
 											src="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg"
 											class="img-fluid" alt="Colorlib Template" id="projectImage"></a>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="lastname">${pBean.pName}</label>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="lastname">${pBean.pName}</label>
+											</div>
 										</div>
-									</div>
 									</div>
 								</div>
 							</div>
@@ -234,7 +234,7 @@
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="radio">
-												<label><input type="radio" name="paymentMethod" 
+												<label><input type="radio" name="paymentMethod"
 													class="mr-2" value="銀行轉帳">銀行轉帳</label>
 											</div>
 										</div>
@@ -242,7 +242,7 @@
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="radio">
-												<label><input type="radio" name="paymentMethod" 
+												<label><input type="radio" name="paymentMethod"
 													class="mr-2" value="信用卡">信用卡</label>
 											</div>
 										</div>
@@ -250,7 +250,7 @@
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="radio">
-												<label><input type="radio" name="paymentMethod" 
+												<label><input type="radio" name="paymentMethod"
 													class="mr-2" value="Line Pay">Line Pay</label>
 											</div>
 										</div>
@@ -264,7 +264,8 @@
 										</div>
 									</div>
 									<p>
-										<button class="btn btn-primary py-3 px-4" type="button" name="submit" id="submit" >立刻贊助</button>
+										<button class="btn btn-primary py-3 px-4" type="button"
+											name="submit" id="submit">立刻贊助</button>
 									</p>
 								</div>
 							</div>
@@ -486,10 +487,22 @@
 				                  icon: 'success',
 				                  text: "已經新增贊助！",
 				                  position: 'center',
+				            
 
 				                }).then((result) => {
+				                	console.log("yes!!!!!!!!!!!!!!!!!!")
 				                    if (result.isConfirmed) {
-				                      location.href= "<c:url value='/'/>";
+				                    $.ajax({
+				                    	url: "./goECPay",
+				   		              	type: 'POST',
+				   					  	data:{
+				   							sAmount:sAmount,
+				  		        	  		sDiscount:sDiscount,
+				  		        	  		sID:"14",
+				  		        			sBonus:sBonus
+				   					  	},
+				                    })
+				                     
 				                    }
 				                  })
 					   },error: function (xhr, text) {
