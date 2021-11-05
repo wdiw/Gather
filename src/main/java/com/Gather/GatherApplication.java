@@ -8,15 +8,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
+
+import com.Gather.util.Mail;
 
 @SpringBootApplication
 public class GatherApplication {
 
 	public static void main(String[] args) {
-		
 		SpringApplication.run(GatherApplication.class, args);
 		
 	}
@@ -27,6 +26,5 @@ public class GatherApplication {
 		filterBean.setFilter(new HiddenHttpMethodFilter());
 		return filterBean;
 	}
-
 
 }

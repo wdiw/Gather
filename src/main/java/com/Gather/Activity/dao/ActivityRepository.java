@@ -6,6 +6,12 @@ import com.Gather.Activity.model.ActivityBean;
 
 public interface ActivityRepository extends JpaRepository<ActivityBean,Integer > {
 
+	
+	
+	
+	
+	
+	
 }
 
 

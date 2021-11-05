@@ -391,42 +391,21 @@
                  
                   <form  id="form" class="forms-sample">
                     <div class="form-group">
-                      <label for="exampleInputName1">活動名稱</label>
-                      <input type="text" class="form-control" name="name" id="name" placeholder="請輸入活動名稱">
+                      <label for="exampleInputName1">文章標題</label>
+                      <input type="text" class="form-control" name="name" id="name" >
                     </div>
+                  
                     <div class="form-group">
-                      <label for="exampleInputEmail3">活動開始日期</label>
-                      <input type="date" class="form-control" name="beginDate" id="st1" >
+                      <label>文章內容</label>
+                      <textarea name="post" id="post" cols="100" rows="7" ></textarea>
                     </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword4">活動結束日期</label>
-                      <input type="date" class="form-control" name="endDate" id="st1" >
-                    </div>
-                    <div class="form-group">
-                      <label>活動內容</label>
-                      <textarea name="description" id="description" cols="100" rows="7" placeholder="請輸入活動詳情"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label>上傳圖片</label>
-                      <input type="file" name="projectImage" class="file-upload-default" id="projectImage">
-                      <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="上傳圖片" >
-                        <span class="input-group-append">
-                          <button  class="file-upload-browse btn btn-primary" type="button">上傳</button>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="form-group">
-					
-						<img style="position: relative; left: 250px" src=" " width="350"
-							height="300" alt="請選擇照片" id="showPic" class="img-rounded">
-					</div>
+                 
 					<button id="btnAdd" type='submit' name='submit' class="btn btn-primary mr-2">送出</button>
 					
                     <a href="<spring:url value='/Activity/sapage' />" class="btn btn-primary mr-2">
 						返回
 					</a>
-					<button id='inputalldata'class="btn btn-light">一鑑輸入</button>
+				
                   </form>
                 </div>
               
@@ -467,28 +446,12 @@
   
 
 
-  
-$('#inputalldata').click(function(e) {
-    $('#name').val("慶祝Gather官網改版!  11/1即日起限時提供領取免運券!");
-    $('#description').val("只要於活動期間於活動頁面登錄，即可以獲得全館免運券(不限贊助金額皆可用)，這麼好康的活動，趕緊樓上揪樓下，阿爸揪阿母一起來領券，支持每個富有理想的提案者吧!");
-    e.preventDefault();
-});
+
   
   
   
   
-	var pic;
-		$('#projectImage').change(function() {
-			var projectImage = $("#projectImage")[0].files[0];
-			var reader = new FileReader;	
-			reader.onload = function(e) {
-				$('#showPic').attr('src', e.target.result);
-				pic=e.target.result;
-// 				console.log(e.target.result);
-			}
-			reader.readAsDataURL(projectImage);
-			console.log(projectImage);
-		})
+
 
 
         var form = document.getElementById("form");
@@ -512,15 +475,13 @@ $('#inputalldata').click(function(e) {
             Swal.fire({
                 title: '您確定要送出嗎？',
                 icon: 'question',
-                imageUrl: pic,
-                imageWidth: 400,
-                imageHeight: 200,
+               
                 showCancelButton: true,
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
                         type:"post",
-                        url:"<spring:url value='/Activity/add'/>",
+                        url:"<spring:url value='/Forum/add'/>",
                         data: formData,
         //                 data: json,
         //                 dataType:"json",
@@ -534,19 +495,7 @@ $('#inputalldata').click(function(e) {
                             var jsonData = JSON.parse(data);
                             
 
-                            var html1 = "";
-                            for (const key in jsonData) {
-                                let val = (jsonData[key] != "") ? jsonData[key] : "無";
-                                if (!(key == "image" || key == "base64String")) {
-//                                 console.log(key);
-//                                 console.log(jsonData[key]);
-                                    html1 += key+": "+val;
-                                    html1 += "<br/>";
-                                } 
-//                                 else if (key == "base64String"){
-//                                     html += "<img src='data:image;base64,"+jsonData.base64String+"'/>";
-//                                 }
-                            };
+                            
                             // console.log(html);
 
                             Swal.fire({
@@ -554,7 +503,7 @@ $('#inputalldata').click(function(e) {
                                 icon: 'success',
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    location.href= "<spring:url value='/Activity/sapage'/>";
+                                    location.href= "<spring:url value='/Forum/queryAll'/>";
                                   }
                                 })
                                     

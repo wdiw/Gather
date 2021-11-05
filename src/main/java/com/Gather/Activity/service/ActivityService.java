@@ -22,4 +22,8 @@ public interface ActivityService {
 	
 	//修改
 	public void updateActivity(ActivityBean activityBean);
+	
+	
+
 }
+

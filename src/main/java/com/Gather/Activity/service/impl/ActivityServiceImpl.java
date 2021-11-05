@@ -1,8 +1,6 @@
 package com.Gather.Activity.service.impl;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +53,19 @@ public class ActivityServiceImpl implements ActivityService {
 	public void deleteActivityById(Integer id) {
 		 activityRepository.deleteById(id);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
 
