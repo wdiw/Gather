@@ -62,7 +62,7 @@ public class SponsorshipUserController {
 	@GetMapping("/payment")
 	public String payment(HttpServletRequest reg, HttpServletRequest request) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
-		Member mBean = memberService.getMemberInfoByID(member.getId());
+		Member mBean =  memberService.queryMemberById(member.getId());
 		request.getSession().setAttribute("mBean", mBean);
 		return "Sponsorship/payment";
 	}
@@ -99,7 +99,7 @@ public class SponsorshipUserController {
 	@GetMapping("/sponsorshipInfo")
 	public String sponsorshipInfo(HttpServletRequest reg, HttpServletRequest request) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
-		Member mBean = memberService.getMemberInfoByID(member.getId());
+		Member mBean =  memberService.queryMemberById(member.getId());
 		List<SponsorOrderBean> sBean=sponsorOrderService.getOrdersByMemberID(mBean.getId());
 		request.getSession().setAttribute("sBean", sBean);
 		return "Sponsorship/sponsorshipInfo";
