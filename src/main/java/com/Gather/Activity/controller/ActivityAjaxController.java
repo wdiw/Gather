@@ -166,7 +166,7 @@ public class ActivityAjaxController {
 				Set<ActivityParticipationBean> activityParticipationBeans = new LinkedHashSet<ActivityParticipationBean>();
 				activityParticipationBeans.add(activityParticipationBean);
 				activity.setActivityParticipation(activityParticipationBeans);
-				Member member=memberService.getMemberById(memberid);
+				Member member = memberService.queryMemberById(memberid);
 				activityService.addActivity(activity);
 				model.addAttribute("activitylogin",activityParticipationBean );
 				
