@@ -113,57 +113,69 @@
 	
 	
 	
-	
+
 	
 	
 	
 	
 	$("#activitylogin").click(function () {
 	
-		
-		if('${activitylogin}'!=null){
-			
-			 Swal.fire({
-                 title: '你已登錄過此活動！',
-                 icon: 'fail',
-                 imageUrl: "<c:url value='/ActivitygetPicture/${activity.id}'/>",
-                 imageWidth: 400,
-                 imageHeight: 200,
-             })
-             
-             location.href= "<spring:url value='/Activity/userpage'/>";
-			
-			
-		}else{
-			
-			var id= '${activity.id}';
-			var memberid='${memberData.id}';
-	
-			$.ajax({
-				url: "<spring:url value='/Activity/login/" + id + "'/>",
-				type: "Put",
-				
-				data: {id:id,memberid:memberid},//前面是標籤，後面是值
-				success: function (data) {
-					 Swal.fire({
-	                     title: '活動登錄成功！',
-	                     icon: 'success',
-	                     imageUrl: "<c:url value='/ActivitygetPicture/${activity.id}'/>",
-	                     imageWidth: 400,
-	                     imageHeight: 200,
-	                 })
-	                 
-	                 location.href= "<spring:url value='/Activity/userpage'/>";
+		var id= '${activity.id}';
+		var memberid='${memberData.id}';
+		var memberlogin='${activitylogin}';
+    var m_id="${activitylogin.m_id}";
+    var logintime="${activitylogin.logintime}";
+    var activityloginbean='${activitylogin.activityBean}'
+    var activitybean='${activity}'
+    
 
-				},
-				error: function (jqXHR, textStatus, errorThrown) {
-					alert("活動登錄失敗");
-				}
-			})
+    
+		
+		if(activityloginbean!=activitybean){
+		
+			$.ajax({
+			url: "<spring:url value='/Activity/login/" + id + "'/>",
+			type: "Put",
 			
-		}
+			data: {id:id,memberid:memberid},//前面是標籤，後面是值
+			success: function (data) {
+				 Swal.fire({
+                     title: '活動登錄成功！',
+                     icon: 'success',
+                     imageUrl: "<c:url value='/ActivitygetPicture/${activity.id}'/>",
+                     imageWidth: 400,
+                     imageHeight: 200,
+                 })
+                 
+                 location.href= "<spring:url value='/Activity/userpage'/>";
+
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				alert("活動登錄失敗");
+			}
+		})
 		
 		
+	}else{
+
+    Swal.fire({
+                     title: '你已登錄過此活動！無法再登錄!',
+                     icon: 'success',
+                     imageUrl: "<c:url value='/ActivitygetPicture/${activity.id}'/>",
+                     imageWidth: 400,
+                     imageHeight: 200,
+                 })
+                 
+                 location.href= "<spring:url value='/Activity/userpage'/>";
+
+
+  }
+		
+		
+		
+		
+		
+	
 
 	});
 	

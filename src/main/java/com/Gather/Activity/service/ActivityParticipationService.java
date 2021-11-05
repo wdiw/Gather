@@ -2,6 +2,9 @@ package com.Gather.Activity.service;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import com.Gather.Activity.model.ActivityBean;
 import com.Gather.Activity.model.ActivityParticipationBean;
 
@@ -21,9 +24,15 @@ public interface ActivityParticipationService {
 	//修改
 	public void updateActivityParticipation(ActivityParticipationBean activityParticipationBean);
 	
-	//用活動編號、會員編號查詢有無登錄活動
-	 ActivityParticipationBean findByM_IDAndActivityBean(Integer memberid,ActivityBean activityBean);
+//	//用活動編號、會員編號查詢有無登錄活動
+//	@Query("SELECT u FROM ActivityParticipationBean u WHERE u.activityid = :activityid and u.m_id = :m_id")
+//	ActivityParticipationBean findUserByM_idAndActivityId(
+//	  @Param("activityid") Integer activityid, 
+//	  @Param("m_id") Integer m_id);
+//	
+//	//用會員編號查詢該會員的登錄活動
+//		public List<ActivityParticipationBean> memberloginrecord(Integer memberid);
 	
-	//用會員編號查詢該會員的登錄活動
-		public List<ActivityParticipationBean> memberloginrecord(Integer memberid);
+	//用活動編號、會員編號查詢有無登錄活動
+	ActivityParticipationBean findActivityParticipationByM_idAndActivityId(ActivityBean activityBean ,Integer m_id);
 }

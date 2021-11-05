@@ -18,7 +18,6 @@ import com.Gather.member.entity.Member;
 
 @Entity
 @Table(name = "ActivityParticipation")
-@Component
 public class ActivityParticipationBean {
 
 	
