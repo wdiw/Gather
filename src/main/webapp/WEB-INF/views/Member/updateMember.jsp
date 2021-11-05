@@ -460,13 +460,13 @@
   <!-- End custom js for this page-->
   
   <script type="text/javascript">
-		$('#projectImage').change(function() {
-			var projectImage = $("#projectImage")[0].files[0];
+		$('#memberImage').change(function() {
+			var memberImage = $("#memberImage")[0].files[0];
 			var reader = new FileReader;
 			reader.onload = function(e) {
 				$('#showPic').attr('src', e.target.result);
 			}
-			reader.readAsDataURL(projectImage);
+			reader.readAsDataURL(memberImage);
 		})
 		
 		function update(updateId){

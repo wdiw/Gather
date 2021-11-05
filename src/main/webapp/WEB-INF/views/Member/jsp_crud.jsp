@@ -439,7 +439,7 @@
 															<c:forEach var='theMember' items='${members}'>
 																<tr>
 																	<td><img src="images/Members/${theMember.id}.jpg"
-																			alt="" onerror="nofind()"></td>
+																			alt="" ></td>
 																	<td>${theMember.id}</td>
 																	<td>${theMember.name}</td>
 																	<td>${theMember.status}</td>

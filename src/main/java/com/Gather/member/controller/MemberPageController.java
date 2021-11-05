@@ -161,9 +161,11 @@ public class MemberPageController {
 
 	@PostMapping("/upload") // 等價於 @RequestMapping(value = "/upload",method = RequestMethod.POST)
 	public String uplaod(HttpServletRequest req, @RequestParam("file") MultipartFile file, Model m) {// 1. 接受上傳的檔案
+		System.out.println("debug1");
 		try {
 			// 2.根據時間戳建立新的檔名，這樣即便是第二次上傳相同名稱的檔案，也不會把第一次的檔案覆蓋了
 			Member theMember = (Member) req.getSession().getAttribute("memberData");
+			System.out.println("debug2");
 			// 3.通過req.getServletContext().getRealPath("") 獲取當前專案的真實路徑，然後拼接前面的檔名
 			/*
 			 * String destFileName = req.getServletContext().getRealPath("") + "WEB-INF" +
@@ -189,6 +191,6 @@ public class MemberPageController {
 			return "上傳失敗," + e.getMessage();
 		}
 
-		return "Member/memberCenter";
+		return "sample";
 	}
 }

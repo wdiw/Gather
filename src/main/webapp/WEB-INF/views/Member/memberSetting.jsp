@@ -65,7 +65,7 @@
 
                     $.ajax({
                         type: "PUT",
-                        url: "http://localhost:8080/Gather/api/members/changePassword",
+                        url: "/Gather/api/members/changePassword",
                         contentType: 'application/json',
                         data: JSON.stringify(params),
                         success: function (data) {
