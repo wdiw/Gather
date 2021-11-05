@@ -64,11 +64,23 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectRepository.findBymID(mID);
 	}
 
+	//管理者審核計畫通過或不通過
 	@Override
 	public void updateStatusBypID(Integer pID, String pStatus) {
 		projectRepository.updateStatusBypID(pID, pStatus);
 		
 	}
+
+	
+	//找審核通過的計畫
+	@Override
+	public List<ProjectBean> getAllProjectBypStatus(String pStatus) {
+		// TODO Auto-generated method stub
+		return projectRepository.findBypStatus(pStatus);
+	}
+	
+	
+	
 	
 	
 	

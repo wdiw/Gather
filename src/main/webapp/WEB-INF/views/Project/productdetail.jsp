@@ -565,21 +565,23 @@
 									var projectID = ${ project.pID };//抓專案ID
 									var mStatus="${sessionScope.memberData.status}"//取得會員身分
 
-									$(".form-control").attr("disabled",true)
+									
 									if(mStatus=='管理員'){
 										//管理員身分
 										$("#passButton").show();
 										$("#NotPassButton").show();
 										$("#sendButton").hide();
 
-										$("#coverImageUpload").attr("disabled", true);//上傳按鈕封掉
+										
 
 										
 									}else{
 										//會員身分
+										
 										$("#sendButton").show();
 										$("#passButton").hide();
 										$("#NotPassButton").hide();
+										$(".form-control").attr("disabled",true)
 										$("#pDescribe").attr("disabled", false);
 										$("#pContent").attr("disabled", false);
 									}

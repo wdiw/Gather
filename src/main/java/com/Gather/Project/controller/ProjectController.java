@@ -2,10 +2,11 @@ package com.Gather.Project.controller;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.transform.Source;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,10 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Gather.Project.model.ProjectBean;
+import com.Gather.Project.model.ProjectPlanBean;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.member.entity.Member;
 
-import javassist.expr.NewArray;
 
 @RestController
 public class ProjectController {
@@ -57,8 +58,6 @@ public class ProjectController {
 		projectService.updateStatusBypID(pID, pStatus);
 		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
-	
-	
 	
 
 	// 更新
@@ -121,20 +120,57 @@ public class ProjectController {
 	// 新增
 	@PostMapping(path = "/Project/addProject")
 	@ResponseBody
-	public ResponseEntity<String> addProject(@RequestParam("pName") String pName, @RequestParam("pTarget") int pTarget,
-			@RequestParam("pSDate") String pSDate, @RequestParam("pEDate") String pEDate,
-			@RequestParam("pDescribe") String pDescribe, @RequestParam("pContent") String pContent,
-			@RequestParam("pImage") MultipartFile pImage, HttpServletRequest request
-
+	public ResponseEntity<String> addProject(
+			//專案相關
+			@RequestParam("pName") String pName,
+			@RequestParam("pTarget") Integer pTarget,
+			@RequestParam("pSDate") String pSDate, 
+			@RequestParam("pEDate") String pEDate,
+			@RequestParam("pDescribe") String pDescribe,
+			@RequestParam("pContent") String pContent,
+			@RequestParam("pImage") MultipartFile pImage, 
+			//回饋一
+			@RequestParam("projectPlanPrice1") Integer projectPlanPrice1,
+			@RequestParam("ETA1") String ETA1,
+			@RequestParam("projectPlanContent1") String projectPlanContent1,
+			@RequestParam("projectPlanImage1") MultipartFile projectPlanImage1,
+			
+			//回饋二
+			@RequestParam(name = "projectPlanPrice2",required = false ) Integer projectPlanPrice2,
+			@RequestParam(name = "ETA2",required = false) String ETA2,
+			@RequestParam(name ="projectPlanContent2",required = false) String projectPlanContent2,
+			@RequestParam(name ="projectPlanImage2",required = false) MultipartFile projectPlanImage2,
+			
+			//回饋3
+			@RequestParam(name ="projectPlanPrice3",required = false) Integer projectPlanPrice3,
+			@RequestParam(name ="ETA3",required = false) String ETA3,
+			@RequestParam(name ="projectPlanContent3",required = false) String projectPlanContent3,
+			@RequestParam(name ="projectPlanImage3",required = false) MultipartFile projectPlanImage3, 
+			HttpServletRequest request
+			
+			
 	) throws MalformedURLException {
-		System.out.println(pSDate);
-		System.out.println(pEDate);
-		System.out.println(pContent);
+		System.out.println("回饋方案1:"+projectPlanPrice1);
+		System.out.println("回饋方案1:"+ETA1);
+		System.out.println("回饋方案1:"+projectPlanContent1);
+		System.out.println("回饋方案1:"+projectPlanImage1);
+		
+		System.out.println("回饋方案2:"+projectPlanPrice2);
+		System.out.println("回饋方案2:"+ETA2);
+		System.out.println("回饋方案2:"+projectPlanContent2);
+		System.out.println("回饋方案2:"+projectPlanImage2);
+		
+		System.out.println("回饋方案3:"+projectPlanPrice3);
+		System.out.println("回饋方案3:"+ETA3);
+		System.out.println("回饋方案3:"+projectPlanContent3);
+		System.out.println("回饋方案3:"+projectPlanImage3);
 
 		Member memberData = (Member) request.getSession().getAttribute("memberData");
 		Integer mID = memberData.getId();
 
-		// 處理圖片
+		
+		
+		// 處理封面
 		String originalFilename = pImage.getOriginalFilename();// 得到原始名稱，如xxx.jpg
 		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
 		String rootDirectory = servletContext.getRealPath("/").replace("webapp", "resources");// 找到應用系統的根目錄
@@ -142,24 +178,115 @@ public class ProjectController {
 		rootDirectory = rootDirectory + "\\static\\images\\Project";
 
 		String filePath = "images/Project/";// 存檔於static相對路徑，如images/Project/xxx.jpg
-		File file = null;
+		File imageFolder=null;//存檔路徑
+		File coverFile = null;//封面包含副檔名完整的存檔路徑
+		File projectPlanFile1=null;//方案一包含副檔名完整的存檔路徑
+		File projectPlanFile2=null;//方案二包含副檔名完整的存檔路徑
+		File projectPlanFile3=null;//方案三包含副檔名完整的存檔路徑
+		String projectPlanFilePath1="";//方案一的相對路徑，要存資料庫用
+		String projectPlanFilePath2="";//方案二的相對路徑，要存資料庫用
+		String projectPlanFilePath3="";//方案三的相對路徑，要存資料庫用
+		
+		//用list 裝多方的所有bean
+		Set<ProjectPlanBean> ProjectPlanBeanList = new LinkedHashSet<ProjectPlanBean>();
+		
+		//處理封面圖片
+		imageFolder = new File(rootDirectory, pName);
 		try {
-			File imageFolder = new File(rootDirectory, pName);
 			if (!imageFolder.exists())
 				imageFolder.mkdirs();// C:\_JSP\tomcat9\webapps\mvcExercise路徑下沒有images資料夾就建
 
-			file = new File(imageFolder, pName + "_Cover" + ext);// File(路徑,檔名.副檔名)
-			System.out.println("檔案路徑為:" + file);
-			pImage.transferTo(file);// 把圖檔搬過去
+			coverFile = new File(imageFolder, pName + "_Cover" + ext);// File(路徑,檔名.副檔名)
+			System.out.println("檔案路徑為:" + coverFile);
+			pImage.transferTo(coverFile);// 把圖檔搬過去
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		filePath += pName + "/" + pName + "_Cover" + ext;
-		ProjectBean pBean = new ProjectBean(pName, pTarget, pSDate, pEDate, filePath, pDescribe, pContent, mID, "待審核");// 存到資料庫，目前會員ID先死
+		String coverFilePath=filePath+ pName + "/" + pName + "_Cover" + ext;//存封面圖片的相對路徑，static\images\Project\xxx\xxx_Cover.jpg
+		//New 一方的Bean
+		ProjectBean pBean = new ProjectBean(pName, pTarget, pSDate, pEDate, coverFilePath, pDescribe, pContent, mID, "待審核");// 存到資料庫，目前會員ID先死
+		
+		
+		
+		if(!(projectPlanImage1.isEmpty())) {
+		// 處理贊助方案一圖片
+		String projectPlanOriginalFilename1 = projectPlanImage1.getOriginalFilename();// 得到原始名稱，如xxx.jpg
+		String projectPlanExt1 = projectPlanOriginalFilename1.substring(projectPlanOriginalFilename1.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
+																								// C:\_JSP\tomcat9\webapps\mvcExercise
+		//System.out.println("處理贊助方案一時的imageFolder"+imageFolder);
+		projectPlanFile1 = new File(imageFolder,"projectPlanImage1" + projectPlanExt1);// File(路徑,檔名.副檔名)
+		try {
+			projectPlanImage1.transferTo(projectPlanFile1);// 把圖檔搬過去
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		projectPlanFilePath1=filePath+ pName+"projectPlan1"+projectPlanExt1;//存方案一的相對路徑static\images\Project\xxx\projectPlan1.jpg
+		
+		//New 多方的Bean
+		ProjectPlanBean projectPlanBean1 = new ProjectPlanBean(projectPlanPrice1, projectPlanContent1,ETA1, projectPlanFilePath1, pBean);
+		//加進List中
+		ProjectPlanBeanList.add(projectPlanBean1);
+		}	
+		
+		
+		
+		
+		if(!(projectPlanImage2.isEmpty())) 
+			{//如果方案二有放圖片
+			System.out.println("有進來方案二處理");
+				// 處理贊助方案二圖片
+				String projectPlanOriginalFilename2 = projectPlanImage2.getOriginalFilename();// 得到原始名稱，如xxx.jpg
+				String projectPlanExt2 = projectPlanOriginalFilename2.substring(projectPlanOriginalFilename2.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
+																										// C:\_JSP\tomcat9\webapps\mvcExercise
+				//System.out.println("處理贊助方案二時的imageFolder"+imageFolder);
+				projectPlanFile2 = new File(imageFolder,"projectPlanImage2" + projectPlanExt2);// File(路徑,檔名.副檔名)
+				try {
+					projectPlanImage2.transferTo(projectPlanFile2);// 把圖檔搬過去
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				projectPlanFilePath2=filePath+ pName+"projectPlan2"+projectPlanExt2;//存方案二的相對路徑static\images\Project\xxx\projectPlan2.jpg
+				//New 多方的Bean
+				ProjectPlanBean projectPlanBean2 = new ProjectPlanBean(projectPlanPrice2, projectPlanContent2,ETA2, projectPlanFilePath2, pBean);
+				//加進List中
+				ProjectPlanBeanList.add(projectPlanBean2);
+			}
+				
+		if(!(projectPlanImage3.isEmpty())) { 
+			System.out.println("有進來方案三處理");
+				// 處理贊助方案三圖片
+				String projectPlanOriginalFilename3 = projectPlanImage3.getOriginalFilename();// 得到原始名稱，如xxx.jpg
+				String projectPlanExt3 = projectPlanOriginalFilename3.substring(projectPlanOriginalFilename3.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
+																										// C:\_JSP\tomcat9\webapps\mvcExercise
+				//System.out.println("處理贊助方案二時的imageFolder"+imageFolder);
+				projectPlanFile3 = new File(imageFolder,"projectPlanImage3" + projectPlanExt3);// File(路徑,檔名.副檔名)
+				try {
+					projectPlanImage3.transferTo(projectPlanFile3);// 把圖檔搬過去
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				projectPlanFilePath3=filePath+ pName+"projectPlan3"+projectPlanExt3;//存方案三的相對路徑static\images\Project\xxx\projectPlan3.jpg
+				//New 多方的bean
+				ProjectPlanBean projectPlanBean3 = new ProjectPlanBean(projectPlanPrice3, projectPlanContent3,ETA3, projectPlanFilePath3, pBean);
+				//加進List中
+				ProjectPlanBeanList.add(projectPlanBean3);
+		}	
+		
+	
+		
+		//使用一方的set方法設定多方的list
+		pBean.setProjectPlanBeans(ProjectPlanBeanList);
+		
+		//呼叫新增方法進行新增		
 		projectService.addProject(pBean);
 
 		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
 
+	
+	
 }

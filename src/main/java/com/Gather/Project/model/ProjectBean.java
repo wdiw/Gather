@@ -1,13 +1,19 @@
 package com.Gather.Project.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "Project")
@@ -26,6 +32,13 @@ public class ProjectBean implements Serializable {
 	private String pEDate;//專案結束日期
 	private Integer mID;//會員ID
 	private String pStatus;//專案狀態
+	
+	@OneToMany(mappedBy = "projectBean",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
+
+	
+	
+	
 
 	// 空的建構子
 	public ProjectBean() {
@@ -145,6 +158,14 @@ public class ProjectBean implements Serializable {
 
 	public void setpStatus(String pStatus) {
 		this.pStatus = pStatus;
+	}
+	
+	public Set<ProjectPlanBean> getProjectPlanBeans() {
+		return projectPlanBeans;
+	}
+
+	public void setProjectPlanBeans(Set<ProjectPlanBean> projectPlanBeans) {
+		this.projectPlanBeans = projectPlanBeans;
 	}
 
 	@Override
