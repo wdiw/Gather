@@ -27,7 +27,7 @@ public class ProjectPageController {
 	
 	
 	// 管理者查詢所有提案
-		@GetMapping("/Project/allproject")
+		@GetMapping("/Project/allProjectInBackstage")
 		public String list(Model model,HttpServletRequest request) {
 			Member memberData = (Member)request.getSession().getAttribute("memberData");
 			String mStatus = memberData.getStatus();
@@ -68,6 +68,12 @@ public class ProjectPageController {
 		}
 		
 		
-	
+		//找通過審核的計畫
+		@GetMapping("/Project/allProjectInForestage")
+		public String allProjectInForestage(Model model,HttpServletRequest request) {
+			List<ProjectBean> result = projectService.getAllProjectBypStatus("通過");
+			model.addAttribute("allProject", result);
+			return "Project/allProjectInForestage";
+		}
 	
 }
