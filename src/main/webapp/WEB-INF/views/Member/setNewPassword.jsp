@@ -1,8 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <!-- Required meta tags -->
+  <!-- note: 最新 -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Skydash Admin</title>
@@ -22,27 +25,30 @@
 <body>
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center text-center error-page bg-primary">
-        <div class="row flex-grow">
-          <div class="col-lg-7 mx-auto text-white">
-            <div class="row align-items-center d-flex flex-row">
-              <div class="col-lg-6 text-lg-right pr-lg-4">
-                <h1 class="display-1 mb-0">404</h1>
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+              <div class="brand-logo">
+                <img src="/Gather/images/logo.svg" alt="logo">
               </div>
-              <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
-                <h2>SORRY!</h2>
-                <h3 class="font-weight-light">The page you’re looking for was not found.</h3>
-              </div>
-            </div>
-            <div class="row mt-5">
-              <div class="col-12 text-center mt-xl-2">
-                <a class="text-white font-weight-medium" href="/Gather/index.html">Back to home</a>
-              </div>
-            </div>
-            <div class="row mt-5">
-              <div class="col-12 mt-xl-2">
-                <p class="text-white font-weight-medium text-center">Copyright &copy; 2021  All rights reserved.</p>
-              </div>
+              
+              <h4>會員 "${memberData.name}" 歡迎回來!</h4>
+              <h6 class="font-weight-light">讓我們重新設定密碼</h6>
+              <form class="pt-3">
+                <div class="form-group">
+                  新密碼
+                  <input type="text" class="form-control form-control-lg" id="new_password" placeholder="New Password">
+                </div>
+                <div class="form-group">
+                  再次輸入
+                  <input type="password" class="form-control form-control-lg" id="new_password_again" placeholder="New Password Again">
+                </div>
+                <div class="mt-3">
+                  <!--登入按鈕在這-->
+                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" id="change">送出</a>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -58,11 +64,16 @@
   <!-- Plugin js for this page -->
   <!-- End plugin js for this page -->
   <!-- inject:js -->
+
   <script src="/Gather/js/off-canvas.js"></script>
   <script src="/Gather/js/hoverable-collapse.js"></script>
   <script src="/Gather/js/template.js"></script>
   <script src="/Gather/js/settings.js"></script>
   <script src="/Gather/js/todolist.js"></script>
+  <script src="/Gather/js/jquery-3.6.0.js"></script>
+  <script src="/Gather/js/login.js"></script>
+  <script src="/Gather/js/sweetalert2.all.min.js"></script>
+  <script src="/Gather/js/forgotPassword.js"></script>
   <!-- endinject -->
 </body>
 

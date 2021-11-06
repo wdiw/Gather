@@ -32,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
 import com.Gather.util.Mail;
+import com.Gather.util.SHA256Util;
 
 @RestController
 @RequestMapping("/api")
@@ -44,6 +45,31 @@ public class MemberRESTController {
 		this.memberService = memberService;
 	}
 
+	@PostMapping("/forgotPassword")
+	public ResponseEntity<String> forgotPassword(@RequestBody Member theMember,HttpServletRequest request){
+		Member theDataBaseMember = memberService.findByAccount(theMember.getAccount());
+		if (theDataBaseMember != null) {
+			// 產生六碼亂數
+			int MAX = 999999;
+			int min = 100000;
+			int random = (int) (Math.random() * (MAX - min + 1)) + min;
+			String randomSixDigitStr = String.valueOf(random);
+			String secretHashCode = SHA256Util.getSHA256StrJava(theDataBaseMember.getAccount()+randomSixDigitStr);
+			theDataBaseMember.setPassword(secretHashCode);
+			memberService.insertOrUpdateMember(theDataBaseMember);
+			String message = "http://localhost:8080/Gather/passwordReset/"+secretHashCode;
+			Mail.SendGmail("Gather.WebService@gmail.com", theDataBaseMember.getAccount(), "Gather募資平台-密碼重設", message);
+			return new ResponseEntity<String>("Y", HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("N", HttpStatus.OK);
+	}
+	
+
+	
+	
+	
+	
+	
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody Member theMember, HttpServletRequest request) {
 		System.out.println("登入: 前端收到的資料" + theMember);
@@ -104,7 +130,7 @@ public class MemberRESTController {
 			System.out.println("驗證成功，準備加入資料庫");
 			Member theMember = (Member) req.getSession().getAttribute("registerData");
 			theMember.setStatus("會員");//賦予會員的身分
-			memberService.addMember(theMember);
+			memberService.insertOrUpdateMember(theMember);
 			System.out.println("會員資料加入資料庫成功");
 			//使用預設大頭貼
 			String rootDirectory = req.getServletContext().getRealPath("/").replace("webapp", "resources");
@@ -141,7 +167,7 @@ public class MemberRESTController {
 		// 但因為我這邊使用的是Integer，所以不能用0 要用null
 		theMember.setId(null);
 		System.out.println(theMember);
-		memberService.addMember(theMember);
+		memberService.insertOrUpdateMember(theMember);
 		return theMember;
 	}
 
@@ -149,20 +175,21 @@ public class MemberRESTController {
 	@PutMapping("/members")
 	public Member updateMember(@RequestBody Member theMember) {
 //		System.out.println(theMember);
-		memberService.addMember(theMember);
+		memberService.insertOrUpdateMember(theMember);
 		return theMember;
 	}
 
 	// 改密碼
 	@PutMapping("/members/changePassword")
-	public Member changePassword(@RequestBody Member theMember, HttpServletRequest request) {
+	public ResponseEntity<String> changePassword(@RequestBody Member theMember, HttpServletRequest request) {
 		System.out.println("改密碼:前端進來的資料" + theMember);
 		Member sessionMemberData = (Member) request.getSession().getAttribute("memberData");
 		System.out.println("改密碼:Session的資料" + sessionMemberData);
 		sessionMemberData.setPassword(theMember.getPassword());
 		System.out.println("改密碼:即將送進Service層的會員資料" + sessionMemberData);
 		memberService.changePwdById(sessionMemberData);
-		return sessionMemberData;
+		request.getSession().removeAttribute("memberData");
+		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
 
 	// 刪除

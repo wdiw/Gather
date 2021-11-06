@@ -9,13 +9,14 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
+import com.Gather.util.SHA256Util;
+
 
 @SpringBootApplication
 public class GatherApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GatherApplication.class, args);
-		
 	}
 
 	@Bean
