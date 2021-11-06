@@ -21,5 +21,4 @@ public interface SponsorOrderService {
 	
 	SponsorOrderBean updateOrder(SponsorOrderBean sBean);
 
-	void prepareECPayData(SponsorOrderBean sponsorOrderBean, HttpServletResponse response);
 }

@@ -132,7 +132,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-10 ftco-animate">
-					<form id="form" action="#" class="billing-form">
+					<form id="form" action="./goECPay" class="billing-form" method="POST">
 						<h3 class="mb-4 billing-heading">贊助明細</h3>
 						<div class="row align-items-end" style="position: relative">
 							<div class="col-md-6" align="center">
@@ -142,15 +142,23 @@
 											href="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg"
 											class="image-popup prod-img-bg"> <img
 											src="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg"
-											class="img-fluid" alt="Colorlib Template" id="projectImage"></a>
+											class="img-fluid" alt="Colorlib Template" id="projectImage" ></a>
+											<input type="hidden" name="projectImage" value="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg">
 										<div class="col-md-6">
 											<div class="form-group">
+											<input type="hidden" name="sPName" value="${pBean.pName}">
 												<label for="lastname">${pBean.pName}</label>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+							<input type="hidden" value="${mBean.id}" name="mID">
+							<input type="hidden" value="${pBean.pID}" name="sPID">
+							<input type="hidden" value="${pBean.mID}" name="proposerID">
+							<input type="hidden" value="300" name="sAmount">
+							
+							
 
 							<div class="col-md-6"
 								style="position: absolute; top: 0; right: 0">
@@ -185,7 +193,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="streetaddress">電子信箱</label> <input type="text"
-										class="form-control" placeholder="" value="${mBean.account}">
+										class="form-control" placeholder="" value="${mBean.account}" name="sEmail">
 								</div>
 							</div>
 
@@ -264,8 +272,8 @@
 										</div>
 									</div>
 									<p>
-										<button class="btn btn-primary py-3 px-4" type="button"
-											name="submit" id="submit">立刻贊助</button>
+										<button class="btn btn-primary py-3 px-4" type="submit"
+											name="submit" id="submit" >立刻贊助</button>
 									</p>
 								</div>
 							</div>
@@ -436,86 +444,87 @@
 			            }
 			    });
 			    
-				$("#submit").click(function(){
+// 				$("#submit").click(function(){
 				
 					
-						let sPID=${pBean.pID};
-						let sPName="${pBean.pName}";
-						let projectImage=$('#projectImage').attr("src");
-						let mID="${sessionScope.memberData.id}";
-						let sName="${sessionScope.memberData.name}"
-						let sPhone=$('#sPhone').val();
-						let sBonus=$('#sBonus').val();
-						let sAddress=$('#sAddress').val();
-						let sEmail="${sessionScope.memberData.account}";
-						let sAmount="300";
-						let sDiscount=$('#sDiscount').val();
-						let radio=document.getElementsByName("paymentMethod");
-						let proposerID=${pBean.mID};
-						 var radioLength = radio.length;
-						   for(var i =0;i < radioLength;i++){
-						    if(radio[i].checked)
-						     var paymentMethod = radio[i].value;
+// 						let sPID=${pBean.pID};
+// 						let sPName="${pBean.pName}";
+// 						let projectImage=$('#projectImage').attr("src");
+// 						let mID="${sessionScope.memberData.id}";
+// 						let sName="${sessionScope.memberData.name}"
+// 						let sPhone=$('#sPhone').val();
+// 						let sBonus=$('#sBonus').val();
+// 						let sAddress=$('#sAddress').val();
+// 						let sEmail="${sessionScope.memberData.account}";
+// 						let sAmount="300";
+// 						let sDiscount=$('#sDiscount').val();
+// 						let radio=document.getElementsByName("paymentMethod");
+// 						let proposerID=${pBean.mID};
+// 						 var radioLength = radio.length;
+// 						   for(var i =0;i < radioLength;i++){
+// 						    if(radio[i].checked)
+// 						     var paymentMethod = radio[i].value;
 							  
-						   }
+// 						   }
 						   
 					
 
 
-					var data = {
-		        	  sPID:sPID,
-		        	  sPName:sPName,
-		        	  projectImage:projectImage,
-		        	  mID:mID,
-		        	  sName:sName,
-		        	  sPhone:sPhone,
-		        	  sBonus:sBonus,
-		        	  sAddress:sAddress,
-		        	  sEmail:sEmail,
-		        	  sAmount:sAmount,
-		        	  sDiscount:sDiscount,
-		        	  paymentMethod:paymentMethod,
-		        	  proposerID:proposerID
-		         	};
-					 $.ajax({
-						 url: "./newOrder",
-		              type: 'POST',
-					  data:data,
-					   success: function (data) {
-						   Swal.fire({
-				                  title: '訂單成立',
-				                  icon: 'success',
-				                  text: "已經新增贊助！",
-				                  position: 'center',
+// 					var data = {
+// 		        	  sPID:sPID,
+// 		        	  sPName:sPName,
+// 		        	  projectImage:projectImage,
+// 		        	  mID:mID,
+// 		        	  sName:sName,
+// 		        	  sPhone:sPhone,
+// 		        	  sBonus:sBonus,
+// 		        	  sAddress:sAddress,
+// 		        	  sEmail:sEmail,
+// 		        	  sAmount:sAmount,
+// 		        	  sDiscount:sDiscount,
+// 		        	  paymentMethod:paymentMethod,
+// 		        	  proposerID:proposerID
+// 		         	};
+// 					 $.ajax({
+// 						 url: "./newOrder",
+// 		              type: 'POST',
+// 					  data:data,
+// 					   success: function (data) {
+// 						   alert(data)
+// 						   Swal.fire({
+// 				                  title: '訂單成立',
+// 				                  icon: 'success',
+// 				                  text: "已經新增贊助！",
+// 				                  position: 'center',
 				            
 
-				                }).then((result) => {
-				                	console.log("yes!!!!!!!!!!!!!!!!!!")
-				                    if (result.isConfirmed) {
-				                    $.ajax({
-				                    	url: "./goECPay",
-				   		              	type: 'POST',
-				   					  	data:{
-				   							sAmount:sAmount,
-				  		        	  		sDiscount:sDiscount,
-				  		        	  		sID:"14",
-				  		        			sBonus:sBonus
-				   					  	},
-				                    })
+// 				                }).then((result) => {
+// 				                	console.log("yes!!!!!!!!!!!!!!!!!!")
+// 				                    if (result.isConfirmed) {
+// 				                    $.ajax({
+// 				                    	url: "./goECPay",
+// 				   		              	type: 'POST',
+// 				   					  	data:{
+// 				   							sAmount:sAmount,
+// 				  		        	  		sDiscount:sDiscount,
+// 				  		        	  		sID:data,
+// 				  		        			sBonus:sBonus
+// 				   					  	},
+// 				                    })
 				                     
-				                    }
-				                  })
-					   },error: function (xhr, text) {
-						   console.log("status code: " + xhr.status);
-		                    console.log("error message: " + text);
-		                    Swal.fire({
-		                      title: '新增失敗',
-		                      icon: 'error',
-		                      text: "失敗",
-		                    })
-					   }
-					 })
-				})
+// 				                    }
+// 				                  })
+// 					   },error: function (xhr, text) {
+// 						   console.log("status code: " + xhr.status);
+// 		                    console.log("error message: " + text);
+// 		                    Swal.fire({
+// 		                      title: '新增失敗',
+// 		                      icon: 'error',
+// 		                      text: "失敗",
+// 		                    })
+// 					   }
+// 					 })
+// 				})
 
 
        			

@@ -76,7 +76,7 @@ public class SponsorshipUserController {
 			@RequestParam("sBonus") String sBonus, @RequestParam("sAddress") String sAddress,
 			@RequestParam("sEmail") String sEmail, @RequestParam("sAmount") String sAmount,
 			@RequestParam("sDiscount") String sDiscount, @RequestParam("paymentMethod") String paymentMethod,
-			@RequestParam("proposerID") String proposerID,Model model
+			@RequestParam("proposerID") String proposerID
 
 	) throws IOException {
 
@@ -96,8 +96,8 @@ public class SponsorshipUserController {
 			sBean.setsTime(sd);
 			sBean.setStatus("待付款");
 			sponsorOrderService.insertOrder(sBean);
-			model.addAttribute("sID",sBean.getsID()) ;
-			return new ResponseEntity<String>(HttpStatus.OK);
+//			model.addAttribute("sID",sBean.getsID()) ;
+			return new ResponseEntity<String>(sBean.getsID().toString(),HttpStatus.OK);
 		}
 
 	}
