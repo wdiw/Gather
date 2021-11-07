@@ -59,15 +59,15 @@ public class SponsorshipUserController {
 		return "Sponsorship/project";
 	}
 
-	
 	@GetMapping("/payment")
 	public String payment(HttpServletRequest reg, HttpServletRequest request) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
-		Member mBean =  memberService.queryMemberById(member.getId());
+		Member mBean = memberService.queryMemberById(member.getId());
 		request.getSession().setAttribute("mBean", mBean);
 		return "Sponsorship/payment";
 	}
 
+	//新增訂單
 	@PostMapping("/newOrder")
 	@ResponseBody
 	public ResponseEntity<String> newOrder(@RequestParam("sPID") String sPID, @RequestParam("sPName") String sPName,
@@ -75,44 +75,104 @@ public class SponsorshipUserController {
 			@RequestParam("sName") String sName, @RequestParam("sPhone") String sPhone,
 			@RequestParam("sBonus") String sBonus, @RequestParam("sAddress") String sAddress,
 			@RequestParam("sEmail") String sEmail, @RequestParam("sAmount") String sAmount,
-			@RequestParam("sDiscount") String sDiscount, @RequestParam("paymentMethod") String paymentMethod
+			@RequestParam("sDiscount") String sDiscount, @RequestParam("paymentMethod") String paymentMethod,
+			@RequestParam("proposerID") String proposerID
 
 	) throws IOException {
 
-		Integer sTotal = Integer.parseInt(sAmount) - Integer.parseInt(sDiscount) + Integer.parseInt(sBonus);
-		SponsorOrderBean sBean = new SponsorOrderBean(Integer.parseInt(mID), Integer.parseInt(sPID), sName, sPName,
-				paymentMethod, Integer.parseInt(sAmount), Integer.parseInt(sDiscount), Integer.parseInt(sBonus),
-				projectImage, sAddress, sPhone, sEmail, sTotal);
+		if (mID.isEmpty()) {
+			return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
+		} else {
 
-		Long timeStamp = System.currentTimeMillis();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String sd = sdf.format(new Date(Long.parseLong(String.valueOf(timeStamp))));
+			Integer sTotal = Integer.parseInt(sAmount) - Integer.parseInt(sDiscount) + Integer.parseInt(sBonus);
+			SponsorOrderBean sBean = new SponsorOrderBean(Integer.parseInt(mID), Integer.parseInt(sPID), sName, sPName,
+					paymentMethod, Integer.parseInt(sAmount), Integer.parseInt(sDiscount), Integer.parseInt(sBonus),
+					projectImage, sAddress, sPhone, sEmail, sTotal, Integer.parseInt(proposerID));
 
-		sBean.setsTime(sd);
-		sBean.setStatus("待付款");
-		sponsorOrderService.insertOrder(sBean);
+			Long timeStamp = System.currentTimeMillis();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String sd = sdf.format(new Date(Long.parseLong(String.valueOf(timeStamp))));
 
-		return new ResponseEntity<String>(HttpStatus.OK);
+			sBean.setsTime(sd);
+			sBean.setStatus("待付款");
+			sponsorOrderService.insertOrder(sBean);
+//			model.addAttribute("sID",sBean.getsID()) ;
+			return new ResponseEntity<String>(sBean.getsID().toString(),HttpStatus.OK);
+		}
+
 	}
 
 	// 查詢贊助訂單
 
 	@GetMapping("/sponsorshipInfo")
-	public String sponsorshipInfo(HttpServletRequest reg, HttpServletRequest request) {
+	public String sponsorshipInfo(HttpServletRequest reg) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
-		Member mBean =  memberService.queryMemberById(member.getId());
-		List<SponsorOrderBean> sBean=sponsorOrderService.getOrdersByMemberID(mBean.getId());
-		request.getSession().setAttribute("sBean", sBean);
-		return "Sponsorship/sponsorshipInfo";
+		
+		Member mBean = memberService.queryMemberById(member.getId());
+
+		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(mBean.getId());
+		if (sBean.isEmpty()) {
+			return "Sponsorship/noSponsorship";
+		} else {
+			reg.getSession().setAttribute("sBean", sBean);
+			System.out.println("登入者id" + mBean.getId());
+			return "Sponsorship/sponsorshipInfo";
+
+		}
 	}
 
-	// 查詢被贊助訂單
+	// 查詢及管理被贊助訂單
 
 	@GetMapping("/sponsoredInfo")
-	public String sponsoredInfo(Model model) {
-		List<SponsorOrderBean> sBeans = sponsorOrderService.getOrders();
-		model.addAttribute("sBeans", sBeans);
-		return "Sponsorship/orders";
+	public String sponsoredInfo(HttpServletRequest reg, HttpServletRequest request) {
+		Member member = (Member) reg.getSession().getAttribute("memberData");
+		Member mBean = memberService.queryMemberById(member.getId());
+		List<ProjectBean> pBean = projectService.getAllProjectBymID(mBean.getId());
+		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByProposerID(pBean.get(0).getmID());
+		request.getSession().setAttribute("sBean", sBean);
+		return "Sponsorship/sponsoredInfo";
+	}
+
+	//修改訂單狀態
+	
+	@PostMapping("/editOrder/{sID}")
+	@ResponseBody
+	public ResponseEntity<String> addUpdateOrderInfo(@PathVariable("sID") int sID,	
+			HttpServletRequest reg,
+		
+			
+//			@RequestParam("sPName") String sPName,
+//
+//			@RequestParam("sName") String sName,
+//
+//			@RequestParam("sPhone") String sPhone,
+//
+//			@RequestParam("sAddress") String sAddress,
+//
+//			@RequestParam("sTotal") String sTotalStr,
+//
+//			@RequestParam("paymentMethod") String paymentMethod,
+//
+//			@RequestParam("sTime") String sTime,
+
+			@RequestParam("status") String status)
+
+//			@RequestParam("projectImage") String projectImage)
+					throws IOException {
+		Member member = (Member) reg.getSession().getAttribute("memberData");
+		Member mBean = memberService.queryMemberById(member.getId());
+		
+		List<ProjectBean> pBean = projectService.getAllProjectBymID(mBean.getId());
+		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByProposerID(pBean.get(0).getmID());
+		SponsorOrderBean sBean2=sponsorOrderService.getOrderBySponsorshipID(sID);
+		sBean2.setStatus(status);
+		
+//		SponsorOrderBean sBean = new SponsorOrderBean(sID, Integer.parseInt(mID) ,sName, sPName, status, paymentMethod, sTime, projectImage,
+//				sAddress, sPhone, Integer.parseInt(sTotal.trim()));
+
+		sponsorOrderService.updateOrder(sBean2);
+		return new ResponseEntity<String>(HttpStatus.OK);
+
 	}
 
 }

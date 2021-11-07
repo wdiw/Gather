@@ -107,37 +107,7 @@ public class SponsorshipController {
 		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(sBean));
 	}
 
-//	@PostMapping("/orders")
-//	@ResponseBody
-//	public ResponseEntity<String> getAddNewOrderForm(@RequestParam("sName") String sName,
-//			@RequestParam("sPID") int sPID, @RequestParam("sPName") String sPName, @RequestParam("sAmount") int sAmount,
-//			@RequestParam(required = false, name = "projectImage") MultipartFile photo,@ModelAttribute SponsorshipBean sBean1,BindingResult bindingResult) throws IOException {
-//		byte[] image = new byte[1024];
-//		InputStream is = photo.getInputStream();
-//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//
-//		int length;
-//		while ((length = is.read(image)) != -1) {
-//			baos.write(image, 0, length);
-//		}
-//
-//		image = baos.toByteArray();
-//		String base64String = Base64.getEncoder().encodeToString(image);
-//		SponsorshipBean sBean = new SponsorshipBean(sName, sPID, sPName, sAmount, image, base64String);
-//		new SponsorshipValidator().validate(sBean1, bindingResult);
-//		if(bindingResult.hasErrors()) {
-//			return ResponseEntity.status(HttpStatus.CREATED).body(sBean.getsName());
-//		}
-//		else {
-//			sponsorshipService.insertOrder(sBean);
-//			HttpHeaders responseHeaders = new HttpHeaders();
-//			responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//			responseHeaders.add("Content-Type", "application/json; charset=utf-8");
-//			return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(sBean));
-//			
-//		}
-		
-//	}
+
 
 	// 刪除訂單
 
@@ -148,27 +118,7 @@ public class SponsorshipController {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
-//	@PostMapping("/order/{sID}")
-//	@ResponseBody
-//	public ResponseEntity<String> addUpdateOrderInfo(@PathVariable("sID") int sID,
-//			@RequestParam("sName") String sName,
-//			@RequestParam("sPID") int sPID,
-//			 
-//			 @RequestParam("sPName") String sPName,
-//			  
-//			 @RequestParam("sAmount") int sAmount,
-//			  
-//			  @RequestParam(required = false, name = "projectImage") MultipartFile photo
-//			  )
-//			{
-//		System.out.println("郭童童");
-//		System.out.println(sName);
-//		System.out.println(sPID);
-//		System.out.println(sPName);
-//		System.out.println(sAmount);
-//		System.out.println(photo);
-//		return new ResponseEntity<String>(HttpStatus.OK);
-//	}
+
 
 	// 修改訂單
 
