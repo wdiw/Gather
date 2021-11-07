@@ -59,6 +59,7 @@ public class SponsorshipUserController {
 		return "Sponsorship/project";
 	}
 
+	
 	@GetMapping("/payment")
 	public String payment(HttpServletRequest reg, HttpServletRequest request) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");

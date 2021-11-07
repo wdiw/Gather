@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Gather.Project.model.ProjectBean;
+import com.Gather.Project.model.ProjectPlanBean;
+import com.Gather.Project.service.ProjectPlanService;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.member.entity.Member;
 
@@ -18,11 +20,15 @@ import com.Gather.member.entity.Member;
 public class ProjectPageController {
 
 	ProjectService projectService;
+	ProjectPlanService projectPlanService;
 
 	@Autowired
-	public ProjectPageController(ProjectService projectService) {
+	public ProjectPageController(
+			ProjectService projectService,
+			ProjectPlanService projectPlanService) {
 		super();
 		this.projectService = projectService;
+		this.projectPlanService=projectPlanService;
 	}
 	
 	
@@ -73,5 +79,20 @@ public class ProjectPageController {
 			model.addAttribute("allProject", result);
 			return "Project/allProjectInForestage";
 		}
+		
+		
+//		// By Id 找尋單一資料並且跳轉(提供參考)
+//				@GetMapping("/Project/ProjectPlan")
+//				public String getProjectPlanByProjectPlanID(
+//						@RequestParam("ProjectPlanID") Integer ProjectPlanID,
+//						Model model) {
+//					
+//					ProjectPlanBean projectPlanBean = projectPlanService.getProjectPlanByProjectPlanID(ProjectPlanID);
+//					System.out.println("方案ID:"+projectPlanBean.getProjectPlanID());
+//					System.out.println("方案內容:"+projectPlanBean.getProjectPlanContent());
+//					
+//					return "Project/allProjectInForestage";
+//											
+//				}
 	
 }

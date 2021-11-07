@@ -32,7 +32,6 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	// 透過id找
-	// Optional 為容器類別，代表若回傳是null，也可以處理，不用特別寫if去判斷
 	@Override
 	public ProjectBean getProjectById(Integer pID) {
 		
