@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.Gather.Sponsorship.model.FavoriteBean;
 import com.Gather.Sponsorship.model.SponsorOrderBean;
 import com.Gather.Sponsorship.model.SponsorshipBean;
+import com.Gather.member.entity.Member;
 
 public interface SponsorOrderService {
 
@@ -20,5 +22,14 @@ public interface SponsorOrderService {
 	List<SponsorOrderBean> getOrdersByProposerID(Integer proposerID);
 	
 	SponsorOrderBean updateOrder(SponsorOrderBean sBean);
+	
+	List<SponsorOrderBean> getOrdersByPIDAndStatus(Integer pID,String status);
+	
+	FavoriteBean insertFavorite(FavoriteBean favoriteBean);
+	
+	void deleteFavorite(Integer favorite);
+	
+
+	List<FavoriteBean> getFavoriteByMemberID(Integer mID);
 
 }

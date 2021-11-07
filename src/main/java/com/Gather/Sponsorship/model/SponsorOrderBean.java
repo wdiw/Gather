@@ -1,11 +1,13 @@
 package com.Gather.Sponsorship.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -32,7 +34,10 @@ public class SponsorOrderBean {
 	private String sEmail;
 	private Integer sTotal;
 	private Integer proposerID;
-	private Long eCPay;
+//	private Long eCPay;
+	private Integer pAmountNow;
+	
+	
 
 	public SponsorOrderBean() {
 	}
@@ -40,7 +45,7 @@ public class SponsorOrderBean {
 
 	public SponsorOrderBean(Integer sID, Integer mID, Integer sPID, String sName, String sPName, String status,
 			String paymentMethod, Integer sAmount, Integer sDiscount, Integer sBonus, String sTime, String projectImage,
-			String sAddress, String sPhone, String sEmail, Integer sTotal, Integer proposerID, Long eCPay) {
+			String sAddress, String sPhone, String sEmail, Integer sTotal, Integer proposerID,Integer pAmountNow) {
 		super();
 		this.sID = sID;
 		this.mID = mID;
@@ -59,7 +64,7 @@ public class SponsorOrderBean {
 		this.sEmail = sEmail;
 		this.sTotal = sTotal;
 		this.proposerID = proposerID;
-		this.eCPay = eCPay;
+		this.pAmountNow= pAmountNow;
 	}
 
 
@@ -332,14 +337,25 @@ public class SponsorOrderBean {
 	}
 
 
-	public Long geteCPay() {
-		return eCPay;
+	public Integer getpAmountNow() {
+		return pAmountNow;
 	}
 
 
-	public void seteCPay(Long odno) {
-		this.eCPay = odno;
+	public void setpAmountNow(Integer pAmountNow) {
+		this.pAmountNow = pAmountNow;
 	}
+
+
+//	public Long geteCPay() {
+//		return eCPay;
+//	}
+//
+//
+//	public void seteCPay(Long odno) {
+//		this.eCPay = odno;
+//	}
+	
 	
 	
 	

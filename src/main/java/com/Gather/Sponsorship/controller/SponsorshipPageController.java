@@ -2,6 +2,7 @@ package com.Gather.Sponsorship.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -50,10 +51,10 @@ public class SponsorshipPageController {
 //		return "Sponsorship/payment";
 //	}
 
-	@GetMapping("/favorite")
-	public String favorite() {
-		return "Sponsorship/favorite";
-	}
+//	@GetMapping("/favorite")
+//	public String favorite() {
+//		return "Sponsorship/favorite";
+//	}
 
 	// 跳轉付款頁面
 	@PostMapping("/goECPay")
@@ -79,6 +80,15 @@ public class SponsorshipPageController {
 
 		sBean.setsTime(sd);
 		sBean.setStatus("已付款");
+		Integer pAmountNow=0;
+		List<SponsorOrderBean> sBean_toatl=sponsorOrderService.getOrdersByPIDAndStatus(Integer.parseInt(sPID), sBean.getStatus());
+		for(int i=0;i<sBean_toatl.size();i++) {
+			 Integer sTotal_select= sBean_toatl.get(i).getsTotal();
+			 pAmountNow += sTotal_select;
+		}
+		
+		sBean.setpAmountNow(pAmountNow);
+		
 		sponsorOrderService.insertOrder(sBean);
 
 

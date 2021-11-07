@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -152,7 +153,7 @@
 	          		<p style="color: #000;">80 piece available</p>
 	          	</div>
           	</div>
-          	<p><a href="../favorite" class="btn btn-black py-3 px-5 mr-2">Add to Favorite</a><a href="../payment" class="btn btn-primary py-3 px-5">Buy now</a></p>
+          	<p><a href="<c:url value='/favorite/131'/>" class="btn btn-black py-3 px-5 mr-2">Add to Favorite</a><a href="../payment" class="btn btn-primary py-3 px-5">Buy now</a></p>
     			</div>
     		</div>
 

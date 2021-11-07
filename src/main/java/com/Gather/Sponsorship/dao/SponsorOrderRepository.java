@@ -10,5 +10,6 @@ public interface SponsorOrderRepository extends JpaRepository<SponsorOrderBean, 
 	List<SponsorOrderBean> findBymID(Integer mID);
 	List<SponsorOrderBean> findByproposerID(Integer proposerID);
 	SponsorOrderBean findBysID(Integer sID);
+	List<SponsorOrderBean> findBysPIDAndStatus(Integer pID,String status);
 	
 }
