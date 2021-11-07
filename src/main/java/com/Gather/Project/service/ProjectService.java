@@ -25,7 +25,7 @@ public interface ProjectService {
 	List<ProjectBean> getAllProjectBymID(Integer mID);
 	
 	//管理者審核計畫通過或不通過
-	public void updateStatusBypID(Integer pID,String pStatus );
+	public void updateStatusBypID(Integer pID,String pStatus,String reason);
 	
 	//找審核通過的計畫
 	List<ProjectBean> getAllProjectBypStatus(String pStatus);

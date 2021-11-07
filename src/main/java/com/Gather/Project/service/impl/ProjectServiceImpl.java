@@ -65,8 +65,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 	//管理者審核計畫通過或不通過
 	@Override
-	public void updateStatusBypID(Integer pID, String pStatus) {
-		projectRepository.updateStatusBypID(pID, pStatus);
+	public void updateStatusBypID(Integer pID, String pStatus,String reason ) {
+		projectRepository.updateStatusBypID(pID, pStatus,reason );
 		
 	}
 
