@@ -42,7 +42,6 @@ public class ProjectController {
 	@DeleteMapping(path = "/Project/theProject/{pID}")
 	@ResponseBody
 	public String deleteProjectById(@PathVariable("pID") int pID) {
-		System.out.println("要刪除的ID" + pID);
 		projectService.deleteProjectById(pID);
 		return "Delete OK";
 	}
@@ -52,14 +51,16 @@ public class ProjectController {
 	@ResponseBody
 	public ResponseEntity<String> changeProjectStatusById(
 			@PathVariable("pID") int pID,
-			@RequestParam("pStatus") String pStatus
+			@RequestParam("pStatus") String pStatus,
+			@RequestParam("reason") String reason
 			) {
-		System.out.println("管理員改變狀態");
-		projectService.updateStatusBypID(pID, pStatus);
+	
+		projectService.updateStatusBypID(pID, pStatus,reason );
 		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
 	
 
+	
 	// 更新
 	@PutMapping(path = "/Project/theProject/{pID}")
 	@ResponseBody
@@ -67,26 +68,23 @@ public class ProjectController {
 			@RequestParam("pDescribe") String pDescribe, @RequestParam("pTarget") int pTarget,
 			@RequestParam("pSDate") String pSDate, @RequestParam("pEDate") String pEDate,
 			@RequestParam("pContent") String pContent, @RequestParam("pStatus") String pStatus,
-			@RequestParam(name = "changeImageCover", required = false) MultipartFile pImage, HttpServletRequest request
+			@RequestParam(name = "changeImageCover", required = false) MultipartFile pImage,
+			@RequestParam("reason") String reason,HttpServletRequest request
 
 	) throws MalformedURLException {
 		Member memberData = (Member) request.getSession().getAttribute("memberData");
 		Integer mID = memberData.getId();
-		String mStatus = memberData.getStatus();
+		
 
 		// 如果圖片沒有換掉，先把原路徑抓出來，再丟回去
 		if (pImage.isEmpty()) {
 
-			System.out.println("狀態為:" + pStatus);
-			System.out.println("會員編碼" + mID);
 			String filePath = projectService.getProjectById(pID).getpImageCover();
 			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pSDate, pEDate, filePath, pDescribe, pContent, mID,
-					pStatus);
+					pStatus,reason);
 			projectService.updateProject(pBean);
 
 		} else {
-			System.out.println("狀態為:" + pStatus);
-			System.out.println("會員編碼" + mID);
 			// 處理圖片
 			String originalFilename = pImage.getOriginalFilename();// 得到原始名稱，如xxx.jpg
 			String ext = originalFilename.substring(originalFilename.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
@@ -110,7 +108,7 @@ public class ProjectController {
 
 			filePath += pName + "/" + pName + "_Cover" + ext;
 			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pSDate, pEDate, filePath, pDescribe, pContent, mID,
-					pStatus);
+					pStatus,reason);
 			projectService.updateProject(pBean);
 		}
 
@@ -150,20 +148,7 @@ public class ProjectController {
 			
 			
 	) throws MalformedURLException {
-		System.out.println("回饋方案1:"+projectPlanPrice1);
-		System.out.println("回饋方案1:"+ETA1);
-		System.out.println("回饋方案1:"+projectPlanContent1);
-		System.out.println("回饋方案1:"+projectPlanImage1);
-		
-		System.out.println("回饋方案2:"+projectPlanPrice2);
-		System.out.println("回饋方案2:"+ETA2);
-		System.out.println("回饋方案2:"+projectPlanContent2);
-		System.out.println("回饋方案2:"+projectPlanImage2);
-		
-		System.out.println("回饋方案3:"+projectPlanPrice3);
-		System.out.println("回饋方案3:"+ETA3);
-		System.out.println("回饋方案3:"+projectPlanContent3);
-		System.out.println("回饋方案3:"+projectPlanImage3);
+
 
 		Member memberData = (Member) request.getSession().getAttribute("memberData");
 		Integer mID = memberData.getId();
@@ -204,7 +189,8 @@ public class ProjectController {
 		}
 		String coverFilePath=filePath+ pName + "/" + pName + "_Cover" + ext;//存封面圖片的相對路徑，static\images\Project\xxx\xxx_Cover.jpg
 		//New 一方的Bean
-		ProjectBean pBean = new ProjectBean(pName, pTarget, pSDate, pEDate, coverFilePath, pDescribe, pContent, mID, "待審核");// 存到資料庫，目前會員ID先死
+		ProjectBean pBean = new ProjectBean(pName, pTarget, pSDate, pEDate,
+				coverFilePath, pDescribe, pContent, mID, "待審核","請待管理員進行審核");// 存到資料庫，目前會員ID先死
 		
 		
 		
@@ -213,7 +199,6 @@ public class ProjectController {
 		String projectPlanOriginalFilename1 = projectPlanImage1.getOriginalFilename();// 得到原始名稱，如xxx.jpg
 		String projectPlanExt1 = projectPlanOriginalFilename1.substring(projectPlanOriginalFilename1.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
 																								// C:\_JSP\tomcat9\webapps\mvcExercise
-		//System.out.println("處理贊助方案一時的imageFolder"+imageFolder);
 		projectPlanFile1 = new File(imageFolder,"projectPlanImage1" + projectPlanExt1);// File(路徑,檔名.副檔名)
 		try {
 			projectPlanImage1.transferTo(projectPlanFile1);// 把圖檔搬過去
@@ -235,12 +220,10 @@ public class ProjectController {
 		
 		if(!(projectPlanImage2.isEmpty())) 
 			{//如果方案二有放圖片
-			System.out.println("有進來方案二處理");
 				// 處理贊助方案二圖片
 				String projectPlanOriginalFilename2 = projectPlanImage2.getOriginalFilename();// 得到原始名稱，如xxx.jpg
 				String projectPlanExt2 = projectPlanOriginalFilename2.substring(projectPlanOriginalFilename2.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
 																										// C:\_JSP\tomcat9\webapps\mvcExercise
-				//System.out.println("處理贊助方案二時的imageFolder"+imageFolder);
 				projectPlanFile2 = new File(imageFolder,"projectPlanImage2" + projectPlanExt2);// File(路徑,檔名.副檔名)
 				try {
 					projectPlanImage2.transferTo(projectPlanFile2);// 把圖檔搬過去
@@ -256,7 +239,6 @@ public class ProjectController {
 			}
 				
 		if(!(projectPlanImage3.isEmpty())) { 
-			System.out.println("有進來方案三處理");
 				// 處理贊助方案三圖片
 				String projectPlanOriginalFilename3 = projectPlanImage3.getOriginalFilename();// 得到原始名稱，如xxx.jpg
 				String projectPlanExt3 = projectPlanOriginalFilename3.substring(projectPlanOriginalFilename3.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif

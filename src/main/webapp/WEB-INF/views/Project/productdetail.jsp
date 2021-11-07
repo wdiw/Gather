@@ -30,6 +30,21 @@
 					<link rel="stylesheet" href="../css/vertical-layout-light/style.css">
 					<!-- endinject -->
 					<link rel="shortcut icon" href="../images/favicon.png" />
+
+					<style>
+						/* 改變text樣式 */
+						.swal2-popup {
+							width: 40em;
+							font-size: 1.6rem !important;
+							font-family: Georgia, serif;
+						}
+
+						.swal2-textarea {
+							height: 10em;
+							width: 30em;
+							padding: .75em;
+						}
+					</style>
 				</head>
 
 				<body>
@@ -510,6 +525,13 @@
 													</div>
 
 
+													<div class="form-group">
+														<label for="reason">狀態說明</label>
+														<textarea rows="4" cols="50" id="reason" name="reason"
+															class="form-control">${project.reason}</textarea>
+													</div>
+
+
 
 													<!-- 以下為按鈕 -->
 													<button id="sendButton" type='button' name='updateButton'
@@ -519,10 +541,10 @@
 													<button id="passButton" type='button' name='passButton'
 														class="btn btn-danger">通過</button>
 
-														<button id="NotPassButton" type='button' name='NotPassButton'
+													<button id="NotPassButton" type='button' name='NotPassButton'
 														class="btn btn-danger">不通過</button>
 
-													 <!-- <button id="deleteButton" type='button' name='deleteButton'
+													<!-- <button id="deleteButton" type='button' name='deleteButton'
 														class="btn btn-danger">刪除</button>  -->
 
 												</form>
@@ -563,29 +585,30 @@
 
 								$(document).ready(function () {
 									var projectID = ${ project.pID };//抓專案ID
-									var mStatus="${sessionScope.memberData.status}"//取得會員身分
+									var mStatus = "${sessionScope.memberData.status}"//取得會員身分
 
-									
-									if(mStatus=='管理員'){
+
+									if (mStatus == '管理員') {
 										//管理員身分
 										$("#passButton").show();
 										$("#NotPassButton").show();
 										$("#sendButton").hide();
 
-										
 
-										
-									}else{
+
+
+									} else {
 										//會員身分
-										
+
 										$("#sendButton").show();
 										$("#passButton").hide();
 										$("#NotPassButton").hide();
-										$(".form-control").attr("disabled",true)
+										$(".form-control").attr("disabled", true)
+										//$(".form-control").attr("readonly", true)
 										$("#pDescribe").attr("disabled", false);
 										$("#pContent").attr("disabled", false);
 									}
-									
+
 
 
 									//當更換圖片
@@ -602,16 +625,19 @@
 
 									//管理者按通過
 									$("#passButton").click(function () {
-										alert("按下通過按鈕")
+										
+										alert("按下通過")
 										$("#pStatus").val("通過");//把狀態改為通過
 										var pStatus = $("#pStatus").val();
-										alert(pStatus)
+										//var reason = $("#reason").val("已通過審核並上架");
+										
+										
 
 										var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
 										$.ajax({
 											url: url,
 											type: 'PUT',
-											data: { pStatus: pStatus },
+											data: { pStatus: pStatus,reason:"已通過審核並上架" },
 											success: function (data) {
 												Swal.fire({
 													title: '更新成功',
@@ -621,7 +647,7 @@
 
 												}).then((result) => {
 													if (result.isConfirmed) {
-														location.href = "<c:url value='/Project/allproject'/>";
+														location.href = "<c:url value='/Project/allProjectInBackstage'/>";
 													}
 												})
 											},
@@ -639,44 +665,76 @@
 									})
 
 
-									
+
+
+
+
 									//管理者按不通過
-									$("#NotPassButton").click(function () {
-										alert("按下不通過按鈕")
-										$("#pStatus").val("未通過");//把狀態改為未通過
-										var pStatus = $("#pStatus").val();
-										alert(pStatus)
+									$("#NotPassButton").click((async () => {
+										// var reason="AA";
 
-										var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
-										$.ajax({
-											url: url,
-											type: 'PUT',
-											data: { pStatus: pStatus },
-											success: function (data) {
-												Swal.fire({
-													title: '更新成功',
-													icon: 'success',
-													text: "已經更新！",
-													position: 'center',
-
-												}).then((result) => {
-													if (result.isConfirmed) {
-														location.href = "<c:url value='/Project/allproject'/>";
-													}
-												})
+										const { value: text } = await Swal.fire({
+											input: 'textarea',
+											inputLabel: 'Message',
+											inputPlaceholder: 'Type your message here...',
+											inputAttributes: {
+												'aria-label': 'Type your message here'
 											},
-											error: function (xhr, text) {
-												console.log("status code: " + xhr.status);
-												console.log("error message: " + text);
-												Swal.fire({
-													title: '更新失敗',
-													icon: 'error',
-													text: "更新失敗",
-												})
-											}
+											showCancelButton: true,
+											height: 20
 
 										})
-									})//NotPassButton 結束
+										
+									
+
+										
+												
+											
+												$("#pStatus").val("未通過");//把狀態改為未通過
+												var pStatus = $("#pStatus").val();
+												var reason=text;//存管理員所寫的理由
+												
+
+
+
+												var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
+												$.ajax({
+													url: url,
+													type: 'PUT',
+													data: { pStatus: pStatus,reason:reason },
+													success: function (data) {
+														Swal.fire({
+															title: '更新成功',
+															icon: 'success',
+															text: "已經更新！",
+															position: 'center',
+
+														}).then((result) => {
+															if (result.isConfirmed) {
+																location.href = "<c:url value='/Project/allProjectInBackstage'/>";
+															}
+														})
+													},
+													error: function (xhr, text) {
+														console.log("status code: " + xhr.status);
+														console.log("error message: " + text);
+														Swal.fire({
+															title: '更新失敗',
+															icon: 'error',
+															text: "更新失敗",
+														})
+													}
+
+												})
+
+
+										
+
+
+
+									}))//NotPassButton End
+
+
 
 
 
@@ -684,8 +742,9 @@
 
 									//使用者按送出審核
 									$("#sendButton").click(function () {
-										$(".form-control").attr("disabled",false);//送出前必須把所有input欄位解開，不然table取不到值
+										$(".form-control").attr("disabled", false);//送出前必須把所有input欄位解開，不然table取不到值
 										var pStatus = $("#pStatus").val("待審核");//把狀態改為待審核
+										var reason = $("#reason").val("請待管理員進行審核");
 										var form = document.getElementById("form")
 										var formData = new FormData(form);
 										var url = "<spring:url value='/Project/theProject/" + projectID + "'/>";
@@ -707,7 +766,7 @@
 
 												}).then((result) => {
 													if (result.isConfirmed) {
-														location.href = "<c:url value='/Project/allproject'/>";
+														location.href = "<c:url value='/Project/allProjectInBackstage'/>";
 													}
 												})
 											},
@@ -766,7 +825,7 @@
 															timerProgressBar: true,
 															showConfirmButton: false,
 														})
-														location.href = "<c:url value='/Project/allproject'/>";
+														location.href = "<c:url value='/Project/allProjectInBackstage'/>";
 													},
 													error: function (xhr, text) {
 														swalWithBootstrapButtons.fire(

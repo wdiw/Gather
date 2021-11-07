@@ -1,3 +1,4 @@
+  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,6 +29,16 @@
     <link rel="stylesheet" href="../css/flaticon.css">
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
+	<style>
+
+		#ProjectContentText{
+			width: 70%;
+			 height:1000px; 
+			float: left;
+			/* margin: 30px 10px; */
+		}
+	</style>
+
   </head>
   <body class="goto-here">
 		<div class="py-1 bg-black">
@@ -176,8 +187,77 @@
 
               <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
               	<div class="p-4">
-	              	<h3 class="mb-4">Nike Free RN 2019 iD</h3>
-	              	<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
+					<h3 class="mb-4">Nike Free RN 2019 iD</h3>
+					<div class="row" id="ProjectContentText">
+					  <div class="col-sm-10"><p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p></div>
+					</div>
+					
+					<!-- 放方案 -->
+				   
+					<!-- <div class="card-deck">
+						<div class="card">
+						  <a href="https://www.youtube.com/">
+						<img src="../images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+						  <h5 class="card-title">Card title</h5>
+						  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+						</div>
+						<div class="card-footer">
+						  <small class="text-muted">Last updated 3 mins ago</small>
+					  </a>
+						</div>
+					  </div>
+			  
+					  <div class="card">
+						<img src="../images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+						  <h5 class="card-title">Card title</h5>
+						  <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+						</div>
+						<div class="card-footer">
+						  <small class="text-muted">Last updated 3 mins ago</small>
+						</div>
+					  </div>
+
+
+					  <div class="card">
+						<img src="../images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+						  <h5 class="card-title">Card title</h5>
+						  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+						</div>
+						<div class="card-footer">
+						  <small class="text-muted">Last updated 3 mins ago</small>
+						</div>
+					  </div>
+					</div> -->
+
+					<div class="card" style="width: 18rem;">
+					  <div class="card-body">
+						  <img src="../images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg" class="card-img-top" alt="...">
+						<h5 class="card-title">Special title treatment</h5>
+						<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+						<a href="#" class="btn btn-primary">Go somewhere</a>
+					  </div>
+					</div>
+
+					<div class="card" style="width: 18rem;">
+					  <div class="card-body">
+						<img src="../images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg" class="card-img-top" alt="...">
+						<h5 class="card-title">Special title treatment</h5>
+						<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+						<a href="#" class="btn btn-primary">Go somewhere</a>
+					  </div>
+					</div>
+
+					<div class="card" style="width: 18rem;">
+					  <div class="card-body">
+						<img src="../images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg" class="card-img-top" alt="...">
+						<h5 class="card-title">Special title treatment</h5>
+						<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+						<a href="#" class="btn btn-primary">Go somewhere</a>
+					  </div>
+					</div>
               	</div>
               </div>
 
@@ -420,7 +500,6 @@
 
   <script>
 		$(document).ready(function(){
-
 		var quantitiy=0;
 		   $('.quantity-right-plus').click(function(e){
 		        
@@ -432,12 +511,10 @@
 		        // If is not undefined
 		            
 		            $('#quantity').val(quantity + 1);
-
 		          
 		            // Increment
 		        
 		    });
-
 		     $('.quantity-left-minus').click(function(e){
 		        // Stop acting like a button
 		        e.preventDefault();

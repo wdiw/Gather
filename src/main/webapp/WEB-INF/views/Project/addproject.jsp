@@ -763,7 +763,7 @@
 
 												}).then((result) => {
 													if (result.isConfirmed) {
-														location.href = "<c:url value='/Project/allproject'/>";
+														location.href = "<c:url value='/Project/allProjectInBackstaget'/>";
 													}
 												})
 											},

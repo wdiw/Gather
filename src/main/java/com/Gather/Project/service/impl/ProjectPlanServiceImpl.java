@@ -1,0 +1,32 @@
+package com.Gather.Project.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.Gather.Project.dao.ProjectPlanRepository;
+import com.Gather.Project.model.ProjectPlanBean;
+import com.Gather.Project.service.ProjectPlanService;
+
+@Repository
+@Transactional
+public class ProjectPlanServiceImpl implements ProjectPlanService {
+	
+	
+	ProjectPlanRepository projectPlanRepository;
+	
+	@Autowired
+	public ProjectPlanServiceImpl(ProjectPlanRepository projectPlanRepository) {
+		super();
+		this.projectPlanRepository = projectPlanRepository;
+	}
+
+
+	// 透過projectPlanID找，因為projectPlanID是Key值，不用實作方法
+	@Override
+	public ProjectPlanBean getProjectPlanByProjectPlanID(Integer projectPlanID) {
+		
+		return projectPlanRepository.getById(projectPlanID);
+	}
+
+}

@@ -1,7 +1,7 @@
 package com.Gather.Project.service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 import com.Gather.Project.model.ProjectBean;
 
@@ -26,8 +26,11 @@ public interface ProjectService {
 	List<ProjectBean> getAllProjectBymID(Integer mID);
 	
 	//管理者審核計畫通過或不通過
-	public void updateStatusBypID(Integer pID,String pStatus );
+	public void updateStatusBypID(Integer pID,String pStatus,String reason);
 	
 	//找審核通過的計畫
 	List<ProjectBean> getAllProjectBypStatus(String pStatus);
+	
+	//透過search找到相關資料
+	List<ProjectBean> getProjectBySearch(Set<String> search);
 }

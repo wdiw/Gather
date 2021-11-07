@@ -1,16 +1,22 @@
 package com.Gather.Project.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Gather.Project.model.ProjectBean;
+import com.Gather.Project.model.ProjectPlanBean;
+import com.Gather.Project.service.ProjectPlanService;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.member.entity.Member;
 
@@ -18,11 +24,15 @@ import com.Gather.member.entity.Member;
 public class ProjectPageController {
 
 	ProjectService projectService;
+	ProjectPlanService projectPlanService;
 
 	@Autowired
-	public ProjectPageController(ProjectService projectService) {
+	public ProjectPageController(
+			ProjectService projectService,
+			ProjectPlanService projectPlanService) {
 		super();
 		this.projectService = projectService;
+		this.projectPlanService=projectPlanService;
 	}
 	
 	
@@ -41,15 +51,14 @@ public class ProjectPageController {
 				//管理者
 				List<ProjectBean> result = projectService.getAllProject();
 				model.addAttribute("allproject", result);
-				
+				System.out.println("總金額"+result.get(1).getpAmountNow());
 			}
 			return "Project/allproject";
 		}
 		
 		
 		
-		
-
+	
 		// By Id 找尋單一資料並且跳轉
 		@GetMapping("/Project/project")
 		public String getProjectById(@RequestParam("pID") Integer pID, Model model) {
@@ -67,7 +76,6 @@ public class ProjectPageController {
 
 		}
 		
-		
 		//找通過審核的計畫
 		@GetMapping("/Project/allProjectInForestage")
 		public String allProjectInForestage(Model model,HttpServletRequest request) {
@@ -75,5 +83,38 @@ public class ProjectPageController {
 			model.addAttribute("allProject", result);
 			return "Project/allProjectInForestage";
 		}
+		
+		
+//		// By Id 找尋單一資料並且跳轉(提供參考)
+//				@GetMapping("/Project/ProjectPlan")
+//				public String getProjectPlanByProjectPlanID(
+//						@RequestParam("ProjectPlanID") Integer ProjectPlanID,
+//						Model model) {
+//					
+//					ProjectPlanBean projectPlanBean = projectPlanService.getProjectPlanByProjectPlanID(ProjectPlanID);
+//					System.out.println("方案ID:"+projectPlanBean.getProjectPlanID());
+//					System.out.println("方案內容:"+projectPlanBean.getProjectPlanContent());
+//					
+//					return "Project/allProjectInForestage";
+//											
+//				}
+		
+		// find  Project By search 透過搜尋的關鍵字找到相關資料
+		
+		@GetMapping("/Project/ProjectSearch")
+		public ResponseEntity<String>  getProjectBySearch(
+				@RequestParam("search") String search,Model model) {
+			
+			System.out.println("search:"+search);
+			Set<String> searchName=new HashSet<>();
+			searchName.add("%"+search+"%");
+			System.out.println(searchName);
+			List<ProjectBean> result = projectService.getProjectBySearch(searchName);
+			System.out.println("結果:"+result);
+			model.addAttribute("allProject",result);
+			return new ResponseEntity<String>(HttpStatus.OK);					
+		}
+		
+
 	
 }

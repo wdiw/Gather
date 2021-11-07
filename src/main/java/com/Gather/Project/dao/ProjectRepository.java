@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import com.Gather.Project.model.ProjectBean;
 
-public interface ProjectRepository extends JpaRepository<ProjectBean,Integer > {
+public interface ProjectRepository extends JpaRepository<ProjectBean,Integer >,ProjectRepositoryCustom {
 	
 	
 
@@ -19,8 +19,8 @@ public interface ProjectRepository extends JpaRepository<ProjectBean,Integer > {
 	
 	
 	@Modifying
-	@Query("update ProjectBean p set p.pStatus=?2 where  p.pID=?1")
-	void updateStatusBypID(Integer pID,String pStatus );
+	@Query("update ProjectBean p set p.pStatus=?2,p.reason=?3 where  p.pID=?1")
+	void updateStatusBypID(Integer pID,String pStatus,String reason );
 	
 	
 }

@@ -2,6 +2,7 @@ package com.Gather.Project.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
@@ -32,7 +33,6 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	// 透過id找
-	// Optional 為容器類別，代表若回傳是null，也可以處理，不用特別寫if去判斷
 	@Override
 	public ProjectBean getProjectById(Integer pID) {
 		
@@ -66,8 +66,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 	//管理者審核計畫通過或不通過
 	@Override
-	public void updateStatusBypID(Integer pID, String pStatus) {
-		projectRepository.updateStatusBypID(pID, pStatus);
+	public void updateStatusBypID(Integer pID, String pStatus,String reason ) {
+		projectRepository.updateStatusBypID(pID, pStatus,reason );
 		
 	}
 
@@ -77,6 +77,12 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectBean> getAllProjectBypStatus(String pStatus) {
 		// TODO Auto-generated method stub
 		return projectRepository.findBypStatus(pStatus);
+	}
+
+	@Override
+	public List<ProjectBean> getProjectBySearch(Set<String> search) {
+		
+		return projectRepository.findProjectBySearch(search);
 	}
 	
 	
