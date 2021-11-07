@@ -94,9 +94,18 @@
     </div>
 
 	
-
     <section class="ftco-section bg-light">
+	
+
     	<div class="container">
+
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
+					
+					<input id="searchBar" name="searchBar"/><button id="searchBtn" name="searchBtn">搜尋</button>
+				</div>
+			</div>
+
     		<div class="row">
     			<div class="col-md-8 col-lg-10 order-md-last">
     				<div class="row">
@@ -446,6 +455,26 @@
   <!-- <script src="../https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
   <!-- <script src="../js/google-map.js"></script> -->
   <script src="../js/main.js"></script>
-    
+
+
+  <script>
+	  $("#searchBtn").click(function(){
+		  var search=$("#searchBar").val()
+		  var url = "<spring:url value='/Project/ProjectSearch'/>";
+		  $.ajax({
+			  url:url,
+			  type:'GET',
+			  data:{search:search},
+			success:function(){
+				alert("成功")
+				location.href = "<c:url value='/Project/allProjectInBackstage'/>";
+			},
+			error: function (xhr, text) {
+
+			}
+		  })
+	  })
+
+  </script>
   </body>
 </html>

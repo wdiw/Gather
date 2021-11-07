@@ -1,6 +1,7 @@
 package com.Gather.Project.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.Gather.Project.model.ProjectBean;
 
@@ -29,4 +30,7 @@ public interface ProjectService {
 	
 	//找審核通過的計畫
 	List<ProjectBean> getAllProjectBypStatus(String pStatus);
+	
+	//透過search找到相關資料
+	List<ProjectBean> getProjectBySearch(Set<String> search);
 }

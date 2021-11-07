@@ -2,6 +2,7 @@ package com.Gather.Project.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
@@ -76,6 +77,12 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectBean> getAllProjectBypStatus(String pStatus) {
 		// TODO Auto-generated method stub
 		return projectRepository.findBypStatus(pStatus);
+	}
+
+	@Override
+	public List<ProjectBean> getProjectBySearch(Set<String> search) {
+		
+		return projectRepository.findProjectBySearch(search);
 	}
 	
 	

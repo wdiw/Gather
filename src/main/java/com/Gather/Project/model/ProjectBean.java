@@ -33,15 +33,12 @@ public class ProjectBean implements Serializable {
 	private Integer mID;//會員ID
 	private String pStatus;//專案狀態
 	private String reason;//狀態說明
+	private Integer pAmountNow;//累積金額
+	
 	
 	@OneToMany(mappedBy = "projectBean",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
 
-	
-	
-	
-
-	
 
 	// 空的建構子
 	public ProjectBean() {
@@ -181,6 +178,15 @@ public class ProjectBean implements Serializable {
 
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+	
+	
+	public Integer getpAmountNow() {
+		return pAmountNow;
+	}
+
+	public void setpAmountNow(Integer pAmounNow) {
+		this.pAmountNow = pAmounNow;
 	}
 	@Override
 	public String toString() {

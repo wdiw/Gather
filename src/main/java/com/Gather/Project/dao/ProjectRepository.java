@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import com.Gather.Project.model.ProjectBean;
 
-public interface ProjectRepository extends JpaRepository<ProjectBean,Integer > {
+public interface ProjectRepository extends JpaRepository<ProjectBean,Integer >,ProjectRepositoryCustom {
 	
 	
 
