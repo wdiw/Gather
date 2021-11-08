@@ -214,9 +214,9 @@
                                    background-position: center;
                                    padding: 55px;"></td>
                       <!-- <td>${project.pID}</td> -->
-                      <td>${project.pName} </td>
+                      <td><a href="/Gather/showProject/${project.pID}" style="font-size: larger;color: black;">${project.pName}</a></td>
                       <td>${project.pStatus}</td>
-                        <td>${project.pTarget}</td>
+                        <td>$${project.pTarget}.NTD</td>
                         <td>
                           <div class="progress progress-md mx-4">
                             <div class="progress-bar bg-primary" role="progressbar"
