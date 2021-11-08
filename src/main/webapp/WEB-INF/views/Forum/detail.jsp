@@ -428,7 +428,7 @@
 
 									<div class="form-group">
 										<label for="post">文章描述</label>
-										<textarea rows="4" cols="50" id="post" name="post"
+										<textarea rows="15" cols="50" id="post" name="post"
 											class="form-control">${forum.post}</textarea>
 									</div>
 									
@@ -440,7 +440,43 @@
 									
 									<button id="deleteButton" type='button' name='deleteButton'
 										class="btn btn-primary mr-2" onclick='location.href="<c:url value='/Forum/queryAll' />"'>回討論區</button>
+									
+									<br><br>
+<!-- 									<div class="form-group"> -->
+<!-- 										<label for="post">文章回應</label> -->
+<!-- 										<textarea rows="4" cols="50" id="post" name="post" -->
+<%-- 											class="form-control">${forum.post}</textarea> --%>
+<!-- 									</div> -->
+									
 								</form>
+
+<!-- 								<h4 class="card-title">新增留言</h4> -->
+<%-- 								<form id="commentsform" class="forms-sample"> --%>
+<!-- 									<div class="form-group"> -->
+<!-- 										<label>使用者</label> <input type="text" id="userid" name="userid" -->
+<!-- 											class="form-control" placeholder="請輸入使用者"> -->
+<!-- 									</div> -->
+<!-- 									<div class="form-group"> -->
+<!-- 										<label>留言內容</label> -->
+<!-- 										<textarea id="usercomment" name="usercomment" cols="100" rows="10"  -->
+<!-- 										class="form-control" placeholder="請輸入留言"></textarea> -->
+<!-- 									</div> -->
+
+<!-- 									<button type='submit' id="addcomment" name='submit' -->
+<!-- 										class="btn btn-primary mr-2">送出留言</button> -->
+<%-- 								</form> --%>
+
+<!-- 								<div style="background-color: lightpink; width: 300px; height: 100%;"> -->
+<!-- 									<div id="messageBox"></div> -->
+<!-- 									<div class="border"> -->
+<!-- 										<p>使用者留言</p> -->
+<!-- 										<input id="myInput" type="text" placeholder="請輸入留言"> -->
+<!-- 										<button id="doPost">提交</button> -->
+<!-- 									</div> -->
+
+<!-- 								</div> -->
+
+
 							</div>
 
 						</div>
@@ -589,6 +625,108 @@
 						}
 					})
 				}
+				
+				
+					window.onload = function () {
+			            var oInput = document.getElementById("myInput"); //取得id="myInput"標籤，也就是<input>
+			            var omessageBox = document.getElementById("messageBox"); //取得id="messageBox"標籤，也就是<div>
+			            var oPostBtn = document.getElementById("doPost"); //取得id="doPost"標籤，也就是<button>
+
+			            oPostBtn.onclick = function () {
+			                if (oInput.value) {
+			                    //在JavaScript中，會等於false的值只會有undefined, null, false, 0, ""這五種，物件類永遠為true
+
+			                    //建一個顯示時間的div
+			                    var oTime = document.createElement("div");
+			                    oTime.className = "time";
+			                    var myDate = new Date();
+			                    oTime.innerHTML = myDate.toLocaleString();
+			                    omessageBox.appendChild(oTime);
+
+
+			                    //建一個顯示留言的div
+			                    var oMessageContent = document.createElement("div");
+			                    oMessageContent.setAttribute("style", "border-style:dotted;background-color:lightblue;border-width:thin;")
+			                    oMessageContent.className = "message_content";
+			                    oMessageContent.innerHTML = oInput.value;
+			                    oInput.value = "";
+			                    omessageBox.appendChild(oMessageContent);
+
+			                }
+			            }
+			        }
+				
+					
+					$("#addcommentbtn").click(function () { //對應button的id屬性值addbtn
+						$("#commentsform").on("submit", function(e){ //對應button的??屬性值??，不是name屬性值
+			            /* =====for formData&MultipartFile =====*/
+			            e.preventDefault(); //不要按完按鈕就跳頁面
+			            var form = document.getElementById("commentsform");
+			    		var formData = new FormData(form); //把表單的資料裝成data
+			    		var url = "<spring:url value='/Forum/addcomment'/>"
+			            
+			            /* =====for JSON =====*/
+			            
+			            //改用ajax傳送 棄用原本的form傳送
+			            Swal.fire({
+			                title: '您確定要送出嗎？',
+			                icon: 'question',
+			                showCancelButton: true,
+//			                 closeOnConfirm: true,
+			            }).then((result) => {
+			                if (result.isConfirmed) {
+			                	
+			                    $.ajax({
+			                        type:"post",
+			                        url:"<spring:url value='/Forum/addcomment'/>", //要放@PostMapping對應的網址
+			                        data: formData,
+			                        //data: json,
+			                        //dataType:"json",
+			                        //contentType: "application/json; charset=utf-8",
+			                        contentType: false, //required
+			                        processData: false, // required
+			                        //mimeType: 'multipart/form-data', //有圖片就要一定要加這行
+			                        success: function(data){
+//			                             var jsonData = JSON.parse(data); //會讓下面跳不出來!!!!!!!
+			                            
+			                            Swal.fire({
+			                            	title: '已新增成功！',
+			                            	icon: 'success',
+			                            }).then((result)=>{
+			                            	if (result.isConfirmed) {
+			                            		location.href= "<spring:url value='/Forum/queryAll'/>";
+			                            	}
+			                            })
+			                            
+			                        },
+			                        error: function(e, text){
+			                        	
+			                        	Swal.fire({
+			                            	title: '新增失敗！',
+			                            	icon: 'error',
+			                            })
+//			                             .then((result)=>{
+//			                             	if (result.isConfirmed) {
+//			                             		location.href= "<spring:url value='/Forum/queryAll'/>";
+//			                             	}
+//			                             })
+			                        	
+			                            console.log(e.status);
+			                            console.log(text);
+			                        }
+			                    }) //$.ajax({
+			                } else if (result.dismiss === Swal.DismissReason.cancel) {
+			                    Swal.fire({
+			                        icon: 'error',
+			                        title: '已取消送出請求',
+			                        text: '您的變更將不會被儲存!'
+			                    })
+			                }
+			            }) //then((result) => {
+			        }) //$("#form").on("submit", function(e){
+			        
+					 }) //$("#addbtn").click(function
+				
 			</script>
 </body>
 

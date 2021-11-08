@@ -1,5 +1,7 @@
 package com.Gather.Forum.controller;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.Gather.Forum.model.ForumBean;
 import com.Gather.Forum.service.ForumService;
@@ -110,11 +114,36 @@ public class ForumController {
 	@PostMapping(path = "/Forum/add") 
 	public ResponseEntity<String> add(@RequestParam("name") String name, 
 			@RequestParam("post") String post, 
-			HttpServletRequest request) {
+//			@RequestParam("fImage") MultipartFile fImage,
+			HttpServletRequest request) throws MalformedURLException {
 		System.out.println("測試");
 		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd a hh:mm:ss");
 		Date date = new Date();
 		String postTime = timeFormat.format(date);
+		
+//		// 處理圖片
+//		String originalFilename = fImage.getOriginalFilename();// 得到原始名稱，如xxx.jpg
+//		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
+//		String rootDirectory = servletContext.getRealPath("/").replace("webapp", "resources");
+//		// 找到應用系統的根目錄 // C:\_JSP\tomcat9\webapps\mvcExercise
+//		rootDirectory = rootDirectory + "\\static\\images\\Forum";
+//
+//		String filePath = "images/Forum/";// 存檔於static相對路徑，如images/Forum/xxx.jpg
+//		File file = null;
+//		try {
+//			File imageFolder = new File(rootDirectory, name);
+//			if (!imageFolder.exists())
+//				imageFolder.mkdirs();// C:\_JSP\tomcat9\webapps\mvcExercise路徑下沒有images資料夾就建
+//
+//			file = new File(imageFolder, name + "_Cover" + ext);// File(路徑,檔名.副檔名)
+//			System.out.println("檔案路徑為:" + file);
+//			fImage.transferTo(file);// 把圖檔搬過去
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		filePath += name + "/" + name + "_Cover" + ext;
+//		ForumBean fBean=new ForumBean(name,post,postTime,postTime,filePath);
 		
 		ForumBean fBean=new ForumBean(name,post,postTime,postTime);
 		forumservice.addForum(fBean);
@@ -122,7 +151,7 @@ public class ForumController {
 		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
 		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(fBean));
-		
+//		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
 	
 //	//舊D

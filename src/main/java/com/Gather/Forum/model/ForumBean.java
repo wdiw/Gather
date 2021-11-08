@@ -18,12 +18,13 @@ public class ForumBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String name; //T
+	private String name;
 	@Column(columnDefinition = "nvarchar(max)") //通常不建議用，因為換資料庫的話這行指令不一定能用
 	private String post;
 	private String postTime;
 	private String postUpdateTime;
 	
+	private String fImageCover;
 	
 	
 	public ForumBean() {
@@ -51,6 +52,14 @@ public class ForumBean implements Serializable {
 		this.post = post;
 		this.postTime = postTime;
 		this.postUpdateTime = postUpdateTime;
+	}
+	
+	public ForumBean(String name, String post, String postTime, String postUpdateTime, String fImageCover) {//C T
+		this.name = name;
+		this.post = post;
+		this.postTime = postTime;
+		this.postUpdateTime = postUpdateTime;
+		this.fImageCover = fImageCover;
 	}
 	
 	public ForumBean(Integer id, String name, String post, String postTime, String postUpdateTime) {//U
@@ -110,5 +119,15 @@ public class ForumBean implements Serializable {
 	public void setPostUpdateTime(String postUpdateTime) {
 		this.postUpdateTime = postUpdateTime;
 	}
+
+	public String getfImageCover() {
+		return fImageCover;
+	}
+
+	public void setfImageCover(String fImageCover) {
+		this.fImageCover = fImageCover;
+	}
+	
+	
 	
 }
