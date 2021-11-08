@@ -399,7 +399,10 @@
 <!-- 			<tr onclick="test()" > -->
 <%-- 			<tr onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
 <%-- 			value='/Project/project?pID=${project.pID}' --%>
-				<td>缺分類${forum.id}</td>
+				<td>
+				<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >缺分類${forum.id}</a>
+<%-- 				缺分類${forum.id} --%>
+				</td>
 				<td style="">
 <%-- 				<td onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
 					<div style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;">
@@ -412,7 +415,7 @@
 					onMouseOver="this.style.backgroundColor='orange';" 
 					onMouseOut="this.style.backgroundColor='';">
 					${forum.post}
-<!-- 					<button onclick="init()">全文</button> -->
+<!-- 					<button onclick="init()">TEST</button> -->
 					</div>
 				</td>
 				<td>
@@ -445,21 +448,17 @@
     </div>
     
     <script>
-    	function test() {
-    		alert("Hello world");
-    	}
+    	
 //     	$(document).ready(function(){
     		
     	function init(){
-            var len = 20; //預設要顯示的字數
-//             var ctn = document.getElementById("content");  //获取div对象
-//             var ctn = null;
-            var ctn = document.getElementsByClassName("showcontent"); //获取div对象
-//             for (i=0;i<ctn.length;i++){
-            	
-//             ctn = document.getElementsByClassName("showcontent")[i];  //获取div对象
-            ctn = document.getElementsByClassName("showcontent")[0];  //获取div对象
+            var len = 30; //預設要顯示的字數
+            
+            var ctn = document.getElementById("content");  //获取div对象
+//             var ctn = document.getElementsByClassName("showcontent");  //获取div对象
+//             var ctn = document.getElementsByClassName("showcontent")[0];  //获取div对象
 //             var ctn = document.getElementsByClassName("showcontent").getElementsByTagName("p");  //获取div对象
+            
             var content = ctn.innerHTML;                   //获取div里的内容
             //alert(content);
             var span = document.createElement("span");     //创建<span>元素
@@ -480,44 +479,11 @@
             ctn.innerHTML = "";
             ctn.appendChild(span);
             ctn.appendChild(a);
-//             } //for
          }
-    	init();
-    		
-    	function init2(){
-            var len = 20; //預設要顯示的字數
-//             var ctn = document.getElementById("content");  //获取div对象
-//             var ctn = null;
-            var ctn = document.getElementsByClassName("showcontent"); //获取div对象
-//             for (i=0;i<ctn.length;i++){
-            	
-//             ctn = document.getElementsByClassName("showcontent")[i];  //获取div对象
-            ctn = document.getElementsByClassName("showcontent")[1];  //获取div对象
-//             var ctn = document.getElementsByClassName("showcontent").getElementsByTagName("p");  //获取div对象
-            var content = ctn.innerHTML;                   //获取div里的内容
-            //alert(content);
-            var span = document.createElement("span");     //创建<span>元素
-            var a = document.createElement("a");           //创建<a>元素
-            span.innerHTML = content.substring(0,len);     //span里的内容为content的前len个字符
-            a.innerHTML = content.length>len?" 展開全文":"";  //判断显示的字数是否大于默认显示的字数 来设置a的显示
-            a.href = "javascript:void(0)"; //让a链接点击不跳转
-            a.onclick = function(){
-                if(a.innerHTML.indexOf("全文")>0){      //如果a中含有"全文"则显示"收起"
-                  a.innerHTML = "收起";
-                  span.innerHTML = content;
-                }else{
-                    a.innerHTML = " 展開全文";
-                    span.innerHTML = content.substring(0,len);
-                }
-            }
-            // 设置div内容为空，span元素 a元素加入到div中
-            ctn.innerHTML = "";
-            ctn.appendChild(span);
-            ctn.appendChild(a);
-//             } //for
-         }
-    	init2();
-    	
+//     	init();
+    	$(document).ready(function(){
+    		$('#content button').click();
+    	})
 //     	}) //$(document).ready(function(){
     </script>
     

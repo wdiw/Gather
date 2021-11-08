@@ -99,7 +99,8 @@ public class ProjectController {
 	@ResponseBody
 	public ResponseEntity<String> addProject(@RequestParam("pName") String pName, 
 			@RequestParam("pTarget") int pTarget,
-			@RequestParam("pDescribe") String pDescribe, @RequestParam("pImage") MultipartFile pImage,
+			@RequestParam("pDescribe") String pDescribe, 
+			@RequestParam("pImage") MultipartFile pImage,
 			HttpServletRequest request) throws MalformedURLException {
 
 		// 處理圖片

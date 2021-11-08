@@ -14,12 +14,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Gather Admin</title>
   <!-- plugins:css -->
-  <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
   <link rel="stylesheet" href="../vendors/feather/feather.css">
   <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
@@ -384,25 +391,41 @@
       <!-- partial -->
       <div class="main-panel">        
         <div class="content-wrapper">
-     
-           
-            
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">新增文章</h4>
-                 
                   <form  id="form" class="forms-sample">
                     <div class="form-group">
                       <label>文章標題</label>
                       <input type="text" id="name" name="name" class="form-control" placeholder="請輸入文章標題">
                     </div>
-                    <div class="form-group">
-                      <label>文章內容</label>
-                      <textarea id="post" name="post" cols="100" rows="7" placeholder="請輸入文章內容"></textarea>
-                    </div>
-                    
-					<button type='submit' id="addbtn" name='submit' class="btn btn-primary mr-2">送出</button>
+<!--                     <div class="form-group"> -->
+<!--                       <label>文章內容</label> -->
+<!--                       <textarea id="post" name="post" cols="100" rows="7" placeholder="請輸入文章內容" class="form-control"></textarea> -->
+<!--                     </div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label>上傳圖片</label>  -->
+<!-- 						<input type="file" name="pImage"  -->
+<!-- 						class="file-upload-default" id="pImage"> -->
+<!-- 						<div class="input-group col-xs-12"> -->
+<!-- 							<input type="text" class="form-control file-upload-info" -->
+<!-- 							disabled placeholder="上傳圖片"> -->
+<!-- 							<span class="input-group-append"> -->
+<!-- 							<button class="file-upload-browse btn btn-primary" type="button">上傳</button> -->
+<!-- 							</span> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 					<img style="position: relative; left: 250px" src="" width="350" -->
+<!-- 					height="300" alt="請選擇照片" id="fImageCover" name="fImageCover" class="img-rounded"> -->
+<!-- 					</div> -->
+					<div >
+						<label>文章內容</label>
+						<textarea id="post" name="post" cols="100" rows="7" ></textarea>
+					</div>
+					
+					<button type='submit' id="addbtn" name="submit" class="btn btn-primary mr-2">送出</button>
                   </form>
                 </div>
               
@@ -417,6 +440,9 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
+  
+  
+  
   <!-- container-scroller -->
   <!-- plugins:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
@@ -445,11 +471,33 @@
   
   
   <script>
-
-        var form = document.getElementById("form");
+  
+//   	$(document).ready(function(){
+  		$('#post').summernote({  //#後面放id屬性值
+  			placeholder: '請輸入文章內容',
+  			tabsize: 2,
+  	        height: 100,
+//   	        callbacks: {
+//   	        	onImageUpload: function(files) {
+//   	        		// upload image to server and create imgNode
+//   	        		$summernote.summernote('insertNode', imgNode);
+//   	        	}
+//   	        }
+  	        
+  		});
+  		
+  		//summernote.image.upload
+  		$('#summernote').on('summernote.image.upload', function(we, files) {
+  			//upload image to server and create imgNode
+  			$summernote.summernote('insertNode', imgNode);
+  		});
+  		
+//   	})
+  		
+  		var form = document.getElementById("form");
 		
-		$("#addbtn").click(function () { //對應button的id屬性值addbtn
-			$("#form").on("submit", function(e){ //對應button的??屬性值??，不是name屬性值
+		$("#addbtn").click(function() { //對應button的id屬性值，也就是addbtn
+			$("#form").on("submit", function(e) { //對應button的??屬性值??，不是name屬性值
             /* =====for formData&MultipartFile =====*/
             e.preventDefault(); //不要按完按鈕就跳頁面
 //             var form = document.getElementById("form");
@@ -459,9 +507,6 @@
             /* =====for JSON =====*/
             
             //改用ajax傳送 棄用原本的form傳送
-//             alert("123");
-            
-            
     		//Success
 //     		$.ajax({
             	
@@ -472,7 +517,6 @@
 //     			data: formData,
     			
 //     			success: function (data) {
-    				
 //     				alert("success");
 //     				location.replace("<spring:url value='/Forum/queryAll'/>");  
 //     			},
@@ -480,7 +524,7 @@
 //     				alert('response status: ' + response.status);
 //     			}
             	
-//             })
+//          })
             
             
             Swal.fire({
