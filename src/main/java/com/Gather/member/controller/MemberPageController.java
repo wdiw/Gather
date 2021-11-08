@@ -50,14 +50,6 @@ public class MemberPageController {
 
 	
 
-	@GetMapping("/sample")
-	public String sample(HttpServletRequest req,Model model) {
-		System.out.println("透過頁面控制器進入會員中心");
-		Member theMember = (Member)req.getSession().getAttribute("memberData");
-		System.out.println("debug: id為"+theMember.getId());
-		model.addAttribute("allproject", projectService.getAllProjectBymID(theMember.getId()));
-		return "sample";	
-	}
 
 	@GetMapping("/addMember")
 	public String addMember() {
@@ -109,9 +101,13 @@ public class MemberPageController {
 	}
 
 	@GetMapping("/showMemberCenter")
-	public String showMemberCenter() {
-		System.out.println("透過頁面控制器，進入會員中心");
-		return "sample";
+	public String showMemberCenter(Model model, HttpServletRequest req) {
+		System.out.println("透過頁面控制器進入會員中心");
+		Member theMember = (Member)req.getSession().getAttribute("memberData");
+		System.out.println("debug: id為"+theMember.getId());
+		model.addAttribute("allproject", projectService.getAllProjectBymID(theMember.getId()));
+		System.out.println(projectService.getAllProjectBymID(theMember.getId()));
+		return "sample";	
 	}
 
 	@GetMapping("/showMemberAdminCenter")

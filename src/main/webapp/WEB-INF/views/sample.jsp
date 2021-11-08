@@ -131,30 +131,37 @@
                     -->
                   <!--照片顯示 結尾-->
                   <div class="col-md-3 d-flex">
-                    <div class="info bg-white p-4">
-                      <h5><b>基本資料</b></h5>
+                    <div class="info bg-white p-4" style="font-size: 26px;">
+                      <h2><b>基本資料</b></h2>
                       <p><span>姓名:</span> ${memberData.name}</p>
                       <p><span>身分:</span> ${memberData.status}</p>
                     </div>
                   </div>
 
                   <div class="col-md-3 d-flex">
-                    <div class="info bg-white p-4">
-                      <h5><b>會員功能</b></h5>
-                      <p><span>我的提案(#)</span> </p>
-                      <p><span>贊助紀錄(#)</span> </p>
+                    <div class="info bg-white p-4" style="font-size: 26px;">
+                      <h2><b>會員功能</b></h2>
+                      <a href="#changePassword" class="btn btn-inverse-success btn-fw" data-toggle="modal"
+                        style="font-size: 26px;">
+                        活動紀錄
+                      </a><br>
+                      <a href="#changePassword" class="btn btn-inverse-success btn-fw" data-toggle="modal"
+                      style="font-size: 26px;">
+                        贊助紀錄
+                      </a>
+
                     </div>
                   </div>
                   <div class="col-md-3 d-flex">
-                    <div class="info bg-white p-4">
-                      <h5><b>會員設定</b></h5>
+                    <div class="info bg-white p-4" style="font-size: 30px;">
+                      <h2><b>會員設定</b></h2>
                       <a href="#changePassword" class="btn btn-inverse-success btn-fw" data-toggle="modal"
-                        style="font-size: 15px;">
-                        修改密碼(#)
-                      </a>
+                      style="font-size: 26px;">
+                        修改密碼
+                      </a><br>
                       <a href="#addEmployeeModal" class="btn btn-inverse-success btn-fw" data-toggle="modal"
-                        style="font-size: 15px;">
-                        帳號綁定(#)
+                      style="font-size: 26px;">
+                        帳號綁定
                       </a>
                     </div>
                   </div>
@@ -189,31 +196,36 @@
             </div>
           </div>
         -->
-                <H2>我的提案</H2>
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>計畫編號</th>
-                      <th>計畫名稱</th>
-                      <!-- <th>計畫圖片</th> -->
-                      <th>計畫目標</th>
-                      <th>計劃描述</th>
-                      <th>詳細資料</th>
+                      <th><h4>我的提案</h4></th>
+                      <th><h4>名稱</h4></th>
+                      <th><h4>狀態</h4></th>
+                      <th><h4>目標</h4></th>
+                      <th><h4>進度</h4></th>
+                      <th><h4>截止日期</h4></th>
                     </tr>
                   </thead>
                   <c:forEach items='${allproject}' var='project'>
                     <tr>
-                      <td>${project.pID}</td>
-                      <td>${project.pName}</td>
-                      <!-- <td><img width='50' height='50'
-                    src="../${project.pImageCover}"
-                    class="img-rounded" /></td> -->
-                      <td>${project.pTarget}</td>
-                      <td>${project.pDescribe}</td>
-
+                        <td style="background-image: url(/Gather/${project.pImageCover});
+                                   background-size: cover;
+                                   background-position: center;
+                                   padding: 55px;"></td>
+                      <!-- <td>${project.pID}</td> -->
+                      <td>${project.pName} </td>
+                      <td>${project.pStatus}</td>
+                        <td>${project.pTarget}</td>
+                        <td>
+                          <div class="progress progress-md mx-4">
+                            <div class="progress-bar bg-primary" role="progressbar"
+                            style="width:${project.pAmountNow/project.pTarget*100}%" aria-valuenow="70"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                      <td>${project.pEDate}</td>
                       <td>
-                        <a href="/Gather/Project/project?pID=${project.pID}"
-                          class="btn btn-primary py-2 px-3">進入專案(開發中)</a>
                       </td>
 
                     </tr>
@@ -295,20 +307,23 @@
                 <div class="modal-content" style="padding: 15%;text-align: center;">
                   <h2><b>更換大頭照</b></h2>
                   <div class="form-group" style="margin-top:10px ;">
-                    <img style="position: relative;border: 2px burlywood solid;border-radius: 50%;" src="/Gather/images/Members/${memberData.id}.jpg"  width="350"
-                    height="300" alt="請選擇照片" id="showPic" class="img-rounded">
+                    <img style="position: relative;border: 2px burlywood solid;border-radius: 50%;"
+                      src="/Gather/images/Members/${memberData.id}.jpg" width="350" height="300" alt="請選擇照片"
+                      id="showPic" class="img-rounded">
                   </div>
                   <form action="upload" method="post" enctype="multipart/form-data" class="pt-3">
                     <div class="form-group">
                       選擇圖片:
-                      <input type="file" name="file" accept="image/*" class="form-control form-control-lg" id="memberImage" />
+                      <input type="file" name="file" accept="image/*" class="form-control form-control-lg"
+                        id="memberImage" />
                     </div>
                     <div class="mt-3">
-                      <input type="submit" value="立刻上傳" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                      <input type="submit" value="立刻上傳"
+                        class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
                     </div>
                   </form>
 
-                  
+
                 </div>
               </div>
             </div>
@@ -329,7 +344,8 @@
                     Retry Password<input type="password" id="text_check_password" class="form-control form-control-lg">
                   </div>
                   <div class="mt-3">
-                    <input type="button" value="提交" id="change" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                    <input type="button" value="提交" id="change"
+                      class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
                   </div>
                 </div>
               </div>
