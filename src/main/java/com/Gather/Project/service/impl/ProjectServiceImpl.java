@@ -78,11 +78,19 @@ public class ProjectServiceImpl implements ProjectService {
 		// TODO Auto-generated method stub
 		return projectRepository.findBypStatus(pStatus);
 	}
-
+	
+	//搜尋計畫
 	@Override
 	public List<ProjectBean> getProjectBySearch(Set<String> search) {
 		
 		return projectRepository.findProjectBySearch(search);
+	}
+	
+//	//依據類別找到通過的計畫
+	@Override
+	public List<ProjectBean> getProjectBypStatusAndpCategory(String pStatus, String pCategory) {
+		
+		return projectRepository.findBypStatusAndpCategory(pStatus, pCategory);
 	}
 	
 	

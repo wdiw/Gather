@@ -126,7 +126,9 @@ public class ProjectController {
 			@RequestParam("pEDate") String pEDate,
 			@RequestParam("pDescribe") String pDescribe,
 			@RequestParam("pContent") String pContent,
-			@RequestParam("pImage") MultipartFile pImage, 
+			@RequestParam("pImage") MultipartFile pImage,
+			@RequestParam("pCategory") String pCategory,
+			
 			//回饋一
 			@RequestParam("projectPlanPrice1") Integer projectPlanPrice1,
 			@RequestParam("ETA1") String ETA1,
@@ -148,7 +150,7 @@ public class ProjectController {
 			
 			
 	) throws MalformedURLException {
-
+		
 
 		Member memberData = (Member) request.getSession().getAttribute("memberData");
 		Integer mID = memberData.getId();
@@ -190,7 +192,7 @@ public class ProjectController {
 		String coverFilePath=filePath+ pName + "/" + pName + "_Cover" + ext;//存封面圖片的相對路徑，static\images\Project\xxx\xxx_Cover.jpg
 		//New 一方的Bean
 		ProjectBean pBean = new ProjectBean(pName, pTarget, pSDate, pEDate,
-				coverFilePath, pDescribe, pContent, mID, "待審核","請待管理員進行審核");// 存到資料庫，目前會員ID先死
+				coverFilePath, pDescribe, pContent, mID, "待審核","請待管理員進行審核",pCategory);// 存到資料庫，目前會員ID先死
 		
 		
 		

@@ -458,6 +458,18 @@
 														<input id="pEDate" name="pEDate" class="form-control"
 															type='Date'>
 													</div>
+
+													<div class="form-group">
+														<label for="pEDate">請選擇計畫類別</label>
+													<select class="form-control" id="pCategory" name="pCategory">
+														<option value="科技" >科技</option>
+														<option value="設計">設計</option>
+														<option value="藝術"> 藝術</option>
+														<option value="教育">教育</option>
+														<option value="挺好店">挺好店</option>
+														
+													</select>
+													</div>
 	
 													<div class="form-group">
 														<label>計畫封面</label>
@@ -747,13 +759,7 @@
 										type: "POST",
 
 										data: formData,
-										// success: function (data) {
-
-										// 	location.replace("<spring:url value='/Project/allproject'/>");  
-										// },
-										// error: function (response) {
-										// 	alert('response status: ' + response.status);
-										// }
+									
 										success: function (data) {
 												Swal.fire({
 													title: '提交成功',
@@ -763,7 +769,7 @@
 
 												}).then((result) => {
 													if (result.isConfirmed) {
-														location.href = "<c:url value='/Project/allProjectInBackstaget'/>";
+														location.href = "<c:url value='/Project/allProjectInBackstage'/>";
 													}
 												})
 											},

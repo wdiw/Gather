@@ -458,10 +458,13 @@
 
 
   <script>
-	  $("#searchBtn").click(function(){
+	 
+		$("#searchBtn").click(function(){
 		  var search=$("#searchBar").val()
 		location.href=  "<spring:url value='/Project/ProjectSearch?search=" + search + "'/>"
 	  })
+
+	
 
   </script>
   </body>

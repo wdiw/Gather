@@ -34,10 +34,13 @@ public class ProjectBean implements Serializable {
 	private String pStatus;//專案狀態
 	private String reason;//狀態說明
 	private Integer pAmountNow;//累積金額
+	private String pCategory;
 	
 	
 	@OneToMany(mappedBy = "projectBean",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
+
+
 
 
 	// 空的建構子
@@ -68,7 +71,7 @@ public class ProjectBean implements Serializable {
 	// 新增的建構子
 	public ProjectBean(String pName, Integer pTarget, String pSDate,String pEDate,
 			String pImageCover,String pDescribe,  String pContent,Integer mID,
-			String pStatus,String reason) {
+			String pStatus,String reason,String pCategory) {
 		super();
 		this.pName = pName;
 		this.pTarget = pTarget;
@@ -80,6 +83,7 @@ public class ProjectBean implements Serializable {
 		this.mID = mID;
 		this.pStatus=pStatus;
 		this.reason=reason;
+		this.pCategory=pCategory;
 	}
 
 	
@@ -187,6 +191,14 @@ public class ProjectBean implements Serializable {
 
 	public void setpAmountNow(Integer pAmounNow) {
 		this.pAmountNow = pAmounNow;
+	}
+	
+	public String getpCategory() {
+		return pCategory;
+	}
+
+	public void setpCategory(String pCategory) {
+		this.pCategory = pCategory;
 	}
 	@Override
 	public String toString() {

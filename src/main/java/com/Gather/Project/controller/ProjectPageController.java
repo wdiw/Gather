@@ -51,7 +51,7 @@ public class ProjectPageController {
 				//管理者
 				List<ProjectBean> result = projectService.getAllProject();
 				model.addAttribute("allproject", result);
-				System.out.println("總金額"+result.get(1).getpAmountNow());
+				
 			}
 			return "Project/allproject";
 		}
@@ -102,17 +102,25 @@ public class ProjectPageController {
 		// find  Project By search 透過搜尋的關鍵字找到相關資料
 		
 		@GetMapping("/Project/ProjectSearch")
-		public ResponseEntity<String>  getProjectBySearch(
+		public String  getProjectBySearch(
 				@RequestParam("search") String search,Model model) {
 			
 			System.out.println("search:"+search);
 			Set<String> searchName=new HashSet<>();
 			searchName.add("%"+search+"%");
+
 			System.out.println(searchName);
 			List<ProjectBean> result = projectService.getProjectBySearch(searchName);
-			System.out.println("結果:"+result);
 			model.addAttribute("allProject",result);
-			return new ResponseEntity<String>(HttpStatus.OK);					
+			return "Project/projectSearch";					
+		}	
+		
+		@GetMapping("/Project/category")
+		public String  getProjectBypStatusAndpCategory(
+				@RequestParam("pCategory") String pCategory,Model model) {
+			List<ProjectBean> result = projectService.getProjectBypStatusAndpCategory("通過",pCategory );
+			model.addAttribute("allProject",result);
+			return "Project/projectCategory";					
 		}
 		
 
