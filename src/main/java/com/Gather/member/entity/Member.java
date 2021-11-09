@@ -1,10 +1,17 @@
 package com.Gather.member.entity;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.Gather.Sponsorship.model.FavoriteBean;
 
 @Entity
 @Table(name = "Member")
@@ -35,6 +42,9 @@ public class Member {
 	
 	@Column(name = "m_birthday")
 	private String  birthday;
+	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+	Set<FavoriteBean> favoriteBeans=new HashSet<>();
+	
 	
 	public Member() {
 	}
@@ -106,6 +116,13 @@ public class Member {
 
 	public void setSexual(String sexual) {
 		this.sexual = sexual;
+	public Set<FavoriteBean> getFavoriteBeans() {
+		return favoriteBeans;
+	}
+
+
+	public void setFavoriteBeans(Set<FavoriteBean> favoriteBeans) {
+		this.favoriteBeans = favoriteBeans;
 	}
 
 	public String getBirthday() {
