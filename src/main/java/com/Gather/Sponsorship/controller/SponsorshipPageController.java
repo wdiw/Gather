@@ -81,6 +81,7 @@ public class SponsorshipPageController {
 		sBean.setsTime(sd);
 		sBean.setStatus("已付款");
 		Integer pAmountNow=0;
+		sponsorOrderService.insertOrder(sBean);
 		List<SponsorOrderBean> sBean_toatl=sponsorOrderService.getOrdersByPIDAndStatus(Integer.parseInt(sPID), sBean.getStatus());
 		for(int i=0;i<sBean_toatl.size();i++) {
 			 Integer sTotal_select= sBean_toatl.get(i).getsTotal();
@@ -88,8 +89,7 @@ public class SponsorshipPageController {
 		}
 		
 		sBean.setpAmountNow(pAmountNow);
-		
-		sponsorOrderService.insertOrder(sBean);
+		sponsorOrderService.updateOrder(sBean);
 
 
 		String tradeNo = "Gather" + sBean.getsID();

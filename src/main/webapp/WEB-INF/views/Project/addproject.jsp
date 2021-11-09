@@ -4,7 +4,7 @@
 			<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 				<!DOCTYPE html>
 				<html lang="en">
-				<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
+				<!-- <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"> -->
 				</script>
 				<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -30,6 +30,26 @@
 					<link rel="stylesheet" href="../css/vertical-layout-light/style.css">
 					<!-- endinject -->
 					<link rel="shortcut icon" href="../images/favicon.png" />
+
+
+					<!-- include libraries(jQuery, bootstrap)
+					<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+						rel="stylesheet">
+					<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+					<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
+					<!-- include summernote css/js -->
+					<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+						rel="stylesheet">
+					<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js" defer></script>
+
+					<style>
+						.note-editing-area .note-editable{
+							height: 400px;
+							width: 100%;
+						}
+					</style>
+
 				</head>
 
 				<body>
@@ -443,7 +463,7 @@
 													<div class="form-group">
 														<label for="pTarget">計畫目標金額</label>
 														<input id="pTarget" name="pTarget" class="form-control"
-															type='text'>
+															type='number' value="10000" min="100" step="100">
 
 													</div>
 
@@ -458,45 +478,188 @@
 														<input id="pEDate" name="pEDate" class="form-control"
 															type='Date'>
 													</div>
-	
+
+													<div class="form-group">
+														<label for="pEDate">請選擇計畫類別</label>
+														<select class="form-control" id="pCategory" name="pCategory">
+															<option value="科技">科技</option>
+															<option value="設計">設計</option>
+															<option value="藝術"> 藝術</option>
+															<option value="教育">教育</option>
+															<option value="挺好店">挺好店</option>
+
+														</select>
+													</div>
+
 													<div class="form-group">
 														<label>計畫封面</label>
 														<input type="file" name="pImage" class="file-upload-default"
 															id="pImage">
-													<div class="input-group col-xs-12">
-														<input type="text" class="form-control file-upload-info"
-															disabled placeholder="上傳圖片">
+														<div class="input-group col-xs-12">
+															<input type="text" class="form-control file-upload-info"
+																disabled placeholder="上傳圖片">
 
-														<span class="input-group-append">
-															<button class="file-upload-browse btn btn-primary"
-																type="button">上傳</button>
-														</span>
+															<span class="input-group-append">
+																<button class="file-upload-browse btn btn-primary"
+																	type="button">上傳</button>
+															</span>
+														</div>
 													</div>
-												</div>
-
-												<div class="form-group">
-
-													<img style="position: relative; left: 250px" src="" width="350"
-														height="300" alt="請選擇照片" id="pImageCover" name="pImageCover"
-														class="img-rounded">
-												</div>
-
 
 													<div class="form-group">
+
+														<img style="position: relative; left: 250px" src="" width="350"
+															height="300" alt="請選擇照片" id="pImageCover" name="pImageCover"
+															class="img-rounded">
+													</div>
+
+
+													<div class="form-group" >
 														<label for="pDescribe">計畫簡述</label>
 														<textarea rows="4" cols="50" id="pDescribe" name="pDescribe"
 															class="form-control"></textarea>
 													</div>
 
-													<div class="form-group">
-														<label for="pContent">計畫完整內容</label>
-														<textarea rows="4" cols="50" id="pContent" name="pContent"
-															class="form-control"></textarea>
+													<div class="form-group" >
+													<label>計畫完整內容</label>
+													<textarea id="pContent"  name="pContent" class="form-control"></textarea>
 													</div>
 
-												
 
-														
+													<!--回饋方案一-->
+													<div class="form-group">
+														<label for="projectPlanPrice1">回饋方案金額(一)</label>
+														<input id="projectPlanPrice1" name="projectPlanPrice1"
+															class="form-control" type='number' value="10000" min="100"
+															step="100">
+
+													</div>
+
+													<div class="form-group">
+														<label for="ETA1">回饋預計實現時間(一)</label>
+														<input id="ETA1" name="ETA1" class="form-control" type='month'>
+													</div>
+
+													<div class="form-group">
+														<label for="projectPlanContent1">回饋內容(一)</label>
+														<textarea rows="4" cols="50" id="projectPlanContent1"
+															name="projectPlanContent1" class="form-control"></textarea>
+													</div>
+
+
+													<div class="form-group">
+														<label>回饋選項照片(一)</label>
+														<input type="file" name="projectPlanImage1"
+															class="file-upload-default" id="projectPlanImage1">
+														<div class="input-group col-xs-12">
+															<input type="text" class="form-control file-upload-info"
+																disabled placeholder="上傳圖片">
+
+															<span class="input-group-append">
+																<button class="file-upload-browse btn btn-primary"
+																	type="button">上傳</button>
+															</span>
+														</div>
+													</div>
+
+													<div class="form-group">
+
+														<img style="position: relative; left: 250px" src="" width="350"
+															height="300" alt="請選擇照片" id="projectPlanImageCover1"
+															name="projectPlanImageCover1" class="img-rounded">
+													</div>
+
+
+
+													<!--回饋方案二-->
+													<div class="form-group">
+														<label for="projectPlanPrice2">回饋方案金額(二)</label>
+														<input id="projectPlanPrice2" name="projectPlanPrice2"
+															class="form-control" type='number' min="100" step="100">
+
+													</div>
+
+													<div class="form-group">
+														<label for="ETA2">回饋預計實現時間(二)</label>
+														<input id="ETA2" name="ETA2" class="form-control" type='month'>
+													</div>
+
+													<div class="form-group">
+														<label for="projectPlanContent2">回饋內容(二)</label>
+														<textarea rows="4" cols="50" id="projectPlanContent2"
+															name="projectPlanContent2" class="form-control"></textarea>
+													</div>
+
+
+													<div class="form-group">
+														<label>回饋選項照片(二)</label>
+														<input type="file" name="projectPlanImage2"
+															class="file-upload-default" id="projectPlanImage2">
+														<div class="input-group col-xs-12">
+															<input type="text" class="form-control file-upload-info"
+																disabled placeholder="上傳圖片">
+
+															<span class="input-group-append">
+																<button class="file-upload-browse btn btn-primary"
+																	type="button">上傳</button>
+															</span>
+														</div>
+													</div>
+
+													<div class="form-group">
+
+														<img style="position: relative; left: 250px" src="" width="350"
+															height="300" alt="請選擇照片" id="projectPlanImageCover2"
+															name="projectPlanImageCover2" class="img-rounded">
+													</div>
+
+
+													<!--回饋方案三-->
+													<div class="form-group">
+														<label for="projectPlanPrice3">回饋方案金額(三)</label>
+														<input id="projectPlanPrice3" name="projectPlanPrice3"
+															class="form-control" type='number' min="100" step="100">
+
+													</div>
+
+													<div class="form-group">
+														<label for="ETA3">回饋預計實現時間(三)</label>
+														<input id="ETA3" name="ETA3" class="form-control" type='month'>
+													</div>
+
+													<div class="form-group">
+														<label for="projectPlanContent3">回饋內容(三)</label>
+														<textarea rows="4" cols="50" id="projectPlanContent3"
+															name="projectPlanContent3" class="form-control"></textarea>
+													</div>
+
+
+													<div class="form-group">
+														<label>回饋選項照片(三)</label>
+														<input type="file" name="projectPlanImage3"
+															class="file-upload-default" id="projectPlanImage3">
+														<div class="input-group col-xs-12">
+															<input type="text" class="form-control file-upload-info"
+																disabled placeholder="上傳圖片">
+
+															<span class="input-group-append">
+																<button class="file-upload-browse btn btn-primary"
+																	type="button">上傳</button>
+															</span>
+														</div>
+													</div>
+
+													<div class="form-group">
+
+														<img style="position: relative; left: 250px" src="" width="350"
+															height="300" alt="請選擇照片" id="projectPlanImageCover3"
+															name="projectPlanImageCover3" class="img-rounded">
+													</div>
+
+
+
+
+
 
 													<button id="addProject" type='submit' name='addProject'
 														class="btn btn-primary mr-2">送出</button>
@@ -536,12 +699,12 @@
 
 
 							<script>
-
-								
-
 								$("#pImageCover").hide();//一開始圖片隱藏
+								$("#projectPlanImageCover1").hide();//一開始圖片隱藏
+								$("#projectPlanImageCover2").hide();//一開始圖片隱藏
+								$("#projectPlanImageCover3").hide();//一開始圖片隱藏
 
-								//當更換圖片
+								//當更換封面
 								$("#pImage").on("change", function () {
 									var changeImageCover = $("#pImage")[0].files[0];
 									var reader = new FileReader;
@@ -553,7 +716,45 @@
 
 								});
 
+								//當更換回饋一圖片
+								$("#projectPlanImage1").on("change", function () {
+									var changeImageCover = $("#projectPlanImage1")[0].files[0];
+									var reader = new FileReader;
+									reader.onload = function (e) {
+										$('#projectPlanImageCover1').attr('src', e.target.result);
+									}
+									reader.readAsDataURL(changeImageCover);
+									$("#projectPlanImageCover1").show();//圖片顯示
 
+								});
+
+								//當更換回饋二圖片
+								$("#projectPlanImage2").on("change", function () {
+									var changeImageCover = $("#projectPlanImage2")[0].files[0];
+									var reader = new FileReader;
+									reader.onload = function (e) {
+										$('#projectPlanImageCover2').attr('src', e.target.result);
+									}
+									reader.readAsDataURL(changeImageCover);
+									$("#projectPlanImageCover2").show();//圖片顯示
+
+								});
+
+								//當更換回饋一圖片
+								$("#projectPlanImage3").on("change", function () {
+									var changeImageCover = $("#projectPlanImage3")[0].files[0];
+									var reader = new FileReader;
+									reader.onload = function (e) {
+										$('#projectPlanImageCover3').attr('src', e.target.result);
+									}
+									reader.readAsDataURL(changeImageCover);
+									$("#projectPlanImageCover3").show();//圖片顯示
+
+								});
+
+
+
+								//送出
 								$("#form").on("submit", function (e) {
 									e.preventDefault();
 
@@ -573,46 +774,42 @@
 										type: "POST",
 
 										data: formData,
-										// success: function (data) {
 
-										// 	location.replace("<spring:url value='/Project/allproject'/>");  
-										// },
-										// error: function (response) {
-										// 	alert('response status: ' + response.status);
-										// }
 										success: function (data) {
-												Swal.fire({
-													title: '提交成功',
-													icon: 'success',
-													text: "已經提交計畫，請待管理員審核！",
-													position: 'center',
+											Swal.fire({
+												title: '提交成功',
+												icon: 'success',
+												text: "已經提交計畫，請待管理員審核！",
+												position: 'center',
 
-												}).then((result) => {
-													if (result.isConfirmed) {
-														location.href = "<c:url value='/Project/allproject'/>";
-													}
-												})
-											},
-											error: function (xhr, text) {
-												console.log("status code: " + xhr.status);
-												console.log("error message: " + text);
-												Swal.fire({
-													title: '提交失敗',
-													icon: 'error',
-													text: "計畫提交失敗",
-												})
-											}
-	
-
-
+											}).then((result) => {
+												if (result.isConfirmed) {
+													location.href = "<c:url value='/Project/allProjectInBackstage'/>";
+												}
+											})
+										},
+										error: function (xhr, text) {
+											console.log("status code: " + xhr.status);
+											console.log("error message: " + text);
+											Swal.fire({
+												title: '提交失敗',
+												icon: 'error',
+												text: "計畫提交失敗",
+											})
+										}
 									})
 
-								
 								})
-
 
 							</script>
 
+							<script>
+								$(document).ready(function () {
+									$('#pContent').summernote();
+									
+								});
+
+							</script>
 
 				</body>
 

@@ -139,11 +139,11 @@
 								<div class="form-group">
 									<div class="col-lg-6 mb-5 ftco-animate">
 										<a
-											href="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg"
+											href="./${pPBean.projectPlanImage}"
 											class="image-popup prod-img-bg"> <img
-											src="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg"
+											src="./${pPBean.projectPlanImage}"
 											class="img-fluid" alt="Colorlib Template" id="projectImage" ></a>
-											<input type="hidden" name="projectImage" value="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg">
+											<input type="hidden" name="projectImage" value="./${pPBean.projectPlanImage}">
 										<div class="col-md-6">
 											<div class="form-group">
 											<input type="hidden" name="sPName" value="${pBean.pName}">
@@ -180,9 +180,10 @@
 								<div class="form-group">
 									<label for="streetaddress">加碼贊助</label>
 									<div style="position: relative;">
+									
 										<i class="fas fa-dollar-sign"
 											style="position: absolute; left: 10px; top: 18px; font-size: 22px; text-align: center;"></i>
-										<input type="number" class="form-control" placeholder="0"
+										<input type="number" class="form-control" placeholder="0" min="0"
 											style="padding-left: 32PX; font-size: 20px; padding-bottom: 8px"
 											name="sBonus" id="sBonus">
 									</div>

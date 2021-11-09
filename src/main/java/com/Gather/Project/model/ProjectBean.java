@@ -14,8 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.Gather.Sponsorship.model.FavoriteBean;
-
 
 @Entity
 @Table(name = "Project")
@@ -34,15 +32,16 @@ public class ProjectBean implements Serializable {
 	private String pEDate;//專案結束日期
 	private Integer mID;//會員ID
 	private String pStatus;//專案狀態
-	private Integer pAmountNow;
+	private String reason;//狀態說明
+	private Integer pAmountNow;//累積金額
+	private String pCategory;
+	
 	
 	@OneToMany(mappedBy = "projectBean",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
 
-	@OneToMany(mappedBy = "projectBean",cascade = CascadeType.ALL)
-	Set<FavoriteBean> favoriteBeans=new HashSet<>();
-	
-	
+
+
 
 	// 空的建構子
 	public ProjectBean() {
@@ -51,7 +50,8 @@ public class ProjectBean implements Serializable {
 
 	// 更新的建構子
 	public ProjectBean(Integer pID, String pName, Integer pTarget, String pSDate,String pEDate,
-			String pImageCover,String pDescribe, String pContent, Integer mID,String pStatus) {
+			String pImageCover,String pDescribe, String pContent, Integer mID,String pStatus,
+			String reason ) {
 	
 		this.pID = pID;
 		this.pName = pName;
@@ -63,13 +63,15 @@ public class ProjectBean implements Serializable {
 		this.pEDate = pEDate;
 		this.mID = mID;
 		this.pStatus=pStatus;
+		this.reason=reason;
 	}
 
 	
 	
 	// 新增的建構子
 	public ProjectBean(String pName, Integer pTarget, String pSDate,String pEDate,
-			String pImageCover,String pDescribe,  String pContent,Integer mID,String pStatus) {
+			String pImageCover,String pDescribe,  String pContent,Integer mID,
+			String pStatus,String reason,String pCategory) {
 		super();
 		this.pName = pName;
 		this.pTarget = pTarget;
@@ -80,6 +82,8 @@ public class ProjectBean implements Serializable {
 		this.pEDate = pEDate;
 		this.mID = mID;
 		this.pStatus=pStatus;
+		this.reason=reason;
+		this.pCategory=pCategory;
 	}
 
 	
@@ -172,27 +176,33 @@ public class ProjectBean implements Serializable {
 		this.projectPlanBeans = projectPlanBeans;
 	}
 
-	@Override
-	public String toString() {
-		return "ProjectBean [pID=" + pID + ", pName=" + pName + ",pTarget=" + pTarget + ",pDescribe=" + pDescribe + "]";
+	public String getReason() {
+		return reason;
 	}
 
-	public Set<FavoriteBean> getFavoriteBeans() {
-		return favoriteBeans;
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
-
-	public void setFavoriteBeans(Set<FavoriteBean> favoriteBeans) {
-		this.favoriteBeans = favoriteBeans;
-	}
-
+	
+	
 	public Integer getpAmountNow() {
 		return pAmountNow;
 	}
 
-	public void setpAmountNow(Integer pAmountNow) {
-		this.pAmountNow = pAmountNow;
+	public void setpAmountNow(Integer pAmounNow) {
+		this.pAmountNow = pAmounNow;
 	}
 	
-	
+	public String getpCategory() {
+		return pCategory;
+	}
+
+	public void setpCategory(String pCategory) {
+		this.pCategory = pCategory;
+	}
+	@Override
+	public String toString() {
+		return "ProjectBean [pID=" + pID + ", pName=" + pName + ",pTarget=" + pTarget + ",pDescribe=" + pDescribe + "]";
+	}
 
 }
