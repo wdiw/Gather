@@ -182,9 +182,7 @@ public class SponsorshipUserController {
 			projectBeans.add(projectBean);
 		}
 
-//	System.out.println(pBean.getpID());
 		request.getSession().setAttribute("projectBeans", projectBeans);
-
 		return "Sponsorship/favorite";
 
 	}

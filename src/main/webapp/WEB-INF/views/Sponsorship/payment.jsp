@@ -169,7 +169,7 @@
 								</div>
 								<div class="form-group">
 									<label for="postcodezip">連絡電話</label> <input type="text"
-										class="form-control" placeholder="" value="0935623709"
+										class="form-control" placeholder="" value="${mBean.phone}"
 										name="sPhone" id="sPhone">
 								</div>
 							</div>

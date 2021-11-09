@@ -1,9 +1,11 @@
 package com.Gather.Sponsorship.service;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.Gather.Project.model.ProjectBean;
 import com.Gather.Sponsorship.model.FavoriteBean;
 import com.Gather.Sponsorship.model.SponsorOrderBean;
 import com.Gather.Sponsorship.model.SponsorshipBean;
@@ -33,5 +35,7 @@ public interface SponsorOrderService {
 	List<FavoriteBean> getFavoriteByMemberID(Integer mID);
 	
 	FavoriteBean getFavoriteByMemberIDAndProjectID(Integer mID,Integer pID);
+	
+	List<SponsorOrderBean> getSponsorshipBySearch(Set<String> search);
 
 }

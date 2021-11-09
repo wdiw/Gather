@@ -135,7 +135,8 @@
 						       
 						        
 					           	<td class="quantity">
-						        	<button type='button' class="btn btn-primary py-3 px-4" id="button" onclick="delFav(${pBean.pID})"><i class="fas fa-trash-alt"></i></button>
+						        	<p type='button' class="btn btn-primary py-3 px-4" id="button" onclick="delFav(${pBean.pID})"><i class="fas fa-trash-alt"></i></p>
+<%-- 						        	<button type='button' style="border: 0;background-color: white" id="button" onclick="delFav(${pBean.pID})"><i class="fas fa-trash-alt"></i></button> --%>
 						        </td>
 						   
 						      </tr><!-- END TR-->

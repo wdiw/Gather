@@ -8,6 +8,7 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -104,8 +105,9 @@ public class SponsorOrderServiceImpl implements SponsorOrderService{
 	}
 
 
-	
-
-
+	@Override
+	public List<SponsorOrderBean> getSponsorshipBySearch(Set<String> search) {
+		return sponsorOrderRepository.findSponsorshipBySearch(search);
+	}
 
 }
