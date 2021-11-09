@@ -196,7 +196,26 @@ public class MemberRESTController {
 		request.getSession().removeAttribute("memberData");
 		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
-
+	
+	//停權
+	@GetMapping("/suspended/{memberId}")
+	public ResponseEntity<String> suspendedMember(@PathVariable Integer memberId) {
+		Member theMember = memberService.queryMemberById(memberId);
+		theMember.setStatus("停權");
+		memberService.insertOrUpdateMember(theMember);
+		return new ResponseEntity<String>("Y", HttpStatus.OK);
+	}
+	
+	//恢復
+		@GetMapping("/recovery/{memberId}")
+		public ResponseEntity<String> recoveryMember(@PathVariable Integer memberId) {
+			Member theMember = memberService.queryMemberById(memberId);
+			theMember.setStatus("會員");
+			memberService.insertOrUpdateMember(theMember);
+			return new ResponseEntity<String>("Y", HttpStatus.OK);
+		}
+	
+	
 	// 刪除
 	@DeleteMapping("/members/{memberId}")
 	public String deleteMember(@PathVariable Integer memberId) {
