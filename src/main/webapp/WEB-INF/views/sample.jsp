@@ -143,7 +143,7 @@
                       <h2><b>會員功能</b></h2>
                       <a href="#changePassword" class="btn btn-inverse-success btn-fw" data-toggle="modal"
                         style="font-size: 26px;">
-                        活動紀錄
+                        活動登陸
                       </a><br>
                       <a href="#changePassword" class="btn btn-inverse-success btn-fw" data-toggle="modal"
                       style="font-size: 26px;">

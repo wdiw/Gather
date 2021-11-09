@@ -44,6 +44,11 @@ public class MemberRESTController {
 	public MemberRESTController(MemberService memberService) {
 		this.memberService = memberService;
 	}
+	
+	@GetMapping("/restricted")
+	public String restricted() {
+		return "to see this text you need to be logged in!";
+	}
 
 	@PostMapping("/forgotPassword")
 	public ResponseEntity<String> forgotPassword(@RequestBody Member theMember,HttpServletRequest request){

@@ -36,11 +36,17 @@ public class Member {
 	@Column(name = "m_birthday")
 	private String  birthday;
 	
+	@Column(name = "m_phone")
+	private String  phone;
+	
+	
 	public Member() {
 	}
 
+
+
 	public Member(Integer id, String name, String status, String account, String password, String address,
-			String sexual, String birthday) {
+			String sexual, String birthday, String phone) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -50,7 +56,10 @@ public class Member {
 		this.address = address;
 		this.sexual = sexual;
 		this.birthday = birthday;
+		this.phone = phone;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -115,12 +124,30 @@ public class Member {
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
+	
+	
+
+	public String getPhone() {
+		return phone;
+	}
+
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", name=" + name + ", status=" + status + ", account=" + account + ", password="
-				+ password + ", address=" + address + ", sexual=" + sexual + ", birthday=" + birthday + "]";
+				+ password + ", address=" + address + ", sexual=" + sexual + ", birthday=" + birthday + ", phone="
+				+ phone + "]";
 	}
+
+
+
 	
 	
 
