@@ -116,6 +116,7 @@ public class Member {
 
 	public void setSexual(String sexual) {
 		this.sexual = sexual;
+	}
 	public Set<FavoriteBean> getFavoriteBeans() {
 		return favoriteBeans;
 	}

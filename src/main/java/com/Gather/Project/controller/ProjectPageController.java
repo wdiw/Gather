@@ -1,10 +1,14 @@
 package com.Gather.Project.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -94,5 +98,31 @@ public class ProjectPageController {
 //					return "Project/allProjectInForestage";
 //											
 //				}
+		
+		// find  Project By search 透過搜尋的關鍵字找到相關資料
+		
+		@GetMapping("/Project/ProjectSearch")
+		public String  getProjectBySearch(
+				@RequestParam("search") String search,Model model) {
+			
+			System.out.println("search:"+search);
+			Set<String> searchName=new HashSet<>();
+			searchName.add("%"+search+"%");
+
+			System.out.println(searchName);
+			List<ProjectBean> result = projectService.getProjectBySearch(searchName);
+			model.addAttribute("allProject",result);
+			return "Project/projectSearch";					
+		}	
+		
+		@GetMapping("/Project/category")
+		public String  getProjectBypStatusAndpCategory(
+				@RequestParam("category") String pCategory,Model model) {
+			List<ProjectBean> result = projectService.getProjectBypStatusAndpCategory("通過",pCategory );
+			model.addAttribute("allProject",result);
+			return "Project/projectCategory";					
+		}
+		
+
 	
 }
