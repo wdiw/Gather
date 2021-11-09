@@ -209,7 +209,7 @@ public class ProjectController {
 			e.printStackTrace();
 		}
 		
-		projectPlanFilePath1=filePath+ pName+"projectPlan1"+projectPlanExt1;//存方案一的相對路徑static\images\Project\xxx\projectPlan1.jpg
+		projectPlanFilePath1=filePath+ pName+"/projectPlanImage1"+projectPlanExt1;//存方案一的相對路徑static\images\Project\xxx\projectPlan1.jpg
 		
 		//New 多方的Bean
 		ProjectPlanBean projectPlanBean1 = new ProjectPlanBean(projectPlanPrice1, projectPlanContent1,ETA1, projectPlanFilePath1, pBean);
@@ -233,7 +233,7 @@ public class ProjectController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				projectPlanFilePath2=filePath+ pName+"projectPlan2"+projectPlanExt2;//存方案二的相對路徑static\images\Project\xxx\projectPlan2.jpg
+				projectPlanFilePath2=filePath+ pName+"/projectPlanImage2"+projectPlanExt2;//存方案二的相對路徑static\images\Project\xxx\projectPlan2.jpg
 				//New 多方的Bean
 				ProjectPlanBean projectPlanBean2 = new ProjectPlanBean(projectPlanPrice2, projectPlanContent2,ETA2, projectPlanFilePath2, pBean);
 				//加進List中
@@ -253,7 +253,7 @@ public class ProjectController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				projectPlanFilePath3=filePath+ pName+"projectPlan3"+projectPlanExt3;//存方案三的相對路徑static\images\Project\xxx\projectPlan3.jpg
+				projectPlanFilePath3=filePath+ pName+"/projectPlanImage3"+projectPlanExt3;//存方案三的相對路徑static\images\Project\xxx\projectPlan3.jpg
 				//New 多方的bean
 				ProjectPlanBean projectPlanBean3 = new ProjectPlanBean(projectPlanPrice3, projectPlanContent3,ETA3, projectPlanFilePath3, pBean);
 				//加進List中

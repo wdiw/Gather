@@ -117,7 +117,7 @@ public class ProjectPageController {
 		
 		@GetMapping("/Project/category")
 		public String  getProjectBypStatusAndpCategory(
-				@RequestParam("pCategory") String pCategory,Model model) {
+				@RequestParam("category") String pCategory,Model model) {
 			List<ProjectBean> result = projectService.getProjectBypStatusAndpCategory("通過",pCategory );
 			model.addAttribute("allProject",result);
 			return "Project/projectCategory";					

@@ -1,6 +1,7 @@
-  
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+			<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -107,7 +108,7 @@
     	<div class="container">
     		<div class="row">
     			<div class="col-lg-6 mb-5 ftco-animate">
-    				<a href="../images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg" class="image-popup prod-img-bg"><img src="../images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg" class="img-fluid" alt="Colorlib Template"></a>
+    				<a href="#" class="image-popup prod-img-bg"><img src="../${pBean.pImageCover}" class="img-fluid" alt="Colorlib Template"></a>
     			</div>
     			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
     				<h3>${pBean.pName}</h3>
@@ -187,9 +188,9 @@
 
               <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
               	<div class="p-4">
-					<h3 class="mb-4">Nike Free RN 2019 iD</h3>
+					<h3 class="mb-4">贊助內容</h3>
 					<div class="row" id="ProjectContentText">
-					  <div class="col-sm-10"><p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p></div>
+					  <div class="col-sm-10"><p>${pBean.pContent}</p></div>
 					</div>
 					
 					<!-- 放方案 -->
@@ -232,32 +233,18 @@
 					  </div>
 					</div> -->
 
-					<div class="card" style="width: 18rem;">
-					  <div class="card-body">
-						  <img src="../images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg" class="card-img-top" alt="...">
-						<h5 class="card-title">Special title treatment</h5>
-						<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						<a href="#" class="btn btn-primary">Go somewhere</a>
-					  </div>
-					</div>
-
-					<div class="card" style="width: 18rem;">
-					  <div class="card-body">
-						<img src="../images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg" class="card-img-top" alt="...">
-						<h5 class="card-title">Special title treatment</h5>
-						<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						<a href="#" class="btn btn-primary">Go somewhere</a>
-					  </div>
-					</div>
-
-					<div class="card" style="width: 18rem;">
-					  <div class="card-body">
-						<img src="../images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg" class="card-img-top" alt="...">
-						<h5 class="card-title">Special title treatment</h5>
-						<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						<a href="#" class="btn btn-primary">Go somewhere</a>
-					  </div>
-					</div>
+				
+	<c:forEach items='${projectPlanList}' var='projectPlan'>
+		<div class="card" style="width: 18rem;">
+		  <div class="card-body">
+			  <img src="../${projectPlan.projectPlanImage}" class="card-img-top" alt="...">
+			<h5 class="card-title">${projectPlan.ETA}</h5>
+			<p class="card-text">${projectPlan.projectPlanContent}</p>
+			<a href="#" class="btn btn-primary">Go somewhere</a>
+		  </div>
+		</div>
+	</c:forEach>
+					
               	</div>
               </div>
 

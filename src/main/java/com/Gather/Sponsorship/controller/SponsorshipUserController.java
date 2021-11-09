@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Gather.Project.model.ProjectBean;
+import com.Gather.Project.model.ProjectPlanBean;
+import com.Gather.Project.service.ProjectPlanService;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.Sponsorship.model.SponsorOrderBean;
 import com.Gather.Sponsorship.model.SponsorshipBean;
@@ -43,22 +45,30 @@ public class SponsorshipUserController {
 	ProjectService projectService;
 	MemberService memberService;
 	SponsorOrderService sponsorOrderService;
-
+	ProjectPlanService  projectPlanService;
+	
 	@Autowired
 	public SponsorshipUserController(ProjectService projectService, MemberService memberService,
-			SponsorOrderService sponsorOrderService) {
+			SponsorOrderService sponsorOrderService,ProjectPlanService  projectPlanService) {
 		this.projectService = projectService;
 		this.memberService = memberService;
 		this.sponsorOrderService = sponsorOrderService;
+		this.projectPlanService=projectPlanService;
 	}
 
+	
 	@GetMapping("/showProject/{pID}")
 	public String showProject(@PathVariable("pID") Integer pID, HttpServletRequest request) {
 		ProjectBean pBean = projectService.getProjectById(pID);
 		request.getSession().setAttribute("pBean", pBean);
+		List<ProjectPlanBean> projectPlanList = projectPlanService.getProjectPlansByProjectBean(pBean);
+		request.getSession().setAttribute("projectPlanList", projectPlanList);
+		
 		return "Sponsorship/project";
 	}
 
+	
+	
 	
 	@GetMapping("/payment")
 	public String payment(HttpServletRequest reg, HttpServletRequest request) {
