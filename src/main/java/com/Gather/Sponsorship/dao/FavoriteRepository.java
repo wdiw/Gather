@@ -13,6 +13,10 @@ public interface FavoriteRepository extends JpaRepository<FavoriteBean, Integer>
 
 	@Query(value = " select * from Favorite where mID=:mID",nativeQuery = true)
 	List<FavoriteBean> findByMemberID(Integer mID);
+	
+	@Query(value = " select * from Favorite where mID=:mID and pID=:pID",nativeQuery = true)
+	FavoriteBean findByMemberIDAndProjectID(Integer mID,Integer pID);
+	
 
 
 }

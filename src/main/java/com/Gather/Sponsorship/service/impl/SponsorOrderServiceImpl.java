@@ -87,8 +87,8 @@ public class SponsorOrderServiceImpl implements SponsorOrderService{
 
 
 	@Override
-	public void deleteFavorite(Integer favorite) {
-		favoriteRepository.deleteById(favorite);
+	public void deleteFavorite(FavoriteBean favoriteBean) {
+		favoriteRepository.delete(favoriteBean);
 	}
 
 
@@ -96,6 +96,15 @@ public class SponsorOrderServiceImpl implements SponsorOrderService{
 	public List<FavoriteBean> getFavoriteByMemberID(Integer mID) {
 		return favoriteRepository.findByMemberID(mID);
 	}
+
+
+	@Override
+	public FavoriteBean getFavoriteByMemberIDAndProjectID(Integer mID, Integer pID) {
+		return favoriteRepository.findByMemberIDAndProjectID(mID, pID);
+	}
+
+
+	
 
 
 

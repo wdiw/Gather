@@ -27,9 +27,11 @@ public interface SponsorOrderService {
 	
 	FavoriteBean insertFavorite(FavoriteBean favoriteBean);
 	
-	void deleteFavorite(Integer favorite);
+	void deleteFavorite(FavoriteBean favoriteBean);
 	
 
 	List<FavoriteBean> getFavoriteByMemberID(Integer mID);
+	
+	FavoriteBean getFavoriteByMemberIDAndProjectID(Integer mID,Integer pID);
 
 }

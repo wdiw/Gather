@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="../https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
 
     <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
@@ -74,7 +74,7 @@
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+	          <li class="nav-item cta cta-colored"><a href="/Gather/myFav/${mBean.id}" class="nav-link"><span class="icon-shopping_cart"></span>${favCount}</a></li>
 
 	        </ul>
 	      </div>
@@ -153,7 +153,16 @@
 	          		<p style="color: #000;">80 piece available</p>
 	          	</div>
           	</div>
-          	<p><a href="<c:url value='/favorite/131'/>" class="btn btn-black py-3 px-5 mr-2">Add to Favorite</a><a href="../payment" class="btn btn-primary py-3 px-5">Buy now</a></p>
+          	<p>
+          	<c:choose>
+          	<c:when test="${favoriteBean==null}">
+          	<button onclick="addFav(${pBean.pID})" class="btn btn-black py-3 px-5 mr-2"><i class="far fa-heart"></i></button>
+          	</c:when>
+          	<c:otherwise>
+          	<button onclick="delFav(${pBean.pID})" class="btn btn-black py-3 px-5 mr-2"><i class="fas fa-heart"></i></button>
+          	</c:otherwise>
+          	</c:choose>
+          	<a href="../payment" class="btn btn-primary py-3 px-5">Buy now</a></p>
     			</div>
     		</div>
 
@@ -454,6 +463,43 @@
 		    });
 		    
 		});
+		
+		function addFav(pID) {
+            $.ajax({
+//               url: "<c:url value='/favorite/" + pID +"'/>",
+              url: "<c:url value='/favorite/131'/>",
+              type: 'get',
+              contentType: "application/json; charset=utf-8",
+              data: {},
+              success: function (data) {
+//                location.href= "<c:url value='/favorite/" + pID +"'/>";
+               location.reload();
+
+					
+
+                },
+                  
+            });
+
+          };
+          function delFav(pID) {
+              $.ajax({
+//                 url: "<c:url value='/favorite/" + pID +"'/>",
+                url: "<c:url value='/delFavorite/131'/>",
+                type: 'get',
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                success: function (data) {
+//                  location.href= "<c:url value='/favorite/" + pID +"'/>";
+                 location.reload();
+
+  					
+
+                  },
+                    
+              });
+
+            };
 	</script>
     
   </body>

@@ -34,6 +34,7 @@ public class ProjectBean implements Serializable {
 	private String pEDate;//專案結束日期
 	private Integer mID;//會員ID
 	private String pStatus;//專案狀態
+	private Integer pAmountNow;
 	
 	@OneToMany(mappedBy = "projectBean",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
@@ -182,6 +183,14 @@ public class ProjectBean implements Serializable {
 
 	public void setFavoriteBeans(Set<FavoriteBean> favoriteBeans) {
 		this.favoriteBeans = favoriteBeans;
+	}
+
+	public Integer getpAmountNow() {
+		return pAmountNow;
+	}
+
+	public void setpAmountNow(Integer pAmountNow) {
+		this.pAmountNow = pAmountNow;
 	}
 	
 	
