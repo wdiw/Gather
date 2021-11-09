@@ -62,7 +62,7 @@ public class SponsorshipUserController {
 	public String showProject(@PathVariable("pID") Integer pID, HttpServletRequest request) {
 		ProjectBean pBean = projectService.getProjectById(pID);
 		Member member = (Member) request.getSession().getAttribute("memberData");
-		Member mBean = memberService.getMemberInfoByID(member.getId());
+		Member mBean = memberService.queryMemberById(member.getId());
 		FavoriteBean favoriteBean = sponsorOrderService.getFavoriteByMemberIDAndProjectID(mBean.getId(), pID);
 		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
 		List<ProjectPlanBean> projectPlanList = projectPlanService.getProjectPlansByProjectBean(pBean);
@@ -79,7 +79,7 @@ public class SponsorshipUserController {
 	@GetMapping("/payment")
 	public String payment(HttpServletRequest reg, HttpServletRequest request, @RequestParam("pPID") Integer pPID) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
-		Member mBean = memberService.getMemberInfoByID(member.getId());
+		Member mBean = memberService.queryMemberById(member.getId());
 		ProjectPlanBean pPBean = projectPlanService.getProjectPlanByProjectPlanID(pPID);
 		request.getSession().setAttribute("pPBean", pPBean);
 		request.getSession().setAttribute("mBean", mBean);
@@ -91,7 +91,7 @@ public class SponsorshipUserController {
 	@GetMapping("/sponsorshipInfo")
 	public String sponsorshipInfo(HttpServletRequest reg) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
-		Member mBean = memberService.getMemberInfoByID(member.getId());
+		Member mBean = memberService.queryMemberById(member.getId());
 
 		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(mBean.getId());
 		if (sBean.isEmpty()) {
@@ -109,7 +109,7 @@ public class SponsorshipUserController {
 	@GetMapping("/sponsoredInfo")
 	public String sponsoredInfo(HttpServletRequest reg) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
-		Member mBean = memberService.getMemberInfoByID(member.getId());
+		Member mBean = memberService.queryMemberById(member.getId());
 		List<ProjectBean> pBean = projectService.getAllProjectBymID(mBean.getId());
 		if (pBean.isEmpty()) {
 			return "Sponsorship/noSponsorshiped";
@@ -130,7 +130,7 @@ public class SponsorshipUserController {
 
 			throws IOException {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
-		Member mBean = memberService.getMemberInfoByID(member.getId());
+		Member mBean = memberService.queryMemberById(member.getId());
 
 		List<ProjectBean> pBean = projectService.getAllProjectBymID(mBean.getId());
 		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByProposerID(pBean.get(0).getmID());
@@ -146,7 +146,7 @@ public class SponsorshipUserController {
 	@GetMapping("/favorite/{pID}")
 	public ResponseEntity<String> addFavorite(HttpServletRequest request, @PathVariable(name = "pID") String pID) {
 		Member member = (Member) request.getSession().getAttribute("memberData");
-		Member mBean = memberService.getMemberInfoByID(member.getId());
+		Member mBean = memberService.queryMemberById(member.getId());
 		ProjectBean pBean = projectService.getProjectById(Integer.parseInt(pID));
 		FavoriteBean favoriteBean = new FavoriteBean();
 		favoriteBean.setMember(mBean);
@@ -160,7 +160,7 @@ public class SponsorshipUserController {
 	@GetMapping("/delFavorite/{pID}")
 	public ResponseEntity<String> deleteFavorite(HttpServletRequest request, @PathVariable(name = "pID") String pID) {
 		Member member = (Member) request.getSession().getAttribute("memberData");
-		Member mBean = memberService.getMemberInfoByID(member.getId());
+		Member mBean = memberService.queryMemberById(member.getId());
 		ProjectBean pBean = projectService.getProjectById(Integer.parseInt(pID));
 		FavoriteBean favoriteBean = sponsorOrderService.getFavoriteByMemberIDAndProjectID(mBean.getId(),
 				Integer.parseInt(pID));
@@ -174,7 +174,7 @@ public class SponsorshipUserController {
 	@GetMapping("/myFav/{mID}")
 	public String favList(HttpServletRequest request, @PathVariable(name = "mID") String mID) {
 		Member member = (Member) request.getSession().getAttribute("memberData");
-		Member mBean = memberService.getMemberInfoByID(member.getId());
+		Member mBean = memberService.queryMemberById(member.getId());
 		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
 		ArrayList<ProjectBean> projectBeans = new ArrayList<ProjectBean>();
 		for (int i = 0; i < favoriteBeans.size(); i++) {

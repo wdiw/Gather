@@ -5,7 +5,7 @@ import java.util.List;
 import com.Gather.member.entity.Member;
 
 public interface MemberService {
-	void addMember(Member theMember);
+	void insertOrUpdateMember(Member theMember);
 
 	void changePwdById(Member theMember);
 
@@ -16,9 +16,13 @@ public interface MemberService {
 	Member queryMemberById(Integer theMemberId);
 
 	void deleteMemberById(Integer theMemberId);
-	
+
 	Member getMemberByAccountAndPassword(Member theMember);
-	
-	Member getMemberInfoByID(Integer mID);
+
+	// 用帳號找會員
+	Member findByAccount(String account);
+
+	// 用密碼找會員
+	Member findByPassword(String password);
 
 }

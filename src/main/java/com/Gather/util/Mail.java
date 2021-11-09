@@ -27,7 +27,6 @@ public class Mail {
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.port", "587");
-		 props.put("mail.smtp.starttls.enable", "true");
 //		props.put("mail.debug", "true");
 
 		try {
