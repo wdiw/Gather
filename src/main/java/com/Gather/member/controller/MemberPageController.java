@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,7 +59,27 @@ public class MemberPageController {
 	}
 
 	@GetMapping("/backend")
-	public String test() {
+	public String test(HttpServletRequest req) {
+		List<Member> allMemberData = memberService.queryMemberAll();
+		Integer male=0;
+		Integer female=0;
+		System.out.println(allMemberData);
+		for (Member member : allMemberData) {
+			if(member.getSexual()==null) {
+				continue;
+			}else if (member.getSexual().equals("男")) { //JAVA要用雙引號!!
+				male = male +1 ;
+			}else if (member.getSexual().equals("女")) {
+				female = female +1;
+			}
+			
+		}
+		System.out.println(male);
+		System.out.println(female);
+		ArrayList<Integer> statisticsMember = new ArrayList<Integer>();
+		statisticsMember.add(female);
+		statisticsMember.add(male);
+		req.getSession().setAttribute("statisticsMember", statisticsMember);
 		return "backend";
 	}
 
@@ -154,10 +175,18 @@ public class MemberPageController {
 	@PostMapping("/memberUpdate/{id}")
 	@ResponseBody
 	public ResponseEntity<String> addUpdateOrderInfo(
-													@RequestBody Member theMember,
-													@RequestParam(required = false, name = "memberImage") MultipartFile photo, 
-													HttpServletRequest req)throws IOException {
-
+		@RequestParam("id") Integer id,
+		@RequestParam("name") String name,
+		@RequestParam("sex") String sexual,
+		@RequestParam("status") String status,
+		@RequestParam("account") String account,
+		@RequestParam("password") String password,
+		@RequestParam("phone") String phone,
+		@RequestParam("birthday") String birthday,
+		@RequestParam("address") String address,
+		@RequestParam(required = false, name = "memberImage") MultipartFile photo, 
+		HttpServletRequest req)throws IOException {
+		Member theMember = new Member(id, name, status, account, password, address, sexual, birthday, phone);
 		savePhotoByUpdatePage(theMember, photo, req); //儲存圖片
 		memberService.insertOrUpdateMember(theMember); //更新會員資料
 		return new ResponseEntity<String>(HttpStatus.OK);
