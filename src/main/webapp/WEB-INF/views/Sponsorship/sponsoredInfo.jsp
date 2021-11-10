@@ -14,6 +14,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    	   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -78,7 +80,8 @@
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+<li class="nav-item cta cta-colored"><a
+						href="/Gather/myFav/${mBean.id}" class="nav-link"><i class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
 
 	        </ul>
 	      </div>
@@ -128,9 +131,9 @@
 						      	<td class="sID" style="display:none">${sBean.sID}</td>
 						        <td class="product-remove sPName">${sBean.sPName}</td>
 						        
-						        <td class="image-prod projectImage"><img width='80' height='80'
-														src="${sBean.projectImage}"
-														class="img-circle" /></td>
+						        <td class="image-prod projectImage"><a href="./showProject/${sBean.sPID}"><img width='80' height='80'
+														src="${sBean.projectImage}" 
+														class="img-circle" /></a></td>
 						        <td class="price sName">${sBean.sName}</td>
 						        <td class="price sPhone">${sBean.sPhone}</td>
 						        <td class="product-name sAddress">${sBean.sAddress}</td>

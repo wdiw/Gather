@@ -79,7 +79,8 @@
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+<li class="nav-item cta cta-colored"><a
+						href="/Gather/myFav/${mBean.id}" class="nav-link"><i class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
 
 	        </ul>
 	      </div>
@@ -113,16 +114,15 @@
 						        <th style="width:1px">贊助進度</th>
 						        <th>贊助截止日</th>
 						        <th>移除</th>
-						     
 						      </tr>
 						    </thead>
 						    <tbody>
 						    <c:forEach items='${projectBeans}' var='projectBeans' >
 								
 						     	<tr class="text-center">
-						        <td class="image-prod projectImage"><img width='80' height='80'
+						        <td class="image-prod projectImage"><a href="../showProject/${projectBeans.pID}"><img width='80' height='80'
 														src="../${projectBeans.pImageCover}"
-														class="img-circle" /></td>
+														class="img-circle" /></a></td>
 						      	
 						        <td class="product-remove sPName">${projectBeans.pName}</td>
 						        

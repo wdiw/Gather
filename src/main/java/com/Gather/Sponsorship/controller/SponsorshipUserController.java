@@ -81,6 +81,9 @@ public class SponsorshipUserController {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
 		Member mBean = memberService.queryMemberById(member.getId());
 		ProjectPlanBean pPBean = projectPlanService.getProjectPlanByProjectPlanID(pPID);
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+		int favCount = favoriteBeans.size();
+		request.getSession().setAttribute("favCount", favCount);
 		request.getSession().setAttribute("pPBean", pPBean);
 		request.getSession().setAttribute("mBean", mBean);
 		return "Sponsorship/payment";
@@ -92,6 +95,10 @@ public class SponsorshipUserController {
 	public String sponsorshipInfo(HttpServletRequest reg) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
 		Member mBean = memberService.queryMemberById(member.getId());
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+		int favCount = favoriteBeans.size();
+		reg.getSession().setAttribute("favCount", favCount);
+		reg.getSession().setAttribute("mBean", mBean);
 
 		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(mBean.getId());
 		if (sBean.isEmpty()) {
@@ -111,11 +118,15 @@ public class SponsorshipUserController {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
 		Member mBean = memberService.queryMemberById(member.getId());
 		List<ProjectBean> pBean = projectService.getAllProjectBymID(mBean.getId());
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+		int favCount = favoriteBeans.size();
+		reg.getSession().setAttribute("favCount", favCount);
 		if (pBean.isEmpty()) {
 			return "Sponsorship/noSponsorshiped";
 		}
 		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByProposerID(pBean.get(0).getmID());
 		reg.getSession().setAttribute("sBean", sBean);
+		reg.getSession().setAttribute("mBean", mBean);
 		return "Sponsorship/sponsoredInfo";
 
 	}
@@ -181,6 +192,10 @@ public class SponsorshipUserController {
 			ProjectBean projectBean = favoriteBeans.get(i).getProjectBean();
 			projectBeans.add(projectBean);
 		}
+	
+		int favCount = favoriteBeans.size();
+		request.getSession().setAttribute("favCount", favCount);
+		request.getSession().setAttribute("mBean", mBean);
 
 		request.getSession().setAttribute("projectBeans", projectBeans);
 		return "Sponsorship/favorite";

@@ -104,8 +104,9 @@
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html"
-						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+					<li class="nav-item cta cta-colored"><a
+						href="/Gather/myFav/${mBean.id}" class="nav-link"><i class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
+
 
 				</ul>
 			</div>
@@ -185,7 +186,7 @@
 											style="position: absolute; left: 10px; top: 18px; font-size: 22px; text-align: center;"></i>
 										<input type="number" class="form-control" placeholder="0" min="0"
 											style="padding-left: 32PX; font-size: 20px; padding-bottom: 8px"
-											name="sBonus" id="sBonus">
+											name="sBonus" id="sBonus" onchange="getBonus();getTotal()">
 									</div>
 								</div>
 							</div>
@@ -204,7 +205,7 @@
 								<div class="form-group">
 									<label for="phone">回饋優惠</label> <input type="text"
 										class="form-control" placeholder="" name="sDiscount"
-										id="sDiscount">
+										id="sDiscount" onchange="getDiscount();getTotal()" >
 								</div>
 							</div>
 
@@ -223,17 +224,17 @@
 									style="width: 450px">
 									<h3 class="billing-heading mb-4">贊助總額</h3>
 									<p class="d-flex">
-										<span>方案金額</span> <span>$20.60</span>
+										<span>方案金額</span> <span>$${pPBean.projectPlanPrice}</span>
 									</p>
 									<p class="d-flex">
-										<span>加碼贊助</span> <span>$0.00</span>
+										<span>加碼贊助</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sBonus_confirm" value=""/></span>
 									</p>
 									<p class="d-flex">
-										<span>回饋金折抵</span> <span>$3.00</span>
+										<span>回饋金折抵</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sDiscount_confirm" value="" /></span>
 									</p>
 									<hr>
 									<p class="d-flex total-price">
-										<span>總金額</span> <span>$17.60</span>
+										<span>總金額</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sTotal_confirm" value=""/></span>
 									</p>
 								</div>
 							</div>
@@ -528,9 +529,36 @@
 // 				})
 
 
+
+
        			
 				    
 			});
+		
+	        
+	    function getBonus(){
+	        var sBonus = document.getElementById('sBonus').value; 
+	        document.getElementById('sBonus_confirm').value ="$"+sBonus;
+	        
+	    }
+	    
+	        
+	    function getDiscount(){
+	        var sDiscount = document.getElementById('sDiscount').value; 
+	        document.getElementById('sDiscount_confirm').value ="$"+sDiscount;
+	        
+	    }
+	    
+	    function getTotal(){
+	    	var planPrice_string=${pPBean.projectPlanPrice};
+	    	var planPrice=parseInt(planPrice_string);
+	    	var sDiscount = document.getElementById('sDiscount').value; 
+	    	var sBonus = document.getElementById('sBonus').value; 
+	    	var sTotal_confirm=planPrice+(sBonus-sDiscount);
+	    	document.getElementById('sTotal_confirm').value ="$"+sTotal_confirm;
+	    		
+	    }
+	 
 			
 			
 		

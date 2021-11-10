@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.service.ProjectService;
-
+import com.Gather.Sponsorship.model.FavoriteBean;
 import com.Gather.Sponsorship.model.SponsorOrderBean;
 import com.Gather.Sponsorship.service.SponsorOrderService;
 import com.Gather.member.entity.Member;
@@ -122,7 +122,7 @@ public class SponsorshipPageController {
 	
 	@GetMapping("/sponsorshipSearch")
 	public String  getSponsorshipBySearch(
-			@RequestParam("search") String search,Model model) {
+			@RequestParam("search") String search,Model model,HttpServletRequest request) {
 		
 		System.out.println("search:"+search);
 		Set<String> searchName=new HashSet<>();
@@ -130,6 +130,11 @@ public class SponsorshipPageController {
 		
 		System.out.println(searchName);
 		List<SponsorOrderBean> result = sponsorOrderService.getSponsorshipBySearch(searchName);
+		Member member = (Member) request.getSession().getAttribute("memberData");
+		Member mBean = memberService.queryMemberById(member.getId());
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+		int favCount = favoriteBeans.size();
+		request.getSession().setAttribute("favCount", favCount);
 		model.addAttribute("sBean",result);
 		return "Sponsorship/sponsorshipSearch";					
 	}	

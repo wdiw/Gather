@@ -368,14 +368,9 @@
 					<li class="nav-item"><a class="nav-link"
 						data-toggle="collapse" href="#charts" aria-expanded="false"
 						aria-controls="charts"> <i class="icon-bar-graph menu-icon"></i>
-							<span class="menu-title">Sponsorship</span> <i class="menu-arrow"></i>
+							<span class="menu-title" href="orders">訂單管理</span> <i class="menu-arrow"></i>
 					</a>
-						<div class="collapse" id="charts">
-							<ul class="nav flex-column sub-menu">
-								<li class="nav-item"><a class="nav-link" href="orders">訂單管理</a></li>
-								<li class="nav-item"><a class="nav-link" href="addorder">新增訂單</a></li>
-							</ul>
-						</div></li>
+						</li>
 					<li class="nav-item"><a class="nav-link"
 						data-toggle="collapse" href="#tables" aria-expanded="false"
 						aria-controls="tables"> <i class="icon-grid-2 menu-icon"></i>
@@ -417,7 +412,7 @@
 											<thead>
 												<tr>
 													<th><i class="mdi mdi-nutrition"></i>訂單編號</th>
-													<th><i class="mdi mdi-account-star"></i> 贊助人</th>
+													<th><i class="mdi mdi-account-star"></i> 贊助人編號</th>
 													<th> <i class="mdi mdi-file-image"></i> 專案圖片</th>
 													<th><i class="mdi mdi-counter"></i>專案編號</th>
 													<th><i class="mdi mdi-book"></i>專案名稱</th>
@@ -429,9 +424,9 @@
 											<c:forEach items='${orders}' var='order'>
 												<tr>
 													<td>${order.sID}</td>
-													<td>${order.sName}</td>
+													<td>${order.mID}</td>
 													<td><img width='50' height='50'
-														src="<c:url value='/getPicture/${order.sID}'/>"
+														src="${order.projectImage}"
 														class="img-rounded" /></td>
 													<td>${order.sPID}</td>
 													<td>${order.sPName}</td>

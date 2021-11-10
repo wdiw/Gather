@@ -98,8 +98,8 @@
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html"
-						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+					<li class="nav-item cta cta-colored"><a
+						href="/Gather/myFav/${mBean.id}" class="nav-link"><i class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
 
 				</ul>
 			</div>
@@ -166,8 +166,8 @@
 										<tr class="text-center">
 											<td class="product-remove">${sBean.sPName}</td>
 
-											<td class="image-prod"><img width='80' height='80'
-												src="${sBean.projectImage}" class="img-circle" /></td>
+											<td class="image-prod"><a href="./showProject/${sBean.sPID}"><img width='80' height='80'
+												src="${sBean.projectImage}" class="img-circle" /></a></td>
 
 											<td class="product-name">$${sBean.sTotal}</td>
 											<td class="price">${sBean.paymentMethod}</td>

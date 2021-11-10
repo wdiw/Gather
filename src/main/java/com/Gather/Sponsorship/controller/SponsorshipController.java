@@ -8,6 +8,7 @@ import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -30,6 +31,8 @@ import com.Gather.Sponsorship.model.SponsorOrderBean;
 import com.Gather.Sponsorship.model.SponsorshipBean;
 import com.Gather.Sponsorship.service.SponsorOrderService;
 import com.Gather.Sponsorship.service.SponsorshipService;
+import com.Gather.member.entity.Member;
+import com.Gather.member.service.MemberService;
 import com.google.gson.Gson;
 
 @Controller
@@ -38,6 +41,7 @@ public class SponsorshipController {
 	SponsorshipService sponsorshipService;
 	SponsorOrderService sponsorOrderService;
 	ServletContext servletContext;
+	MemberService memberService;
 
 	@Autowired
 	public SponsorshipController(SponsorshipService sponsorshipService, ServletContext servletContext, SponsorOrderService sponsorOrderService) {
@@ -67,7 +71,7 @@ public class SponsorshipController {
 	// 查詢所有訂單
 
 	@GetMapping("/orders")
-	public String list(Model model) {
+	public String list(Model model,HttpServletRequest reg) {
 		List<SponsorOrderBean> sBeans = sponsorOrderService.getOrders();
 		model.addAttribute("orders", sBeans);
 		return "Sponsorship/orders";
@@ -75,8 +79,8 @@ public class SponsorshipController {
 
 	// 查單筆
 	@GetMapping("/order/{sID}")
-	public String order(@PathVariable("sID") Integer sID, Model model) {
-		SponsorshipBean sBean = sponsorshipService.getOrderByID(sID);
+	public String order(@PathVariable("sID") Integer sID, Model model,HttpServletRequest reg) {
+		SponsorOrderBean sBean = sponsorOrderService.getOrderBySponsorshipID(sID);
 		model.addAttribute("sBean", sBean);
 		return "Sponsorship/updateOrder";
 	}

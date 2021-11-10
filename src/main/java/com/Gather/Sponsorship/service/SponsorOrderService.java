@@ -3,13 +3,10 @@ package com.Gather.Sponsorship.service;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletResponse;
 
-import com.Gather.Project.model.ProjectBean;
 import com.Gather.Sponsorship.model.FavoriteBean;
 import com.Gather.Sponsorship.model.SponsorOrderBean;
-import com.Gather.Sponsorship.model.SponsorshipBean;
-import com.Gather.member.entity.Member;
+
 
 public interface SponsorOrderService {
 

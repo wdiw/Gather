@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +47,7 @@ public class Member {
 	@Column(name = "m_phone")
 	private String  phone;
 	
-	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	Set<FavoriteBean> favoriteBeans=new HashSet<>();
 	
 	
