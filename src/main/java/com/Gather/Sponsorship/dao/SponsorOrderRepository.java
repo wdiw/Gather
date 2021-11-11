@@ -19,4 +19,8 @@ public interface SponsorOrderRepository extends JpaRepository<SponsorOrderBean, 
 	void updateOrders(Integer sID,String sName,String sAddress,String sPhone,String sEmail);
 	
 	List<SponsorOrderBean> findBysPID(Integer pID);
+	
+	@Modifying
+	@Query(value="UPDATE SponsorOrder SET pAmountNow=:pAmountNow WHERE sPID=:sPID",nativeQuery=true)
+	void updateAmountNowBypID(Integer sPID,Integer pAmountNow);
 }

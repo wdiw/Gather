@@ -135,6 +135,12 @@ public class SponsorOrderServiceImpl implements SponsorOrderService{
 	}
 
 
+	@Override
+	public void updateAmountNowBysPID(Integer sPID, Integer pAmountNow) {
+		sponsorOrderRepository.updateAmountNowBypID(sPID, pAmountNow);
+	}
+
+
 	
 
 }

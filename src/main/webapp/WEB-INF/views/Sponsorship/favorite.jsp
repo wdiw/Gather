@@ -126,15 +126,17 @@
 						      	
 						        <td class="product-remove sPName">${projectBeans.pName}</td>
 						        
-						        <td class="price sName"><div class="progress">
-    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="${projectBeans.pAmountNow/projectBeans.pTarget*100}" aria-valuemin="0" aria-valuemax="" style="width:${projectBeans.pAmountNow/projectBeans.pTarget*100}%">
-
-    </div>
-  </div></td>
+						        <td class="price sName">
+						        	<div class="progress">
+									    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:${projectBeans.pAmountNow/projectBeans.pTarget*100}%;background-color:#977C00"></div>
+									</div>
+								    <div>$${projectBeans.pAmountNow} / ${projectBeans.pTarget}<br/>${projectBeans.pAmountNow/projectBeans.pTarget*100}%</div>
+								</td>
 						        <td class="price sPhone">${projectBeans.pEDate}</td>
 						       
 						        
-					           	<td class="quantity">
+<!-- 					        <td class="quantity"> -->
+								<td>
 						        	<p type='button' class="btn btn-primary py-3 px-4" id="button" onclick="delFav(${pBean.pID})"><i class="fas fa-trash-alt"></i></p>
 <%-- 						        	<button type='button' style="border: 0;background-color: white" id="button" onclick="delFav(${pBean.pID})"><i class="fas fa-trash-alt"></i></button> --%>
 						        </td>

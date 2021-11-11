@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Gather.Project.model.ProjectBean;
+import com.Gather.Project.model.ProjectPlanBean;
+import com.Gather.Project.service.ProjectPlanService;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.Sponsorship.model.FavoriteBean;
 import com.Gather.Sponsorship.model.SponsorOrderBean;
@@ -41,7 +43,8 @@ public class SponsorshipPageController {
 
 	@Autowired
 	ProjectService projectService;
-	
+	@Autowired
+	ProjectPlanService projectPlanService;
 	@Autowired
 	MemberService memberService;
 	@Autowired
@@ -72,19 +75,40 @@ public class SponsorshipPageController {
 
 		sBean.setsTime(sd);
 		sBean.setStatus("已付款");
-		Integer pAmountNow=sBean.getpAmountNow();
-		sponsorOrderService.insertOrder(sBean);
-		List<SponsorOrderBean> sBean_toatl=sponsorOrderService.getOrdersByPIDAndStatus(Integer.parseInt(sPID), sBean.getStatus());
-		for(int i=0;i<sBean_toatl.size();i++) {
-			 Integer sTotal_select= sBean_toatl.get(i).getsTotal();
-			 pAmountNow += sTotal_select;
-		}
+		ProjectBean pBean=projectService.getProjectById(Integer.parseInt(sPID));
+		
+		Integer pAmountNow= pBean.getpAmountNow();
+		
+		pAmountNow+=sTotal;
 		
 		sBean.setpAmountNow(pAmountNow);
 		
+//		Integer pAmountNow=sBean.getpAmountNow();
+		sponsorOrderService.insertOrder(sBean);
+//		List<SponsorOrderBean> sBean_toatl=sponsorOrderService.getOrdersByPIDAndStatus(Integer.parseInt(sPID), sBean.getStatus());
+//		for(int i=0;i<sBean_toatl.size();i++) {
+//			 Integer sTotal_select= sBean_toatl.get(i).getsTotal();
+//			 pAmountNow += sTotal_select;
+//		}
 		
+
+		ProjectPlanBean planBean = projectPlanService.getProjectPlanByProjectPlanID(Integer.parseInt(projectPlanID));
 		
-		sponsorOrderService.updateOrder(sBean);
+		Integer planAmount=planBean.getProjectPlanAmount();
+		planAmount+=sTotal;
+		
+		projectService.updateProjectAmountBypID(Integer.parseInt(sPID), pAmountNow);
+		projectPlanService.updateProjecPlantAmountByprojectPlanID(Integer.parseInt(projectPlanID), planAmount);
+		
+				
+		
+		Integer projectSponsorCount=pBean.getSponsorCount();
+		projectSponsorCount++;
+		
+		projectService.updateProjectSponsorCountBypID(pBean.getpID(), projectSponsorCount);
+		sponsorOrderService.updateAmountNowBysPID(Integer.parseInt(sPID), pAmountNow);
+		
+//		sponsorOrderService.updateOrder(sBean);
 
 
 		String tradeNo = "Gather" + sBean.getsID();
@@ -161,6 +185,8 @@ public class SponsorshipPageController {
 		List<SponsorOrderBean> ordersData = sponsorOrderService.getOrdersByPID(Integer.parseInt(sPID));
 		Integer project_Amount=ordersData.get(0).getpAmountNow();
 		ProjectBean pBean= projectService.getProjectById(Integer.parseInt(sPID));
+		List<ProjectPlanBean> planBean = projectPlanService.getProjectPlansByProjectBean(pBean);
+		model.addAttribute("planBean", planBean);
 		model.addAttribute("pBean", pBean);
 		model.addAttribute("project_Amount", project_Amount);
 		return "Sponsorship/project_sponsorData";

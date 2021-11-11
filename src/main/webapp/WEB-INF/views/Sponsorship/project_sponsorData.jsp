@@ -7,6 +7,13 @@
 <html lang="en">
 
 <head>
+<style type="text/css">
+canvas{
+  display: block;
+  margin: auto;
+}
+
+</style>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -411,7 +418,7 @@
           
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
-              <div class="card position-relative">
+              <div class="card position-relative" style="height:420px">
                 <div class="card-body">
                   <div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2" data-ride="carousel">
                     <div class="carousel-inner">
@@ -422,8 +429,13 @@
                             <p class="card-title">${pBean.pName}</p>
                               <h1 class="text-primary">$${project_Amount}</h1>
                               <h3 class="font-weight-500 mb-xl-4 text-primary">目標金額 : $${pBean.pTarget}</h3>
+                              <p class="mb-2 mb-xl-0">贊助數 : ${pBean.sponsorCount} 筆</p>
                               <p class="mb-2 mb-xl-0">截止日期 : ${pBean.pEDate}</p>
-                              <img class="img-rounded" alt="" src="../${pBean.pImageCover}" style="width: 210px;height: 130px;position: relative;left: 3px;top:20px">
+                              
+<div style="width: 10%;height: 10%;margin: 0">
+	<canvas id="canvas01" width="200" height="200"></canvas>
+</div>
+                              <img class="img-rounded" alt="" src="../${pBean.pImageCover}" style="width: 230px;height: 130px;position: relative;left: 365px;top:-20px">
                             </div>  
                             </div>
                           <div class="col-md-12 col-xl-9">
@@ -431,60 +443,22 @@
                               <div class="col-md-6 border-right">
                                 <div class="table-responsive mb-3 mb-md-0 mt-3">
                                   <table class="table table-borderless report-table">
+                                  <c:forEach items='${planBean}' var='planBean' >
                                     <tr>
-                                      <td class="text-muted">Illinois</td>
+                                      <td class="text-muted">方案${planBean.projectPlanID}</td>
                                       <td class="w-100 px-0">
                                         <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                          <div class="progress-bar bg-warning" role="progressbar" style="width: ${planBean.projectPlanAmount/project_Amount*100}%"></div>
                                         </div>
                                       </td>
-                                      <td><h5 class="font-weight-bold mb-0">713</h5></td>
+                                      <td><h5 class="font-weight-bold mb-0">$${planBean.projectPlanAmount}</h5></td>
+<%--                                       <td>${planBean.projectPlanAmount/project_Amount*100}%</td> --%>
                                     </tr>
-                                    <tr>
-                                      <td class="text-muted">Washington</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td><h5 class="font-weight-bold mb-0">583</h5></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">Mississippi</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td><h5 class="font-weight-bold mb-0">924</h5></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">California</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td><h5 class="font-weight-bold mb-0">664</h5></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">Maryland</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td><h5 class="font-weight-bold mb-0">560</h5></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">Alaska</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td><h5 class="font-weight-bold mb-0">793</h5></td>
-                                    </tr>
+                                    
+
+                                    
+                                    </c:forEach>
+                                   
                                   </table>
                                 </div>
                               </div>
@@ -496,86 +470,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="carousel-item">
-                        <div class="row">
-                          <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
-                            <div class="ml-xl-4 mt-3">
-                            <p class="card-title">Detailed Reports</p>
-                              <h1 class="text-primary">${project_Amount}</h1>
-                              <h3 class="font-weight-500 mb-xl-4 text-primary">North America</h3>
-                              <p class="mb-2 mb-xl-0">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
-                            </div>  
-                            </div>
-                          <div class="col-md-12 col-xl-9">
-                            <div class="row">
-                              <div class="col-md-6 border-right">
-                                <div class="table-responsive mb-3 mb-md-0 mt-3">
-                                  <table class="table table-borderless report-table">
-                                    <tr>
-                                      <td class="text-muted">Illinois</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td><h5 class="font-weight-bold mb-0">713</h5></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">Washington</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td><h5 class="font-weight-bold mb-0">583</h5></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">Mississippi</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td><h5 class="font-weight-bold mb-0">924</h5></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">California</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td><h5 class="font-weight-bold mb-0">664</h5></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">Maryland</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td><h5 class="font-weight-bold mb-0">560</h5></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">Alaska</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td><h5 class="font-weight-bold mb-0">793</h5></td>
-                                    </tr>
-                                  </table>
-                                </div>
-                              </div>
-                              <div class="col-md-6 mt-3">
-                                <canvas id="south-america-chart"></canvas>
-                                <div id="south-america-legend"></div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      
                     </div>
                     <a class="carousel-control-prev" href="#detailedReports" role="button" data-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -695,6 +590,69 @@
   <script src="../js/dashboard.js"></script>
   <script src="../js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
+  <script type="text/javascript">
+  var forEach = function (array, callback, scope) {
+		for (var i = 0; i < array.length; i++) {
+			callback.call(scope, i, array[i]);
+		}
+	};
+	window.onload = function(){
+		var max = -219.99078369140625;
+		forEach(document.querySelectorAll('.progress'), function (index, value) {
+		percent = value.getAttribute('data-progress');
+			value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - percent) / 100) * max);
+			value.querySelector('.value').innerHTML = percent + '%';
+		});
+	}
+	
+	// 44
+	var canvas01 = document.getElementById('canvas01');
+	var context01 = canvas01.getContext('2d');
+	var al01=0;
+	var start01=4.72;
+	var cw01=context01.canvas.width/2;
+	var ch01=context01.canvas.height/2;
+	var diff01;
+
+	function progressBar01()
+	{
+	  diff01=(al01/100)*Math.PI*2;
+	  context01.clearRect(0,0,400,200);
+	  context01.beginPath();
+	  context01.arc(cw01,ch01,50,0,2*Math.PI,false);
+	  context01.fillStyle='#FFF';
+	  context01.fill();
+	  context01.strokeStyle='#e9ecef';
+	  context01.stroke();
+	  context01.fillStyle='#000';
+	  context01.strokeStyle='#C2C287';
+	  context01.textAlign='center';
+	  context01.lineWidth=15;
+	  context01.font = '10pt Verdana';
+	  context01.beginPath();
+	  context01.arc(cw01,ch01,50,start01,diff01+start01,false);
+	  context01.stroke();
+	// Percentage Display 
+	var percentage=${project_Amount}/${pBean.pTarget}*100;
+	  context01.fillText(al01+'%',cw01+2,ch01+6);
+	  if(al01>=percentage)   //Change Percentage Here
+	  {
+	    clearTimeout(bar01);
+	  }
+	  al01++;
+	}
+
+	var bar01 = setInterval(progressBar01,50);
+
+	var canvas02 = document.getElementById('python-scripting');
+	var context02 = canvas02.getContext('2d');
+	var al02=0;
+	var start02=4.72;
+	var cw02=context02.canvas.width/2;
+	var ch02=context02.canvas.height/2;
+	var diff02;
+
+  </script>
 </body>
 
 </html>

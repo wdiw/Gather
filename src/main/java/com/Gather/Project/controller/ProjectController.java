@@ -2,40 +2,68 @@ package com.Gather.Project.controller;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+//import org.json.JSONArray;
+//import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.model.ProjectPlanBean;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.member.entity.Member;
+import com.Gather.member.service.MemberService;
+import com.Gather.util.Mail;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 
 @RestController
+@SessionAttributes("allProject")
 public class ProjectController {
 
 	ProjectService projectService;
 	ServletContext servletContext;// servletContext.getRealPath() 需要用
+	MemberService memberService;//寄信需要用
 
 	@Autowired
-	public ProjectController(ProjectService projectService, ServletContext servletContext) {
+	public ProjectController(ProjectService projectService, ServletContext servletContext,MemberService memberService) {
 		this.projectService = projectService;
 		this.servletContext = servletContext;
+		this.memberService=memberService;
 	}
 
 	// 刪除
@@ -56,32 +84,62 @@ public class ProjectController {
 			) {
 	
 		projectService.updateStatusBypID(pID, pStatus,reason );
+		
+		ProjectBean projectBean = projectService.getProjectById(pID);
+		String projectName = projectBean.getpName();
+		Integer mID = projectBean.getmID();//得到會員ID
+		
+		Member member = memberService.queryMemberById(mID);
+		String memberName = member.getName();
+		
+		
+		if(pStatus.equals("通過")) {
+			String statusChange="親愛的會員"+memberName+"您好~<br>您所提出的計畫 "+projectName+" 已通過，祝您募資計畫順利!";
+			Mail.SendGmail("Gather.WebService@gmail.com", " ChillSeph0729@gmail.com", "計畫審核通過通知",statusChange);
+		}else {
+			String statusChange="親愛的會員"+memberName+"您好~<br>您所提出的計畫 "+projectName+" 已未通過。原因為:<br>"+reason;
+			//member.getName()+"您好，您已成功登錄活動，活動名稱:"+activity.getName();
+			Mail.SendGmail("Gather.WebService@gmail.com", " ChillSeph0729@gmail.com", "計畫審核未通過通知",statusChange);
+		}
+	
+		
 		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
 	
 
 	
+	
+	
 	// 更新
 	@PutMapping(path = "/Project/theProject/{pID}")
 	@ResponseBody
-	public ResponseEntity<String> updateProjectById(@PathVariable("pID") int pID, @RequestParam("pName") String pName,
-			@RequestParam("pDescribe") String pDescribe, @RequestParam("pTarget") int pTarget,
-			@RequestParam("pSDate") String pSDate, @RequestParam("pEDate") String pEDate,
-			@RequestParam("pContent") String pContent, @RequestParam("pStatus") String pStatus,
-			@RequestParam(name = "changeImageCover", required = false) MultipartFile pImage,
-			@RequestParam("reason") String reason,HttpServletRequest request
+	public ResponseEntity<String> updateProjectById(
+			@PathVariable("pID") int pID,
+			@RequestParam("pName") String pName,
+			@RequestParam("pDescribe") String pDescribe,
+			@RequestParam("pTarget") int pTarget,
+			@RequestParam("pSDate") String pSDate,
+			@RequestParam("pEDate") String pEDate,
+			@RequestParam("pContent") String pContent,
+			@RequestParam("pStatus") String pStatus,
+			@RequestParam(name = "changeImageCover",required = false) MultipartFile pImage,
+			@RequestParam("reason") String reason,
+			HttpServletRequest request
+			
+			
 
 	) throws MalformedURLException {
 		Member memberData = (Member) request.getSession().getAttribute("memberData");
 		Integer mID = memberData.getId();
-		
+		Integer sponsorCount = projectService.getProjectById(pID).getSponsorCount();//取得已被贊助數
 
 		// 如果圖片沒有換掉，先把原路徑抓出來，再丟回去
 		if (pImage.isEmpty()) {
 
 			String filePath = projectService.getProjectById(pID).getpImageCover();
+			
 			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pSDate, pEDate, filePath, pDescribe, pContent, mID,
-					pStatus,reason);
+					pStatus,reason,sponsorCount);
 			projectService.updateProject(pBean);
 
 		} else {
@@ -108,12 +166,18 @@ public class ProjectController {
 
 			filePath += pName + "/" + pName + "_Cover" + ext;
 			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pSDate, pEDate, filePath, pDescribe, pContent, mID,
-					pStatus,reason);
+					pStatus,reason,sponsorCount);
 			projectService.updateProject(pBean);
 		}
 
 		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
+	
+	
+	
+	
+	
+	
 
 	// 新增
 	@PostMapping(path = "/Project/addProject")
@@ -211,11 +275,15 @@ public class ProjectController {
 		
 		projectPlanFilePath1=filePath+ pName+"/projectPlanImage1"+projectPlanExt1;//存方案一的相對路徑static\images\Project\xxx\projectPlan1.jpg
 		
+		projectPlanContent1=projectPlanContent1.replaceAll("/","<br>");
+		System.out.println("方案1內容為"+projectPlanContent1);
+		
 		//New 多方的Bean
 		ProjectPlanBean projectPlanBean1 = new ProjectPlanBean(projectPlanPrice1, projectPlanContent1,ETA1, projectPlanFilePath1, pBean);
 		//加進List中
 		ProjectPlanBeanList.add(projectPlanBean1);
 		}	
+			
 		
 		
 		
@@ -239,6 +307,8 @@ public class ProjectController {
 				//加進List中
 				ProjectPlanBeanList.add(projectPlanBean2);
 			}
+		
+		
 				
 		if(!(projectPlanImage3.isEmpty())) { 
 				// 處理贊助方案三圖片
@@ -254,13 +324,12 @@ public class ProjectController {
 					e.printStackTrace();
 				}
 				projectPlanFilePath3=filePath+ pName+"/projectPlanImage3"+projectPlanExt3;//存方案三的相對路徑static\images\Project\xxx\projectPlan3.jpg
+				
 				//New 多方的bean
 				ProjectPlanBean projectPlanBean3 = new ProjectPlanBean(projectPlanPrice3, projectPlanContent3,ETA3, projectPlanFilePath3, pBean);
 				//加進List中
 				ProjectPlanBeanList.add(projectPlanBean3);
 		}	
-		
-	
 		
 		//使用一方的set方法設定多方的list
 		pBean.setProjectPlanBeans(ProjectPlanBeanList);
@@ -271,6 +340,111 @@ public class ProjectController {
 		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
 
+//	//分頁功能
+	@GetMapping("/Project/page")
+//			public ResponseEntity<String> getProjectByPage(
+//	public String getProjectByPage(
+	
+	public	ResponseEntity<Map<String, Object>> getProjectByPage(
+			@RequestParam(defaultValue = "0") int page, //頁數
+		    @RequestParam(defaultValue = "3") int size, // 每頁幾筆
+//		    @RequestParam(defaultValue = "id,desc") String[] sort,
+		    Model model) {
+		
+		List<Order> orders = new ArrayList<Order>();
+
+		orders.add(new Order(getSortDirection("desc"), "pID"));
+		
+		
+		List<ProjectBean> projectBeanList = new ArrayList<ProjectBean>();
+	      
+		Pageable pagingSort = PageRequest.of(page, size, Sort.by(orders));
+	      
+	      Page<ProjectBean> pageProjs;
+	      
+	      pageProjs= projectService.findBypStatusContaining("通過", pagingSort);
+		
+//	      if (pageProjs.isEmpty()) {
+//	          return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//	        }
+	     
+	      projectBeanList = pageProjs.getContent();
+	      
+	      Map<String, Object> response = new HashMap<>();
+	      
+	      System.out.println("當前頁數"+pageProjs.getNumber());
+	      System.out.println("總頁數"+pageProjs.getTotalPages());
+	      System.out.println("分頁中內容"+projectBeanList);
+	      System.out.println("全部內容資料"+pageProjs.getTotalElements());
+	      
+	      response.put("projectBeanList", projectBeanList);//分頁中內容
+	      response.put("currentPage", pageProjs.getNumber());//當前頁數
+	      response.put("totalItems", pageProjs.getTotalElements());//全部內容資料
+	      response.put("totalPages", pageProjs.getTotalPages());//總頁數
+	      
+	      
+	      //HttpHeaders responseHeaders = new HttpHeaders();
+	       // responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	       // responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+
+	     //   return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(response));
+		return new ResponseEntity<>(response, HttpStatus.OK);
+								
+	}
+	
+	
+	
+	//配合分頁功能
+	 private Sort.Direction getSortDirection(String direction) {
+		    if (direction.equals("asc")) {
+		      return Sort.Direction.ASC;
+		    } else if (direction.equals("desc")) {
+		      return Sort.Direction.DESC;
+		    }
+
+		    return Sort.Direction.ASC;
+		  }
+	 
+
+		
+	 
+//	 @GetMapping(path = "/Project/ProjectSearch", produces = MediaType.APPLICATION_JSON_VALUE)
+//		public ResponseEntity<String>  getProjectBySearch(
+//				@RequestParam("search") String search,
+//				Model model,
+//				@ModelAttribute("allProject") List<ProjectBean> result ) {
+//			
+//			System.out.println("search:"+search);
+//			Set<String> searchName=new HashSet<>();
+//			searchName.add("%"+search+"%");
+//
+//			System.out.println(searchName);
+//			result = projectService.getProjectBySearch(searchName);
+//			if (result.size() == 0) {
+//				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//			}
+//			List<ProjectBean> projectInfo=new ArrayList<>();
+//			
+//			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//			for (ProjectBean bean : result) {
+//				bean.setProjectPlanBeans(new HashSet<>());
+//				projectInfo.add(bean);
+//			}
+//			String jsonStr = new Gson().toJson(projectInfo);
+//			JSONArray jsonArr = new JSONArray(jsonStr);
+//			JSONObject jsonObj = new JSONObject();
+//			jsonObj.put("allProject", jsonArr);
+//			
+//			JsonElement parseString = JsonParser.parseString(jsonObj.toString());
+//			System.out.println(gson.toJson(parseString));
+//			
+
+//			return new ResponseEntity<String>(jsonObj.toString(), HttpStatus.OK);					
+//		}	
+	
+
+	 
+	 
 	
 	
 }
