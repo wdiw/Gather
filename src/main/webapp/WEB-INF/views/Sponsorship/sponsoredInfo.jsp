@@ -143,7 +143,7 @@
 								<td class="price ">
 									<select class="status" name="status" >
 									<option value="" selected >${sBean.status}</option>
-									<option value="已付款">已付款</option>
+									<option value="待付款">待付款</option>
 									<option value="待出貨">待出貨</option>
 									<option value="已出貨">已出貨</option>
 									<option value="訂單已完成">訂單已完成</option>

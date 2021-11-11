@@ -186,9 +186,30 @@ public class SponsorshipPageController {
 		Integer project_Amount=ordersData.get(0).getpAmountNow();
 		ProjectBean pBean= projectService.getProjectById(Integer.parseInt(sPID));
 		List<ProjectPlanBean> planBean = projectPlanService.getProjectPlansByProjectBean(pBean);
+		
+		double male=0;
+		double female=0;
+		
+		List<SponsorOrderBean> ordersForPID = sponsorOrderService.getOrdersByPID(Integer.parseInt(sPID));
+		for(SponsorOrderBean sBean:ordersForPID) {
+			Member sponsorMember = memberService.queryMemberById(sBean.getmID());
+			if(sponsorMember.getSexual().equals("男")) {
+				male++;
+			}else {
+				female++;
+			}
+		}
+		List<SponsorOrderBean> orders = sponsorOrderService.getOrdersByPID(Integer.parseInt(sPID));		
+		
+		model.addAttribute("male",(male/(male+female))*100);
+		model.addAttribute("female", (female/(male+female))*100);
+		model.addAttribute("male_count", male);
+		model.addAttribute("female_count", female);
+		model.addAttribute("counts", male+female);
 		model.addAttribute("planBean", planBean);
 		model.addAttribute("pBean", pBean);
 		model.addAttribute("project_Amount", project_Amount);
+		model.addAttribute("orders", orders);
 		return "Sponsorship/project_sponsorData";
 	}
 }

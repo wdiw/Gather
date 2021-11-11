@@ -1,18 +1,10 @@
 package com.Gather.member.entity;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.Gather.Sponsorship.model.FavoriteBean;
 
 @Entity
 @Table(name = "Member")
@@ -47,18 +39,17 @@ public class Member {
 	@Column(name = "m_phone")
 	private String  phone;
 	
-	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	Set<FavoriteBean> favoriteBeans=new HashSet<>();
+	@Column(name = "m_loginTimes")
+	private Integer loginTimes;
 	
 	
 	public Member() {
 	}
 
 
-
+	//沒有loginTimes的建構子
 	public Member(Integer id, String name, String status, String account, String password, String address,
 			String sexual, String birthday, String phone) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.status = status;
@@ -68,6 +59,22 @@ public class Member {
 		this.sexual = sexual;
 		this.birthday = birthday;
 		this.phone = phone;
+	}
+
+	
+	//有loginTimes的建構子
+	public Member(Integer id, String name, String status, String account, String password, String address,
+			String sexual, String birthday, String phone, Integer loginTimes) {
+		this.id = id;
+		this.name = name;
+		this.status = status;
+		this.account = account;
+		this.password = password;
+		this.address = address;
+		this.sexual = sexual;
+		this.birthday = birthday;
+		this.phone = phone;
+		this.loginTimes = loginTimes;
 	}
 
 
@@ -147,6 +154,19 @@ public class Member {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	
+
+
+	public Integer getLoginTimes() {
+		return loginTimes;
+	}
+
+
+
+	public void setLoginTimes(Integer loginTimes) {
+		this.loginTimes = loginTimes;
+	}
 
 
 
@@ -154,18 +174,14 @@ public class Member {
 	public String toString() {
 		return "Member [id=" + id + ", name=" + name + ", status=" + status + ", account=" + account + ", password="
 				+ password + ", address=" + address + ", sexual=" + sexual + ", birthday=" + birthday + ", phone="
-				+ phone + "]";
+				+ phone + ", loginTimes=" + loginTimes + "]";
 	}
 
 
-	public Set<FavoriteBean> getFavoriteBeans() {
-		return favoriteBeans;
-	}
+
+	
 
 
-	public void setFavoriteBeans(Set<FavoriteBean> favoriteBeans) {
-		this.favoriteBeans = favoriteBeans;
-	}
 
 	
 	

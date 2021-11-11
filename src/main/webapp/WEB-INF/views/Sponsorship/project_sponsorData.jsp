@@ -472,14 +472,7 @@ canvas{
                       </div>
                       
                     </div>
-                    <a class="carousel-control-prev" href="#detailedReports" role="button" data-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#detailedReports" role="button" data-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-                    </a>
+                    
                   </div>
                 </div>
               </div>
@@ -489,61 +482,41 @@ canvas{
             <div class="col-md-7 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title mb-0">Top Products</p>
+                  <p class="card-title mb-0">訂單明細</p>
                   <div class="table-responsive">
                     <table class="table table-striped table-borderless">
                       <thead>
                         <tr>
-                          <th>Product</th>
-                          <th>Price</th>
-                          <th>Date</th>
-                          <th>Status</th>
+                          <th>贊助者ID</th>
+                          <th>贊助者</th>
+                          <th>贊助金額</th>
+                          <th>贊助時間</th>
+                          <th>付款狀態</th>
                         </tr>  
                       </thead>
+                       <c:forEach items='${orders}' var='orders' >
                       <tbody>
                         <tr>
-                          <td>Search Engine Marketing</td>
-                          <td class="font-weight-bold">$362</td>
-                          <td>21 Sep 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-success">Completed</div></td>
+                          <td>${orders.mID}</td>
+                          <td>${orders.sName}</td>
+                          <td class="font-weight-bold">$${orders.sTotal}</td>
+                          <td>${orders.sTime}</td>
+                          <c:choose>
+                          
+                          <c:when test="${orders.status=='已付款'}">
+                          <td class="font-weight-medium"><div class="badge badge-success">${orders.status}</div></td>
+                          </c:when>
+                          <c:when test="${orders.status=='待付款'}">
+                          <td class="font-weight-medium"><div class="badge badge-danger">${orders.status}</div></td>
+                          </c:when>
+                          <c:otherwise>
+                          <td class="font-weight-medium"><div class="badge badge-warning">${orders.status}</div></td>
+                          </c:otherwise>
+                          </c:choose>
                         </tr>
-                        <tr>
-                          <td>Search Engine Optimization</td>
-                          <td class="font-weight-bold">$116</td>
-                          <td>13 Jun 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-success">Completed</div></td>
-                        </tr>
-                        <tr>
-                          <td>Display Advertising</td>
-                          <td class="font-weight-bold">$551</td>
-                          <td>28 Sep 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-warning">Pending</div></td>
-                        </tr>
-                        <tr>
-                          <td>Pay Per Click Advertising</td>
-                          <td class="font-weight-bold">$523</td>
-                          <td>30 Jun 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-warning">Pending</div></td>
-                        </tr>
-                        <tr>
-                          <td>E-Mail Marketing</td>
-                          <td class="font-weight-bold">$781</td>
-                          <td>01 Nov 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-danger">Cancelled</div></td>
-                        </tr>
-                        <tr>
-                          <td>Referral Marketing</td>
-                          <td class="font-weight-bold">$283</td>
-                          <td>20 Mar 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-warning">Pending</div></td>
-                        </tr>
-                        <tr>
-                          <td>Social media marketing</td>
-                          <td class="font-weight-bold">$897</td>
-                          <td>26 Oct 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-success">Completed</div></td>
-                        </tr>
+                        
                       </tbody>
+                      </c:forEach>
                     </table>
                   </div>
                 </div>
@@ -589,8 +562,9 @@ canvas{
   <!-- Custom js for this page-->
   <script src="../js/dashboard.js"></script>
   <script src="../js/Chart.roundedBarCharts.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- End custom js for this page-->
-  <script type="text/javascript">
+  <script type="text/javascript" >
   var forEach = function (array, callback, scope) {
 		for (var i = 0; i < array.length; i++) {
 			callback.call(scope, i, array[i]);
@@ -604,6 +578,81 @@ canvas{
 			value.querySelector('.value').innerHTML = percent + '%';
 		});
 	}
+	$(function() {
+		
+		if ($("#north-america-chart").length) {
+			
+		      var areaData = {
+		        labels: ["男性", "女性"],
+		        datasets: [{
+		            data: [${male}, ${female}],
+		            backgroundColor: [
+		               "#4B49AC","#FFC100",
+		            ],
+		            borderColor: "rgba(0,0,0,0)"
+		          }
+		        ]
+		      };
+		      var areaOptions = {
+		        responsive: true,
+		        maintainAspectRatio: true,
+		        segmentShowStroke: false,
+		        cutoutPercentage: 78,
+		        elements: {
+		          arc: {
+		              borderWidth: 4
+		          }
+		        },      
+		        legend: {
+		          display: false
+		        },
+		        tooltips: {
+		          enabled: true
+		        },
+		        legendCallback: function(chart) { 
+		          var text = [];
+		          text.push('<div class="report-chart">');
+		            text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[0] + '"></div><p class="mb-0">男性</p></div>');
+		            text.push('<p class="mb-0">'+${male_count}+'人</p>');
+		            text.push('</div>');
+		            text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[1] + '"></div><p class="mb-0">女性</p></div>');
+		            text.push('<p class="mb-0">'+${female_count}+'人</p>');
+		            text.push('</div>');
+		          
+		          return text.join("");
+		        },
+		      }
+		      var northAmericaChartPlugins = {
+		        beforeDraw: function(chart) {
+		          var width = chart.chart.width,
+		              height = chart.chart.height,
+		              ctx = chart.chart.ctx;
+		      
+		          ctx.restore();
+		          var fontSize = 2.125;
+		          ctx.font = "500 " + fontSize + "em sans-serif";
+		          ctx.textBaseline = "middle";
+		          ctx.fillStyle = "#13381B";
+		      
+		          var text = "共"+${counts}+"人",
+		              textX = Math.round((width - ctx.measureText(text).width) / 2),
+		              textY = height / 2;
+		      
+		          ctx.fillText(text, textX, textY);
+		          ctx.save();
+		        }
+		      }
+		      var northAmericaChartCanvas = $("#north-america-chart").get(0).getContext("2d");
+		      var northAmericaChart = new Chart(northAmericaChartCanvas, {
+		        type: 'doughnut',
+		        data: areaData,
+		        options: areaOptions,
+		        plugins: northAmericaChartPlugins
+		      });
+		      document.getElementById('north-america-legend').innerHTML = northAmericaChart.generateLegend();
+		    }
+		})
+	
 	
 	// 44
 	var canvas01 = document.getElementById('canvas01');
@@ -652,6 +701,7 @@ canvas{
 	var ch02=context02.canvas.height/2;
 	var diff02;
 
+	
   </script>
 </body>
 
