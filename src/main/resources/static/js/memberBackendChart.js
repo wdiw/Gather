@@ -5,6 +5,32 @@ function setMaleFemale(female_outside, male_outside) {
     female = female_outside;
     male = male_outside;
 }
+var bestName;
+var secondName;
+var thirdName;
+var best;
+var second;
+var third;
+function setLoginTime(the1stUserName, the2ndUserName, the3rdUserName, the1stTimes, the2ndTimes, the3rdTimes){
+    bestName = the1stUserName;
+    secondName = the2ndUserName;
+    thirdName = the3rdUserName;
+    best = the1stTimes;
+    second = the2ndTimes ;
+    third = the3rdTimes ;
+}
+
+var groupA;
+var groupB;
+var groupC;
+var groupD;
+function setEachGroup(groupA, groupB, groupC, groupD){
+    this.groupA = groupA;
+    this.groupB = groupB;
+    this.groupC = groupC;
+    this.groupD = groupD;
+}
+console.log('debug'+groupA)
 
 
 //jQuery
@@ -16,10 +42,11 @@ $(function () {
      */
     'use strict';
     var data = {
-        labels: ["2013", "2014", "2014", "2015", "2016", "2017"],
+        //長條圖在這裡
+        labels: ['第一名:'+bestName, "第二名:"+secondName, "第三名:"+thirdName],
         datasets: [{
-            label: '# of Votes',
-            data: [10, 19, 3, 5, 2, 3],
+            label: '登入次數',
+            data: [best, second, third],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -126,11 +153,12 @@ $(function () {
             animateRotate: true
         }
     };
+
     var areaData = {
-        labels: ["2013", "2014", "2015", "2016", "2017"],
+        labels: ["青年(8-17)", "成年(18-35)", "青壯年(36-60)", "熟齡(61+)"],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: '統計人數',
+            data: [groupA, groupB, groupC, groupD,],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

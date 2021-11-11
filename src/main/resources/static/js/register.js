@@ -61,7 +61,7 @@ $(function () {
 
         $.ajax({
             type: 'post',
-            url: '/Gather/api/register',
+            url: 'http://localhost:8080/Gather/api/register',
             contentType: 'application/json',
             data: JSON.stringify(params),
             success: function (data) {

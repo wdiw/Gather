@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.StringJoiner;
@@ -82,6 +83,10 @@ public class MemberRESTController {
 		System.out.println("登入:資料庫搜尋的結果" + result);
 		if (result != null) {
 			// 找到會員
+			// 更新登入次數，存入資料庫
+			result.setLoginTimes(result.getLoginTimes()+1);
+			memberService.insertOrUpdateMember(theMember);
+			// 將會員資料放入session 供前端使用
 			request.getSession().setAttribute("memberData", result);
 			return new ResponseEntity<String>("Y", HttpStatus.OK);
 //			return new ResponseEntity<String>("<meta http-equiv='refresh' content=0;URL='https://www.baidu.com/'>", HttpStatus.OK);
