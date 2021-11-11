@@ -110,4 +110,31 @@ public class SponsorOrderServiceImpl implements SponsorOrderService{
 		return sponsorOrderRepository.findSponsorshipBySearch(search);
 	}
 
+
+	@Override
+	public void updateOrderBysID(Integer sID, String sName, String sAddress, String sPhone, String sEmail) {
+		sponsorOrderRepository.updateOrders(sID, sName, sAddress, sPhone, sEmail);
+	}
+
+
+	@Override
+	public void deleteBysID(Integer sID) {
+		sponsorOrderRepository.deleteById(sID);
+	}
+
+
+	@Override
+	public List<SponsorOrderBean> getOrdersBySearch(Set<String> search) {
+		return sponsorOrderRepository.findOrdersBySearch(search);
+	}
+
+
+	@Override
+	public List<SponsorOrderBean> getOrdersByPID(Integer pID) {
+		return sponsorOrderRepository.findBysPID(pID);
+	}
+
+
+	
+
 }

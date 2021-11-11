@@ -424,14 +424,14 @@
 													<th><i class="mdi mdi-delete"></i></th>
 												</tr>
 											</thead>
-											<c:forEach items='${orders}' var='order' varStatus="status">
+											<c:forEach items='${orders}' var='order'>
 												<tr>
 													<td>${order.sID}</td>
 													<td>${order.mID}</td>
 													<td><img width='50' height='50'
 														src="${order.projectImage}"
 														class="img-rounded" /></td>
-													<td class="sPID">${order.sPID}<button onclick="data(${status.index})"><i class="mdi mdi-chart-line"></i></button></td>
+													<td>${order.sPID}</td>
 													<td>${order.sPName}</td>
 													<td>${order.sAmount}</td>
 													<td>
@@ -512,27 +512,6 @@
   			var search = $("#searchBar").val()
   			location.href = "<spring:url value='/ordersSearch?search=" + search + "'/>"
   		})
-  		
-  		function data(index){
-        	  var sPID=parseInt($('.sPID').eq(index).text());
-        	  var data = {
-      				sPID:$('.sPID').eq(index).text(),
-      			}
-        	  
-        	  $.ajax({
-        		  url: "<c:url value='/data/'/>"+$('.sPID').eq(index).text(),
-//         		  url: "./data/"+sPID_test,
-  				  type: 'POST',
-  				  data:data,
-                  success: function () {
-                 	location.href= "<c:url value='/dataInfo/" + sPID +"'/>";
-//                        alert("hiiiiiii");
-                    },
-            
-                });
-        	  
-        	  
-          }
           
 
         

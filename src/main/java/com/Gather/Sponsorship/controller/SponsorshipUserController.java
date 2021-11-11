@@ -196,7 +196,6 @@ public class SponsorshipUserController {
 		int favCount = favoriteBeans.size();
 		request.getSession().setAttribute("favCount", favCount);
 		request.getSession().setAttribute("mBean", mBean);
-
 		request.getSession().setAttribute("projectBeans", projectBeans);
 		return "Sponsorship/favorite";
 

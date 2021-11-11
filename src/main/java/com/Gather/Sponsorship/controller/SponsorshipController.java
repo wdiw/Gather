@@ -114,11 +114,18 @@ public class SponsorshipController {
 
 
 	// 刪除訂單
-
+//
+//	@DeleteMapping("/order/delete/{sID}")
+//	@ResponseBody
+//	public ResponseEntity<String> getDeleteNewOrderForm(@PathVariable("sID") int sID) {
+//		sponsorshipService.deleteOrderByOrderID(sID);
+//		return new ResponseEntity<String>(HttpStatus.OK);
+//	}
+	
 	@DeleteMapping("/order/delete/{sID}")
 	@ResponseBody
 	public ResponseEntity<String> getDeleteNewOrderForm(@PathVariable("sID") int sID) {
-		sponsorshipService.deleteOrderByOrderID(sID);
+		sponsorOrderService.deleteBysID(sID);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
@@ -126,6 +133,47 @@ public class SponsorshipController {
 
 	// 修改訂單
 
+//	@PostMapping("/order/{sID}")
+//
+//	@ResponseBody
+//	public ResponseEntity<String> addUpdateOrderInfo(@PathVariable("sID") int sID,
+//
+//			@RequestParam("sName") String sName,
+//
+//			@RequestParam("sPID") int sPID,
+//
+//			@RequestParam("sPName") String sPName,
+//
+//			@RequestParam("sAmount") int sAmount,
+//
+//			@RequestParam(required = false, name = "projectImage") MultipartFile photo) throws IOException {
+//
+//		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//
+//		byte[] image = new byte[1024];
+//		if (photo.isEmpty()) {
+//			SponsorshipBean sBean = sponsorshipService.getOrderByID(sID);
+//			image = sBean.getImage();
+//		} else {
+//			InputStream is = photo.getInputStream();
+//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//
+//			int length;
+//			while ((length = is.read(image)) != -1) {
+//				baos.write(image, 0, length);
+//			}
+//
+//			image = baos.toByteArray();
+//		}
+//
+//		String base64String = Base64.getEncoder().encodeToString(image);
+//		SponsorshipBean sBean = new SponsorshipBean(sID, sName, sPID, sPName, sAmount, base64String, image);
+//
+//		sponsorshipService.updateOrder(sBean);
+//		return new ResponseEntity<String>(HttpStatus.OK);
+//
+//	}
+	
 	@PostMapping("/order/{sID}")
 
 	@ResponseBody
@@ -133,39 +181,23 @@ public class SponsorshipController {
 
 			@RequestParam("sName") String sName,
 
-			@RequestParam("sPID") int sPID,
+			@RequestParam("sPhone") String sPhone,
 
-			@RequestParam("sPName") String sPName,
+			@RequestParam("sAddress") String sAddress,
 
-			@RequestParam("sAmount") int sAmount,
+			@RequestParam("sEmail") String sEmail
 
-			@RequestParam(required = false, name = "projectImage") MultipartFile photo) throws IOException {
+			) throws IOException {
 
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-		byte[] image = new byte[1024];
-		if (photo.isEmpty()) {
-			SponsorshipBean sBean = sponsorshipService.getOrderByID(sID);
-			image = sBean.getImage();
-		} else {
-			InputStream is = photo.getInputStream();
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-			int length;
-			while ((length = is.read(image)) != -1) {
-				baos.write(image, 0, length);
-			}
-
-			image = baos.toByteArray();
-		}
-
-		String base64String = Base64.getEncoder().encodeToString(image);
-		SponsorshipBean sBean = new SponsorshipBean(sID, sName, sPID, sPName, sAmount, base64String, image);
-
-		sponsorshipService.updateOrder(sBean);
+		sponsorOrderService.updateOrderBysID(sID, sName, sAddress, sPhone, sEmail);
+		
 		return new ResponseEntity<String>(HttpStatus.OK);
 
 	}
+	
+	
 
 	// 圖片從資料庫輸出
 

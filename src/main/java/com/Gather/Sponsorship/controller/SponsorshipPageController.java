@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,24 +41,12 @@ public class SponsorshipPageController {
 
 	@Autowired
 	ProjectService projectService;
+	
 	@Autowired
 	MemberService memberService;
 	@Autowired
 	SponsorOrderService sponsorOrderService;
-//	@GetMapping("/showProject1")
-//	public String showProject() {
-//		return "Sponsorship/project";
-//	}
 
-//	@GetMapping("/payment")
-//	public String payment() {
-//		return "Sponsorship/payment";
-//	}
-
-//	@GetMapping("/favorite")
-//	public String favorite() {
-//		return "Sponsorship/favorite";
-//	}
 
 	// 跳轉付款頁面
 	@PostMapping("/goECPay")
@@ -67,7 +57,7 @@ public class SponsorshipPageController {
 			@RequestParam("sBonus") String sBonus, @RequestParam("sAddress") String sAddress,
 			@RequestParam("sEmail") String sEmail, @RequestParam("sAmount") String sAmount,
 			@RequestParam("sDiscount") String sDiscount, @RequestParam("paymentMethod") String paymentMethod,
-			@RequestParam("proposerID") String proposerID
+			@RequestParam("proposerID") String proposerID, @RequestParam("projectPlanID") String projectPlanID
 
 	) {
 		// 新增訂單
@@ -82,7 +72,7 @@ public class SponsorshipPageController {
 
 		sBean.setsTime(sd);
 		sBean.setStatus("已付款");
-		Integer pAmountNow=0;
+		Integer pAmountNow=sBean.getpAmountNow();
 		sponsorOrderService.insertOrder(sBean);
 		List<SponsorOrderBean> sBean_toatl=sponsorOrderService.getOrdersByPIDAndStatus(Integer.parseInt(sPID), sBean.getStatus());
 		for(int i=0;i<sBean_toatl.size();i++) {
@@ -91,6 +81,9 @@ public class SponsorshipPageController {
 		}
 		
 		sBean.setpAmountNow(pAmountNow);
+		
+		
+		
 		sponsorOrderService.updateOrder(sBean);
 
 
@@ -138,5 +131,38 @@ public class SponsorshipPageController {
 		model.addAttribute("sBean",result);
 		return "Sponsorship/sponsorshipSearch";					
 	}	
-
+	
+	@GetMapping("/ordersSearch")
+	public String  getOrdersBySearch(
+			@RequestParam("search") String search,Model model,HttpServletRequest request) {
+		
+		System.out.println("search:"+search);
+		Set<String> searchName=new HashSet<>();
+		searchName.add("%"+search+"%");
+		
+		System.out.println(searchName);
+		List<SponsorOrderBean> result = sponsorOrderService.getOrdersBySearch(searchName);
+		model.addAttribute("orders",result);
+		return "Sponsorship/ordersSearch";					
+	}
+	
+	
+	@PostMapping("/data/{sPID}")
+	public ResponseEntity<String> getData(@PathVariable("sPID") String sPID, Model model) {
+//		System.out.println(pID.getClass());
+		List<SponsorOrderBean> ordersData = sponsorOrderService.getOrdersByPID(Integer.parseInt(sPID));
+		Integer project_Amount=ordersData.get(0).getpAmountNow();
+		model.addAttribute("project_Amount", project_Amount);
+		return new ResponseEntity<String>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/dataInfo/{sPID}")
+	public String dataInfo(@PathVariable("sPID") String sPID,Model model) {
+		List<SponsorOrderBean> ordersData = sponsorOrderService.getOrdersByPID(Integer.parseInt(sPID));
+		Integer project_Amount=ordersData.get(0).getpAmountNow();
+		ProjectBean pBean= projectService.getProjectById(Integer.parseInt(sPID));
+		model.addAttribute("pBean", pBean);
+		model.addAttribute("project_Amount", project_Amount);
+		return "Sponsorship/project_sponsorData";
+	}
 }

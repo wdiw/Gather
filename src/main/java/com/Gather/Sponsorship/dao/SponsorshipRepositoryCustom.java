@@ -9,4 +9,5 @@ import com.Gather.Sponsorship.model.SponsorOrderBean;
 public interface SponsorshipRepositoryCustom {
 
 	List<SponsorOrderBean> findSponsorshipBySearch(Set<String> search);
+	List<SponsorOrderBean> findOrdersBySearch(Set<String> search);
 }

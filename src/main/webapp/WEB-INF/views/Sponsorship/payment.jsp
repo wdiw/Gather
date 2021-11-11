@@ -157,6 +157,7 @@
 							<input type="hidden" value="${mBean.id}" name="mID">
 							<input type="hidden" value="${pBean.pID}" name="sPID">
 							<input type="hidden" value="${pBean.mID}" name="proposerID">
+							<input type="hidden" value="${pPBean.projectPlanID}" name="projectPlanID"> 
 							<input type="hidden" value="300" name="sAmount">
 							
 							
@@ -166,12 +167,12 @@
 								<div class="form-group">
 									<label for="postcodezip">贊助者</label> <input type="text"
 										class="form-control" placeholder="" value="${mBean.name}"
-										name="sName" id="sName">
+										name="sName" id="sName" required="required">
 								</div>
 								<div class="form-group">
 									<label for="postcodezip">連絡電話</label> <input type="text"
 										class="form-control" placeholder="" value="${mBean.phone}"
-										name="sPhone" id="sPhone">
+										name="sPhone" id="sPhone" required="required">
 								</div>
 							</div>
 
@@ -186,7 +187,7 @@
 											style="position: absolute; left: 10px; top: 18px; font-size: 22px; text-align: center;"></i>
 										<input type="number" class="form-control" placeholder="0" min="0"
 											style="padding-left: 32PX; font-size: 20px; padding-bottom: 8px"
-											name="sBonus" id="sBonus" onchange="getBonus();getTotal()">
+											name="sBonus" id="sBonus" onchange="getBonus();getTotal()" required="required">
 									</div>
 								</div>
 							</div>
@@ -195,7 +196,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="streetaddress">電子信箱</label> <input type="text"
-										class="form-control" placeholder="" value="${mBean.account}" name="sEmail">
+										class="form-control" placeholder="" value="${mBean.account}" name="sEmail" required="required">
 								</div>
 							</div>
 
@@ -205,7 +206,7 @@
 								<div class="form-group">
 									<label for="phone">回饋優惠</label> <input type="text"
 										class="form-control" placeholder="" name="sDiscount"
-										id="sDiscount" onchange="getDiscount();getTotal()" >
+										id="sDiscount" onchange="getDiscount();getTotal()" required="required">
 								</div>
 							</div>
 
@@ -214,7 +215,7 @@
 								<div class="form-group">
 									<label for="towncity">地址</label> <input type="text"
 										class="form-control" placeholder="" value="桃園市中壢區中央路300號"
-										name="sAddress" id="sAddress">
+										name="sAddress" id="sAddress" required="required">
 								</div>
 							</div>
 						</div>
