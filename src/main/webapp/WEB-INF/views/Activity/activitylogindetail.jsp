@@ -139,7 +139,7 @@
 								<div class="form-group">
 									<div class="col-lg-6 mb-5 ftco-animate">
 									
-											<img src="<c:url value='/ActivitygetPicture/${activity.id}'/>"  width="250" height="300" id="projectImage">
+											<img src="<c:url value='/ActivitygetPicture/${activity.id}'/>"  width="350" height="300" id="projectImage">
 									
 
 
@@ -161,6 +161,16 @@
 										name="name" id="name">
 								</div>
 								<div class="form-group">
+									<label for="postcodezip">活動開始日期</label> <input type="text"
+										class="form-control" placeholder="" value="${activity.beginDate}"
+										name="beginDate" id="beginDate">
+								</div>
+							</div>
+
+							<div class="w-100"></div>
+
+							<div class="col-md-6">
+								<div class="form-group">
 									<label for="streetaddress">活動參加人數</label>
 									<div style="position: relative;">
 									
@@ -169,23 +179,10 @@
 											name="activityParticipationCount" id="activityParticipationCount">
 									</div>
 								</div>
+							</div>
 
-							<div class="w-100"></div>
 
-							
-
-							
-						</div>
-
-							
-						
-						<div class="col-md-6"  >
-
-								<div class="form-group">
-									<label for="postcodezip">活動開始日期</label> <input type="text"
-										class="form-control" placeholder="" value="${activity.beginDate}"
-										name="beginDate" id="beginDate">
-								</div>
+							<div class="col-md-6">
 								<div class="form-group">
 									<label for="streetaddress">活動結束日期</label> <input type="text"
 										class="form-control" placeholder="" value="${activity.endDate}">
@@ -216,15 +213,10 @@
 					
 							</div>
 							
-									
-									<p>
-									
-										 <a id="activitylogin"class="btn btn-primary py-3 px-4">活動登錄</a>
-									</p>
-									
+								
 									 
                                       <p>
-					                <a href="<spring:url value='/userpage' />" class="btn btn-primary py-3 px-4" >返回</a>
+					                <a href="<spring:url value='/memberactivitylogin' />" class="btn btn-primary py-3 px-4" >返回</a>
 					                </p>
 								</div>
 							</div>
@@ -392,14 +384,9 @@
                      imageUrl: "<c:url value='/ActivitygetPicture/${activity.id}'/>",
                      imageWidth: 400,
                      imageHeight: 200,
-                 }).then((result) => {
-                              if (result.isConfirmed) {
-                                   
-                 location.href= "<spring:url value='/userpage'/>";
-                              }
-                            })
+                 })
                  
-                
+                 location.href= "<spring:url value='/userpage'/>";
 
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -416,25 +403,16 @@
                      imageUrl: "<c:url value='/ActivitygetPicture/${activity.id}'/>",
                      imageWidth: 400,
                      imageHeight: 200,
-                 }).then((result) => {
-                              if (result.isConfirmed) {
-                                   
+                 })
+                 
                  location.href= "<spring:url value='/userpage'/>";
-                              }
-                            })
-                 
-          
-
-			
-                 
-                 
 
 
   }
 		
 		
 		
-  
+		
 		
 	
 

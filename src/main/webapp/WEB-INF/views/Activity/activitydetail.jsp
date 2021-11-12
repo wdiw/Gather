@@ -67,9 +67,22 @@
                       <label for="endDate">活動結束日期</label>
                       <input id="endDate" name="endDate" disabled="disabled" class="form-control" value="${activity.endDate}"  type='date'>
                     </div>
+					<div class="form-group">
+						<label for="exampleInputPassword4">活動分類</label>
+						<select name="category" id="category">
+						  <option value="課程講座">課程講座</option>
+						  <option value="優惠活動">優惠活動</option>
+						  <option value="提案競賽">提案競賽</option>
+						  <option value="線上抽獎">線上抽獎</option>
+						</select>
+					  </div>
+
+
+
+
                     <div class="form-group">
                       <label for="description">活動內容</label>
-                      <textarea name="description" id="description" disabled="disabled" cols="100" rows="10" placeholder="請輸入活動詳情">${activity.description}</textarea>
+                      <textarea name="description" id="description" disabled="disabled" cols="100" rows="6" placeholder="請輸入活動詳情">${activity.description}</textarea>
                     </div>
                     <div class="form-group">
                       <label>上傳圖片</label>
@@ -109,7 +122,7 @@
                     	
 
 
-					<a href="<spring:url value='/Activity/sapage' />" class="btn btn-primary mr-2">
+					<a href="<spring:url value='/sapageactivity' />" class="btn btn-primary mr-2">
 						返回
 					</a>
 					<button id='inputalldata'class="btn btn-light">一鑑輸入</button>
@@ -168,12 +181,34 @@
 			var beginDate="";
 			var endDate = "";
 
-		
+		    var activityname="${activity.name}";
+			var activityid="${activity.id}";
+			var begindate="${activity.beginDate}";
+			var enddate="${activity.endDate}";
+			var deletepic="<c:url value='/ActivitygetPicture/${activity.id}'/>";
+
+			var str="活動編號:"+activityid+"\n"+
+			"活動名稱:"+ activityname+"\n"+
+			"活動開始日期:"+begindate+"\n"+
+			"活動結束日期:"+enddate+"\n";
 			
 			
 
 			//點刪除按鈕時，透過id刪除資料
 			$("#deleteButton").click(function () {
+
+				Swal.fire({
+                title: '確定刪除活動編號:'+activityid+"?",
+				text:   '活動名稱:'+activityname   ,
+                icon: 'question',
+                imageUrl: deletepic,
+                imageWidth: 400,
+                imageHeight: 200,
+                showCancelButton: true,
+            }).then((result) => {
+
+
+				if(result.isConfirmed){
 
 				$.ajax({
 					url: "<spring:url value='/Activity/theActivity/" + id + "'/>",
@@ -181,15 +216,37 @@
 					// data: { pID: pID },//前面是標籤，後面是值
 					data: {},//前面是標籤，後面是值
 					success: function (data) {
-						alert("活動編號:"+id+"刪除成功，跳轉回活動清單");
-						location.href="<spring:url value='/Activity/sapage'/>"
+					    Swal.fire({
+                        icon: 'success',
+                        title: '活動刪除成功'
+                    
+                    }).then((result) => {
+						if(result.isConfirmed){
+						location.href="<spring:url value='/sapageactivity'/>"
+						}
 
-					},
+					})},
 					error: function (jqXHR, textStatus, errorThrown) {
 						alert("刪除失敗");
 					}
-				})
+				})}
+				else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '已取消刪除活動'
+                    
+                    })
+                }
 
+
+
+
+
+
+
+
+
+})
 			});
 
 			//修改按鈕，變成可編輯
@@ -212,6 +269,19 @@
 				endDate = $("#endDate").val();
 				var form=document.getElementById("form");
 				var formdata=new FormData(form);
+
+				Swal.fire({
+                title: '確定修改活動資訊如下?',
+				text:  str       ,
+                icon: 'question',
+                imageUrl: pic,
+                imageWidth: 400,
+                imageHeight: 200,
+                showCancelButton: true,
+            }).then((result) => {
+
+				if(result.isConfirmed){
+
 				$.ajax({
 					url: "<spring:url value='/Activity/theActivity/" + id + "'/>",
 					type: "PUT",
@@ -221,22 +291,47 @@
                      /*一定要加*/
                      mimeType: 'multipart/form-data', //有圖片就要加這行
 					success: function (data) {
-						alert("修改成功，跳轉回活動清單");
-						$("#name").prop("disabled", true);
+                    
+						
+					
+			Swal.fire({
+                        icon: 'success',
+                        title: '活動修改成功'
+                    
+                    }).then((result) => {
+						if(result.isConfirmed){
+							$("#name").prop("disabled", true);
 						$("#description").prop("disabled", true);
 						$("#beginDate").prop("disabled", true);
 						$("#endDate").prop("disabled", true);
 						$("#updateButton").hide();//存檔按鈕隱藏
 						$("#editButton").show();//編輯按鈕顯示
-						location.href="<spring:url value='/Activity/sapage'/>"
+						location.href="<spring:url value='/sapageactivity'/>"	
+						
+						}
 
-					},
+					})},
+
+
 					error: function (jqXHR, textStatus, errorThrown) {
-						alert("存檔失敗");
+						Swal.fire({
+
+							icon: 'error',
+                        title: '活動修改失敗'
+
+
+
+						})
 					}
 				})
+			}
+
+
+
 
 			})
+
+		})
 
 
 		})

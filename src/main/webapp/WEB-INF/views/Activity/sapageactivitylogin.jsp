@@ -27,6 +27,26 @@
 					<link rel="stylesheet" href="css/vertical-layout-light/style.css">
 					<!-- endinject -->
 					<link rel="shortcut icon" href="images/favicon.png" />
+
+					<link rel="stylesheet" type="text/css"
+						href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
+					<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"
+						defer></script>
+
+
+
+
+					<script>
+						$(function () {
+
+
+							$('#allActivityTable').DataTable();
+
+
+						})
+
+					</script>
+
 					<style>
 						.warp {
 							width: 80%;
@@ -430,14 +450,14 @@
 										<div class="col-lg-6 grid-margin stretch-card">
 											<div class="card">
 												<div class="card-body">
-													<h4 class="card-title">活動登錄清單</h4> 
-													
-													<button class="btn btn-primary" id='outdata'>資料輸出</button>
+													<h4 class="card-title">活動登錄清單</h4>
+
+													<button class="btn btn-primary" id='outputdata'>資料輸出</button>
 													<!--                   <p class="card-description"> -->
 													<%-- Add class <code>.table-hover</code> --%>
 														<!--                   </p> -->
 														<div class="table-responsive">
-															<table class="table table-hover">
+															<table class="table table-hover" id='allActivityTable'>
 																<thead>
 																	<tr>
 																		<th>活動登錄編號</th>
@@ -468,6 +488,8 @@
 																	</tr>
 																</c:forEach>
 															</table>
+														
+														
 														</div>
 												</div>
 											</div>
@@ -490,12 +512,16 @@
 								<script src="js/template.js"></script>
 								<script src="js/settings.js"></script>
 								<script src="js/todolist.js"></script>
+								<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 								<script>
+
+
+
+
+
+
 									function deleteActivityLogin(deleteId) {
-
-
-
 
 										Swal.fire({
 											title: '確定取消活動登錄?',
@@ -528,10 +554,6 @@
 												})
 											}
 
-
-
-
-
 											else if (result.dismiss === Swal.DismissReason.cancel) {
 												Swal.fire({
 													icon: 'error',
@@ -540,21 +562,86 @@
 												})
 											}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 										})
+									};
+
+
+
+
+									$('#outputdata').click(function () {
+
+										$.ajax({
+											url: "<spring:url value='/GatherActivityLoginOutput'/>",
+											type: "get",
+
+											data: {},
+											success: function (data) {
+												Swal.fire({
+													icon: 'success',
+													title: '資料輸出成功'
+												})
+											},
+											error: function (jqXHR, textStatus, errorThrown) {
+
+											}
+										})
+									})
+
+
+
+									 $(document).ready(function () {
+									var activitynames=[];
+									var participationcounts=[];
+
+                                        
+                                  var activityBeans="${sessionScope.activityBeans}";
+                                  
+									  var activityBeanSize="${activityBeanSize}";
+									  var activityBeansArray=[];
+									  activityBeansArray.push(activityBeans);
+
+                                    
+										
+						
+									            
+
+
+
+
+									   }
+
+
+									 
+
+
+									 )
+
+
+							
+
+									
+
+
+									// var activitylogincounts='${activitylogincounts.name}'
+									// console.log(activitylogincounts);
+									// var ctx = document.getElementById('myChart');
+									// var myChart = new Chart(ctx, {
+									// 	type: 'doughnut',
+									// 	data: {
+									// 		labels: activityname,
+									// 		datasets: [{
+									// 			label: 'My First Dataset',
+									// 			data: participation,
+									// 			backgroundColor: [
+									// 				'rgb(255, 99, 132)',
+									// 				'rgb(54, 162, 235)',
+									// 				'rgb(255, 205, 86)'
+									// 			],
+									// 			hoverOffset: 4
+									// 		}]
+									// 	}
+
+									// });
 
 
 
@@ -566,10 +653,6 @@
 
 
 
-
-
-
-									}
 
 
 

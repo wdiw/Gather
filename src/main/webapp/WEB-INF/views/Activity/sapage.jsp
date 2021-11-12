@@ -21,16 +21,16 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Gather Admin</title>
 <!-- plugins:css -->
-<link rel="stylesheet" href="../vendors/feather/feather.css">
-<link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
-<link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
+<link rel="stylesheet" href="vendors/feather/feather.css">
+<link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+<link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
 <!-- endinject -->
 <!-- Plugin css for this page -->
 <!-- End plugin css for this page -->
 <!-- inject:css -->
-<link rel="stylesheet" href="../css/vertical-layout-light/style.css">
+<link rel="stylesheet" href="css/vertical-layout-light/style.css">
 <!-- endinject -->
-<link rel="shortcut icon" href="../images/favicon.png" />
+<link rel="shortcut icon" href="images/favicon.png" />
 <style>
 
 .warp{width:80%;white-space:normal;word-wrap:break-word;word-break:break-all;}
@@ -45,9 +45,9 @@
 			<div
 				class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
 				<a class="navbar-brand brand-logo mr-5" href="index.html"><img
-					src="../images/logo.svg" class="mr-2" alt="logo" /></a> <a
+					src="images/logo.svg" class="mr-2" alt="logo" /></a> <a
 					class="navbar-brand brand-logo-mini" href="index.html"><img
-					src="../images/logo-mini.svg" alt="logo" /></a>
+					src="images/logo-mini.svg" alt="logo" /></a>
 			</div>
 			<div
 				class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -121,7 +121,7 @@
 							</a>
 						</div></li>
 					<li class="nav-item nav-profile dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="../images/Members/${memberData.id}.jpg" alt="profile">
+              <img src="images/Members/${memberData.id}.jpg" alt="profile">
             </a>
 						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
 							aria-labelledby="profileDropdown">
@@ -344,7 +344,7 @@
 			<nav class="sidebar sidebar-offcanvas" id="sidebar">
 				<ul class="nav">
 					<li class="nav-item"><a class="nav-link"
-						href="../../index.html"> <i class="icon-grid menu-icon"></i> <span
+						href="../index.html"> <i class="icon-grid menu-icon"></i> <span
 							class="menu-title">Dashboard</span>
 					</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -413,7 +413,7 @@
 						<div class="col-lg-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">活動清單</h4>    <a href="<spring:url value='/Activity/add' />"class="btn btn-primary">新增活動</a>
+									<h4 class="card-title">活動清單</h4>    <a href="<spring:url value='/addActivity' />"class="btn btn-primary">新增活動</a>
 									<!--                   <p class="card-description"> -->
 									<%--                     Add class <code>.table-hover</code> --%>
 									<!--                   </p> -->

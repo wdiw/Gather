@@ -36,6 +36,16 @@ public class ActivityBean implements Serializable {
 	private String endDate;
 	private String fileName;
 	private String postDate;
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+	public  String category;
 
 
 
@@ -45,39 +55,68 @@ public class ActivityBean implements Serializable {
 	private String base64String;
 	private byte[] image;
 	
+	@Transient
+	private Integer participationcount;
+	
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "activityBean",cascade = CascadeType.ALL)
 	private Set<ActivityParticipationBean> activityParticipation = new HashSet<ActivityParticipationBean>(0);
 	
-	
-	
-	 public ActivityBean( String name, String description,String beginDate,String endDate,String postDate) {
-			this.name = name;
-			this.description = description;
-			this.beginDate=beginDate;
-			this.endDate=endDate;
-			this.postDate=postDate;
-		}
-		
-	 public ActivityBean( Integer id,String name, String description,String beginDate,String endDate,String postDate) {
+	 public ActivityBean( Integer id,String name, String description,String beginDate,String endDate, String postDate,String category,String base64String,
+			 byte[] image,Integer participationcount) {
 		    this.id=id;
 			this.name = name;
 			this.description = description;
 			this.beginDate=beginDate;
 			this.endDate=endDate;
 			this.postDate=postDate;
+			this.category=category;
+			this.base64String = base64String;
+			this.image = image;
+			this.participationcount=participationcount;
+			
+			
+			
+	 }
+	
+	 public Integer getParticipationcount() {
+		return participationcount;
+	}
+
+	public void setParticipationcount(Integer participationcount) {
+		this.participationcount = participationcount;
+	}
+
+	public ActivityBean( String name, String description,String beginDate,String endDate,String postDate,String category) {
+			this.name = name;
+			this.description = description;
+			this.beginDate=beginDate;
+			this.endDate=endDate;
+			this.postDate=postDate;
+			this.category=category;
+		}
+		
+	 public ActivityBean( Integer id,String name, String description,String beginDate,String endDate,String postDate,String category) {
+		    this.id=id;
+			this.name = name;
+			this.description = description;
+			this.beginDate=beginDate;
+			this.endDate=endDate;
+			this.postDate=postDate;
+			this.category=category;
 			
 		}
 	 
 	 
 
-	 public ActivityBean( String name, String description,String beginDate,String endDate, String postDate,byte[] image,
+	 public ActivityBean( String name, String description,String beginDate,String endDate, String postDate,String category,byte[] image,
 				String base64String) {
 			this.name = name;
 			this.description = description;
 			this.beginDate=beginDate;
 			this.endDate=endDate;
 			this.postDate=postDate;
+			this.category=category;
 			this.image = image;
 			this.base64String = base64String;
 			
@@ -85,7 +124,7 @@ public class ActivityBean implements Serializable {
 	 }
 	 
 
-	 public ActivityBean( Integer id,String name, String description,String beginDate,String endDate, String postDate,String base64String,
+	 public ActivityBean( Integer id,String name, String description,String beginDate,String endDate, String postDate,String category,String base64String,
 			 byte[] image		) {
 		    this.id=id;
 			this.name = name;
@@ -93,6 +132,7 @@ public class ActivityBean implements Serializable {
 			this.beginDate=beginDate;
 			this.endDate=endDate;
 			this.postDate=postDate;
+			this.category=category;
 			this.base64String = base64String;
 			this.image = image;
 			

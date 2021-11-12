@@ -105,7 +105,7 @@
                        
 						
 
-		    			<c:forEach items='${activities}' var='activity' >
+		    			<c:forEach items='${activityresults}' var='activity' >
 
 		    			<div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
 		    				<div class="product d-flex flex-column">
@@ -148,6 +148,7 @@
 		          <div class="col text-center">
 		            <div class="block-27">
 		            
+		              </ul>
 		            </div>
 		          </div>
 		        </div>
@@ -175,7 +176,6 @@
 														<li><a href="<spring:url value='/activityCategory?category=提案競賽'/>">提案競賽</a></li>
 														<li><a href="<spring:url value='/activityCategory?category=線上抽獎'/>">線上抽獎</a></li>
 														<li><a href="<spring:url value='/lottery'/>">抽獎頁面</a></li>
-														
 													</ul>
 												</div>
 											</div>

@@ -27,6 +27,27 @@
 					<link rel="stylesheet" href="css/vertical-layout-light/style.css">
 					<!-- endinject -->
 					<link rel="shortcut icon" href="images/favicon.png" />
+
+
+
+					<link rel="stylesheet" type="text/css"
+						href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
+					<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"
+						defer></script>
+
+
+
+
+					<script>
+						$(function () {
+
+
+							$('#allActivityTable').DataTable();
+
+
+						})
+
+					</script>
 					<style>
 						.warp {
 							width: 80%;
@@ -371,9 +392,10 @@
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"><a class="nav-link"
 														href="<spring:url value='/sapageactivity' />">活動管理</a></li>
-														<li class="nav-item"><a class="nav-link"
-														href="<spring:url value='/sapageactivitylogin' />">活動登錄管理</a></li>
-		
+												<li class="nav-item"><a class="nav-link"
+														href="<spring:url value='/sapageactivitylogin' />">活動登錄管理</a>
+												</li>
+
 											</ul>
 										</div>
 										<div class="collapse" id="form-elements">
@@ -432,12 +454,12 @@
 													<h4 class="card-title">活動清單</h4> <a
 														href="<spring:url value='/addActivity' />"
 														class="btn btn-primary">新增活動</a>
-													<button class="btn btn-primary" id='outdata'>資料輸出</button>
+													<button class="btn btn-primary" id='outputdata'>資料輸出</button>
 													<!--                   <p class="card-description"> -->
 													<%-- Add class <code>.table-hover</code> --%>
 														<!--                   </p> -->
 														<div class="table-responsive">
-															<table class="table table-hover">
+															<table class="table table-hover" id='allActivityTable'>
 																<thead>
 																	<tr>
 																		<th>活動編號</th>
@@ -446,6 +468,7 @@
 																		<th>開始日期</th>
 																		<th>結束日期</th>
 																		<th>活動內容</th>
+																		<th>活動登錄人數</th>
 																		<th>活動編輯</th>
 
 																	</tr>
@@ -453,9 +476,9 @@
 
 																<c:forEach items='${activities}' var='activity'>
 																	<tr>
-																		<td>${activity.id}</td>
+																		<td class='activityid'>${activity.id}</td>
 																		<td>
-																			<div class="warp">${activity.name}</div>
+																			<div class='warp'><span class='activityname'>${activity.name}</span></div>
 																		</td>
 																		<td><img width='50' height='50'
 																				src="<c:url value='/ActivitygetPicture/${activity.id}'/>"
@@ -466,6 +489,7 @@
 																			<div class="warp">${activity.description}
 																			</div>
 																		</td>
+																		<td class="participationcount">${activity.participationcount}</td>
 
 
 																		<td>
@@ -478,7 +502,15 @@
 																	</tr>
 																</c:forEach>
 															</table>
+
 														</div>
+														<div style="width: 15cm; height: 15cm; margin:0 auto ">
+														<center>	<h3 style="padding: 0 auto;">各活動登錄人數</h3> </center>
+														<br>
+															<canvas id="myChart" ></canvas>
+														</div>
+														
+													
 												</div>
 											</div>
 										</div>
@@ -491,18 +523,99 @@
 								<!-- container-scroller -->
 								<!-- plugins:js -->
 								<script src="vendors/js/vendor.bundle.base.js"></script>
-								<!-- endinject -->
-								<!-- Plugin js for this page -->
-								<!-- End plugin js for this page -->
-								<!-- inject:js -->
 								<script src="js/off-canvas.js"></script>
 								<script src="js/hoverable-collapse.js"></script>
 								<script src="js/template.js"></script>
 								<script src="js/settings.js"></script>
 								<script src="js/todolist.js"></script>
+								<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 								<!-- endinject -->
 								<!-- Custom js for this page-->
 								<!-- End custom js for this page-->
+
+								<script>
+
+									$('#outputdata').click(function () {
+
+
+										$.ajax({
+											url: "<spring:url value='/GatherActivityOutput'/>",
+											type: "get",
+
+											data: {},
+											success: function (data) {
+												Swal.fire({
+													icon: 'success',
+													title: '資料輸出成功'
+												})
+											},
+											error: function (jqXHR, textStatus, errorThrown) {
+
+											}
+										})
+
+									})
+
+
+									$(document).ready(function () {
+
+										var activityidArray = [];
+										var participationcountArray = [];
+
+
+										//今日日期涵式
+									
+
+										$(".activityid").each(function () {
+											var activityid = $(this).text();
+											activityidArray.push(activityid);
+											
+										})
+
+										
+
+										$(".participationcount").each(function () {
+											var participationcount = $(this).text();
+											participationcountArray.push(participationcount);
+											
+										})
+
+                                    
+										var ctx = document.getElementById('myChart');
+									var myChart = new Chart(ctx, {
+										type: 'doughnut',
+										data: {
+											labels: activityidArray,
+											datasets: [{
+												label: 'My First Dataset',
+												data: participationcountArray,
+												backgroundColor: [
+													'rgb(255, 99, 132)',
+													'rgb(54, 162, 235)',
+													'rgb(255, 205, 86)',
+													'rgb(100, 50, 86)',
+													'rgb(255, 150, 100)',
+													'rgb(100, 100, 100)'
+
+												],
+												hoverOffset: 4
+											}]
+										}
+
+									});
+
+									})
+
+
+
+
+
+
+							
+
+
+
+								</script>
 
 
 

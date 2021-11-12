@@ -97,6 +97,21 @@ public class ActivityParticipationServiceImpl implements ActivityParticipationSe
 		return activityParticipationRepository.getActivityParticipationCount(activityBean);
 		
 		
+	}
+
+
+	@Override
+	public List<ActivityParticipationBean> findActivityParticipationByM_id(Integer m_id) {
+		// TODO Auto-generated method stub
+		return activityParticipationRepository.findActivityParticipationByM_id(m_id);
+	}
+
+
+	@Override
+	public void deleteActivityParticipationByactivityParticipationid(Integer id) {
+		// TODO Auto-generated method stuba
+		activityParticipationRepository.deleteActivityParticipationByactivityParticipationid(id);
+		
 	};
 	
 }

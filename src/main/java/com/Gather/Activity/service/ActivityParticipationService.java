@@ -18,18 +18,24 @@ public interface ActivityParticipationService {
 	//依據id刪單筆資料
 	public void deleteActivityParticipationById(Integer id);
 	
+	
 	//新增
 	public void addActivityParticipation(ActivityParticipationBean activityParticipationBean);
 	
 	//修改
 	public void updateActivityParticipation(ActivityParticipationBean activityParticipationBean);
 	
-//	//用會員編號查詢該會員的登錄活動
-//		public List<ActivityParticipationBean> memberloginrecord(Integer memberid);
+//	
+
 	
 	//用活動編號、會員編號查詢有無登錄活動
 	ActivityParticipationBean findActivityParticipationByM_idAndActivityId(ActivityBean activityBean ,Integer m_id);
 	
 	Integer getActivityParticipationCount(ActivityBean activityBean );
+	
+	//用會員編號查詢該會員的登錄活動
+	List<ActivityParticipationBean> findActivityParticipationByM_id(Integer m_id);
+	
+	void deleteActivityParticipationByactivityParticipationid(Integer id);
 	
 }

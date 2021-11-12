@@ -72,8 +72,8 @@
               </div>
             </li>
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="<spring:url value='/memberactivitylogin' />"  class="nav-link">會員中心</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link"></a></li>
 	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 
 	        </ul>
@@ -147,7 +147,7 @@
 		    		<div class="row mt-5">
 		          <div class="col text-center">
 		            <div class="block-27">
-		            
+		          
 		            </div>
 		          </div>
 		        </div>
@@ -175,7 +175,6 @@
 														<li><a href="<spring:url value='/activityCategory?category=提案競賽'/>">提案競賽</a></li>
 														<li><a href="<spring:url value='/activityCategory?category=線上抽獎'/>">線上抽獎</a></li>
 														<li><a href="<spring:url value='/lottery'/>">抽獎頁面</a></li>
-														
 													</ul>
 												</div>
 											</div>
