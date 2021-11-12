@@ -61,6 +61,7 @@ public class ActivityAjaxController {
 
 	@Autowired
 	public ActivityAjaxController(ActivityService activityService, ServletContext servletContext,MemberService memberService, ActivityParticipationService activityParticipationService) {
+		System.out.println("debug");
 		this.activityService = activityService;
 		this.servletContext = servletContext;
 		this.activityParticipationService=activityParticipationService;

@@ -174,7 +174,7 @@
 
 											<div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
 												<div class="product d-flex flex-column">
-													<a href="<c:url value='/Gather/showProject/${project.pID}' />"
+													<a href="<c:url value='/showProject/${project.pID}' />"
 														class="img-prod"><img class="img-fluid"
 															src="/Gather/${project.pImageCover}" alt="">
 														<!-- <span class="status">50% Off</span> -->
@@ -194,7 +194,7 @@
 
 
 														</div>
-														<h3><a href="<c:url value='/Gather/showProject/${project.pID}' />">${project.pName}</a></h3>
+														<h3><a href="<c:url value='/showProject/${project.pID}' />">${project.pName}</a></h3>
 														<div class="pricing">
 															<p class="price">
 																<!-- <span class="mr-2 price-dc"></span> -->

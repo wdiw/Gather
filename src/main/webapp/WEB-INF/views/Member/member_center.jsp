@@ -141,11 +141,15 @@
                   <div class="col-md-3 d-flex">
                     <div class="info bg-white p-4" style="font-size: 26px;">
                       <h2><b>會員功能</b></h2>
-                      <a href="#changePassword" class="btn btn-inverse-success btn-fw" data-toggle="modal"
+                      <a href="/Gather/userpage" class="btn btn-inverse-success btn-fw"
                         style="font-size: 26px;">
                         活動登陸
                       </a><br>
-                      <a href="#changePassword" class="btn btn-inverse-success btn-fw" data-toggle="modal"
+                      <a href="/Gather/Project/allProjectInBackstage" class="btn btn-inverse-success btn-fw"
+                        style="font-size: 26px;">
+                        計劃管理
+                      </a><br>
+                      <a href="/Gather/sponsorshipInfo" class="btn btn-inverse-success btn-fw"
                       style="font-size: 26px;">
                         贊助紀錄
                       </a>
@@ -159,10 +163,13 @@
                       style="font-size: 26px;">
                         修改密碼
                       </a><br>
-                      <a href="#addEmployeeModal" class="btn btn-inverse-success btn-fw" data-toggle="modal"
-                      style="font-size: 26px;">
+                      <!--
+
+                        <a href="#addEmployeeModal" class="btn btn-inverse-success btn-fw" data-toggle="modal"
+                        style="font-size: 26px;">
                         帳號綁定
                       </a>
+                    -->
                     </div>
                   </div>
                 </div>
