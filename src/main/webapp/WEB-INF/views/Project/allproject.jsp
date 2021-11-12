@@ -443,7 +443,7 @@
 																			class="btn btn-inverse-warning btn-fw" 
 																			onclick='location.href="<c:url value='/Project/addProject' />"'>新增計畫</button>
 													<div class="table-responsive">
-														<table class="table table-hover">
+														<table id="allProjectTable" class="table table-hover">
 															<thead>
 																<tr>
 																	<th>計畫編號</th>

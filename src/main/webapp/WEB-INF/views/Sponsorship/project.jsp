@@ -11,6 +11,7 @@
       <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
 
+
       <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
       <link rel="stylesheet" href="../css/animate.css">
 
@@ -42,10 +43,7 @@
           overflow: auto;
           height: auto;
         }
-
-        
       </style>
-
 
     </head>
 
@@ -99,8 +97,8 @@
               <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
               <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
               <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-              <li class="nav-item cta cta-colored"><a href="/Gather/myFav/${mBean.id}" class="nav-link"><span
-                    class="icon-shopping_cart"></span>${favCount}</a></li>
+              <li class="nav-item cta cta-colored"><a href="/Gather/myFav/${mBean.id}" class="nav-link"><i
+                    class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
 
             </ul>
           </div>
@@ -184,20 +182,34 @@
                   <p style="color: #000;">80 piece available</p>
                 </div>
               </div>
-              <p>
+              <div>
+
                 <c:choose>
                   <c:when test="${favoriteBean==null}">
-                    <button onclick="addFav(${pBean.pID})" class="btn btn-black py-3 px-5 mr-2">
+                    <button onclick="addFav(${pBean.pID})">
                       <i class="far fa-heart"></i>
                     </button>
                   </c:when>
                   <c:otherwise>
-                    <button onclick="delFav(${pBean.pID})" class="btn btn-black py-3 px-5 mr-2">
+                    <button onclick="delFav(${pBean.pID})">
                       <i class="fas fa-heart"></i>
                     </button>
                   </c:otherwise>
                 </c:choose>
-              </p>
+
+                <div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3"
+                  data-url="http://localhost:8080/Gather/showProject/${pBean.pID}" data-color="default"
+                  data-size="large" data-count="true" style="display: none;"></div>
+                <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async"
+                  defer="defer"></script>
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous"
+                  src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0" nonce="GqQI2z3c"></script>
+                <div class="fb-share-button" data-href="http://localhost:8080/Gather/showProject/${pBean.pID}"
+                  data-layout="button_count" data-size="large"><a target="_blank" href=""
+                    class="fb-xfbml-parse-ignore">分享</a></div>
+
+              </div>
             </div>
           </div>
 
@@ -233,17 +245,18 @@
 
 
                     <c:forEach items='${projectPlanList}' var='projectPlan'>
-                      <div class="card" style="width: 18rem;" >
-                        <div class="controllCard" >
-                        <div class="card-body">
-                          <!-- style="background-color: rgb(255, 255, 255);" -->
-                          <img src="../${projectPlan.projectPlanImage}" class="card-img-top" alt="...">
-                          <h5 class="card-title">預計實現日期:${projectPlan.ETA}</h5>
-                          <p class="card-text">${projectPlan.projectPlanContent}</p>
-                          <a name="sponsorBtn" href="../payment?pPID=${projectPlan.projectPlanID}" class="btn btn-primary" >贊助方案</a>
-                          <span class="planStatus">寫狀態</span>
+                      <div class="card" style="width: 18rem;">
+                        <div class="controllCard">
+                          <div class="card-body">
+                            <!-- style="background-color: rgb(255, 255, 255);" -->
+                            <img src="../${projectPlan.projectPlanImage}" class="card-img-top" alt="...">
+                            <h5 class="card-title">預計實現日期:${projectPlan.ETA}</h5>
+                            <p class="card-text">${projectPlan.projectPlanContent}</p>
+                            <a name="sponsorBtn" href="../payment?pPID=${projectPlan.projectPlanID}"
+                              class="btn btn-primary">贊助方案</a>
+                            <span class="planStatus">寫狀態</span>
+                          </div>
                         </div>
-                      </div>
                       </div>
                     </c:forEach>
 
@@ -484,16 +497,13 @@
                             var diffDay = parseInt(time / (1000 * 60 * 60 * 24));
 
                             if (diffDay >= 0) {
-                              $(".planStatus").text("進行中") 
+                              $(".planStatus").text("進行中")
                             }
                             else {
                               $("[name='sponsorBtn']").hide();
                               $(".planStatus").text("已結束")
-                              $(".planStatus").css("color","red")
+                              $(".planStatus").css("color", "red")
                             }
-
-
-
 
 
 
