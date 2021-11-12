@@ -414,7 +414,7 @@ canvas{
           
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
-              <div class="card position-relative" style="height:420px">
+              <div class="card position-relative" style="height:500px">
                 <div class="card-body">
                   <div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2" data-ride="carousel">
                     <div class="carousel-inner">

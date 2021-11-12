@@ -34,6 +34,19 @@
 <link rel="stylesheet" href="../css/flaticon.css">
 <link rel="stylesheet" href="../css/icomoon.css">
 <link rel="stylesheet" href="../css/style.css">
+
+<style>
+        #ProjectContentText {
+          width: 70%;
+          /* height:auto;  */
+          float: left;
+        }
+        .tab-content>.active {
+          display: block;
+          overflow: auto;
+          height: auto;
+        }
+      </style>
 </head>
 <body class="goto-here">
 	<div class="py-1 bg-black">
@@ -197,7 +210,8 @@
 
 						<c:choose>
 							<c:when test="${mBean.id==null}">
-								<a href='<c:url value="/pages/member/login.html"/>'/><i class="far fa-heart"></i>
+								<a href='<c:url value="/pages/member/login.html"/>' />
+								<i class="far fa-heart"></i>
 							</c:when>
 
 							<c:when test="${favoriteBean==null}">
@@ -221,10 +235,8 @@
 						<script
 							src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js"
 							async="async" defer="defer"></script>
-						<div id="fb-root"></div>
-						<script async defer crossorigin="anonymous"
-							src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0"
-							nonce="GqQI2z3c"></script>
+
+
 						<div class="fb-share-button"
 							data-href="http://localhost:8080/Gather/showProject/${pBean.pID}"
 							data-layout="button_count" data-size="large">
@@ -272,13 +284,17 @@
 
 								<c:forEach items='${projectPlanList}' var='projectPlan'>
 									<div class="card" style="width: 18rem;">
-										<div class="card-body">
-											<img src="../${projectPlan.projectPlanImage}"
-												class="card-img-top" alt="...">
-											<h5 class="card-title">${projectPlan.ETA}</h5>
-											<p class="card-text">${projectPlan.projectPlanContent}</p>
-											<a href="../payment?pPID=${projectPlan.projectPlanID}"
-												class="btn btn-primary">贊助方案</a>
+										<div class="controllCard">
+											<div class="card-body">
+												<!-- style="background-color: rgb(255, 255, 255);" -->
+												<img src="../${projectPlan.projectPlanImage}"
+													class="card-img-top" alt="...">
+												<h5 class="card-title">預計實現日期:${projectPlan.ETA}</h5>
+												<p class="card-text">${projectPlan.projectPlanContent}</p>
+												<a name="sponsorBtn"
+													href="../payment?pPID=${projectPlan.projectPlanID}"
+													class="btn btn-primary">贊助方案</a> <span class="planStatus">寫狀態</span>
+											</div>
 										</div>
 									</div>
 								</c:forEach>
@@ -497,6 +513,30 @@
 										<script src="../js/google-map.js"></script> <script
 											src="../js/main.js"></script> <script>
 		$(document).ready(function(){
+			
+			
+		    //今日日期涵式
+            const formatDate = (date) => {
+              let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+              return formatted_date;
+            }
+            var projectDate = "${pBean.pEDate}"//計畫日期
+            var todate = formatDate(new Date());//今日日期
+            var projectDatetime = new Date(projectDate);
+            todate = todate.replace(/-/g, "/");
+            var todatetime = new Date(todate);
+            var time = projectDatetime.getTime() - todatetime.getTime();
+            var diffDay = parseInt(time / (1000 * 60 * 60 * 24));
+            if (diffDay >= 0) {
+              $(".planStatus").text("進行中")
+            }
+            else {
+              $("[name='sponsorBtn']").hide();
+              $(".planStatus").text("已結束")
+              $(".planStatus").css("color", "red")
+            }
+			
+			
 
 		var quantitiy=0;
 		   $('.quantity-right-plus').click(function(e){
@@ -528,6 +568,8 @@
 		            $('#quantity').val(quantity - 1);
 		            }
 		    });
+		     
+             
 		    
 		});
 		

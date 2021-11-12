@@ -10,6 +10,7 @@
 <style>
 * {
 	font-weight: bold;
+	
 }
 /*tooltip Box*/
 .con-tooltip {
@@ -518,25 +519,25 @@
 			<div class="content-wrapper">
 				<div class="row" style="margin: auto;">
 
-					<div class="card" style="margin-left: 180px;">
+					<div class="card" style="margin-left: 80px;">
 						<div class="card-body" >
-							<h2 class="card-title"
-								style="text-align: center; position: relative; right: 450px">贊助訂單</h2>
-							<div>
-								<input
-									style="border-radius: 40px; border-width: 2px; border-color: lightgrey; margin-left: 940px"
-									class="search-bar" type="text" name="search" id="searchBar"
-									placeholder="搜尋...">
-								<p class="btn btn-primary py-2 px-3" id="searchBtn">
-									<i class="fas fa-search-dollar"></i>
-								</p>
-							</div>
+							<h1 class="card-title"
+								style="text-align: center; position: relative; right: 45px;font-size: 30px">贊助訂單</h1>
+<!-- 							<div> -->
+<!-- 								<input -->
+<!-- 									style="border-radius: 40px; border-width: 2px; border-color: lightgrey; margin-left: 940px" -->
+<!-- 									class="search-bar" type="text" name="search" id="searchBar" -->
+<!-- 									placeholder="搜尋..."> -->
+<!-- 								<p class="btn btn-primary py-2 px-3" id="searchBtn"> -->
+<!-- 									<i class="fas fa-search-dollar"></i> -->
+<!-- 								</p> -->
+<!-- 							</div> -->
 
-							<div class="table-responsive" >
+							<div >
 								<table class="table table-hover"
-									style="text-align: center; width: 10%;" id="ordersTable">
+									style="text-align: center; width: 10%;font-size: 10px" id="ordersTable">
 									<thead>
-										<tr>
+										<tr ">
 											<th><i class="mdi mdi-nutrition"></i>訂單編號</th>
 											<th><i class="mdi mdi-account-star"></i> 贊助人編號</th>
 											<th><i class="mdi mdi-file-image"></i> 專案圖片</th>
@@ -648,10 +649,10 @@
 
           };
          
-          $("#searchBtn").click(function () {
-  			var search = $("#searchBar").val()
-  			location.href = "<spring:url value='/ordersSearch?search=" + search + "'/>"
-  		})
+//           $("#searchBtn").click(function () {
+//   			var search = $("#searchBar").val()
+//   			location.href = "<spring:url value='/ordersSearch?search=" + search + "'/>"
+//   		})
   		
   		function data(index){
         	  var sPID=parseInt($('.sPID').eq(index).text());
