@@ -12,10 +12,6 @@ import com.Gather.Activity.model.ActivityParticipationBean;
 
 public interface ActivityParticipationRepository extends JpaRepository<ActivityParticipationBean,Integer > {
 
-	
-	 
-
-	
 
 	@Query("select p from ActivityParticipationBean p where p.activityBean = ?1 and p.m_id = ?2 ")
 	ActivityParticipationBean findActivityParticipationByM_idAndActivityId(ActivityBean activityBean ,Integer m_id);

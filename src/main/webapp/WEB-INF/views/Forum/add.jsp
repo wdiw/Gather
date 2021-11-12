@@ -5,8 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
-</script>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <head>
   <!-- Required meta tags -->
@@ -19,8 +18,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  
-  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -394,8 +391,17 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">新增文章</h4>
+                  <h2 class="card-title">新增文章</h2>
                   <form  id="form" class="forms-sample">
+                    <div class="form-group">
+                      <label>文章分類</label>
+                      <select name="postCategory">
+                        <option selected>公告</option>
+                        <option>閒聊</option>
+                        <option>討論</option>
+                        <option>心得</option>
+                      </select>
+                    </div>
                     <div class="form-group">
                       <label>文章標題</label>
                       <input type="text" id="name" name="name" class="form-control" placeholder="請輸入文章標題">
@@ -422,7 +428,7 @@
 <!-- 					</div> -->
 					<div >
 						<label>文章內容</label>
-						<textarea id="post" name="post" cols="100" rows="7" ></textarea>
+						<textarea id="post" name="post" cols="100" rows="7" class="form-control" ></textarea>
 					</div>
 					
 					<button type='submit' id="addbtn" name="submit" class="btn btn-primary mr-2">送出</button>
@@ -469,11 +475,16 @@
   <!-- 若需相容 IE11，要加載 Promise Polyfill-->
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
   
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  
+  
   
   <script>
   
 //   	$(document).ready(function(){
   		$('#post').summernote({  //#後面放id屬性值
+//   			alert("進入summernote"); //沒跳
   			placeholder: '請輸入文章內容',
   			tabsize: 2,
   	        height: 100,

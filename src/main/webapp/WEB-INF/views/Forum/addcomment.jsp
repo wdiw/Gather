@@ -14,6 +14,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Gather Admin</title>
   <!-- plugins:css -->
+  
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -40,8 +47,8 @@
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="../../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="../../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -51,9 +58,9 @@
           <li class="nav-item nav-search d-none d-lg-block">
             <div class="input-group">
               <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-<!--                 <span class="input-group-text" id="search"> -->
-<!--                   <i class="icon-search"></i> -->
-<!--                 </span> -->
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
               </div>
               <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
             </div>
@@ -109,15 +116,15 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="/Gather/images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
-              <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/>
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="/Gather/showMemberCenter">
+              <a class="dropdown-item">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item" href="/Gather/showLogout">
+              <a class="dropdown-item">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -258,7 +265,7 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="../images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -269,7 +276,7 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="../images/faces/face3.jpg" alt="image"><span class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -277,7 +284,7 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="../images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -310,7 +317,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/Gather/backend">
+            <a class="nav-link" href="../../index.html">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -364,157 +371,160 @@
               </ul>
             </div>
           </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="<spring:url value='/Forum/queryAll' />" aria-expanded="false" aria-controls="icons">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">討論區</span>
+              <span class="menu-title">AD</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<spring:url value='/Forum/queryAll' />">全部文章</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">廣告管理</a></li>
               </ul>
             </div>
           </li>
         </ul>
       </nav>
-
-			
-			<br><br>
-
-			<div class="table-responsive">
-      <table class="table table-hover">
       
-    	<thead>
-    		<tr>
-    			<th>文章編號</th>
-    			<th>文章分類</th>
-				<th>文章標題</th>
-				<th>文章內容</th>
-				<th>發文資訊</th>
-				<th>最後修改時間</th>
-				<th>回覆數</th>
-			</tr>
-		</thead>
-		<c:forEach items='${AllForum}' var='forum' >
-			<tr>
-<!-- 			<tr onclick="test()" > -->
-<%-- 			<tr onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
-<%-- 			value='/Project/project?pID=${project.pID}' --%>
-				<td>
-				<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.id}</a>
-<%-- 				缺分類${forum.id} --%>
-				</td>
-				<td>
-				<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.postCategory}</a>
-				</td>
-				<td style="">
-<%-- 				<td onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
-					<div style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;">
-<%-- 					${forum.name} --%>
-						<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.name}</a>
+      
+      
+      <!-- partial -->
+      <div class="main-panel">        
+        <div class="content-wrapper">
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">新增留言</h4>
+                  <form  id="form" class="forms-sample">
+                    <div class="form-group">
+                      <label>留言人</label>
+                      <input type="text" id="commenter" name="commenter" class="form-control" placeholder="請輸入姓名">
+                    </div>
+					<div >
+						<label>留言內容</label>
+						<textarea id="comment" name="comment" cols="100" rows="7" ></textarea>
 					</div>
-				</td>
-				<td onMouseOver="this.style.backgroundColor='pink';" onMouseOut="this.style.backgroundColor='';">
-					<div id="post" name="post" class="showcontent" style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;" 
-					onMouseOver="this.style.backgroundColor='orange';" 
-					onMouseOut="this.style.backgroundColor='';">
-					${forum.post}
-<!-- 					<button onclick="init()">TEST</button> -->
-					</div>
-				</td>
-				<td>
-				${forum.poster}<br>
-				${forum.postTime}
-				</td>
-				
-				<td><br>${forum.postUpdateTime}</td>
-				<td>回覆數123</td>
-<!-- 				<td> -->
-<%-- 					<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">編輯</a> --%>
-<%-- 					<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">文章刪除</a> --%>
-<!-- 					<button type="button" id="update" class="btn btn-inverse-warning btn-fw" -->
-<%-- 					onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"'>詳細資料</button> --%>
-<%-- 					<a href="<c:url value='/Forum/adUpdate' />" class="btn btn-primary">文章修改</a><br><br> --%>
-<!-- 				</td> -->
-			</tr>
-		</c:forEach>
-	</table>
-	
-<!-- 	TTTTTTTTTTTTTTTTT -->
-	
-	<div>
-		<input class='search-bar' type='text' id='searchvalue' placeholder='輸入文章標題'>
-		<button id='search'>搜尋</button>
-<!-- 		<a id='search' style="cursor: pointer;">搜尋<span  class="icon ion-ios-search"></span></a> -->
-	</div>
-	
-	<br><br>
-	<div>
-		<ul>
-			<li><a href="<spring:url value='/Forum/queryAll'/>">全部</a></li>
-			<li><a href="<spring:url value='/Forum/category?postCategory=公告'/>">公告</a></li>
-			<li><a href="<spring:url value='/Forum/category?postCategory=閒聊'/>">閒聊</a></li>
-			<li><a href="<spring:url value='/Forum/category?postCategory=討論'/>">討論</a></li>
-			<li><a href="<spring:url value='/Forum/category?postCategory=心得'/>">心得</a></li>
-		</ul>
-	</div>
-
-
-
-				<!-- 	TTTTTTTTTTTTTTTTT -->
-	
-	</div>
-	
-	
-    <div align='center'>
-    	<br>
-<%--     	<a href="<c:url value='/Forum/add1' />" class="btn btn-primary">測試</a><br><br> --%>
-<%--     	<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">發表文章</a><br><br> --%>
-    	<a href="<c:url value='/Forum/add' />" class="btn btn-primary">發表文章add</a><br><br>
-    	<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">文章刪除</a><br><br>
-    	<a href="<c:url value='/Forum/adUpdate' />" class="btn btn-primary">文章修改</a><br><br>
-    	<a href="<c:url value='/Forum/queryAll' />" class="btn btn-primary">回討論區</a><br><br>
-    	<a href="<c:url value='/' />" class="btn btn-primary">回首頁</a><br><br>
+					
+					<button type='submit' id="addbtn" name="submit" class="btn btn-primary mr-2">送出</button>
+                  </form>
+                </div>
+              
+            </div>
+       
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
     </div>
-    
-    
-    
-<script>
-
-$('#search').click(function() {
-    var searchvalue = $('#searchvalue').val(); //用變數searchvalue放輸入的東西
-//     alert(searchvalue); //測試是否抓到輸入的東西
-    location.href=  "<spring:url value='/Forum/searchresult?searchvalue=" + searchvalue + "'/>" //跳轉進@GetMapping對應的方法，也是網址
-									   //@GetMapping對應網址 ? 方法的@RequestParam對應的參數，這裡就是@RequestParam("searchvalue")
-})
-
-
-// $(document).ready(function () {
-// 		var projectID = ${ project.pID };//抓專案ID
-// 		var mStatus = "${sessionScope.memberData.status}"//取得會員身分
-// 		var mID = "${sessionScope.memberData.id}"//取得會員身分
-
-// 		if (mStatus == '管理員') {
-// 			//管理員身分
-// 			$("#passButton").show();
-// 			$("#NotPassButton").show();
-// 			$("#sendButton").hide();
-
-// 		} else {
-// 			//會員身分
-
-// 			$("#sendButton").show();
-// 			$("#passButton").hide();
-// 			$("#NotPassButton").hide();
-// 			$(".form-control").attr("disabled", true)
-// 			$("#pDescribe").attr("disabled", false);
-// 			$("#pContent").attr("disabled", false);
-// 		}
-// 	})
-
-</script>
-    
+    <!-- page-body-wrapper ends -->
+  </div>
+  
+  
+  
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
+  <script src="vendors/select2/select2.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../js/file-upload.js"></script>
+  <script src="../js/typeahead.js"></script>
+  <script src="../js/select2.js"></script>
+  <!-- End custom js for this page-->
+  
+  <!-- 要用Swal.fire需要引用下面兩個 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <!-- 若需相容 IE11，要加載 Promise Polyfill-->
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+  
+  
+  <script>
+  
+//   	$(document).ready(function(){
+  		$('#comment').summernote({  //#後面放id屬性值
+  			placeholder: '請輸入文章內容',
+  			tabsize: 2,
+  	        height: 100,
+  		});
+  		
+		$("#addbtn").click(function() { //對應button的id屬性值，也就是addbtn
+			$("#form").on("submit", function(e) { //對應button的??屬性值??，不是name屬性值
+            e.preventDefault(); //不要按完按鈕就跳頁面
+            var form = document.getElementById("form");
+    		var formData = new FormData(form); //把表單的資料裝成data
+    		var url = "<spring:url value='/Forum/addcomment'/>"
+            Swal.fire({
+                title: '您確定要送出嗎？',
+                icon: 'question',
+                showCancelButton: true,
+//                 closeOnConfirm: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                	
+                    $.ajax({
+                        type:"post",
+                        url:"<spring:url value='/Forum/addcomment'/>", //要放@PostMapping對應的網址
+                        data: formData,
+                        //data: json,
+                        //dataType:"json",
+                        //contentType: "application/json; charset=utf-8",
+                        contentType: false, //required
+                        processData: false, // required
+                        //mimeType: 'multipart/form-data', //有圖片就要一定要加這行
+                        success: function(data){
+//                             var jsonData = JSON.parse(data); //會讓下面跳不出來!!!!!!!
+                            
+                            Swal.fire({
+                            	title: '已新增成功！',
+                            	icon: 'success',
+                            }).then((result)=>{
+                            	if (result.isConfirmed) {
+                            		location.href= "<spring:url value='/Forum/comments'/>";
+                            	}
+                            })
+                            
+                        },
+                        error: function(e, text){
+                        	
+                        	Swal.fire({
+                            	title: '新增失敗！',
+                            	icon: 'error',
+                            })
+//                             .then((result)=>{
+//                             	if (result.isConfirmed) {
+//                             		location.href= "<spring:url value='/Forum/queryAll'/>";
+//                             	}
+//                             })
+                        	
+                            console.log(e.status);
+                            console.log(text);
+                        }
+                    }) //$.ajax({
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '已取消送出請求',
+                        text: '您的變更將不會被儲存!'
+                    })
+                }
+            }) //then((result) => {
+        }) //$("#form").on("submit", function(e){
+        
+		 }) //$("#addbtn").click(function
+    </script>
+  
 </body>
+
 </html>
-    

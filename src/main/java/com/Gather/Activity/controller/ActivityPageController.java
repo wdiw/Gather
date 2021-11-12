@@ -83,11 +83,6 @@ public class ActivityPageController {
 
 		}
 		
-		
-		
-		
-		
-		
 
 		// 跳轉到新增專案
 		@GetMapping("/Activity/add")

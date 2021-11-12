@@ -1,17 +1,106 @@
 <body>
 
-    <script type="text/javascript">
+	<div class="form-group">
+		<label>更換封面</label> <input type="file" name="changeImageCover"
+			class="file-upload-default" id="changeImageCover">
 
-        //當更換圖片
-        $("#changeImageCover").on("change", function () {
-            var changeImageCover = $("#changeImageCover")[0].files[0];
-            var reader = new FileReader;
-            reader.onload = function (e) {
-                $('#pImageCover').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(changeImageCover);
+		<div class="input-group col-xs-12">
+			<input type="text" class="form-control file-upload-info" disabled
+				placeholder="上傳圖片"> <span class="input-group-append">
+				<button class="file-upload-browse btn btn-primary" type="button"
+					id="coverImageUpload">上傳</button>
+			</span>
+		</div>
+	</div>
 
-        });
+
+	<div class="form-group">
+
+		<img style="position: relative; left: 250px"
+			src="../${project.pImageCover}" width="350" height="300" alt="請選擇照片"
+			id="pImageCover" name="pImageCover" class="img-rounded">
+	</div>
+
+
+    <form id="form" class="forms-sample">
+        <div class="form-group">
+            <label>留言編號</label>
+            <input name="id" id="id" 
+            class="form-control" value="${forum.id}" disabled>
+        </div>
+
+        <div class="form-group">
+            <label>留言</label>
+            <textarea rows="15" cols="50" 
+            id="post" name="post" class="form-control">${forum.post}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>留言時間</label>
+            <textarea rows="15" cols="50" 
+            id="post" name="post" class="form-control">${forum.post}</textarea>
+        </div>
+
+        <button id="updateButton" type='button' name='updateButton'
+            class="btn btn-primary mr-2" onclick="updatebtn(${forum.id})">送出</button>
+        
+        <button id="deleteButton" type='button' name='deleteButton'
+            class="btn btn-danger" onclick="deletebtn(${forum.id})">刪除</button>
+        
+        <button id="returnButton" type='button' name='returnButton'
+            class="btn btn-primary mr-2" onclick='location.href="<c:url value='/Forum/queryAll' />"'>回討論區</button>
+        
+        <br><br>
+
+    </form>
+
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+        
+          <thead>
+              <tr>
+                  <th>留言編號</th>
+                  <th>留言人</th>
+                  <th>留言內容</th>
+                  <th>留言時間</th>
+              </tr>
+          </thead>
+          <c:forEach items='${AllForumComment}' var='forumcomments' >
+              <tr>
+                  <td>${forumcomments.forumcommentID}</td>
+                  <td>
+                      <div style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;">
+                        ${forumcomments.forumcommenter}
+                      </div>
+                  </td>
+                  <td onMouseOver="this.style.backgroundColor='pink';" onMouseOut="this.style.backgroundColor='';">
+                      <div id="post" name="post" class="showcontent" style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;" 
+                      onMouseOver="this.style.backgroundColor='orange';" 
+                      onMouseOut="this.style.backgroundColor='';">
+                      ${forumcomments.forumcomment}
+                      </div>
+                  </td>
+                  <td>${forumcomments.forumcommentTime}</td>
+              </tr>
+          </c:forEach>
+      </table>
+      
+      </div>
+
+
+	<script type="text/javascript">
+
+	//當更換圖片
+	$("#changeImageCover").on("change", function () {
+		var changeImageCover = $("#changeImageCover")[0].files[0];
+		var reader = new FileReader;
+		reader.onload = function (e) {
+			$('#pImageCover').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(changeImageCover);
+
+	});
 
         function updatebtn(id) {
             // alert(updateId);

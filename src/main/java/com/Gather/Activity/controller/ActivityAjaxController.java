@@ -102,8 +102,6 @@ public class ActivityAjaxController {
 			return new ResponseEntity<String>(HttpStatus.OK);
 		}
 		
-		
-		
 
 		
 		@PostMapping(path = "/Activity/add")

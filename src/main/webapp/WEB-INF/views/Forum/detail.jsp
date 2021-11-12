@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
-				</script>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <head>
@@ -16,12 +14,17 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Gather Admin</title>
 <!-- plugins:css -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <link rel="stylesheet" href="../vendors/feather/feather.css">
 <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
@@ -413,23 +416,38 @@
 					<div class="col-12 grid-margin stretch-card">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-title">詳細內容</h4>
+								<h4 class="card-title">文章內容</h4>
 								<p class="card-description"></p>
 								<form id="form" class="forms-sample">
 									<div class="form-group">
-										<label for="id">文章編號</label> <input name="id" id="id"
-											class="form-control" value="${forum.id}" disabled>
+										<label>文章編號</label>
+										<input name="id" id="id" 
+										class="form-control" value="${forum.id}" disabled>
 									</div>
 
 									<div class="form-group">
-										<label for="name">文章標題</label> <input id="name" name="name"
-											class="form-control" value="${forum.name}" type='text'>
+										<label>文章分類</label> 
+<!-- 										<input id="name" name="name" -->
+<%-- 										class="form-control" value="${forum.postCategory}" type='text'> --%>
+										<select name="postCategory">
+<%-- 											<option selected>${forum.postCategory}</option> --%>
+											<option selected>公告</option>
+											<option>閒聊</option>
+											<option>討論</option>
+											<option>心得</option>
+										</select>
 									</div>
 
 									<div class="form-group">
-										<label for="post">文章描述</label>
-										<textarea rows="15" cols="50" id="post" name="post"
-											class="form-control">${forum.post}</textarea>
+										<label>文章標題</label>
+										<input id="name" name="name" 
+										class="form-control" value="${forum.name}" type='text'>
+									</div>
+
+									<div class="form-group">
+										<label>文章描述</label>
+										<textarea rows="15" cols="50" 
+										id="post" name="post" class="form-control">${forum.post}</textarea>
 									</div>
 									
 									<button id="updateButton" type='button' name='updateButton'
@@ -438,45 +456,65 @@
 									<button id="deleteButton" type='button' name='deleteButton'
 										class="btn btn-danger" onclick="deletebtn(${forum.id})">刪除</button>
 									
-									<button id="deleteButton" type='button' name='deleteButton'
+									<button id="returnButton" type='button' name='returnButton'
 										class="btn btn-primary mr-2" onclick='location.href="<c:url value='/Forum/queryAll' />"'>回討論區</button>
 									
 									<br><br>
 <!-- 									<div class="form-group"> -->
-<!-- 										<label for="post">文章回應</label> -->
+<!-- 										<label>文章回應</label> -->
 <!-- 										<textarea rows="4" cols="50" id="post" name="post" -->
 <%-- 											class="form-control">${forum.post}</textarea> --%>
 <!-- 									</div> -->
 									
 								</form>
+								
+								<br><br>
 
-<!-- 								<h4 class="card-title">新增留言</h4> -->
-<%-- 								<form id="commentsform" class="forms-sample"> --%>
-<!-- 									<div class="form-group"> -->
-<!-- 										<label>使用者</label> <input type="text" id="userid" name="userid" -->
-<!-- 											class="form-control" placeholder="請輸入使用者"> -->
-<!-- 									</div> -->
-<!-- 									<div class="form-group"> -->
-<!-- 										<label>留言內容</label> -->
-<!-- 										<textarea id="usercomment" name="usercomment" cols="100" rows="10"  -->
-<!-- 										class="form-control" placeholder="請輸入留言"></textarea> -->
-<!-- 									</div> -->
+								<div class="table-responsive">
+									<table class="table table-hover">
 
-<!-- 									<button type='submit' id="addcomment" name='submit' -->
-<!-- 										class="btn btn-primary mr-2">送出留言</button> -->
-<%-- 								</form> --%>
+										<thead>
+											<tr>
+												<th>留言編號</th>
+												<th>留言人</th>
+												<th>留言內容</th>
+												<th>留言時間</th>
+											</tr>
+										</thead>
+										<c:forEach items='${AllForumComment}' var='forumcomments'>
+											<tr>
+												<td>${forumcomments.forumcommentID}</td>
+												<td>
+													<div
+														style="width: 100%; white-space: normal; word-wrap: break-word; word-break: break-all; cursor: pointer;">
+														${forumcomments.forumcommenter}</div>
+												</td>
+												<td onMouseOver="this.style.backgroundColor='pink';"
+													onMouseOut="this.style.backgroundColor='';">
+													<div id="post" name="post" class="showcontent"
+														style="width: 100%; white-space: normal; word-wrap: break-word; word-break: break-all; cursor: pointer;"
+														onMouseOver="this.style.backgroundColor='orange';"
+														onMouseOut="this.style.backgroundColor='';">
+														${forumcomments.forumcomment}</div>
+												</td>
+												<td>${forumcomments.forumcommentTime}</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
 
-<!-- 								<div style="background-color: lightpink; width: 300px; height: 100%;"> -->
-<!-- 									<div id="messageBox"></div> -->
-<!-- 									<div class="border"> -->
-<!-- 										<p>使用者留言</p> -->
-<!-- 										<input id="myInput" type="text" placeholder="請輸入留言"> -->
-<!-- 										<button id="doPost">提交</button> -->
-<!-- 									</div> -->
+								<br><br>
+								
+								<h3>新增留言</h3>
+							
+									<div class="form-group">
+										<textarea id="forumcomment" name="forumcomment" cols="100" rows="10" 
+										class="form-control" placeholder="請輸入留言"></textarea>
+									</div>
 
-<!-- 								</div> -->
-
-
+									<button type='submit' id="addcomment" name='submit'
+										class="btn btn-primary mr-2">送出留言</button>
+							
 							</div>
 
 						</div>
@@ -503,25 +541,33 @@
 			<script src="../js/settings.js"></script>
 			<script src="../js/todolist.js"></script>
 			<!-- endinject -->
-			<!-- Custom js for this page-->
+			<!-- Custom js for this page -->
 			<script src="../js/file-upload.js"></script>
 			<script src="../js/typeahead.js"></script>
 			<script src="../js/select2.js"></script>
-			<!-- End custom js for this page-->
-
-
-			<script type="text/javascript">
+			<!-- End custom js for this page -->
 			
-				//當更換圖片
-// 				$("#changeImageCover").on("change", function () {
-// 					var changeImageCover = $("#changeImageCover")[0].files[0];
-// 					var reader = new FileReader;
-// 					reader.onload = function (e) {
-// 						$('#pImageCover').attr('src', e.target.result);
-// 						}
-// 					reader.readAsDataURL(changeImageCover);
-// 					});
+			<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+			<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+
+
+			<script>
+			
+				$(document).ready(function(){
+				$('#post').summernote({  //#後面放id屬性值
+  					placeholder: '請輸入文章內容',
+  					tabsize: 2,
+  	        		height: 100,
+  				});
+				$('#forumcomment').summernote({  //#後面放id屬性值
+  					placeholder: '請輸入留言',
+  					tabsize: 2,
+  	        		height: 100,
+  				});
+				});
 				
+				//更新按鈕
 				function updatebtn(id) {
 					
 					var form = document.getElementById("form")
@@ -559,20 +605,12 @@
 						}
 					});
 				};
-
-
+				
+				
+				//刪除按鈕
 				function deletebtn(id) {
-
-// 					const swalWithBootstrapButtons = Swal.mixin({
-// 						customClass: {
-// 							confirmButton: 'btn btn-success',
-// 							cancelButton: 'btn btn-danger'
-// 						},
-// 						buttonsStyling: false
-// 					})
 					
 					Swal.fire({
-// 					swalWithBootstrapButtons.fire({
 						title: '確定刪除?',
 						text: "你將刪除此計畫!",
 						icon: 'warning',
@@ -613,10 +651,8 @@
 							})
 						
 						} else if (
-							/* Read more about handling dismissals below */
 							result.dismiss === Swal.DismissReason.cancel
 						) {
-// 							swalWithBootstrapButtons.fire(
 							Swal.fire(
 								'取消',
 								'已取消刪除 ',
@@ -624,77 +660,65 @@
 							)
 						}
 					})
-				}
+				} //function deletebtn(id)
 				
 				
-					window.onload = function () {
-			            var oInput = document.getElementById("myInput"); //取得id="myInput"標籤，也就是<input>
-			            var omessageBox = document.getElementById("messageBox"); //取得id="messageBox"標籤，也就是<div>
-			            var oPostBtn = document.getElementById("doPost"); //取得id="doPost"標籤，也就是<button>
+// 					window.onload = function () {
+// 			            var oInput = document.getElementById("myInput"); //取得id="myInput"標籤，也就是<input>
+// 			            var omessageBox = document.getElementById("messageBox"); //取得id="messageBox"標籤，也就是<div>
+// 			            var oPostBtn = document.getElementById("doPost"); //取得id="doPost"標籤，也就是<button>
 
-			            oPostBtn.onclick = function () {
-			                if (oInput.value) {
-			                    //在JavaScript中，會等於false的值只會有undefined, null, false, 0, ""這五種，物件類永遠為true
+// 			            oPostBtn.onclick = function () {
+// 			                if (oInput.value) {
+// 			                    //在JavaScript中，會等於false的值只會有undefined, null, false, 0, ""這五種，物件類永遠為true
 
-			                    //建一個顯示時間的div
-			                    var oTime = document.createElement("div");
-			                    oTime.className = "time";
-			                    var myDate = new Date();
-			                    oTime.innerHTML = myDate.toLocaleString();
-			                    omessageBox.appendChild(oTime);
+// 			                    //建一個顯示時間的div
+// 			                    var oTime = document.createElement("div");
+// 			                    oTime.className = "time";
+// 			                    var myDate = new Date();
+// 			                    oTime.innerHTML = myDate.toLocaleString();
+// 			                    omessageBox.appendChild(oTime);
 
 
-			                    //建一個顯示留言的div
-			                    var oMessageContent = document.createElement("div");
-			                    oMessageContent.setAttribute("style", "border-style:dotted;background-color:lightblue;border-width:thin;")
-			                    oMessageContent.className = "message_content";
-			                    oMessageContent.innerHTML = oInput.value;
-			                    oInput.value = "";
-			                    omessageBox.appendChild(oMessageContent);
+// 			                    //建一個顯示留言的div
+// 			                    var oMessageContent = document.createElement("div");
+// 			                    oMessageContent.setAttribute("style", "border-style:dotted;background-color:lightblue;border-width:thin;")
+// 			                    oMessageContent.className = "message_content";
+// 			                    oMessageContent.innerHTML = oInput.value;
+// 			                    oInput.value = "";
+// 			                    omessageBox.appendChild(oMessageContent);
 
-			                }
-			            }
-			        }
+// 			                }
+// 			            }
+// 			        }
 				
-					
-					$("#addcommentbtn").click(function () { //對應button的id屬性值addbtn
-						$("#commentsform").on("submit", function(e){ //對應button的??屬性值??，不是name屬性值
-			            /* =====for formData&MultipartFile =====*/
-			            e.preventDefault(); //不要按完按鈕就跳頁面
-			            var form = document.getElementById("commentsform");
-			    		var formData = new FormData(form); //把表單的資料裝成data
-			    		var url = "<spring:url value='/Forum/addcomment'/>"
-			            
-			            /* =====for JSON =====*/
-			            
-			            //改用ajax傳送 棄用原本的form傳送
+					//送出留言
+					$("#addcomment").click(function() { //對應button的id屬性值addcomment
+						
+						var forumcomment=$('#forumcomment').val();
+						var id=$('#id').val();
+           
 			            Swal.fire({
 			                title: '您確定要送出嗎？',
+							text:forumcomment,
 			                icon: 'question',
 			                showCancelButton: true,
 //			                 closeOnConfirm: true,
 			            }).then((result) => {
 			                if (result.isConfirmed) {
-			                	
 			                    $.ajax({
-			                        type:"post",
-			                        url:"<spring:url value='/Forum/addcomment'/>", //要放@PostMapping對應的網址
-			                        data: formData,
-			                        //data: json,
-			                        //dataType:"json",
-			                        //contentType: "application/json; charset=utf-8",
-			                        contentType: false, //required
-			                        processData: false, // required
-			                        //mimeType: 'multipart/form-data', //有圖片就要一定要加這行
+			                        type:"post", //對應@PostMapping
+			                        url:"<spring:url value='/Forum/addforumcomment'/>", //對應@PostMapping
+			                        data:{forumcomment:forumcomment,id:id},	//?		                       
+									
 			                        success: function(data){
-//			                             var jsonData = JSON.parse(data); //會讓下面跳不出來!!!!!!!
-			                            
 			                            Swal.fire({
 			                            	title: '已新增成功！',
 			                            	icon: 'success',
 			                            }).then((result)=>{
 			                            	if (result.isConfirmed) {
-			                            		location.href= "<spring:url value='/Forum/queryAll'/>";
+// 			                            		location.href= "<spring:url value='/Forum/detail/" + id + "'/>";
+			                            		location.href= "<spring:url value='/Forum/detail?id=" + ${forum.id} + "'/>";
 			                            	}
 			                            })
 			                            
@@ -705,16 +729,11 @@
 			                            	title: '新增失敗！',
 			                            	icon: 'error',
 			                            })
-//			                             .then((result)=>{
-//			                             	if (result.isConfirmed) {
-//			                             		location.href= "<spring:url value='/Forum/queryAll'/>";
-//			                             	}
-//			                             })
 			                        	
 			                            console.log(e.status);
 			                            console.log(text);
 			                        }
-			                    }) //$.ajax({
+			                    })
 			                } else if (result.dismiss === Swal.DismissReason.cancel) {
 			                    Swal.fire({
 			                        icon: 'error',
@@ -722,12 +741,13 @@
 			                        text: '您的變更將不會被儲存!'
 			                    })
 			                }
-			            }) //then((result) => {
-			        }) //$("#form").on("submit", function(e){
-			        
+			            }) 
+
 					 }) //$("#addbtn").click(function
 				
 			</script>
+			
+			
 </body>
 
 </html>
