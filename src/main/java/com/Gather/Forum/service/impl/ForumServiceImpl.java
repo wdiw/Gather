@@ -1,6 +1,7 @@
 package com.Gather.Forum.service.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -53,5 +54,20 @@ public class ForumServiceImpl implements ForumService {
 	public void deleteForumById(Integer fID) {
 		forumRepository.deleteById(fID);
 	}
+	
+	//搜尋
+	@Override
+	public List<ForumBean> findforumBytitle(Set<String> forumtitles) {
+		return forumRepository.findforumBytitle(forumtitles);
+	}
+	
+	//搜尋
+	@Override
+	public List<ForumBean> findByPostCategory(String forumcategory) {
+	
+		return forumRepository.findByPostCategory(forumcategory);
+		
+	}
+	
 	
 }

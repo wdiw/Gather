@@ -1,6 +1,7 @@
 package com.Gather.Forum.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.Gather.Forum.model.ForumBean;
 
@@ -21,5 +22,12 @@ public interface ForumService {
 	
     //依據id 找單筆資料
 	public ForumBean getForumById(Integer fID);
+	
+	//搜尋
+	List<ForumBean> findforumBytitle(Set<String> forumtitles);
+	
+	//搜尋
+	List<ForumBean> findByPostCategory(String forumcategory);
+	
 	
 }
