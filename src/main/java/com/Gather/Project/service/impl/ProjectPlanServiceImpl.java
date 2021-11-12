@@ -39,4 +39,13 @@ public class ProjectPlanServiceImpl implements ProjectPlanService {
 		return projectPlanRepository.findProjectPlansByProjectBean(projectBean);
 	}
 
+
+	@Override
+	public void updateProjecPlantAmountByprojectPlanID(Integer projectPlanID, Integer projectPlanAmount) {
+		projectPlanRepository.updateProjecPlantAmountByprojectPlanID(projectPlanID, projectPlanAmount);
+		
+	}
+	
+	
+
 }

@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -32,6 +34,8 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectRepository.findAll();
 	}
 
+	
+	
 	// 透過id找
 	@Override
 	public ProjectBean getProjectById(Integer pID) {
@@ -91,6 +95,33 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectBean> getProjectBypStatusAndpCategory(String pStatus, String pCategory) {
 		
 		return projectRepository.findBypStatusAndpCategory(pStatus, pCategory);
+	}
+
+	//分頁
+	@Override
+	public Page<ProjectBean> findBypStatusContaining(String pStatus, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return projectRepository.findBypStatusContaining(pStatus, pageable);
+	}
+
+	//計畫贊助累積金額
+	@Override
+	public void updateProjectAmountBypID(Integer pID, Integer pAmountNow) {
+		projectRepository.updateProjectAmountBypID(pID, pAmountNow);
+		
+	}
+
+	//方案贊助累積金額
+	@Override
+	public void updateProjectSponsorCountBypID(Integer pID, Integer sponsorCount) {
+		projectRepository.updateProjectSponsorCountBypID(pID, sponsorCount);
+		
+	}
+	
+	//找計畫熱門前10名
+	@Override
+	public List<ProjectBean> findProjectByOrderby() {
+		return projectRepository.findProjectByOrderby();
 	}
 	
 	

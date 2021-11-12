@@ -4,8 +4,7 @@
 			<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 				<!DOCTYPE html>
 				<html lang="en">
-				<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
-				</script>
+				<!-- <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script> -->
 				<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 				<head>
@@ -31,6 +30,13 @@
 					<!-- endinject -->
 					<link rel="shortcut icon" href="../images/favicon.png" />
 
+					<!-- include summernote css/js -->
+					<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+						rel="stylesheet">
+					<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js" defer></script>
+
+
+
 					<style>
 						/* 改變text樣式 */
 						.swal2-popup {
@@ -43,6 +49,11 @@
 							height: 10em;
 							width: 30em;
 							padding: .75em;
+						}
+
+						.note-editing-area .note-editable {
+							height: 400px;
+							width: 100%;
 						}
 					</style>
 				</head>
@@ -451,8 +462,9 @@
 													<div class="form-group">
 														<label for='pID'>計畫編號</label>
 														<input name="pID" id="pID" class="form-control"
-															value="${project.pID}" disabled>
+															value="${project.pID}" readonly>
 													</div>
+
 
 													<div class="form-group">
 														<label for="pName">計畫名稱</label>
@@ -517,6 +529,59 @@
 															class="form-control">${project.pContent}</textarea>
 													</div>
 
+												
+													<c:forEach   items='${projectPlanList}' var='projectPlan' varStatus="status">
+														
+														<!--回饋方案一-->
+														<div class="form-group">
+															<label for="projectPlanPrice${status.count}">回饋方案${status.count}金額</label>
+															<input id="projectPlanPrice${status.count}"   name="projectPlanPrice${status.count}"
+																class="form-control" type='number' value="${projectPlan.projectPlanPrice}"
+																min="100" step="100">
+
+														</div>
+														<div class="form-group">
+															<label for="ETA${status.count}">回饋方案${status.count}預計實現時間</label>
+															<input id="ETA${status.count}" name="ETA${status.count}" 
+															value="${projectPlan.ETA}" class="form-control" type='month'>
+														</div>
+	
+														<div class="form-group">
+															<label for="projectPlanContent${status.count}">回饋方案${status.count}內容</label>
+															<textarea rows="4" cols="50" id="projectPlanContent${status.count}"
+																name="projectPlanContent${status.count}" class="form-control">${projectPlan.projectPlanContent}</textarea>
+														</div>
+	
+	
+														<div class="form-group">
+															<label>回饋方案${status.count}圖片</label>
+															<input type="file" name="projectPlanImage${status.count}"
+																class="file-upload-default" id="projectPlanImage${status.count}">
+															<div class="input-group col-xs-12">
+																<input type="text" class="form-control file-upload-info"
+																	disabled placeholder="上傳圖片">
+	
+																<span class="input-group-append">
+																	<button class="file-upload-browse btn btn-primary"
+																		type="button" disabled>上傳</button>
+																</span>
+															</div>
+														</div>
+														
+														
+														<div class="form-group">
+	
+															<img style="position: relative; left: 250px" src="../${projectPlan.projectPlanImage}" width="350"
+																
+																height="300" alt="請選擇圖片" id="projectPlanImageCover${status.count}"
+																name="projectPlanImageCover${status.count}" class="img-rounded">
+														</div>
+
+														
+													</c:forEach> 
+
+													
+
 
 													<div class="form-group">
 														<label for="pStatus">狀態</label>
@@ -539,13 +604,13 @@
 
 
 													<button id="passButton" type='button' name='passButton'
-														class="btn btn-danger">通過</button>
+														class="btn btn-info">通過</button>
 
 													<button id="NotPassButton" type='button' name='NotPassButton'
-														class="btn btn-danger">不通過</button>
+														class="btn btn-warning">不通過</button>
 
-													<!-- <button id="deleteButton" type='button' name='deleteButton'
-														class="btn btn-danger">刪除</button>  -->
+													<button id="deleteButton" type='button' name='deleteButton'
+														class="btn btn-danger" >刪除</button> 
 
 												</form>
 											</div>
@@ -584,6 +649,9 @@
 							<script type="text/javascript">
 
 								$(document).ready(function () {
+									$('#pContent').summernote();
+
+
 									var projectID = ${ project.pID };//抓專案ID
 									var mStatus = "${sessionScope.memberData.status}"//取得會員身分
 
@@ -603,11 +671,13 @@
 										$("#sendButton").show();
 										$("#passButton").hide();
 										$("#NotPassButton").hide();
-										$(".form-control").attr("disabled", true)
-										//$(".form-control").attr("readonly", true)
-										$("#pDescribe").attr("disabled", false);
-										$("#pContent").attr("disabled", false);
+										$("#deleteButton").hide();
+										// $(".form-control").attr("disabled", true)
+										$(".form-control").attr("readonly", true)
+										$("#pDescribe").attr("readonly", false);
+										$("#pContent").attr("readonly", false);
 									}
+
 
 
 
@@ -625,19 +695,19 @@
 
 									//管理者按通過
 									$("#passButton").click(function () {
-										
+
 										alert("按下通過")
 										$("#pStatus").val("通過");//把狀態改為通過
 										var pStatus = $("#pStatus").val();
 										//var reason = $("#reason").val("已通過審核並上架");
-										
-										
+
+
 
 										var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
 										$.ajax({
 											url: url,
 											type: 'PUT',
-											data: { pStatus: pStatus,reason:"已通過審核並上架" },
+											data: { pStatus: pStatus, reason: "已通過審核並上架" },
 											success: function (data) {
 												Swal.fire({
 													title: '更新成功',
@@ -684,59 +754,43 @@
 											height: 20
 
 										})
-										
-									
-
-										
-												
-											
-												$("#pStatus").val("未通過");//把狀態改為未通過
-												var pStatus = $("#pStatus").val();
-												var reason=text;//存管理員所寫的理由
-												
 
 
+										$("#pStatus").val("未通過");//把狀態改為未通過
+										var pStatus = $("#pStatus").val();
+										var reason = text;//存管理員所寫的理由
 
-												var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
-												$.ajax({
-													url: url,
-													type: 'PUT',
-													data: { pStatus: pStatus,reason:reason },
-													success: function (data) {
-														Swal.fire({
-															title: '更新成功',
-															icon: 'success',
-															text: "已經更新！",
-															position: 'center',
+										var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
+										$.ajax({
+											url: url,
+											type: 'PUT',
+											data: { pStatus: pStatus, reason: reason },
+											success: function (data) {
+												Swal.fire({
+													title: '更新成功',
+													icon: 'success',
+													text: "已經更新！",
+													position: 'center',
 
-														}).then((result) => {
-															if (result.isConfirmed) {
-																location.href = "<c:url value='/Project/allProjectInBackstage'/>";
-															}
-														})
-													},
-													error: function (xhr, text) {
-														console.log("status code: " + xhr.status);
-														console.log("error message: " + text);
-														Swal.fire({
-															title: '更新失敗',
-															icon: 'error',
-															text: "更新失敗",
-														})
+												}).then((result) => {
+													if (result.isConfirmed) {
+														location.href = "<c:url value='/Project/allProjectInBackstage'/>";
 													}
-
 												})
+											},
+											error: function (xhr, text) {
+												console.log("status code: " + xhr.status);
+												console.log("error message: " + text);
+												Swal.fire({
+													title: '更新失敗',
+													icon: 'error',
+													text: "更新失敗",
+												})
+											}
 
-
-										
-
-
+										})
 
 									}))//NotPassButton End
-
-
-
-
 
 
 
@@ -781,6 +835,8 @@
 											}
 										});
 									})
+
+
 
 
 
@@ -858,12 +914,6 @@
 
 
 								})//read function 結束
-
-
-
-
-
-
 
 							</script>
 				</body>

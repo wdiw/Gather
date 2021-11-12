@@ -64,7 +64,7 @@
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">Shop</a>
+              	<a class="dropdown-item" href="/Gather/Project/allProjectInForestage">Shop</a>
                 <a class="dropdown-item" href="showProject/131">Single Product</a>
                 <a class="dropdown-item" href="sponsorshipInfo">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
