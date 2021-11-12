@@ -8,6 +8,7 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -104,8 +105,42 @@ public class SponsorOrderServiceImpl implements SponsorOrderService{
 	}
 
 
+	@Override
+	public List<SponsorOrderBean> getSponsorshipBySearch(Set<String> search) {
+		return sponsorOrderRepository.findSponsorshipBySearch(search);
+	}
+
+
+	@Override
+	public void updateOrderBysID(Integer sID, String sName, String sAddress, String sPhone, String sEmail) {
+		sponsorOrderRepository.updateOrders(sID, sName, sAddress, sPhone, sEmail);
+	}
+
+
+	@Override
+	public void deleteBysID(Integer sID) {
+		sponsorOrderRepository.deleteById(sID);
+	}
+
+
+	@Override
+	public List<SponsorOrderBean> getOrdersBySearch(Set<String> search) {
+		return sponsorOrderRepository.findOrdersBySearch(search);
+	}
+
+
+	@Override
+	public List<SponsorOrderBean> getOrdersByPID(Integer pID) {
+		return sponsorOrderRepository.findBysPID(pID);
+	}
+
+
+	@Override
+	public void updateAmountNowBysPID(Integer sPID, Integer pAmountNow) {
+		sponsorOrderRepository.updateAmountNowBypID(sPID, pAmountNow);
+	}
+
+
 	
-
-
 
 }

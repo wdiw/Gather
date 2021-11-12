@@ -2,6 +2,8 @@ package com.Gather.Sponsorship.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -16,12 +18,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.Gather.Project.model.ProjectBean;
+import com.Gather.Project.model.ProjectPlanBean;
+import com.Gather.Project.service.ProjectPlanService;
 import com.Gather.Project.service.ProjectService;
-
+import com.Gather.Sponsorship.model.FavoriteBean;
 import com.Gather.Sponsorship.model.SponsorOrderBean;
 import com.Gather.Sponsorship.service.SponsorOrderService;
 import com.Gather.member.entity.Member;
@@ -37,23 +44,12 @@ public class SponsorshipPageController {
 	@Autowired
 	ProjectService projectService;
 	@Autowired
+	ProjectPlanService projectPlanService;
+	@Autowired
 	MemberService memberService;
 	@Autowired
 	SponsorOrderService sponsorOrderService;
-//	@GetMapping("/showProject1")
-//	public String showProject() {
-//		return "Sponsorship/project";
-//	}
 
-//	@GetMapping("/payment")
-//	public String payment() {
-//		return "Sponsorship/payment";
-//	}
-
-	@GetMapping("/favorite")
-	public String favorite() {
-		return "Sponsorship/favorite";
-	}
 
 	// 跳轉付款頁面
 	@PostMapping("/goECPay")
@@ -64,7 +60,7 @@ public class SponsorshipPageController {
 			@RequestParam("sBonus") String sBonus, @RequestParam("sAddress") String sAddress,
 			@RequestParam("sEmail") String sEmail, @RequestParam("sAmount") String sAmount,
 			@RequestParam("sDiscount") String sDiscount, @RequestParam("paymentMethod") String paymentMethod,
-			@RequestParam("proposerID") String proposerID
+			@RequestParam("proposerID") String proposerID, @RequestParam("projectPlanID") String projectPlanID
 
 	) {
 		// 新增訂單
@@ -79,7 +75,40 @@ public class SponsorshipPageController {
 
 		sBean.setsTime(sd);
 		sBean.setStatus("已付款");
+		ProjectBean pBean=projectService.getProjectById(Integer.parseInt(sPID));
+		
+		Integer pAmountNow= pBean.getpAmountNow();
+		
+		pAmountNow+=sTotal;
+		
+		sBean.setpAmountNow(pAmountNow);
+		
+//		Integer pAmountNow=sBean.getpAmountNow();
 		sponsorOrderService.insertOrder(sBean);
+//		List<SponsorOrderBean> sBean_toatl=sponsorOrderService.getOrdersByPIDAndStatus(Integer.parseInt(sPID), sBean.getStatus());
+//		for(int i=0;i<sBean_toatl.size();i++) {
+//			 Integer sTotal_select= sBean_toatl.get(i).getsTotal();
+//			 pAmountNow += sTotal_select;
+//		}
+		
+
+		ProjectPlanBean planBean = projectPlanService.getProjectPlanByProjectPlanID(Integer.parseInt(projectPlanID));
+		
+		Integer planAmount=planBean.getProjectPlanAmount();
+		planAmount+=sTotal;
+		
+		projectService.updateProjectAmountBypID(Integer.parseInt(sPID), pAmountNow);
+		projectPlanService.updateProjecPlantAmountByprojectPlanID(Integer.parseInt(projectPlanID), planAmount);
+		
+				
+		
+		Integer projectSponsorCount=pBean.getSponsorCount();
+		projectSponsorCount++;
+		
+		projectService.updateProjectSponsorCountBypID(pBean.getpID(), projectSponsorCount);
+		sponsorOrderService.updateAmountNowBysPID(Integer.parseInt(sPID), pAmountNow);
+		
+//		sponsorOrderService.updateOrder(sBean);
 
 
 		String tradeNo = "Gather" + sBean.getsID();
@@ -107,5 +136,59 @@ public class SponsorshipPageController {
 		return form;
 
 	}
-
+	
+	@GetMapping("/sponsorshipSearch")
+	public String  getSponsorshipBySearch(
+			@RequestParam("search") String search,Model model,HttpServletRequest request) {
+		
+		System.out.println("search:"+search);
+		Set<String> searchName=new HashSet<>();
+		searchName.add("%"+search+"%");
+		
+		System.out.println(searchName);
+		List<SponsorOrderBean> result = sponsorOrderService.getSponsorshipBySearch(searchName);
+		Member member = (Member) request.getSession().getAttribute("memberData");
+		Member mBean = memberService.queryMemberById(member.getId());
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+		int favCount = favoriteBeans.size();
+		request.getSession().setAttribute("favCount", favCount);
+		model.addAttribute("sBean",result);
+		return "Sponsorship/sponsorshipSearch";					
+	}	
+	
+	@GetMapping("/ordersSearch")
+	public String  getOrdersBySearch(
+			@RequestParam("search") String search,Model model,HttpServletRequest request) {
+		
+		System.out.println("search:"+search);
+		Set<String> searchName=new HashSet<>();
+		searchName.add("%"+search+"%");
+		
+		System.out.println(searchName);
+		List<SponsorOrderBean> result = sponsorOrderService.getOrdersBySearch(searchName);
+		model.addAttribute("orders",result);
+		return "Sponsorship/ordersSearch";					
+	}
+	
+	
+	@PostMapping("/data/{sPID}")
+	public ResponseEntity<String> getData(@PathVariable("sPID") String sPID, Model model) {
+//		System.out.println(pID.getClass());
+		List<SponsorOrderBean> ordersData = sponsorOrderService.getOrdersByPID(Integer.parseInt(sPID));
+		Integer project_Amount=ordersData.get(0).getpAmountNow();
+		model.addAttribute("project_Amount", project_Amount);
+		return new ResponseEntity<String>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/dataInfo/{sPID}")
+	public String dataInfo(@PathVariable("sPID") String sPID,Model model) {
+		List<SponsorOrderBean> ordersData = sponsorOrderService.getOrdersByPID(Integer.parseInt(sPID));
+		Integer project_Amount=ordersData.get(0).getpAmountNow();
+		ProjectBean pBean= projectService.getProjectById(Integer.parseInt(sPID));
+		List<ProjectPlanBean> planBean = projectPlanService.getProjectPlansByProjectBean(pBean);
+		model.addAttribute("planBean", planBean);
+		model.addAttribute("pBean", pBean);
+		model.addAttribute("project_Amount", project_Amount);
+		return "Sponsorship/project_sponsorData";
+	}
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,8 +43,6 @@ public class Member {
 	
 	@Column(name = "m_birthday")
 	private String  birthday;
-	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
-	Set<FavoriteBean> favoriteBeans=new HashSet<>();
 	
 	
 	@Column(name = "m_phone")
@@ -51,6 +50,8 @@ public class Member {
 	
 	@Column(name = "m_loginTimes")
 	private Integer loginTimes;
+	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	Set<FavoriteBean> favoriteBeans=new HashSet<>();
 	
 	
 	public Member() {

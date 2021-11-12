@@ -5,43 +5,42 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
-</script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <head>
+<style type="text/css">
+canvas{
+  display: block;
+  margin: auto;
+}
+
+</style>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Gather Admin</title>
+  <title>Skydash Admin</title>
   <!-- plugins:css -->
-  <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+  
   <link rel="stylesheet" href="../vendors/feather/feather.css">
   <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="../vendors/select2/select2.min.css">
-  <link rel="stylesheet" href="../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+  <link rel="stylesheet" href="../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" type="text/css" href="../js/select.dataTables.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../images/favicon.png" />
 </head>
-
 <body>
   <div class="container-scroller">
-    <!-- partial:../../partials/_navbar.html -->
+    <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -110,7 +109,7 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
+              <img src="images/faces/face28.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -136,7 +135,7 @@
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:../../partials/_settings-panel.html -->
+      <!-- partial:partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
         <div id="theme-settings" class="settings-panel">
@@ -250,7 +249,7 @@
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="../../images/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="images/faces/face1.jpg" alt="image"><span class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
                   <p>Available</p>
@@ -258,7 +257,7 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="../images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -269,7 +268,7 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="../images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="images/faces/face3.jpg" alt="image"><span class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -277,7 +276,7 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="../images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -306,11 +305,11 @@
         </div>
       </div>
       <!-- partial -->
-      <!-- partial:../../partials/_sidebar.html -->
+      <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../../index.html">
+            <a class="nav-link" href="index.html">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -318,97 +317,250 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Member</span>
+              <span class="menu-title">UI Elements</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">會員管理</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Activity</span>
+              <span class="menu-title">Form elements</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">全部活動</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic Elements</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Sponsorship</span>
+              <span class="menu-title">Charts</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="orders">訂單管理</a></li>
-                <li class="nav-item"> <a class="nav-link" href="addorder">新增訂單</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
               <i class="icon-grid-2 menu-icon"></i>
-              <span class="menu-title">Projects</span>
+              <span class="menu-title">Tables</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">專案管理</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">AD</span>
+              <span class="menu-title">Icons</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">廣告管理</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
               </ul>
             </div>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">User Pages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
+              <i class="icon-ban menu-icon"></i>
+              <span class="menu-title">Error pages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="error">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/documentation/documentation.html">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Documentation</span>
+            </a>
+          </li>
         </ul>
       </nav>
-      
       <!-- partial -->
-      <div class="main-panel">        
+      <div class="main-panel">
         <div class="content-wrapper">
-     
-           
-            
-            <div class="col-12 grid-margin stretch-card">
+          
+          
+          
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card position-relative" style="height:420px">
+                <div class="card-body">
+                  <div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2" data-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <div class="row">
+                          <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
+                            <div class="ml-xl-4 mt-3">
+                            <p class="card-title">${pBean.pName}</p>
+                              <h1 class="text-primary">$${project_Amount}</h1>
+                              <h3 class="font-weight-500 mb-xl-4 text-primary">目標金額 : $${pBean.pTarget}</h3>
+                              <p class="mb-2 mb-xl-0">贊助數 : ${pBean.sponsorCount} 筆</p>
+                              <p class="mb-2 mb-xl-0">截止日期 : ${pBean.pEDate}</p>
+                              
+<div style="width: 10%;height: 10%;margin: 0">
+	<canvas id="canvas01" width="200" height="200"></canvas>
+</div>
+                              <img class="img-rounded" alt="" src="../${pBean.pImageCover}" style="width: 230px;height: 130px;position: relative;left: 365px;top:-20px">
+                            </div>  
+                            </div>
+                          <div class="col-md-12 col-xl-9">
+                            <div class="row">
+                              <div class="col-md-6 border-right">
+                                <div class="table-responsive mb-3 mb-md-0 mt-3">
+                                  <table class="table table-borderless report-table">
+                                  <c:forEach items='${planBean}' var='planBean' >
+                                    <tr>
+                                      <td class="text-muted">方案${planBean.projectPlanID}</td>
+                                      <td class="w-100 px-0">
+                                        <div class="progress progress-md mx-4">
+                                          <div class="progress-bar bg-warning" role="progressbar" style="width: ${planBean.projectPlanAmount/project_Amount*100}%"></div>
+                                        </div>
+                                      </td>
+                                      <td><h5 class="font-weight-bold mb-0">$${planBean.projectPlanAmount}</h5></td>
+<%--                                       <td>${planBean.projectPlanAmount/project_Amount*100}%</td> --%>
+                                    </tr>
+                                    
+
+                                    
+                                    </c:forEach>
+                                   
+                                  </table>
+                                </div>
+                              </div>
+                              <div class="col-md-6 mt-3">
+                                <canvas id="north-america-chart"></canvas>
+                                <div id="north-america-legend"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <a class="carousel-control-prev" href="#detailedReports" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#detailedReports" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">新增文章</h4>
-                  <form  id="form" class="forms-sample">
-                    <div class="form-group">
-                      <label for="exampleInputName1">文章標題</label>
-                      <input type="text" class="form-control" name="name" id="name" >
-                    </div>
-                  
-                    <div class="form-group">
-                      <label>文章內容</label>
-                      <textarea name="post" id="post" cols="100" rows="7" ></textarea>
-                    </div>
-                 
-					<button id="btnAdd" type='submit' name='submit' class="btn btn-primary mr-2">新增文章</button>
-                  </form>
+                  <p class="card-title mb-0">Top Products</p>
+                  <div class="table-responsive">
+                    <table class="table table-striped table-borderless">
+                      <thead>
+                        <tr>
+                          <th>Product</th>
+                          <th>Price</th>
+                          <th>Date</th>
+                          <th>Status</th>
+                        </tr>  
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Search Engine Marketing</td>
+                          <td class="font-weight-bold">$362</td>
+                          <td>21 Sep 2018</td>
+                          <td class="font-weight-medium"><div class="badge badge-success">Completed</div></td>
+                        </tr>
+                        <tr>
+                          <td>Search Engine Optimization</td>
+                          <td class="font-weight-bold">$116</td>
+                          <td>13 Jun 2018</td>
+                          <td class="font-weight-medium"><div class="badge badge-success">Completed</div></td>
+                        </tr>
+                        <tr>
+                          <td>Display Advertising</td>
+                          <td class="font-weight-bold">$551</td>
+                          <td>28 Sep 2018</td>
+                          <td class="font-weight-medium"><div class="badge badge-warning">Pending</div></td>
+                        </tr>
+                        <tr>
+                          <td>Pay Per Click Advertising</td>
+                          <td class="font-weight-bold">$523</td>
+                          <td>30 Jun 2018</td>
+                          <td class="font-weight-medium"><div class="badge badge-warning">Pending</div></td>
+                        </tr>
+                        <tr>
+                          <td>E-Mail Marketing</td>
+                          <td class="font-weight-bold">$781</td>
+                          <td>01 Nov 2018</td>
+                          <td class="font-weight-medium"><div class="badge badge-danger">Cancelled</div></td>
+                        </tr>
+                        <tr>
+                          <td>Referral Marketing</td>
+                          <td class="font-weight-bold">$283</td>
+                          <td>20 Mar 2018</td>
+                          <td class="font-weight-medium"><div class="badge badge-warning">Pending</div></td>
+                        </tr>
+                        <tr>
+                          <td>Social media marketing</td>
+                          <td class="font-weight-bold">$897</td>
+                          <td>26 Oct 2018</td>
+                          <td class="font-weight-medium"><div class="badge badge-success">Completed</div></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              
+              </div>
             </div>
-       
+            
+          
+            
+        </div>
         <!-- content-wrapper ends -->
-        <!-- partial:../../partials/_footer.html -->
-        
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+          </div>
+        </footer>
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
@@ -416,12 +568,16 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+
   <!-- plugins:js -->
-  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <script src="../vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
-  <script src="vendors/select2/select2.min.js"></script>
+  <script src="../vendors/chart.js/Chart.min.js"></script>
+  <script src="../vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="../vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="../js/dataTables.select.min.js"></script>
+
   <!-- End plugin js for this page -->
   <!-- inject:js -->
   <script src="../js/off-canvas.js"></script>
@@ -431,77 +587,73 @@
   <script src="../js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="../js/file-upload.js"></script>
-  <script src="../js/typeahead.js"></script>
-  <script src="../js/select2.js"></script>
+  <script src="../js/dashboard.js"></script>
+  <script src="../js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
-  
-  <script>
+  <script type="text/javascript">
+  var forEach = function (array, callback, scope) {
+		for (var i = 0; i < array.length; i++) {
+			callback.call(scope, i, array[i]);
+		}
+	};
+	window.onload = function(){
+		var max = -219.99078369140625;
+		forEach(document.querySelectorAll('.progress'), function (index, value) {
+		percent = value.getAttribute('data-progress');
+			value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - percent) / 100) * max);
+			value.querySelector('.value').innerHTML = percent + '%';
+		});
+	}
+	
+	// 44
+	var canvas01 = document.getElementById('canvas01');
+	var context01 = canvas01.getContext('2d');
+	var al01=0;
+	var start01=4.72;
+	var cw01=context01.canvas.width/2;
+	var ch01=context01.canvas.height/2;
+	var diff01;
 
-        var form = document.getElementById("form");
-        $("#btnAdd").click(function () {
-        	$("#form").on("submit", function(e){
-            /* =====for formData&MultipartFile =====*/
-            var formData = new FormData(form);
-            /* =====for JSON =====*/
-            
-            //改用ajax傳送 棄用原本的form傳送
-            alert("123");
-            e.preventDefault();
-            
-            Swal.fire({
-                title: '您確定要送出嗎？',
-                icon: 'question',
-                showCancelButton: true,
-            }).then((result) => {
-            	if (result.isConfirmed) {
-                	$.ajax({
-                        url:"<spring:url value='/Forum/add'/>",
-                        type:"post",
-                        data: formData,
-        //                 data: json,
-        //                 dataType:"json",
-        //                 contentType: "application/json; charset=utf-8",
-                        contentType: false, //required
-                        processData: false, // required
-                        /*一定要加*/
-                        mimeType: 'multipart/form-data', //有圖片就要加這行
-                        
-                        /*一定要加*/
-                        success: function(data){
-                        	
-                            var jsonData = JSON.parse(data);
-                            // console.log(html);
+	function progressBar01()
+	{
+	  diff01=(al01/100)*Math.PI*2;
+	  context01.clearRect(0,0,400,200);
+	  context01.beginPath();
+	  context01.arc(cw01,ch01,50,0,2*Math.PI,false);
+	  context01.fillStyle='#FFF';
+	  context01.fill();
+	  context01.strokeStyle='#e9ecef';
+	  context01.stroke();
+	  context01.fillStyle='#000';
+	  context01.strokeStyle='#C2C287';
+	  context01.textAlign='center';
+	  context01.lineWidth=15;
+	  context01.font = '10pt Verdana';
+	  context01.beginPath();
+	  context01.arc(cw01,ch01,50,start01,diff01+start01,false);
+	  context01.stroke();
+	// Percentage Display 
+	var percentage=${project_Amount}/${pBean.pTarget}*100;
+	  context01.fillText(al01+'%',cw01+2,ch01+6);
+	  if(al01>=percentage)   //Change Percentage Here
+	  {
+	    clearTimeout(bar01);
+	  }
+	  al01++;
+	}
 
-                            Swal.fire({
-                                title: '已新增成功！',
-                                icon: 'success',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.href= "<spring:url value='/Forum/queryAll'/>";
-                                  }
-                                })
-                                    
-                        },
-                        error: function(e, text){
-                        	alert("!!!!!!!!!!!!!!!!!!!!!!");
-                            console.log(e.status);
-                            console.log(text);
-                        }
-                    })
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: '已取消送出請求',
-                        text: '您的變更將不會被儲存!'
-                    })
-                }
-            })
-        })
-        
-		 })
-    </script>
-  
+	var bar01 = setInterval(progressBar01,50);
+
+	var canvas02 = document.getElementById('python-scripting');
+	var context02 = canvas02.getContext('2d');
+	var al02=0;
+	var start02=4.72;
+	var cw02=context02.canvas.width/2;
+	var ch02=context02.canvas.height/2;
+	var diff02;
+
+  </script>
 </body>
 
 </html>
+

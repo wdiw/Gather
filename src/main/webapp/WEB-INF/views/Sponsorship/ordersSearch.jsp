@@ -1,9 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/Forum/detail.jsp
+<html lang="en">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Gather Admin</title>
+<!-- plugins:css -->
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+=======
 <html>
 <head>
 
@@ -14,6 +37,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+>>>>>>> Sponsorship:src/main/webapp/WEB-INF/views/Sponsorship/ordersSearch.jsp
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -396,6 +420,112 @@
 				</ul>
 			</nav>
 			<!-- partial -->
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/Forum/detail.jsp
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="col-12 grid-margin stretch-card">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="card-title">文章內容</h4>
+								<p class="card-description"></p>
+								<form id="form" class="forms-sample">
+									<div class="form-group">
+										<label>文章編號</label>
+										<input name="id" id="id" 
+										class="form-control" value="${forum.id}" disabled>
+									</div>
+
+									<div class="form-group">
+										<label>文章分類</label> 
+<!-- 										<input id="name" name="name" -->
+<%-- 										class="form-control" value="${forum.postCategory}" type='text'> --%>
+										<select name="postCategory">
+<%-- 											<option selected>${forum.postCategory}</option> --%>
+											<option selected>公告</option>
+											<option>閒聊</option>
+											<option>討論</option>
+											<option>心得</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label>文章標題</label>
+										<input id="name" name="name" 
+										class="form-control" value="${forum.name}" type='text'>
+									</div>
+
+									<div class="form-group">
+										<label>文章描述</label>
+										<textarea rows="15" cols="50" 
+										id="post" name="post" class="form-control">${forum.post}</textarea>
+									</div>
+									
+									<button id="updateButton" type='button' name='updateButton'
+										class="btn btn-primary mr-2" onclick="updatebtn(${forum.id})">送出</button>
+									
+									<button id="deleteButton" type='button' name='deleteButton'
+										class="btn btn-danger" onclick="deletebtn(${forum.id})">刪除</button>
+									
+									<button id="returnButton" type='button' name='returnButton'
+										class="btn btn-primary mr-2" onclick='location.href="<c:url value='/Forum/queryAll' />"'>回討論區</button>
+									
+									<br><br>
+<!-- 									<div class="form-group"> -->
+<!-- 										<label>文章回應</label> -->
+<!-- 										<textarea rows="4" cols="50" id="post" name="post" -->
+<%-- 											class="form-control">${forum.post}</textarea> --%>
+<!-- 									</div> -->
+									
+								</form>
+								
+								<br><br>
+
+								<div class="table-responsive">
+									<table class="table table-hover">
+
+										<thead>
+											<tr>
+												<th>留言編號</th>
+												<th>留言人</th>
+												<th>留言內容</th>
+												<th>留言時間</th>
+											</tr>
+										</thead>
+										<c:forEach items='${AllForumComment}' var='forumcomments'>
+											<tr>
+												<td>${forumcomments.forumcommentID}</td>
+												<td>
+													<div
+														style="width: 100%; white-space: normal; word-wrap: break-word; word-break: break-all; cursor: pointer;">
+														${forumcomments.forumcommenter}</div>
+												</td>
+												<td onMouseOver="this.style.backgroundColor='pink';"
+													onMouseOut="this.style.backgroundColor='';">
+													<div id="post" name="post" class="showcontent"
+														style="width: 100%; white-space: normal; word-wrap: break-word; word-break: break-all; cursor: pointer;"
+														onMouseOver="this.style.backgroundColor='orange';"
+														onMouseOut="this.style.backgroundColor='';">
+														${forumcomments.forumcomment}</div>
+												</td>
+												<td>${forumcomments.forumcommentTime}</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+
+								<br><br>
+								
+								<h3>新增留言</h3>
+							
+									<div class="form-group">
+										<textarea id="forumcomment" name="forumcomment" cols="100" rows="10" 
+										class="form-control" placeholder="請輸入留言"></textarea>
+									</div>
+
+									<button type='submit' id="addcomment" name='submit'
+										class="btn btn-primary mr-2">送出留言</button>
+							
+=======
 <!-- 			<div class="main-panel"> -->
 				<div class="content-wrapper"style="margin: auto;">
 					<div class="row" style="margin: auto;">
@@ -424,14 +554,14 @@
 													<th><i class="mdi mdi-delete"></i></th>
 												</tr>
 											</thead>
-											<c:forEach items='${orders}' var='order' varStatus="status">
+											<c:forEach items='${orders}' var='order'>
 												<tr>
 													<td>${order.sID}</td>
 													<td>${order.mID}</td>
 													<td><img width='50' height='50'
 														src="${order.projectImage}"
 														class="img-rounded" /></td>
-													<td class="sPID">${order.sPID}<button onclick="data(${status.index})"><i class="mdi mdi-chart-line"></i></button></td>
+													<td>${order.sPID}</td>
 													<td>${order.sPName}</td>
 													<td>${order.sAmount}</td>
 													<td>
@@ -449,6 +579,7 @@
 										</table>
 									</div>
 						
+>>>>>>> Sponsorship:src/main/webapp/WEB-INF/views/Sponsorship/ordersSearch.jsp
 							</div>
 						</div>
 
@@ -457,6 +588,57 @@
 					</div>
 					<!-- page-body-wrapper ends -->
 				</div>
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/Forum/detail.jsp
+				<!-- page-body-wrapper ends -->
+			</div>
+			<!-- container-scroller -->
+			<!-- plugins:js -->
+			<script src="../vendors/js/vendor.bundle.base.js"></script>
+			<!-- endinject -->
+			<!-- Plugin js for this page -->
+			<script src="../vendors/typeahead.js/typeahead.bundle.min.js"></script>
+			<script src="../vendors/select2/select2.min.js"></script>
+			<!-- End plugin js for this page -->
+			<!-- inject:js -->
+			<script src="../js/off-canvas.js"></script>
+			<script src="../js/hoverable-collapse.js"></script>
+			<script src="../js/template.js"></script>
+			<script src="../js/settings.js"></script>
+			<script src="../js/todolist.js"></script>
+			<!-- endinject -->
+			<!-- Custom js for this page -->
+			<script src="../js/file-upload.js"></script>
+			<script src="../js/typeahead.js"></script>
+			<script src="../js/select2.js"></script>
+			<!-- End custom js for this page -->
+			
+			<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+			<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+
+
+			<script>
+			
+				$(document).ready(function(){
+				$('#post').summernote({  //#後面放id屬性值
+  					placeholder: '請輸入文章內容',
+  					tabsize: 2,
+  	        		height: 100,
+  				});
+				$('#forumcomment').summernote({  //#後面放id屬性值
+  					placeholder: '請輸入留言',
+  					tabsize: 2,
+  	        		height: 100,
+  				});
+				});
+				
+				//更新按鈕
+				function updatebtn(id) {
+					
+					var form = document.getElementById("form")
+					var formData = new FormData(form);
+					var url = "<spring:url value='/Forum/detail/" + id + "'/>";
+=======
 				<!-- container-scroller -->
 				<!-- plugins:js -->
 				<script src="vendors/js/vendor.bundle.base.js"></script>
@@ -473,6 +655,7 @@
 				<!-- Custom js for this page-->
 				<!-- End custom js for this page-->
 
+>>>>>>> Sponsorship:src/main/webapp/WEB-INF/views/Sponsorship/ordersSearch.jsp
 
 				<script>
 		function deleteOrder(deleteId) {
@@ -488,6 +671,40 @@
                   text: "已經刪除！",
                   position: 'center',
 
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/Forum/detail.jsp
+							}).then((result) => {
+								if (result.isConfirmed) {
+									location.href = "<spring:url value='/Forum/queryAll'/>";
+								}
+							})
+						},
+						error: function (xhr, text) {
+							console.log("status code: " + xhr.status);
+							console.log("error message: " + text);
+							Swal.fire({
+								title: '更新失敗',
+								icon: 'error',
+								text: "更新失敗",
+							})
+						}
+					});
+				};
+				
+				
+				//刪除按鈕
+				function deletebtn(id) {
+					
+					Swal.fire({
+						title: '確定刪除?',
+						text: "你將刪除此計畫!",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonText: '刪除!',
+						cancelButtonText: '取消!',
+						reverseButtons: true
+					}).then((result) => {
+						if (result.isConfirmed) {
+=======
                 }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
@@ -512,34 +729,143 @@
   			var search = $("#searchBar").val()
   			location.href = "<spring:url value='/ordersSearch?search=" + search + "'/>"
   		})
-  		
-  		function data(index){
-        	  var sPID=parseInt($('.sPID').eq(index).text());
-        	  var data = {
-      				sPID:$('.sPID').eq(index).text(),
-      			}
-        	  
-        	  $.ajax({
-        		  url: "<c:url value='/data/'/>"+$('.sPID').eq(index).text(),
-//         		  url: "./data/"+sPID_test,
-  				  type: 'POST',
-  				  data:data,
-                  success: function () {
-                 	location.href= "<c:url value='/dataInfo/" + sPID +"'/>";
-//                        alert("hiiiiiii");
-                    },
-            
-                });
-        	  
-        	  
-          }
           
 
         
 	
 	</script>
 </body>
+>>>>>>> Sponsorship:src/main/webapp/WEB-INF/views/Sponsorship/ordersSearch.jsp
 
 </html>
 
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/Forum/detail.jsp
+							$.ajax({
+								url: url,
+								type: 'DELETE',
+								data: {},
+								
+								success: function (data) {
+									Swal.fire({
+										position: 'center',
+										icon: 'success',
+										title: '刪除成功',
+									
+										timer: 3000,
+										timerProgressBar: true,
+										showConfirmButton: false,
+									})
+									location.href = "<spring:url value='/Forum/queryAll'/>";
+								},
+								error: function (xhr, text) {
+// 									swalWithBootstrapButtons.fire(
+									Swal.fire(
+										'失敗', 
+										'刪除失敗，請確認有此紀錄 ', 
+										'error'
+									)
+								}
+							})
+						
+						} else if (
+							result.dismiss === Swal.DismissReason.cancel
+						) {
+							Swal.fire(
+								'取消',
+								'已取消刪除 ',
+								'success'
+							)
+						}
+					})
+				} //function deletebtn(id)
+				
+				
+// 					window.onload = function () {
+// 			            var oInput = document.getElementById("myInput"); //取得id="myInput"標籤，也就是<input>
+// 			            var omessageBox = document.getElementById("messageBox"); //取得id="messageBox"標籤，也就是<div>
+// 			            var oPostBtn = document.getElementById("doPost"); //取得id="doPost"標籤，也就是<button>
+
+// 			            oPostBtn.onclick = function () {
+// 			                if (oInput.value) {
+// 			                    //在JavaScript中，會等於false的值只會有undefined, null, false, 0, ""這五種，物件類永遠為true
+
+// 			                    //建一個顯示時間的div
+// 			                    var oTime = document.createElement("div");
+// 			                    oTime.className = "time";
+// 			                    var myDate = new Date();
+// 			                    oTime.innerHTML = myDate.toLocaleString();
+// 			                    omessageBox.appendChild(oTime);
+
+
+// 			                    //建一個顯示留言的div
+// 			                    var oMessageContent = document.createElement("div");
+// 			                    oMessageContent.setAttribute("style", "border-style:dotted;background-color:lightblue;border-width:thin;")
+// 			                    oMessageContent.className = "message_content";
+// 			                    oMessageContent.innerHTML = oInput.value;
+// 			                    oInput.value = "";
+// 			                    omessageBox.appendChild(oMessageContent);
+
+// 			                }
+// 			            }
+// 			        }
+				
+					//送出留言
+					$("#addcomment").click(function() { //對應button的id屬性值addcomment
+						
+						var forumcomment=$('#forumcomment').val();
+						var id=$('#id').val();
+           
+			            Swal.fire({
+			                title: '您確定要送出嗎？',
+							text:forumcomment,
+			                icon: 'question',
+			                showCancelButton: true,
+//			                 closeOnConfirm: true,
+			            }).then((result) => {
+			                if (result.isConfirmed) {
+			                    $.ajax({
+			                        type:"post", //對應@PostMapping
+			                        url:"<spring:url value='/Forum/addforumcomment'/>", //對應@PostMapping
+			                        data:{forumcomment:forumcomment,id:id},	//?		                       
+									
+			                        success: function(data){
+			                            Swal.fire({
+			                            	title: '已新增成功！',
+			                            	icon: 'success',
+			                            }).then((result)=>{
+			                            	if (result.isConfirmed) {
+// 			                            		location.href= "<spring:url value='/Forum/detail/" + id + "'/>";
+			                            		location.href= "<spring:url value='/Forum/detail?id=" + ${forum.id} + "'/>";
+			                            	}
+			                            })
+			                            
+			                        },
+			                        error: function(e, text){
+			                        	
+			                        	Swal.fire({
+			                            	title: '新增失敗！',
+			                            	icon: 'error',
+			                            })
+			                        	
+			                            console.log(e.status);
+			                            console.log(text);
+			                        }
+			                    })
+			                } else if (result.dismiss === Swal.DismissReason.cancel) {
+			                    Swal.fire({
+			                        icon: 'error',
+			                        title: '已取消送出請求',
+			                        text: '您的變更將不會被儲存!'
+			                    })
+			                }
+			            }) 
+
+					 }) //$("#addbtn").click(function
+				
+			</script>
+			
+			
+</body>
+=======
+>>>>>>> Sponsorship:src/main/webapp/WEB-INF/views/Sponsorship/ordersSearch.jsp
 

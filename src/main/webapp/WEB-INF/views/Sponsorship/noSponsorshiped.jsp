@@ -14,8 +14,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-
-	   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    	   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -102,7 +102,7 @@
 
     <section class="ftco-section ftco-cart" >
     <div>
-    <p class="text-center"><a href="sponsoredInfo" class="btn btn-primary py-3 px-4">被贊助清單</a></p>
+    <p class="text-center"><a href="sponsorshipInfo" class="btn btn-primary py-3 px-4">贊助清單</a></p>
     
     </div>
 
@@ -114,9 +114,9 @@
 						    
 						    <tbody>
 						  	
-						    <p align="center">目前尚未贊助任何方案</p>
+						   <p align="center">目前尚未有任何提案或被贊助紀錄!</p>
 						   
-						    <p class="text-center"><a href="Project/allProjectInForest" class="btn btn-primary py-3 px-4">去逛逛有哪些方案!</a></p></tr>
+						    <p class="text-center"><a href="/Gather" class="btn btn-primary py-3 px-4">回首頁</a></p>
 						     
 						    </tbody>
 						   

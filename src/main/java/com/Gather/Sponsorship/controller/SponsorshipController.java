@@ -8,6 +8,7 @@ import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -30,6 +31,8 @@ import com.Gather.Sponsorship.model.SponsorOrderBean;
 import com.Gather.Sponsorship.model.SponsorshipBean;
 import com.Gather.Sponsorship.service.SponsorOrderService;
 import com.Gather.Sponsorship.service.SponsorshipService;
+import com.Gather.member.entity.Member;
+import com.Gather.member.service.MemberService;
 import com.google.gson.Gson;
 
 @Controller
@@ -38,6 +41,7 @@ public class SponsorshipController {
 	SponsorshipService sponsorshipService;
 	SponsorOrderService sponsorOrderService;
 	ServletContext servletContext;
+	MemberService memberService;
 
 	@Autowired
 	public SponsorshipController(SponsorshipService sponsorshipService, ServletContext servletContext, SponsorOrderService sponsorOrderService) {
@@ -67,7 +71,7 @@ public class SponsorshipController {
 	// 查詢所有訂單
 
 	@GetMapping("/orders")
-	public String list(Model model) {
+	public String list(Model model,HttpServletRequest reg) {
 		List<SponsorOrderBean> sBeans = sponsorOrderService.getOrders();
 		model.addAttribute("orders", sBeans);
 		return "Sponsorship/orders";
@@ -75,8 +79,8 @@ public class SponsorshipController {
 
 	// 查單筆
 	@GetMapping("/order/{sID}")
-	public String order(@PathVariable("sID") Integer sID, Model model) {
-		SponsorshipBean sBean = sponsorshipService.getOrderByID(sID);
+	public String order(@PathVariable("sID") Integer sID, Model model,HttpServletRequest reg) {
+		SponsorOrderBean sBean = sponsorOrderService.getOrderBySponsorshipID(sID);
 		model.addAttribute("sBean", sBean);
 		return "Sponsorship/updateOrder";
 	}
@@ -85,7 +89,7 @@ public class SponsorshipController {
 
 	@PostMapping("/orders")
 	@ResponseBody
-	public ResponseEntity<String> getAddNewOrderForm(@Valid @RequestParam("sName") String sName,
+	public ResponseEntity<String> getAddNewOrderForm(@RequestParam("sName") String sName,
 			@RequestParam("sPID") int sPID, @RequestParam("sPName") String sPName, @RequestParam("sAmount") int sAmount,
 			@RequestParam(required = false, name = "projectImage") MultipartFile photo) throws IOException {
 		byte[] image = new byte[1024];
@@ -110,11 +114,18 @@ public class SponsorshipController {
 
 
 	// 刪除訂單
-
+//
+//	@DeleteMapping("/order/delete/{sID}")
+//	@ResponseBody
+//	public ResponseEntity<String> getDeleteNewOrderForm(@PathVariable("sID") int sID) {
+//		sponsorshipService.deleteOrderByOrderID(sID);
+//		return new ResponseEntity<String>(HttpStatus.OK);
+//	}
+	
 	@DeleteMapping("/order/delete/{sID}")
 	@ResponseBody
 	public ResponseEntity<String> getDeleteNewOrderForm(@PathVariable("sID") int sID) {
-		sponsorshipService.deleteOrderByOrderID(sID);
+		sponsorOrderService.deleteBysID(sID);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
@@ -122,6 +133,47 @@ public class SponsorshipController {
 
 	// 修改訂單
 
+//	@PostMapping("/order/{sID}")
+//
+//	@ResponseBody
+//	public ResponseEntity<String> addUpdateOrderInfo(@PathVariable("sID") int sID,
+//
+//			@RequestParam("sName") String sName,
+//
+//			@RequestParam("sPID") int sPID,
+//
+//			@RequestParam("sPName") String sPName,
+//
+//			@RequestParam("sAmount") int sAmount,
+//
+//			@RequestParam(required = false, name = "projectImage") MultipartFile photo) throws IOException {
+//
+//		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//
+//		byte[] image = new byte[1024];
+//		if (photo.isEmpty()) {
+//			SponsorshipBean sBean = sponsorshipService.getOrderByID(sID);
+//			image = sBean.getImage();
+//		} else {
+//			InputStream is = photo.getInputStream();
+//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//
+//			int length;
+//			while ((length = is.read(image)) != -1) {
+//				baos.write(image, 0, length);
+//			}
+//
+//			image = baos.toByteArray();
+//		}
+//
+//		String base64String = Base64.getEncoder().encodeToString(image);
+//		SponsorshipBean sBean = new SponsorshipBean(sID, sName, sPID, sPName, sAmount, base64String, image);
+//
+//		sponsorshipService.updateOrder(sBean);
+//		return new ResponseEntity<String>(HttpStatus.OK);
+//
+//	}
+	
 	@PostMapping("/order/{sID}")
 
 	@ResponseBody
@@ -129,39 +181,23 @@ public class SponsorshipController {
 
 			@RequestParam("sName") String sName,
 
-			@RequestParam("sPID") int sPID,
+			@RequestParam("sPhone") String sPhone,
 
-			@RequestParam("sPName") String sPName,
+			@RequestParam("sAddress") String sAddress,
 
-			@RequestParam("sAmount") int sAmount,
+			@RequestParam("sEmail") String sEmail
 
-			@RequestParam(required = false, name = "projectImage") MultipartFile photo) throws IOException {
+			) throws IOException {
 
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-		byte[] image = new byte[1024];
-		if (photo.isEmpty()) {
-			SponsorshipBean sBean = sponsorshipService.getOrderByID(sID);
-			image = sBean.getImage();
-		} else {
-			InputStream is = photo.getInputStream();
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-			int length;
-			while ((length = is.read(image)) != -1) {
-				baos.write(image, 0, length);
-			}
-
-			image = baos.toByteArray();
-		}
-
-		String base64String = Base64.getEncoder().encodeToString(image);
-		SponsorshipBean sBean = new SponsorshipBean(sID, sName, sPID, sPName, sAmount, base64String, image);
-
-		sponsorshipService.updateOrder(sBean);
+		sponsorOrderService.updateOrderBysID(sID, sName, sAddress, sPhone, sEmail);
+		
 		return new ResponseEntity<String>(HttpStatus.OK);
 
 	}
+	
+	
 
 	// 圖片從資料庫輸出
 

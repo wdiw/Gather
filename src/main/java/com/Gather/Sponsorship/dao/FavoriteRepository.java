@@ -18,5 +18,4 @@ public interface FavoriteRepository extends JpaRepository<FavoriteBean, Integer>
 	FavoriteBean findByMemberIDAndProjectID(Integer mID,Integer pID);
 	
 
-
 }
