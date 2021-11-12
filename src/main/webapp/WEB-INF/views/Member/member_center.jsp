@@ -34,31 +34,11 @@
 
         <body class="goto-here">
           <div class="py-1 bg-black">
-            <div class="container">
-              <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-                <div class="col-lg-12 d-block">
-                  <div class="row d-flex">
-                    <div class="col-md pr-4 d-flex topper align-items-center">
-                      <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
-                          class="icon-phone2"></span></div>
-                      <span class="text">+ 1235 2355 98</span>
-                    </div>
-                    <div class="col-md pr-4 d-flex topper align-items-center">
-                      <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
-                          class="icon-paper-plane"></span></div>
-                      <span class="text">youremail@email.com</span>
-                    </div>
-                    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-                      <span class="text">3-5 Business days delivery &amp; Free Returns</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
           <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-              <a class="navbar-brand" href="index.html">Minishop</a>
+              <a class="navbar-brand" href="./">Gather</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -66,10 +46,8 @@
 
               <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                  <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false">Catalog</a>
+
+                  
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                       <a class="dropdown-item" href="shop.html">Shop</a>
                       <a class="dropdown-item" href="product-single.html">Single Product</a>
@@ -77,11 +55,39 @@
                       <a class="dropdown-item" href="checkout.html">Checkout</a>
                     </div>
                   </li>
-                  <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                  <li class="nav-item active"><a href="blog.html" class="nav-link">Blog</a></li>
-                  <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                  <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span
-                        class="icon-shopping_cart"></span>[0]</a></li>
+                  <li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
+
+
+
+
+                  <c:choose>
+                    <c:when test="${memberData!=null}">
+                      <li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
+                      <li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
+                      <c:choose>
+                        <c:when test="${memberData.status eq '管理員'}">
+                          <li class="nav-item"><a href="/Gather/backend" class="nav-link">管理員後台</a></li>
+                        </c:when>
+                      </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                      <li class="nav-item"><a href="/Gather/pages/member/register.html" class="nav-link">註冊</a></li>
+                      <li class="nav-item"><a href="/Gather/pages/member/login.html" class="nav-link">登入</a></li>
+                    </c:otherwise>
+                  </c:choose>
+
+
+                  <!--我的最愛-->
+                  <c:choose>
+                    <c:when test="${mBean.id!=null}">
+                      <li class="nav-item cta cta-colored"><a href="/Gather/myFav/${mBean.id}" class="nav-link"><i
+                            class="fas fa-hand-holding-heart"></i>[${favCount}]</a>
+                      </li>
+                    </c:when>
+
+                  </c:choose>
+                  <!--購物車-->
+
 
                 </ul>
               </div>
@@ -141,16 +147,14 @@
                   <div class="col-md-3 d-flex">
                     <div class="info bg-white p-4" style="font-size: 26px;">
                       <h2><b>會員功能</b></h2>
-                      <a href="/Gather/userpage" class="btn btn-inverse-success btn-fw"
-                        style="font-size: 26px;">
+                      <a href="/Gather/userpage" class="btn btn-inverse-success btn-fw" style="font-size: 26px;">
                         活動登陸
                       </a><br>
                       <a href="/Gather/Project/allProjectInBackstage" class="btn btn-inverse-success btn-fw"
                         style="font-size: 26px;">
                         計劃管理
                       </a><br>
-                      <a href="/Gather/sponsorshipInfo" class="btn btn-inverse-success btn-fw"
-                      style="font-size: 26px;">
+                      <a href="/Gather/sponsorshipInfo" class="btn btn-inverse-success btn-fw" style="font-size: 26px;">
                         贊助紀錄
                       </a>
 
@@ -160,7 +164,7 @@
                     <div class="info bg-white p-4" style="font-size: 30px;">
                       <h2><b>會員設定</b></h2>
                       <a href="#changePassword" class="btn btn-inverse-success btn-fw" data-toggle="modal"
-                      style="font-size: 26px;">
+                        style="font-size: 26px;">
                         修改密碼
                       </a><br>
                       <!--
@@ -206,31 +210,44 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th><h4>我的提案</h4></th>
-                      <th><h4>名稱</h4></th>
-                      <th><h4>狀態</h4></th>
-                      <th><h4>目標</h4></th>
-                      <th><h4>進度</h4></th>
-                      <th><h4>截止日期</h4></th>
+                      <th>
+                        <h4>我的提案</h4>
+                      </th>
+                      <th>
+                        <h4>名稱</h4>
+                      </th>
+                      <th>
+                        <h4>狀態</h4>
+                      </th>
+                      <th>
+                        <h4>目標</h4>
+                      </th>
+                      <th>
+                        <h4>進度</h4>
+                      </th>
+                      <th>
+                        <h4>截止日期</h4>
+                      </th>
                     </tr>
                   </thead>
                   <c:forEach items='${allproject}' var='project'>
                     <tr>
-                        <td style="background-image: url(/Gather/${project.pImageCover});
+                      <td style="background-image: url(/Gather/${project.pImageCover});
                                    background-size: cover;
                                    background-position: center;
                                    padding: 55px;"></td>
                       <!-- <td>${project.pID}</td> -->
-                      <td><a href="/Gather/showProject/${project.pID}" style="font-size: larger;color: black;">${project.pName}</a></td>
+                      <td><a href="/Gather/showProject/${project.pID}"
+                          style="font-size: larger;color: black;">${project.pName}</a></td>
                       <td>${project.pStatus}</td>
-                        <td>$${project.pTarget}.NTD</td>
-                        <td>
-                          <div class="progress progress-md mx-4">
-                            <div class="progress-bar bg-primary" role="progressbar"
+                      <td>$${project.pTarget}.NTD</td>
+                      <td>
+                        <div class="progress progress-md mx-4">
+                          <div class="progress-bar bg-primary" role="progressbar"
                             style="width:${project.pAmountNow/project.pTarget*100}%" aria-valuenow="70"
                             aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
+                        </div>
+                      </td>
                       <td>${project.pEDate}</td>
                       <td>
                       </td>

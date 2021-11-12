@@ -10,7 +10,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Mail {
-	private static String userAccount = "Gather.WebService@gmail.com";
+	private static String userAccount = "";
 	private static String userPassword = "GatherPassword7";
 	/**
 	 * @param from 寄件者(預設為userAccount)

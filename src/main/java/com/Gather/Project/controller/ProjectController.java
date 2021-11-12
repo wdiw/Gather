@@ -95,11 +95,11 @@ public class ProjectController {
 		
 		if(pStatus.equals("通過")) {
 			String statusChange="親愛的會員"+memberName+"您好~<br>您所提出的計畫 "+projectName+" 已通過，祝您募資計畫順利!";
-			Mail.SendGmail("Gather.WebService@gmail.com", " ChillSeph0729@gmail.com", "計畫審核通過通知",statusChange);
+			Mail.SendGmail("", " ChillSeph0729@gmail.com", "計畫審核通過通知",statusChange);
 		}else {
 			String statusChange="親愛的會員"+memberName+"您好~<br>您所提出的計畫 "+projectName+" 已未通過。原因為:<br>"+reason;
 			//member.getName()+"您好，您已成功登錄活動，活動名稱:"+activity.getName();
-			Mail.SendGmail("Gather.WebService@gmail.com", " ChillSeph0729@gmail.com", "計畫審核未通過通知",statusChange);
+			Mail.SendGmail("", " ChillSeph0729@gmail.com", "計畫審核未通過通知",statusChange);
 		}
 	
 		

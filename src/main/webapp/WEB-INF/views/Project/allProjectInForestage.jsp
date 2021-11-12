@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.Gather.member.entity.Member" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 			<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -30,7 +30,7 @@
 					<link rel="stylesheet" href="/Gather/css/flaticon.css">
 					<link rel="stylesheet" href="/Gather/css/icomoon.css">
 					<link rel="stylesheet" href="/Gather/css/style.css">
-
+					<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
 					<style>
 						.img-fluid {
@@ -64,7 +64,7 @@
 											<div class="icon mr-2 d-flex justify-content-center align-items-center">
 												<span class="icon-paper-plane"></span>
 											</div>
-											<span class="text">youremail@email.com</span>
+											<span class="text">Gather.WebService@gmail.com</span>
 										</div>
 										<div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
 											<span class="text">3-5 Business days delivery &amp; Free Returns</span>
@@ -85,11 +85,9 @@
 
 							<div class="collapse navbar-collapse" id="ftco-nav">
 								<ul class="navbar-nav ml-auto">
-									
+
 									<li class="nav-item dropdown active">
-										<a class="nav-link dropdown-toggle" href="#" id="dropdown04"
-											data-toggle="dropdown" aria-haspopup="true"
-											aria-expanded="false">Catalog</a>
+										
 										<div class="dropdown-menu" aria-labelledby="dropdown04">
 											<a class="dropdown-item" href="shop.html">Shop</a>
 											<a class="dropdown-item" href="product-single.html">Single Product</a>
@@ -97,39 +95,40 @@
 											<a class="dropdown-item" href="checkout.html">Checkout</a>
 										</div>
 									</li>
-									<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+									<li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
 
 
 
 
-								<%Member memberData= (Member)session.getAttribute("memberData");
-									if (memberData == null) {%>
-									<li class="nav-item"><a href="/Gather/pages/member/register.html" class="nav-link">註冊</a></li>
-									<li class="nav-item"><a href="/Gather/pages/member/login.html" class="nav-link">登入</a></li>
-								<%} else {
-									  if(!memberData.getStatus().equals("管理員")){
-								%>
-								<li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
-								<li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
-									<%  } else{
-								%>
-								<li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
-								<li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
-								<li class="nav-item"><a href="/Gather/backend" class="nav-link">管理員後台</a></li>
-											
-								<%
-									}}
-								%>
+								<c:choose>
+                    <c:when test="${memberData!=null}">
+                      <li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
+                      <li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
+                      <c:choose>
+                        <c:when test="${memberData.status eq '管理員'}">
+                          <li class="nav-item"><a href="/Gather/backend" class="nav-link">管理員後台</a></li>
+                        </c:when>
+                      </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                      <li class="nav-item"><a href="/Gather/pages/member/register.html" class="nav-link">註冊</a></li>
+                      <li class="nav-item"><a href="/Gather/pages/member/login.html" class="nav-link">登入</a></li>
+                    </c:otherwise>
+                  </c:choose>
 
 
+													<!--我的最愛-->
+													<c:choose>
+														<c:when test="${mBean.id!=null}">
+															<li class="nav-item cta cta-colored"><a
+																	href="/Gather/myFav/${mBean.id}" class="nav-link"><i
+																		class="fas fa-hand-holding-heart"></i>[${favCount}]</a>
+															</li>
+														</c:when>
 
+													</c:choose>
+													<!--購物車-->
 
-
-
-									<!--購物車-->
-									<li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link">
-										<span class="icon-shopping_cart"></span>[0]</a></li>
-									<!--購物車-->
 
 								</ul>
 							</div>
@@ -194,7 +193,9 @@
 
 
 														</div>
-														<h3><a href="<c:url value='/showProject/${project.pID}' />">${project.pName}</a></h3>
+														<h3><a
+																href="<c:url value='/showProject/${project.pID}' />">${project.pName}</a>
+														</h3>
 														<div class="pricing">
 															<p class="price">
 																<!-- <span class="mr-2 price-dc"></span> -->
@@ -212,14 +213,14 @@
 														</div>
 														<p></p>
 														<div class="container">
-															
+
 
 															<div class="progress">
 																<div class="progress-bar" role="progressbar"
 																	aria-valuenow="0" aria-valuemin="0"
 																	aria-valuemax="100"
 																	style="width:${Math.round((project.pAmountNow/project.pTarget)*100)}%">
-																	
+
 																</div>
 															</div>
 														</div>
@@ -234,7 +235,7 @@
 											</div>
 										</c:forEach>
 
-										
+
 
 
 									</div>
@@ -526,7 +527,7 @@
 						$(document).ready(function () {
 
 							var date = new Date();
-							
+
 
 							//今日日期涵式
 							const formatDate = (date) => {
@@ -554,8 +555,8 @@
 									$(this).text("已結束")
 								}
 
-							
-								
+
+
 							})
 
 						})
@@ -563,4 +564,3 @@
 				</body>
 
 				</html>
-				

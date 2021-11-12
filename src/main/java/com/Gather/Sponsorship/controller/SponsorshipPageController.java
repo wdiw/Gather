@@ -131,7 +131,7 @@ public class SponsorshipPageController {
 		String form = all.aioCheckOut(obj, null);
 		
 		Member mBean=memberService.queryMemberById(Integer.parseInt(mID));
-		Mail.SendGmail("Gather.WebService@gmail.com",mBean.getAccount(),"Gather贊助平台付款成功通知", mBean.getName()+"您好!\n"+"您的訂單"+tradeNo.toString()+"已成功贊助"+sPName+"專案，贊助總額為"+sTotal+"元\n"+"非常感謝您對本平台的喜愛，再次感謝您的贊助!");
+		Mail.SendGmail("",mBean.getAccount(),"Gather贊助平台付款成功通知", mBean.getName()+"您好!\n"+"您的訂單"+tradeNo.toString()+"已成功贊助"+sPName+"專案，贊助總額為"+sTotal+"元\n"+"非常感謝您對本平台的喜愛，再次感謝您的贊助!");
 		System.out.println("成功寄信");
 		return form;
 
@@ -186,9 +186,30 @@ public class SponsorshipPageController {
 		Integer project_Amount=ordersData.get(0).getpAmountNow();
 		ProjectBean pBean= projectService.getProjectById(Integer.parseInt(sPID));
 		List<ProjectPlanBean> planBean = projectPlanService.getProjectPlansByProjectBean(pBean);
+		
+		double male=0;
+		double female=0;
+		
+		List<SponsorOrderBean> ordersForPID = sponsorOrderService.getOrdersByPID(Integer.parseInt(sPID));
+		for(SponsorOrderBean sBean:ordersForPID) {
+			Member sponsorMember = memberService.queryMemberById(sBean.getmID());
+			if(sponsorMember.getSexual().equals("男")) {
+				male++;
+			}else {
+				female++;
+			}
+		}
+		List<SponsorOrderBean> orders = sponsorOrderService.getOrdersByPID(Integer.parseInt(sPID));		
+		
+		model.addAttribute("male",(male/(male+female))*100);
+		model.addAttribute("female", (female/(male+female))*100);
+		model.addAttribute("male_count", male);
+		model.addAttribute("female_count", female);
+		model.addAttribute("counts", male+female);
 		model.addAttribute("planBean", planBean);
 		model.addAttribute("pBean", pBean);
 		model.addAttribute("project_Amount", project_Amount);
+		model.addAttribute("orders", orders);
 		return "Sponsorship/project_sponsorData";
 	}
 }

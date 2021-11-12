@@ -60,21 +60,37 @@
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">Shop</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
-              </div>
-            </li>
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item active"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+	          <li class="nav-item active"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
+	          	<c:choose>
+                    <c:when test="${memberData!=null}">
+                      <li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
+                      <li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
+                      <c:choose>
+                        <c:when test="${memberData.status eq '管理員'}">
+                          <li class="nav-item"><a href="/Gather/backend" class="nav-link">管理員後台</a></li>
+                        </c:when>
+                      </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                      <li class="nav-item"><a href="/Gather/pages/member/register.html" class="nav-link">註冊</a></li>
+                      <li class="nav-item"><a href="/Gather/pages/member/login.html" class="nav-link">登入</a></li>
+                    </c:otherwise>
+                  </c:choose>
+
+
+													<!--我的最愛-->
+													<c:choose>
+														<c:when test="${mBean.id!=null}">
+															<li class="nav-item cta cta-colored"><a
+																	href="/Gather/myFav/${mBean.id}" class="nav-link"><i
+																		class="fas fa-hand-holding-heart"></i>[${favCount}]</a>
+															</li>
+														</c:when>
+
+													</c:choose>
+													<!--購物車-->
 
 	        </ul>
 	      </div>
@@ -98,30 +114,6 @@
         <div class="row">
           <div class="col-lg-8 order-lg-last ftco-animate">
 						<div class="row">
-		          
-		          <form  id="form" class="forms-sample">
-                    <div class="form-group">
-                      <label>文章分類</label>
-                      <select name="postCategory">
-                        <option selected>公告</option>
-                        <option>閒聊</option>
-                        <option>討論</option>
-                        <option>心得</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label>文章標題</label>
-                      <input type="text" id="name" name="name" class="form-control" placeholder="請輸入文章標題">
-                    </div>
-                    <div>
-						<label>文章內容</label>
-						<textarea id="post" name="post" cols="100" rows="7" class="form-control" ></textarea>
-					</div>
-					
-					<button type='submit' id="addbtn" name="submit" class="btn btn-primary mr-2">送出</button>
-                  </form>
-		          
-		          
 		          <c:forEach items='${AllForum}' var='forum'>
 		          <div class="col-md-12 d-flex ftco-animate">
 		            <div class="blog-entry align-self-stretch d-md-flex">
@@ -143,6 +135,54 @@
 		          </div>
 		          </c:forEach>
 		          
+<!-- 		          <table class="table table-hover"> -->
+
+<!-- 							<thead> -->
+<!-- 								<tr width=""> -->
+<!-- 									<th width="10%">文章分類</th> -->
+<!-- 									<th width="55%">文章標題</th> -->
+<!-- 									<th width="35%">發文資訊</th> -->
+<!-- 								</tr> -->
+<!-- 							</thead> -->
+<%-- 							<c:forEach items='${AllForum}' var='forum'> --%>
+<%-- 								<tr onclick='location.href="<c:url value='/postdetail?id=${forum.id}' />"' style="cursor: pointer;" > --%>
+<!-- 									<td> -->
+<%-- 										<a href="<c:url value='/Forum/detail?id=${forum.id}' />" --%>
+<%-- 										style="color: black;">${forum.postCategory}</a> --%>
+<!-- 									</td> -->
+<!-- 									<td style=""> -->
+<%-- 										<div style="width: 100%; white-space: normal; word-wrap: break-word;  --%>
+<%-- <!-- 										word-break: break-all; cursor: pointer;"> --> --%>
+<%-- 											<a href="<c:url value='/Forum/detail?id=${forum.id}' />" --%>
+<%-- 											style="color: black;">${forum.name}</a> --%>
+<!-- 										</div> -->
+<!-- 									</td> -->
+<!-- 									<td> -->
+<%-- 										${forum.poster}<br>  --%>
+<%-- 										${forum.postTime}<br> --%>
+<!-- 										最後修改時間<br> -->
+<%-- 										${forum.postUpdateTime} --%>
+<!-- 									</td> -->
+<!-- 								</tr> -->
+<%-- 							</c:forEach> --%>
+<!-- 						</table> -->
+		          
+<!-- 		          <div class="col-md-12 d-flex ftco-animate"> -->
+<!-- 		            <div class="blog-entry align-self-stretch d-md-flex"> -->
+<!-- 		              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_6.jpg');"> -->
+<!-- 		              </a> -->
+<!-- 		              <div class="text d-block pl-md-4"> -->
+<!-- 		              	<div class="meta mb-3"> -->
+<!-- 		                  <div><a href="#">TESTApril 9, 2019</a></div> -->
+<!-- 		                  <div><a href="#">TEST</a></div> -->
+<!-- 		                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div> -->
+<!-- 		                </div> -->
+<!-- 		                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3> -->
+<!-- 		                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p> -->
+<!-- 		                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p> -->
+<!-- 		              </div> -->
+<!-- 		            </div> -->
+<!-- 		          </div> -->
 						</div>
 						
 		        <!-- 頁數 -->
@@ -165,6 +205,8 @@
           
           <div class="col-lg-4 sidebar ftco-animate">
             <div class="sidebar-box">
+<%--             <a href="<c:url value='/Forum/add' />" class="btn py-3 px-4 btn-primary">發表文章</a><br><br> --%>
+            <a href="<c:url value='/addposts' />" class="btn py-3 px-4 btn-primary">發表文章</a><br><br>
               <form action="#" class="search-form">
                 <div class="form-group">
                   <a id="search" style="cursor: pointer;"><span class="icon ion-ios-search"></span></a>
@@ -342,84 +384,15 @@
 <!--   <script src="js/google-map.js"></script> -->
   <script src="js/main.js"></script>
   
-  <!-- 要用Swal.fire需要引用下面兩個 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <!-- 若需相容 IE11，要加載 Promise Polyfill-->
-  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-  
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  
   
 	<script>
 	
-	$('#post').summernote({  //#後面放id屬性值
-//		alert("進入summernote"); //沒跳
-		placeholder: '請輸入文章內容',
-		tabsize: 2,
-      height: 100,
-	});
-	
-	
-	
-	var form = document.getElementById("form");
-
-$("#addbtn").click(function() { //對應button的id屬性值，也就是addbtn
-	$("#form").on("submit", function(e) { //對應button的??屬性值??，不是name屬性值
-    /* =====for formData&MultipartFile =====*/
-    e.preventDefault(); //不要按完按鈕就跳頁面
-//     var form = document.getElementById("form");
-	var formData = new FormData(form); //把表單的資料裝成data
-	var url = "<spring:url value='/addposts'/>"
-    
-    Swal.fire({
-        title: '您確定要送出嗎？',
-        icon: 'question',
-        showCancelButton: true,
-//         closeOnConfirm: true,
-    }).then((result) => {
-        if (result.isConfirmed) {
-        	
-            $.ajax({
-                type:"post",
-                url:"<spring:url value='/addposts'/>", //要放@PostMapping對應的網址
-                data: formData,
-                contentType: false, //required
-                processData: false, // required
-                success: function(data){
-                    
-                    Swal.fire({
-                    	title: '已新增成功！',
-                    	icon: 'success',
-                    }).then((result)=>{
-                    	if (result.isConfirmed) {
-                    		location.href= "<spring:url value='/allposts'/>";
-                    	}
-                    })
-                    
-                },
-                error: function(e, text){
-                	
-                	Swal.fire({
-                    	title: '新增失敗！請先登入會員',
-                    	icon: 'error',
-                    })
-                	
-                    console.log(e.status);
-                    console.log(text);
-                }
-            }) //$.ajax({
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire({
-                icon: 'error',
-                title: '已取消送出請求',
-                text: '您的變更將不會被儲存!'
-            })
-        }
-    }) //then((result) => {
-}) //$("#form").on("submit", function(e){
-
- }) //$("#addbtn").click(function
+	$('#search').click(function() {
+	    var searchvalue = $('#searchvalue').val(); //用變數searchvalue放輸入的東西
+// 	    alert(searchvalue); //測試是否抓到輸入的東西
+	    location.href=  "<spring:url value='/searchresults?searchvalue=" + searchvalue + "'/>" //跳轉進@GetMapping對應的方法，也是網址
+										   //@GetMapping對應網址 ? 方法的@RequestParam對應的參數，這裡就是@RequestParam("searchvalue")
+	})
 	
 	</script>
 

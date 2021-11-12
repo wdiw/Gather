@@ -9,11 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
 
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,13 +18,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.service.ProjectService;
+import com.Gather.Sponsorship.model.FavoriteBean;
+import com.Gather.Sponsorship.model.SponsorOrderBean;
+import com.Gather.Sponsorship.service.SponsorOrderService;
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
 
@@ -35,10 +34,15 @@ import com.Gather.member.service.MemberService;
 public class MemberPageController {
 	private MemberService memberService;
 	private ProjectService projectService;
-
+	private SponsorOrderService sponsorOrderService;
+	
 	@Autowired
-	public MemberPageController(MemberService memberService, ProjectService projectService) {
-		super();
+	public MemberPageController(
+			MemberService memberService, 
+			ProjectService projectService,
+			SponsorOrderService sponsorOrderService
+			) {
+		this.sponsorOrderService = sponsorOrderService;
 		this.memberService = memberService;
 		this.projectService = projectService;
 	}
@@ -46,12 +50,26 @@ public class MemberPageController {
 	// ==========================SHOW
 	// PAGE=============================================
 	@GetMapping("/")
-	public String home(Model model) {
+	public String home(Model model,HttpServletRequest reg) {
 		System.out.println("透過頁面控制器進入首頁");
 		List<ProjectBean> result = projectService.getAllProjectBypStatus("通過");
 		model.addAttribute("allProject", result);
+		
+		Member member = (Member) reg.getSession().getAttribute("memberData");
+		
+		if(member!=null) {
+			List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(member.getId());
+			int favCount = favoriteBeans.size();
+			reg.getSession().setAttribute("favCount", favCount);
+			reg.getSession().setAttribute("mBean", member);
+			
+			List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(member.getId());
+			if (!sBean.isEmpty()) {
+				reg.getSession().setAttribute("sBean", sBean);
+			}
+		}
 		return "Project/allProjectInForestage";
-	}
+		}
 
 	@GetMapping("/addMember")
 	public String addMember() {

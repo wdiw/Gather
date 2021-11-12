@@ -28,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.Gather.Activity.model.ActivityBean;
+import com.Gather.Activity.service.ActivityParticipationService;
+import com.Gather.Activity.service.ActivityService;
 import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.model.ProjectPlanBean;
 import com.Gather.Project.service.ProjectPlanService;
@@ -48,67 +51,101 @@ public class SponsorshipUserController {
 	MemberService memberService;
 	SponsorOrderService sponsorOrderService;
 	ProjectPlanService projectPlanService;
-
+	ActivityService activityService;
+	ActivityParticipationService activityParticipationService;
+ 
 	@Autowired
 	public SponsorshipUserController(ProjectService projectService, MemberService memberService,
-			SponsorOrderService sponsorOrderService, ProjectPlanService projectPlanService) {
+			SponsorOrderService sponsorOrderService, ProjectPlanService projectPlanService,ActivityService activityService,ActivityParticipationService activityParticipationService) {
 		this.projectService = projectService;
 		this.memberService = memberService;
 		this.sponsorOrderService = sponsorOrderService;
 		this.projectPlanService = projectPlanService;
+		this.activityService = activityService;
+		this.activityParticipationService=activityParticipationService;
 	}
 
 	@GetMapping("/showProject/{pID}")
 	public String showProject(@PathVariable("pID") Integer pID, HttpServletRequest request) {
 		ProjectBean pBean = projectService.getProjectById(pID);
 		Member member = (Member) request.getSession().getAttribute("memberData");
-		Member mBean = memberService.queryMemberById(member.getId());
-		FavoriteBean favoriteBean = sponsorOrderService.getFavoriteByMemberIDAndProjectID(mBean.getId(), pID);
-		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+		
+		if(member!=null) {
+			Member mBean = memberService.queryMemberById(member.getId());
+			FavoriteBean favoriteBean = sponsorOrderService.getFavoriteByMemberIDAndProjectID(mBean.getId(), pID);
+			List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+			int favCount = favoriteBeans.size();
+			request.getSession().setAttribute("favoriteBean", favoriteBean);
+			request.getSession().setAttribute("favCount", favCount);
+			request.getSession().setAttribute("mBean", mBean);
+		}
+
 		List<ProjectPlanBean> projectPlanList = projectPlanService.getProjectPlansByProjectBean(pBean);
 		request.getSession().setAttribute("projectPlanList", projectPlanList);
-		int favCount = favoriteBeans.size();
-		request.getSession().setAttribute("favoriteBean", favoriteBean);
-		request.getSession().setAttribute("favCount", favCount);
 		request.getSession().setAttribute("pBean", pBean);
-		request.getSession().setAttribute("mBean", mBean);
-
 		return "Sponsorship/project";
 	}
 
 	@GetMapping("/payment")
-	public String payment(HttpServletRequest reg, HttpServletRequest request, @RequestParam("pPID") Integer pPID) {
-		Member member = (Member) reg.getSession().getAttribute("memberData");
-		Member mBean = memberService.queryMemberById(member.getId());
-		ProjectPlanBean pPBean = projectPlanService.getProjectPlanByProjectPlanID(pPID);
-		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
-		int favCount = favoriteBeans.size();
-		request.getSession().setAttribute("favCount", favCount);
-		request.getSession().setAttribute("pPBean", pPBean);
-		request.getSession().setAttribute("mBean", mBean);
-		return "Sponsorship/payment";
-	}
+	 public String payment(HttpServletRequest reg, HttpServletRequest request, @RequestParam("pPID") Integer pPID) {
+	  Member member = (Member) reg.getSession().getAttribute("memberData");
+	  Member mBean = memberService.queryMemberById(member.getId());
+	  ProjectPlanBean pPBean = projectPlanService.getProjectPlanByProjectPlanID(pPID);
+	  Integer planAmount =pPBean.getProjectPlanPrice();
+	  List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+	  ActivityBean discountActivity=activityService.getActivityById(2);
+	  int favCount = favoriteBeans.size();
+	  
+	  if(activityParticipationService.findActivityParticipationByM_idAndActivityId(discountActivity, member.getId())!=null) {
+	   System.out.println("方案金額:"+planAmount);
+	   
+	   Integer discount=planAmount/1000*100;
 
+	   request.getSession().setAttribute("favCount", favCount);
+	   request.getSession().setAttribute("pPBean", pPBean);
+	   request.getSession().setAttribute("mBean", mBean);
+	   request.getSession().setAttribute("discount", discount);
+	   
+	   System.out.println("折扣金額"+discount);
+	   
+	   return "Sponsorship/payment";
+	  }else {
+	   Integer discount=0;
+
+	   request.getSession().setAttribute("favCount", favCount);
+	   request.getSession().setAttribute("pPBean", pPBean);
+	   request.getSession().setAttribute("mBean", mBean);
+	   request.getSession().setAttribute("discount", discount);
+	   
+	   return "Sponsorship/payment";
+	  }
+	  }
 	// 查詢贊助訂單
 
 	@GetMapping("/sponsorshipInfo")
 	public String sponsorshipInfo(HttpServletRequest reg) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
 		Member mBean = memberService.queryMemberById(member.getId());
-		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
-		int favCount = favoriteBeans.size();
-		reg.getSession().setAttribute("favCount", favCount);
-		reg.getSession().setAttribute("mBean", mBean);
-
-		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(mBean.getId());
-		if (sBean.isEmpty()) {
-			return "Sponsorship/noSponsorship";
-		} else {
-			reg.getSession().setAttribute("sBean", sBean);
-			System.out.println("登入者id" + mBean.getId());
-			return "Sponsorship/sponsorshipInfo";
-
+		
+		if(mBean!=null) {
+			List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+			int favCount = favoriteBeans.size();
+			reg.getSession().setAttribute("favCount", favCount);
+			reg.getSession().setAttribute("mBean", mBean);
+			
+			List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(mBean.getId());
+			if (sBean.isEmpty()) {
+				return "Sponsorship/noSponsorship";
+			} else {
+				reg.getSession().setAttribute("sBean", sBean);
+				System.out.println("登入者id" + mBean.getId());
+				return "Sponsorship/sponsorshipInfo";
+				
+			}
+		}else {
+			return "Member/addMember";
 		}
+		
 	}
 
 	// 查詢及管理被贊助訂單
@@ -117,17 +154,22 @@ public class SponsorshipUserController {
 	public String sponsoredInfo(HttpServletRequest reg) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
 		Member mBean = memberService.queryMemberById(member.getId());
-		List<ProjectBean> pBean = projectService.getAllProjectBymID(mBean.getId());
-		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
-		int favCount = favoriteBeans.size();
-		reg.getSession().setAttribute("favCount", favCount);
-		if (pBean.isEmpty()) {
-			return "Sponsorship/noSponsorshiped";
+		if(mBean!=null) {
+			
+			List<ProjectBean> pBean = projectService.getAllProjectBymID(mBean.getId());
+			List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+			int favCount = favoriteBeans.size();
+			reg.getSession().setAttribute("favCount", favCount);
+			if (pBean.isEmpty()) {
+				return "Sponsorship/noSponsorshiped";
+			}
+			List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByProposerID(pBean.get(0).getmID());
+			reg.getSession().setAttribute("sBean", sBean);
+			reg.getSession().setAttribute("mBean", mBean);
+			return "Sponsorship/sponsoredInfo";
+		}else {
+			return "Member/addMember";
 		}
-		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByProposerID(pBean.get(0).getmID());
-		reg.getSession().setAttribute("sBean", sBean);
-		reg.getSession().setAttribute("mBean", mBean);
-		return "Sponsorship/sponsoredInfo";
 
 	}
 
@@ -186,18 +228,24 @@ public class SponsorshipUserController {
 	public String favList(HttpServletRequest request, @PathVariable(name = "mID") String mID) {
 		Member member = (Member) request.getSession().getAttribute("memberData");
 		Member mBean = memberService.queryMemberById(member.getId());
-		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
-		ArrayList<ProjectBean> projectBeans = new ArrayList<ProjectBean>();
-		for (int i = 0; i < favoriteBeans.size(); i++) {
-			ProjectBean projectBean = favoriteBeans.get(i).getProjectBean();
-			projectBeans.add(projectBean);
+		
+		if(mBean!=null) {
+			List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+			ArrayList<ProjectBean> projectBeans = new ArrayList<ProjectBean>();
+			for (int i = 0; i < favoriteBeans.size(); i++) {
+				ProjectBean projectBean = favoriteBeans.get(i).getProjectBean();
+				projectBeans.add(projectBean);
+			}
+			
+			int favCount = favoriteBeans.size();
+			request.getSession().setAttribute("favCount", favCount);
+			request.getSession().setAttribute("mBean", mBean);
+			request.getSession().setAttribute("projectBeans", projectBeans);
+			return "Sponsorship/favorite";
+		}else {
+			return "Member/addMember";
 		}
-	
-		int favCount = favoriteBeans.size();
-		request.getSession().setAttribute("favCount", favCount);
-		request.getSession().setAttribute("mBean", mBean);
-		request.getSession().setAttribute("projectBeans", projectBeans);
-		return "Sponsorship/favorite";
+		
 
 	}
 

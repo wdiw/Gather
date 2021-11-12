@@ -61,7 +61,6 @@ public class ActivityAjaxController {
 
 	@Autowired
 	public ActivityAjaxController(ActivityService activityService, ServletContext servletContext,MemberService memberService, ActivityParticipationService activityParticipationService) {
-		System.out.println("debug");
 		this.activityService = activityService;
 		this.servletContext = servletContext;
 		this.activityParticipationService=activityParticipationService;
@@ -185,7 +184,7 @@ public class ActivityAjaxController {
 				
 				
 				String activityLogin=member.getName()+"您好，您已成功登錄活動，活動名稱:"+activity.getName();
-				Mail.SendGmail("Gather.WebService@gmail.com", "ChillSeph0729@gmail.com", "Gather活動登錄成功通知",activityLogin);
+				Mail.SendGmail("", "ChillSeph0729@gmail.com", "Gather活動登錄成功通知",activityLogin);
 				
 				
 			
@@ -206,7 +205,7 @@ public class ActivityAjaxController {
 			Member member = (Member)request.getSession().getAttribute("memberData");
 			ActivityBean activity=activityParticipationService.getActivityParticipationBeanById(id).getActivityBean();
 			String activityLogin=member.getName()+"您好，您成功取消活動，活動名稱:"+activity.getName();
-			Mail.SendGmail("Gather.WebService@gmail.com", "ChillSeph0729@gmail.com", "Gather取消活動登錄通知",activityLogin);
+			Mail.SendGmail("", "ChillSeph0729@gmail.com", "Gather取消活動登錄通知",activityLogin);
 					activityParticipationService.deleteActivityParticipationByactivityParticipationid(id);
 				
 					
@@ -265,7 +264,7 @@ public class ActivityAjaxController {
 					
 					Member member = (Member)request.getSession().getAttribute("memberData");
 					String lotteryreultmail=member.getName()+"您好，恭喜您參加Gather線上抽獎活動抽中:"+lotteryesult;
-					Mail.SendGmail("Gather.WebService@gmail.com", "ChillSeph0729@gmail.com", "Gather線上抽獎中獎通知",lotteryreultmail);
+					Mail.SendGmail("", "ChillSeph0729@gmail.com", "Gather線上抽獎中獎通知",lotteryreultmail);
 
 					
 				    return new ResponseEntity<String>(HttpStatus.OK);

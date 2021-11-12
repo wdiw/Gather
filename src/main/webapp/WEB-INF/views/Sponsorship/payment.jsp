@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -60,14 +59,14 @@
 								class="icon mr-2 d-flex justify-content-center align-items-center">
 								<span class="icon-phone2"></span>
 							</div>
-							<span class="text">+ 1235 2355 98</span>
+							<span class="text"></span>
 						</div>
 						<div class="col-md pr-4 d-flex topper align-items-center">
 							<div
 								class="icon mr-2 d-flex justify-content-center align-items-center">
 								<span class="icon-paper-plane"></span>
 							</div>
-							<span class="text">youremail@email.com</span>
+							<span class="text"></span>
 						</div>
 						<div
 							class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
@@ -83,7 +82,7 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">Minishop</a>
+			<a class="navbar-brand" href="/Gather">Gather</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -103,10 +102,11 @@
 								class="dropdown-item" href="checkout.html">Checkout</a>
 						</div></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+					<li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html"
-						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+					<li class="nav-item cta cta-colored"><a
+						href="/Gather/myFav/${mBean.id}" class="nav-link"><i class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
+
 
 				</ul>
 			</div>
@@ -140,11 +140,11 @@
 								<div class="form-group">
 									<div class="col-lg-6 mb-5 ftco-animate">
 										<a
-											href="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg"
+											href="./${pPBean.projectPlanImage}"
 											class="image-popup prod-img-bg"> <img
-											src="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg"
+											src="./${pPBean.projectPlanImage}"
 											class="img-fluid" alt="Colorlib Template" id="projectImage" ></a>
-											<input type="hidden" name="projectImage" value="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg">
+											<input type="hidden" name="projectImage" value="./${pPBean.projectPlanImage}">
 										<div class="col-md-6">
 											<div class="form-group">
 											<input type="hidden" name="sPName" value="${pBean.pName}">
@@ -157,6 +157,7 @@
 							<input type="hidden" value="${mBean.id}" name="mID">
 							<input type="hidden" value="${pBean.pID}" name="sPID">
 							<input type="hidden" value="${pBean.mID}" name="proposerID">
+							<input type="hidden" value="${pPBean.projectPlanID}" name="projectPlanID"> 
 							<input type="hidden" value="300" name="sAmount">
 							
 							
@@ -166,12 +167,12 @@
 								<div class="form-group">
 									<label for="postcodezip">贊助者</label> <input type="text"
 										class="form-control" placeholder="" value="${mBean.name}"
-										name="sName" id="sName">
+										name="sName" id="sName" required="required">
 								</div>
 								<div class="form-group">
 									<label for="postcodezip">連絡電話</label> <input type="text"
-										class="form-control" placeholder="" value="0935623709"
-										name="sPhone" id="sPhone">
+										class="form-control" placeholder="" value="${mBean.phone}"
+										name="sPhone" id="sPhone" required="required">
 								</div>
 							</div>
 
@@ -181,11 +182,12 @@
 								<div class="form-group">
 									<label for="streetaddress">加碼贊助</label>
 									<div style="position: relative;">
+									
 										<i class="fas fa-dollar-sign"
 											style="position: absolute; left: 10px; top: 18px; font-size: 22px; text-align: center;"></i>
-										<input type="number" class="form-control" placeholder="0"
+										<input type="number" class="form-control" placeholder="0" min="0"
 											style="padding-left: 32PX; font-size: 20px; padding-bottom: 8px"
-											name="sBonus" id="sBonus">
+											name="sBonus" id="sBonus" onchange="getBonus();getTotal()" required="required">
 									</div>
 								</div>
 							</div>
@@ -194,7 +196,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="streetaddress">電子信箱</label> <input type="text"
-										class="form-control" placeholder="" value="${mBean.account}" name="sEmail">
+										class="form-control" placeholder="" value="${mBean.account}" name="sEmail" required="required">
 								</div>
 							</div>
 
@@ -204,7 +206,7 @@
 								<div class="form-group">
 									<label for="phone">回饋優惠</label> <input type="text"
 										class="form-control" placeholder="" name="sDiscount"
-										id="sDiscount">
+										id="sDiscount" onchange="getDiscount();getTotal()" required="required">
 								</div>
 							</div>
 
@@ -213,7 +215,7 @@
 								<div class="form-group">
 									<label for="towncity">地址</label> <input type="text"
 										class="form-control" placeholder="" value="桃園市中壢區中央路300號"
-										name="sAddress" id="sAddress">
+										name="sAddress" id="sAddress" required="required">
 								</div>
 							</div>
 						</div>
@@ -223,17 +225,17 @@
 									style="width: 450px">
 									<h3 class="billing-heading mb-4">贊助總額</h3>
 									<p class="d-flex">
-										<span>方案金額</span> <span>$20.60</span>
+										<span>方案金額</span> <span>$${pPBean.projectPlanPrice}</span>
 									</p>
 									<p class="d-flex">
-										<span>加碼贊助</span> <span>$0.00</span>
+										<span>加碼贊助</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sBonus_confirm" value=""/></span>
 									</p>
 									<p class="d-flex">
-										<span>回饋金折抵</span> <span>$3.00</span>
+										<span>回饋金折抵</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sDiscount_confirm" value="" /></span>
 									</p>
 									<hr>
 									<p class="d-flex total-price">
-										<span>總金額</span> <span>$17.60</span>
+										<span>總金額</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sTotal_confirm" value=""/></span>
 									</p>
 								</div>
 							</div>
@@ -528,9 +530,36 @@
 // 				})
 
 
+
+
        			
 				    
 			});
+		
+	        
+	    function getBonus(){
+	        var sBonus = document.getElementById('sBonus').value; 
+	        document.getElementById('sBonus_confirm').value ="$"+sBonus;
+	        
+	    }
+	    
+	        
+	    function getDiscount(){
+	        var sDiscount = document.getElementById('sDiscount').value; 
+	        document.getElementById('sDiscount_confirm').value ="$"+sDiscount;
+	        
+	    }
+	    
+	    function getTotal(){
+	    	var planPrice_string=${pPBean.projectPlanPrice};
+	    	var planPrice=parseInt(planPrice_string);
+	    	var sDiscount = document.getElementById('sDiscount').value; 
+	    	var sBonus = document.getElementById('sBonus').value; 
+	    	var sTotal_confirm=planPrice+(sBonus-sDiscount);
+	    	document.getElementById('sTotal_confirm').value ="$"+sTotal_confirm;
+	    		
+	    }
+	 
 			
 			
 		
@@ -599,14 +628,14 @@
 								class="icon mr-2 d-flex justify-content-center align-items-center">
 								<span class="icon-phone2"></span>
 							</div>
-							<span class="text">+ 1235 2355 98</span>
+							<span class="text"></span>
 						</div>
 						<div class="col-md pr-4 d-flex topper align-items-center">
 							<div
 								class="icon mr-2 d-flex justify-content-center align-items-center">
 								<span class="icon-paper-plane"></span>
 							</div>
-							<span class="text">youremail@email.com</span>
+							<span class="text"></span>
 						</div>
 						<div
 							class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
@@ -622,7 +651,7 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">Minishop</a>
+			<a class="navbar-brand" href="/Gather">Gather</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -642,7 +671,7 @@
 								class="dropdown-item" href="checkout.html">Checkout</a>
 						</div></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+					<li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 					<li class="nav-item cta cta-colored"><a
 						href="/Gather/myFav/${mBean.id}" class="nav-link"><i class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
@@ -746,7 +775,7 @@
 								<div class="form-group">
 									<label for="phone">回饋優惠</label> <input type="text"
 										class="form-control" placeholder="" name="sDiscount"
-										id="sDiscount" onchange="getDiscount();getTotal()" required="required">
+										id="sDiscount" onchange="getDiscount();getTotal()" required="required" value="${discount}">
 								</div>
 							</div>
 
@@ -771,7 +800,7 @@
 										<span>加碼贊助</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sBonus_confirm" value=""/></span>
 									</p>
 									<p class="d-flex">
-										<span>回饋金折抵</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sDiscount_confirm" value="" /></span>
+										<span>回饋金折抵</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sDiscount_confirm" value="$${discount}" /></span>
 									</p>
 									<hr>
 									<p class="d-flex total-price">
