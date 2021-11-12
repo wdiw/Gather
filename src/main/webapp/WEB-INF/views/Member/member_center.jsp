@@ -462,6 +462,7 @@
             <script src="js/bootstrap-datepicker.js"></script>
             <script src="js/scrollax.min.js"></script>
             <script src="js/main.js"></script>
+            <script src="/Gather/js/sweetalert2.all.min.js"></script>
             <script src="js/member-center.js"></script>
         </body>
 

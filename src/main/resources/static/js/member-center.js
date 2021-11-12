@@ -22,8 +22,17 @@ $(function () {
             contentType: 'application/json',
             data: JSON.stringify(params),
             success: function (data) {
-                alert('已成功修改')
+                Swal.fire({
+                    icon: 'success',
+                    position: 'center',
+                    title: '成功修改，請使用新密碼重新登入'
+                })
+                setTimeout(function () {
+                    $("#div2").hide();
+                    $(location).attr('href', '/Gather/pages/member/login.html');
+                }, 2000);
             }
+            
 
         })
     })

@@ -430,6 +430,7 @@
 																	<th>姓名</th>
 																	<th>身分</th>
 																	<th>帳號</th>
+																	<th>電話</th>
 																	<th>修改</th>
 																	<th>停(復)權</th>
 																</tr>
@@ -440,8 +441,9 @@
 																			alt=""></td>
 																	<td>${theMember.id}</td>
 																	<td>${theMember.name}</td>
-																	<td>${theMember.status}</td>
 																	<td>${theMember.account}</td>
+																	<td>${theMember.status}</td>
+																	<td>${theMember.phone }</td>
 																	<td>
 																		<button type="button" id="update"
 																			class="btn btn-inverse-warning btn-fw"

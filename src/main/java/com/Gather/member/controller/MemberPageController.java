@@ -193,7 +193,7 @@ public class MemberPageController {
 		System.out.println("debug: id為" + theMember.getId());
 		model.addAttribute("allproject", projectService.getAllProjectBymID(theMember.getId()));
 		System.out.println(projectService.getAllProjectBymID(theMember.getId()));
-		return "sample";
+		return "Member/member_center";
 	}
 
 	@GetMapping("/showMemberAdminCenter")

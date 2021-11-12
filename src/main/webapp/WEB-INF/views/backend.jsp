@@ -325,104 +325,95 @@
 							<!-- partial:partials/_sidebar.html -->
 
 
-								<nav class="sidebar sidebar-offcanvas" id="sidebar" style="border: 10px black solid;">
-									<ul class="nav">
-										<li class="nav-item"><a class="nav-link" href="./backend">
-												<i class="icon-grid menu-icon"></i> <span
-													class="menu-title">Dashboard</span>
-											</a></li>
-										<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#ui-basic"
-												aria-expanded="false" aria-controls="ui-basic"> <i
-													class="icon-layout menu-icon"></i>
-												<span class="menu-title">Member</span> <i class="menu-arrow"></i>
-											</a>
-											<div class="collapse" id="ui-basic">
-												<ul class="nav flex-column sub-menu">
-													<li class="nav-item"><a class="nav-link"
-															href="showAllMember">會員管理</a>
-													</li>
-													<li class="nav-item"><a class="nav-link" href="./addMember">新增會員</a>
-													</li>
-												</ul>
-											</div>
-										</li>
-										<li class="nav-item"><a class="nav-link" data-toggle="collapse"
-												href="#form-elements" aria-expanded="false"
-												aria-controls="form-elements">
-												<i class="icon-columns menu-icon"></i> <span
-													class="menu-title">Activity</span>
-												<i class="menu-arrow"></i>
-											</a>
-											<div class="collapse" id="form-elements">
-												<ul class="nav flex-column sub-menu">
-													<li class="nav-item"><a class="nav-link"
-															href="Activity/selectall">全部活動</a></li>
-												</ul>
-											</div>
-										</li>
-										<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#charts"
-												aria-expanded="false" aria-controls="charts"> <i
-													class="icon-bar-graph menu-icon"></i>
-												<span class="menu-title">Sponsorship</span> <i class="menu-arrow"></i>
-											</a>
-											<div class="collapse" id="charts">
-												<ul class="nav flex-column sub-menu">
-													<li class="nav-item"><a class="nav-link" href="orders">訂單管理</a></li>
-													<li class="nav-item"><a class="nav-link" href="addorder">新增訂單</a>
-													</li>
-												</ul>
-											</div>
-										</li>
-										<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#tables"
-												aria-expanded="false" aria-controls="tables"> <i
-													class="icon-grid-2 menu-icon"></i>
-												<span class="menu-title">Projects</span> <i class="menu-arrow"></i>
-											</a>
-											<div class="collapse" id="tables">
-												<ul class="nav flex-column sub-menu">
-													<li class="nav-item"><a class="nav-link"
-															href="Project/allProjectInBackstage">專案管理</a></li>
-												</ul>
-											</div>
-										</li>
-										<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#icons"
-												aria-expanded="false" aria-controls="icons"> <i
-													class="icon-contract menu-icon"></i>
-												<span class="menu-title">Forum</span> <i class="menu-arrow"></i>
-											</a>
-											<div class="collapse" id="icons">
-												<ul class="nav flex-column sub-menu">
-													<li class="nav-item"><a class="nav-link"
-															href="/Gather/Forum/adMain">討論區管理</a></li>
-												</ul>
-											</div>
-										</li>
+							<nav class="sidebar sidebar-offcanvas" id="sidebar">
+								<ul class="nav">
+									<li class="nav-item"><a class="nav-link" href="./backend">
+											<i class="icon-grid menu-icon"></i> <span
+												class="menu-title">Dashboard</span>
+										</a></li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#ui-basic"
+											aria-expanded="false" aria-controls="ui-basic"> <i
+												class="icon-layout menu-icon"></i>
+											<span class="menu-title">Member</span> <i class="menu-arrow"></i>
+										</a>
+										<div class="collapse" id="ui-basic">
+											<ul class="nav flex-column sub-menu">
+												<li class="nav-item"><a class="nav-link" href="showAllMember">會員管理</a>
+												</li>
+												<li class="nav-item"><a class="nav-link" href="./addMember">新增會員</a>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse"
+											href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+											<i class="icon-columns menu-icon"></i> <span
+												class="menu-title">Activity</span>
+											<i class="menu-arrow"></i>
+										</a>
+										<div class="collapse" id="form-elements">
+											<ul class="nav flex-column sub-menu">
+												<li class="nav-item"><a class="nav-link"
+														href="Activity/selectall">全部活動</a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#charts"
+											aria-expanded="false" aria-controls="charts"> <i
+												class="icon-bar-graph menu-icon"></i>
+											<span class="menu-title">Sponsorship</span> <i class="menu-arrow"></i>
+										</a>
+										<div class="collapse" id="charts">
+											<ul class="nav flex-column sub-menu">
+												<li class="nav-item"><a class="nav-link" href="orders">訂單管理</a></li>
+												<li class="nav-item"><a class="nav-link" href="addorder">新增訂單</a>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#tables"
+											aria-expanded="false" aria-controls="tables"> <i
+												class="icon-grid-2 menu-icon"></i>
+											<span class="menu-title">Projects</span> <i class="menu-arrow"></i>
+										</a>
+										<div class="collapse" id="tables">
+											<ul class="nav flex-column sub-menu">
+												<li class="nav-item"><a class="nav-link"
+														href="Project/allProjectInBackstage">專案管理</a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#icons"
+											aria-expanded="false" aria-controls="icons"> <i
+												class="icon-contract menu-icon"></i>
+											<span class="menu-title">Forum</span> <i class="menu-arrow"></i>
+										</a>
+										<div class="collapse" id="icons">
+											<ul class="nav flex-column sub-menu">
+												<li class="nav-item"><a class="nav-link"
+														href="/Gather/Forum/adMain">討論區管理</a></li>
+											</ul>
+										</div>
+									</li>
 
-									</ul>
+								</ul>
 
-								</nav>
+							</nav>
 							<div class="main-panel">
 								<div class="content-wrapper">
 									<div class="row">
 
 										<div class="col-lg-6 grid-margin stretch-card">
-												<div class="card">
-													<div class="card-body">
-														<h4 class="card-title">會員性別比</h4>
+											<div class="card">
+												<div class="card-body">
+													<h4 class="card-title">會員性別比</h4>
 													<canvas id="doughnutChart" width="131" height="55"
 														style="display: block; height: 210px; width: 421px;"
 														class="chartjs-render-monitor"></canvas>
 												</div>
 											</div>
-											<!--card end-->
-
-											<!--長條圖-->
-											<!--
-
-													-->
 
 										</div>
-										<!--col-lg-6 grid-margin stretch-card end-->
 										<div class="col-lg-6 grid-margin stretch-card">
 											<div class="card">
 												<div class="card-body">
@@ -434,18 +425,17 @@
 											</div>
 										</div>
 									</div>
-									<!--row end-->
-										<!--性別比 圓餅圖-->
-										<div class="col-lg-6 grid-margin stretch-card">
-											<div class="card">
-												<div class="card-body">
-													<h4 class="card-title">會員年齡分布</h4>
-													<canvas id="areaChart" width="631" height="315"
-														style="display: block; height: 210px; width: 421px;"
-														class="chartjs-render-monitor"></canvas>
-												</div>
+									<!--性別比 圓餅圖-->
+									<div class="col-lg-6 grid-margin stretch-card">
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title">會員年齡分布</h4>
+												<canvas id="areaChart" width="631" height="315"
+													style="display: block; height: 210px; width: 421px;"
+													class="chartjs-render-monitor"></canvas>
 											</div>
 										</div>
+									</div>
 								</div>
 							</div>
 
@@ -482,15 +472,15 @@
 							setLoginTime('${statisticsLoginName[0]}',
 								'${statisticsLoginName[1]}',
 								'${statisticsLoginName[2]}',
-								${statisticsMember[6]},
-								${statisticsMember[7]},
-								${statisticsMember[8]});
+								${ statisticsMember[6]},
+								${ statisticsMember[7]},
+								${ statisticsMember[8]});
 
 							setEachGroup(
-							${statisticsMember[2]},
-							${statisticsMember[3]},
-							${statisticsMember[4]},
-							${statisticsMember[5]}
+								${ statisticsMember[2]},
+								${ statisticsMember[3]},
+								${ statisticsMember[4]},
+								${ statisticsMember[5]}
 							);
 						</script>
 						<!-- End custom js for this page-->

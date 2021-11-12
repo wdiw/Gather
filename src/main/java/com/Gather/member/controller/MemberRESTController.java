@@ -70,12 +70,6 @@ public class MemberRESTController {
 		return new ResponseEntity<String>("N", HttpStatus.OK);
 	}
 	
-
-	
-	
-	
-	
-	
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody Member theMember, HttpServletRequest request) {
 		System.out.println("登入: 前端收到的資料" + theMember);
@@ -85,7 +79,7 @@ public class MemberRESTController {
 			// 找到會員
 			// 更新登入次數，存入資料庫
 			result.setLoginTimes(result.getLoginTimes()+1);
-			memberService.insertOrUpdateMember(theMember);
+			memberService.insertOrUpdateMember(result);
 			// 將會員資料放入session 供前端使用
 			request.getSession().setAttribute("memberData", result);
 			return new ResponseEntity<String>("Y", HttpStatus.OK);
@@ -143,24 +137,14 @@ public class MemberRESTController {
 			memberService.insertOrUpdateMember(theMember);
 			System.out.println("會員資料加入資料庫成功");
 			//使用預設大頭貼
-			String rootDirectory = req.getServletContext().getRealPath("/").replace("webapp", "resources");
-			String destDirectory = rootDirectory + "static\\images\\Members\\";
-			
-			final String INPUT_FILE_PATH = destDirectory+"default.jpg"; // 被複製的檔案路徑及檔名
-			final String OUTPUT_FILE_PATH = destDirectory+theMember.getId()+".jpg"; // 已複製的檔案路徑及檔名
-
-			try ( FileOutputStream fos = new FileOutputStream(new File(OUTPUT_FILE_PATH))) {
-			    Path inputPath = new File(INPUT_FILE_PATH).toPath();
-			    Files.copy(inputPath, fos);
-			} catch (IOException e) {
-			    e.printStackTrace();
-			}
+			useDefaultUserPhoto(req, theMember);
 			return new ResponseEntity<String>("Y", HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("N", HttpStatus.OK);
 
 	}
 
+	
 	@GetMapping("/members")
 	public List<Member> getMembers() {
 		return memberService.queryMemberAll();
@@ -171,13 +155,18 @@ public class MemberRESTController {
 		return memberService.queryMemberById(memberId);
 	}
 
+	//新增會員(後台)
 	@PostMapping("/members")
-	public Member addMember(@RequestBody Member theMember) {
+	public Member addMember(@RequestBody Member theMember,
+							HttpServletRequest req) {
 		// 清洗前端資料，確保ID為0或null，使insertOrUpdate成功判斷
 		// 但因為我這邊使用的是Integer，所以不能用0 要用null
 		theMember.setId(null);
-		System.out.println(theMember);
+		//預設一般會員
+		theMember.setStatus("會員");
 		memberService.insertOrUpdateMember(theMember);
+		//使用預設大頭貼
+		useDefaultUserPhoto(req, theMember);
 		return theMember;
 	}
 
@@ -197,7 +186,7 @@ public class MemberRESTController {
 		System.out.println("改密碼:Session的資料" + sessionMemberData);
 		sessionMemberData.setPassword(theMember.getPassword());
 		System.out.println("改密碼:即將送進Service層的會員資料" + sessionMemberData);
-		memberService.changePwdById(sessionMemberData);
+		memberService.insertOrUpdateMember(sessionMemberData);
 		request.getSession().removeAttribute("memberData");
 		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
@@ -226,6 +215,21 @@ public class MemberRESTController {
 	public String deleteMember(@PathVariable Integer memberId) {
 		memberService.deleteMemberById(memberId);
 		return "The member\t" + memberId + "\thas been deleted!";
+	}
+	
+	private void useDefaultUserPhoto(HttpServletRequest req, Member theMember) {
+		String rootDirectory = req.getServletContext().getRealPath("/").replace("webapp", "resources");
+		String destDirectory = rootDirectory + "static\\images\\Members\\";
+		
+		final String INPUT_FILE_PATH = destDirectory+"default.jpg"; // 被複製的檔案路徑及檔名
+		final String OUTPUT_FILE_PATH = destDirectory+theMember.getId()+".jpg"; // 已複製的檔案路徑及檔名
+
+		try ( FileOutputStream fos = new FileOutputStream(new File(OUTPUT_FILE_PATH))) {
+		    Path inputPath = new File(INPUT_FILE_PATH).toPath();
+		    Files.copy(inputPath, fos);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
 	}
 
 }
