@@ -423,19 +423,19 @@
                       <input id="sName" name="sName" class="form-control" value="${sBean.sName}" type='text' style="width: 270px;text-align: center;position: relative;left: 40px ">
                     </div>
                     <div class="form-group">
-                    <i class="mdi mdi-coin" style="position: relative;left: -60px;top:29px"></i>
+                    <i class="mdi mdi-cellphone-android" style="position: relative;left: -60px;top:29px"></i>
                       <label for="sPhone" style="position: relative;left: -60px;top:29px">聯絡電話</label>
                       <input id="sPhone" name="sPhone" class="form-control" value="${sBean.sPhone}"  type='text' style="width: 270px;text-align: center;position: relative;left: 40px ">
                     </div>
                     
                     <div class="form-group">
-                    <i class="mdi mdi-coin" style="position: relative;left: -60px;top:29px"></i>
+                    <i class="mdi mdi-home-map-marker" style="position: relative;left: -60px;top:29px"></i>
                       <label for="sAddress" style="position: relative;left: -60px;top:29px">聯絡地址</label>
                       <input id="sAddress" name="sAddress" class="form-control" value="${sBean.sAddress}"  type='text' style="width: 270px;text-align: center;position: relative;left: 40px ">
                     </div>
                     
                     <div class="form-group">
-                    <i class="mdi mdi-coin" style="position: relative;left: -60px;top:29px"></i>
+                    <i class="mdi mdi-email-open" style="position: relative;left: -60px;top:29px"></i>
                       <label for="sEmail" style="position: relative;left: -60px;top:29px">聯絡信箱</label>
                       <input id="sEmail" name="sEmail" class="form-control" value="${sBean.sEmail}"  type='text' style="width: 270px;text-align: center;position: relative;left: 40px ">
                     </div>

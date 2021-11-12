@@ -13,7 +13,7 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-	
+
 
 
 <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
@@ -92,8 +92,15 @@
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item cta cta-colored"><a
-						href="/Gather/myFav/${mBean.id}" class="nav-link"><i class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
+					<c:choose>
+						<c:when test="${mBean.id!=null}">
+							<li class="nav-item cta cta-colored"><a
+								href="/Gather/myFav/${mBean.id}" class="nav-link"><i
+									class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
+						</c:when>
+
+					</c:choose>
+
 
 				</ul>
 			</div>
@@ -120,11 +127,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 mb-5 ftco-animate">
-					<a
-						href="../${pBean.pImageCover}"
-						class="image-popup prod-img-bg"><img
-						src="../${pBean.pImageCover}"
-						class="img-fluid" alt="Colorlib Template"></a>
+					<a href="../${pBean.pImageCover}" class="image-popup prod-img-bg"><img
+						src="../${pBean.pImageCover}" class="img-fluid"
+						alt="Colorlib Template"></a>
 				</div>
 				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
 					<h3>${pBean.pName}</h3>
@@ -189,279 +194,308 @@
 						</div>
 					</div>
 					<div>
-					
+
 						<c:choose>
+							<c:when test="${mBean.id==null}">
+								<a href='<c:url value="/pages/member/login.html"/>'/><i class="far fa-heart"></i>
+							</c:when>
+
 							<c:when test="${favoriteBean==null}">
-								<button onclick="addFav(${pBean.pID})"
-									>
+								<button onclick="addFav(${pBean.pID})">
 									<i class="far fa-heart"></i>
 								</button>
 							</c:when>
+
 							<c:otherwise>
-								<button onclick="delFav(${pBean.pID})"
-									>
+								<button onclick="delFav(${pBean.pID})">
 									<i class="fas fa-heart"></i>
 								</button>
 							</c:otherwise>
 						</c:choose>
-						
-						<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/Gather/showProject/${pBean.pID}" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
- <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0" nonce="GqQI2z3c"></script>
-<div class="fb-share-button" data-href="http://localhost:8080/Gather/showProject/${pBean.pID}" data-layout="button_count" data-size="large"><a target="_blank" href="" class="fb-xfbml-parse-ignore">分享</a></div>
-					
+
+						<div class="line-it-button" data-lang="zh_Hant"
+							data-type="share-a" data-ver="3"
+							data-url="http://localhost:8080/Gather/showProject/${pBean.pID}"
+							data-color="default" data-size="large" data-count="true"
+							style="display: none;"></div>
+						<script
+							src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js"
+							async="async" defer="defer"></script>
+						<div id="fb-root"></div>
+						<script async defer crossorigin="anonymous"
+							src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0"
+							nonce="GqQI2z3c"></script>
+						<div class="fb-share-button"
+							data-href="http://localhost:8080/Gather/showProject/${pBean.pID}"
+							data-layout="button_count" data-size="large">
+							<a target="_blank" href="" class="fb-xfbml-parse-ignore">分享</a>
+						</div>
+
 					</div>
 				</div>
 			</div>
 
-<div class="row mt-5">
-          <div class="col-md-12 nav-link-wrap">
-            <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <a class="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Description</a>
+			<div class="row mt-5">
+				<div class="col-md-12 nav-link-wrap">
+					<div class="nav nav-pills d-flex text-center" id="v-pills-tab"
+						role="tablist" aria-orientation="vertical">
+						<a class="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab"
+							data-toggle="pill" href="#v-pills-1" role="tab"
+							aria-controls="v-pills-1" aria-selected="true">Description</a> <a
+							class="nav-link ftco-animate mr-lg-1" id="v-pills-2-tab"
+							data-toggle="pill" href="#v-pills-2" role="tab"
+							aria-controls="v-pills-2" aria-selected="false">Manufacturer</a>
 
-              <a class="nav-link ftco-animate mr-lg-1" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Manufacturer</a>
+						<a class="nav-link ftco-animate" id="v-pills-3-tab"
+							data-toggle="pill" href="#v-pills-3" role="tab"
+							aria-controls="v-pills-3" aria-selected="false">Reviews</a>
 
-              <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Reviews</a>
+					</div>
+				</div>
 
-            </div>
-          </div>
+				<div class="col-md-12 tab-wrap">
 
-          <div class="col-md-12 tab-wrap">
-            
-            <div class="tab-content bg-light" id="v-pills-tabContent">
+					<div class="tab-content bg-light" id="v-pills-tabContent">
 
-              <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
-               <div class="p-4">
-     <h3 class="mb-4">贊助內容</h3>
-     <div class="row" id="ProjectContentText">
-       <div class="col-sm-10"><p>${pBean.pContent}</p></div>
-   </div>
-     
-     
-
-    
- <c:forEach items='${projectPlanList}' var='projectPlan'>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-     <img src="../${projectPlan.projectPlanImage}" class="card-img-top" alt="...">
-   <h5 class="card-title">${projectPlan.ETA}</h5>
-   <p class="card-text">${projectPlan.projectPlanContent}</p>
-   <a href="../payment?pPID=${projectPlan.projectPlanID}" class="btn btn-primary">贊助方案</a>
-    </div>
-  </div>
- </c:forEach>
+						<div class="tab-pane fade show active" id="v-pills-1"
+							role="tabpanel" aria-labelledby="day-1-tab">
+							<div class="p-4">
+								<h3 class="mb-4">贊助內容</h3>
+								<div class="row" id="ProjectContentText">
+									<div class="col-sm-10">
+										<p>${pBean.pContent}</p>
+									</div>
+								</div>
 
 
-     
-               </div>
-              </div>
-
-              <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
-               <div class="p-4">
-                <h3 class="mb-4">Manufactured By Nike</h3>
-                <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-               </div>
-              </div>
-              <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
-               <div class="row p-4">
-           <div class="col-md-7">
-            <h3 class="mb-4">23 Reviews</h3>
-            <div class="review">
-             <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-             <div class="desc">
-              <h4>
-               <span class="text-left">Jacob Webb</span>
-               <span class="text-right">14 March 2018</span>
-              </h4>
-              <p class="star">
-               <span>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-               </span>
-               <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-              </p>
-              <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-             </div>
-            </div>
-            <div class="review">
-             <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-             <div class="desc">
-              <h4>
-               <span class="text-left">Jacob Webb</span>
-               <span class="text-right">14 March 2018</span>
-              </h4>
-              <p class="star">
-               <span>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-               </span>
-               <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-              </p>
-              <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-             </div>
-            </div>
-            <div class="review">
-             <div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
-             <div class="desc">
-              <h4>
-               <span class="text-left">Jacob Webb</span>
-               <span class="text-right">14 March 2018</span>
-              </h4>
-              <p class="star">
-               <span>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-                <i class="ion-ios-star-outline"></i>
-               </span>
-               <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-              </p>
-              <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-             </div>
-            </div>
-           </div>
-           <div class="col-md-4">
-            <div class="rating-wrap">
-             <h3 class="mb-4">Give a Review</h3>
-             <p class="star">
-              <span>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               (98%)
-              </span>
-              <span>20 Reviews</span>
-             </p>
-             <p class="star">
-              <span>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               (85%)
-              </span>
-              <span>10 Reviews</span>
-             </p>
-             <p class="star">
-              <span>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               (98%)
-              </span>
-              <span>5 Reviews</span>
-             </p>
-             <p class="star">
-              <span>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               (98%)
-              </span>
-              <span>0 Reviews</span>
-             </p>
-             <p class="star">
-              <span>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               <i class="ion-ios-star-outline"></i>
-               (98%)
-              </span>
-              <span>0 Reviews</span>
-             </p>
-            </div>
-           </div>
-          </div>
-              </div>
-            </div>
-          </div>
-        </div>
-     </div>
-    </section>
-  
-
-    <footer class="ftco-footer ftco-section">
-      <div class="container">
-       <div class="row">
-        <div class="mouse">
-      <a href="#" class="mouse-icon">
-       <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-      </a>
-     </div>
-       </div>
-        <div class="row mb-5">
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Minishop</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Menu</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Shop</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Journal</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Help</h2>
-              <div class="d-flex">
-               <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-                 <li><a href="#" class="py-2 d-block">Shipping Information</a></li>
-                 <li><a href="#" class="py-2 d-block">Returns &amp; Exchange</a></li>
-                 <li><a href="#" class="py-2 d-block">Terms &amp; Conditions</a></li>
-                 <li><a href="#" class="py-2 d-block">Privacy
 
 
-			
+								<c:forEach items='${projectPlanList}' var='projectPlan'>
+									<div class="card" style="width: 18rem;">
+										<div class="card-body">
+											<img src="../${projectPlan.projectPlanImage}"
+												class="card-img-top" alt="...">
+											<h5 class="card-title">${projectPlan.ETA}</h5>
+											<p class="card-text">${projectPlan.projectPlanContent}</p>
+											<a href="../payment?pPID=${projectPlan.projectPlanID}"
+												class="btn btn-primary">贊助方案</a>
+										</div>
+									</div>
+								</c:forEach>
 
 
-	<script src="../js/jquery.min.js"></script>
-	<script src="../js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="../js/popper.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/jquery.easing.1.3.js"></script>
-	<script src="../js/jquery.waypoints.min.js"></script>
-	<script src="../js/jquery.stellar.min.js"></script>
-	<script src="../js/owl.carousel.min.js"></script>
-	<script src="../js/jquery.magnific-popup.min.js"></script>
-	<script src="../js/aos.js"></script>
-	<script src="../js/jquery.animateNumber.min.js"></script>
-	<script src="../js/bootstrap-datepicker.js"></script>
-	<script src="../js/scrollax.min.js"></script>
-	<script
-		src="../https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="../js/google-map.js"></script>
-	<script src="../js/main.js"></script>
 
-	<script>
+							</div>
+						</div>
+
+						<div class="tab-pane fade" id="v-pills-2" role="tabpanel"
+							aria-labelledby="v-pills-day-2-tab">
+							<div class="p-4">
+								<h3 class="mb-4">Manufactured By Nike</h3>
+								<p>On her way she met a copy. The copy warned the Little
+									Blind Text, that where it came from it would have been
+									rewritten a thousand times and everything that was left from
+									its origin would be the word "and" and the Little Blind Text
+									should turn around and return to its own, safe country. But
+									nothing the copy said could convince her and so it didn’t take
+									long until a few insidious Copy Writers ambushed her, made her
+									drunk with Longe and Parole and dragged her into their agency,
+									where they abused her for their.</p>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="v-pills-3" role="tabpanel"
+							aria-labelledby="v-pills-day-3-tab">
+							<div class="row p-4">
+								<div class="col-md-7">
+									<h3 class="mb-4">23 Reviews</h3>
+									<div class="review">
+										<div class="user-img"
+											style="background-image: url(images/person_1.jpg)"></div>
+										<div class="desc">
+											<h4>
+												<span class="text-left">Jacob Webb</span> <span
+													class="text-right">14 March 2018</span>
+											</h4>
+											<p class="star">
+												<span> <i class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i>
+												</span> <span class="text-right"><a href="#" class="reply"><i
+														class="icon-reply"></i></a></span>
+											</p>
+											<p>When she reached the first hills of the Italic
+												Mountains, she had a last view back on the skyline of her
+												hometown Bookmarksgrov</p>
+										</div>
+									</div>
+									<div class="review">
+										<div class="user-img"
+											style="background-image: url(images/person_2.jpg)"></div>
+										<div class="desc">
+											<h4>
+												<span class="text-left">Jacob Webb</span> <span
+													class="text-right">14 March 2018</span>
+											</h4>
+											<p class="star">
+												<span> <i class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i>
+												</span> <span class="text-right"><a href="#" class="reply"><i
+														class="icon-reply"></i></a></span>
+											</p>
+											<p>When she reached the first hills of the Italic
+												Mountains, she had a last view back on the skyline of her
+												hometown Bookmarksgrov</p>
+										</div>
+									</div>
+									<div class="review">
+										<div class="user-img"
+											style="background-image: url(images/person_3.jpg)"></div>
+										<div class="desc">
+											<h4>
+												<span class="text-left">Jacob Webb</span> <span
+													class="text-right">14 March 2018</span>
+											</h4>
+											<p class="star">
+												<span> <i class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i> <i
+													class="ion-ios-star-outline"></i>
+												</span> <span class="text-right"><a href="#" class="reply"><i
+														class="icon-reply"></i></a></span>
+											</p>
+											<p>When she reached the first hills of the Italic
+												Mountains, she had a last view back on the skyline of her
+												hometown Bookmarksgrov</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="rating-wrap">
+										<h3 class="mb-4">Give a Review</h3>
+										<p class="star">
+											<span> <i class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> (98%)
+											</span> <span>20 Reviews</span>
+										</p>
+										<p class="star">
+											<span> <i class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> (85%)
+											</span> <span>10 Reviews</span>
+										</p>
+										<p class="star">
+											<span> <i class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> (98%)
+											</span> <span>5 Reviews</span>
+										</p>
+										<p class="star">
+											<span> <i class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> (98%)
+											</span> <span>0 Reviews</span>
+										</p>
+										<p class="star">
+											<span> <i class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> <i
+												class="ion-ios-star-outline"></i> (98%)
+											</span> <span>0 Reviews</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<footer class="ftco-footer ftco-section">
+		<div class="container">
+			<div class="row">
+				<div class="mouse">
+					<a href="#" class="mouse-icon">
+						<div class="mouse-wheel">
+							<span class="ion-ios-arrow-up"></span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="row mb-5">
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Minishop</h2>
+						<p>Far far away, behind the word mountains, far from the
+							countries Vokalia and Consonantia.</p>
+						<ul
+							class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+							<li class="ftco-animate"><a href="#"><span
+									class="icon-twitter"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span
+									class="icon-facebook"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span
+									class="icon-instagram"></span></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4 ml-md-5">
+						<h2 class="ftco-heading-2">Menu</h2>
+						<ul class="list-unstyled">
+							<li><a href="#" class="py-2 d-block">Shop</a></li>
+							<li><a href="#" class="py-2 d-block">About</a></li>
+							<li><a href="#" class="py-2 d-block">Journal</a></li>
+							<li><a href="#" class="py-2 d-block">Contact Us</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Help</h2>
+						<div class="d-flex">
+							<ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+								<li><a href="#" class="py-2 d-block">Shipping
+										Information</a></li>
+								<li><a href="#" class="py-2 d-block">Returns &amp;
+										Exchange</a></li>
+								<li><a href="#" class="py-2 d-block">Terms &amp;
+										Conditions</a></li>
+								<li><a href="#" class="py-2 d-block">Privacy <script
+											src="../js/jquery.min.js"></script> <script
+											src="../js/jquery-migrate-3.0.1.min.js"></script> <script
+											src="../js/popper.min.js"></script> <script
+											src="../js/bootstrap.min.js"></script> <script
+											src="../js/jquery.easing.1.3.js"></script> <script
+											src="../js/jquery.waypoints.min.js"></script> <script
+											src="../js/jquery.stellar.min.js"></script> <script
+											src="../js/owl.carousel.min.js"></script> <script
+											src="../js/jquery.magnific-popup.min.js"></script> <script
+											src="../js/aos.js"></script> <script
+											src="../js/jquery.animateNumber.min.js"></script> <script
+											src="../js/bootstrap-datepicker.js"></script> <script
+											src="../js/scrollax.min.js"></script> <script
+											src="../https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+										<script src="../js/google-map.js"></script> <script
+											src="../js/main.js"></script> <script>
 		$(document).ready(function(){
 
 		var quantitiy=0;
@@ -534,6 +568,5 @@
 
             };
 	</script>
-
 </body>
 </html>

@@ -7,6 +7,84 @@
 <html>
 <head>
 
+<style>
+* {
+	font-weight: bold;
+}
+/*tooltip Box*/
+.con-tooltip {
+	/* position: relative; */
+	/* background: #fafdff; */
+	background-color: rgb(255, 255, 255);
+	border-radius: 500px;
+	/* padding: 0 20px; */
+	/* margin: 300px; */
+	display: inline-flexbox;
+	transition: all 0.3s ease-in-out;
+	cursor: default;
+}
+
+/*tooltip */
+.tooltip {
+	visibility: hidden;
+	z-index: 1;
+	opacity: .40;
+	width: 280px;
+	height: 120px;
+	text-align: center;
+	padding: 23px 50px 10px;
+	background: #e5f3d5;
+	color: #333;
+	position: absolute;
+	top: -100%;
+	left: -10%;
+	border-radius: 9px;
+	font: 16px;
+	transform: translateY(9px);
+	transition: all 0.3s ease-in-out;
+	box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
+}
+/* tooltip  after*/
+.tooltip::after {
+	content: " ";
+	width: 0;
+	height: 0;
+
+	/* border-style: solid;
+  border-width: 12px 12.5px 0 12.5px;
+  border-color: #d7e1f1 transparent transparent transparent; */
+
+	/* position: absolute; */
+	/* left: 40%; */
+}
+
+.con-tooltip:hover .tooltip {
+	visibility: visible;
+	transform: translateY(-10px);
+	opacity: 1;
+	transition: .3s linear;
+	animation: odsoky 1s ease-in-out infinite alternate;
+}
+
+.bottom:hover {
+	transform: translateY(6px);
+}
+
+.bottom .tooltip {
+	top: 180%;
+	left: 0%;
+}
+
+.bottom .tooltip::after {
+	top: -17%;
+	left: 40%;
+	transform: rotate(180deg);
+}
+</style>
+
+
+
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script
@@ -27,11 +105,51 @@
 <!-- endinject -->
 <!-- Plugin css for this page -->
 <!-- End plugin css for this page -->
-  <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+<link rel="stylesheet"
+	href="vendors/mdi/css/materialdesignicons.min.css">
 <!-- inject:css -->
 <link rel="stylesheet" href="css/vertical-layout-light/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="images/favicon.png" />
+
+
+<!-- Datatable-->
+					<link rel="stylesheet" type="text/css"
+						href="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.css" defer/>
+					<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.js"
+						defer></script> 
+
+						<script>
+					
+									$(document).ready(function () {
+								$('#ordersTable').DataTable({
+									"language": {
+										"processing": "處理中...",
+										"loadingRecords": "載入中...",
+										"lengthMenu": "顯示筆數 _MENU_ ",
+										"zeroRecords": "沒有符合的結果",
+										"info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+										"infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+										"infoFiltered": "(從 _MAX_ 項結果中過濾)",
+										"infoPostFix": "",
+										"search": "搜尋:",
+										"paginate": {
+											"first": "第一頁",
+											"previous": "上一頁",
+											"next": "下一頁",
+											"last": "最後一頁"
+										},
+										"aria": {
+											"sortAscending": ": 升冪排列",
+											"sortDescending": ": 降冪排列"
+										}
+									}
+								});
+							});
+			
+			
+								</script>
+
 </head>
 
 <body>
@@ -368,9 +486,9 @@
 					<li class="nav-item"><a class="nav-link"
 						data-toggle="collapse" href="#charts" aria-expanded="false"
 						aria-controls="charts"> <i class="icon-bar-graph menu-icon"></i>
-							<span class="menu-title" href="orders">訂單管理</span> <i class="menu-arrow"></i>
-					</a>
-						</li>
+							<span class="menu-title" href="orders">訂單管理</span> <i
+							class="menu-arrow"></i>
+					</a></li>
 					<li class="nav-item"><a class="nav-link"
 						data-toggle="collapse" href="#tables" aria-expanded="false"
 						aria-controls="tables"> <i class="icon-grid-2 menu-icon"></i>
@@ -396,85 +514,107 @@
 				</ul>
 			</nav>
 			<!-- partial -->
-<!-- 			<div class="main-panel"> -->
-				<div class="content-wrapper"style="margin: auto;">
-					<div class="row" style="margin: auto;">
+			<!-- 			<div class="main-panel"> -->
+			<div class="content-wrapper">
+				<div class="row" style="margin: auto;">
 
-							<div class="card" style="margin-left:180px">
-								<div class="card-body" style="width: 200%;margin: auto;">
-									<h2 class="card-title" style="text-align: center;position: relative;right:450px ">贊助訂單</h2>
-									<div>
-				<input style="border-radius: 40px;border-width: 2px;border-color: lightgrey;margin-left: 940px" class="search-bar" type="text" name="search" id="searchBar"
-					placeholder="搜尋...">
-				<p class="btn btn-primary py-2 px-3" id="searchBtn">
-					<i class="fas fa-search-dollar"></i></p>
-				</div>
-									
-									<div class="table-responsive" style="width: 200%%;margin: auto;">
-										<table class="table table-hover" style="text-align: center; width: 10%;">
-											<thead>
-												<tr>
-													<th><i class="mdi mdi-nutrition"></i>訂單編號</th>
-													<th><i class="mdi mdi-account-star"></i> 贊助人編號</th>
-													<th> <i class="mdi mdi-file-image"></i> 專案圖片</th>
-													<th><i class="mdi mdi-counter"></i>專案編號</th>
-													<th><i class="mdi mdi-book"></i>專案名稱</th>
-													<th><i class="mdi mdi-coin"></i>贊助金額</th>
-													<th><i class="mdi mdi-pencil"></i></th>
-													<th><i class="mdi mdi-delete"></i></th>
-												</tr>
-											</thead>
-											<c:forEach items='${orders}' var='order' varStatus="status">
-												<tr>
-													<td>${order.sID}</td>
-													<td>${order.mID}</td>
-													<td><img width='50' height='50'
-														src="${order.projectImage}"
-														class="img-rounded" /></td>
-													<td class="sPID">${order.sPID}<button onclick="data(${status.index})"><i class="mdi mdi-chart-line"></i></button></td>
-													<td>${order.sPName}</td>
-													<td>${order.sAmount}</td>
-													<td>
-														<button type="button" id="update"
-															class="btn btn-inverse-warning btn-fw"
-															onclick='location.href="<c:url value='/order/${order.sID}'/>"'>修改</button>
-													</td>
-													<td>
-														<button type="button" id="delete"
-															class="btn btn-inverse-danger btn-fw"
-															onclick="deleteOrder(${order.sID})">刪除</button>
-													</td>
-												</tr>
-											</c:forEach>
-										</table>
-									</div>
-						
+					<div class="card" style="margin-left: 180px;">
+						<div class="card-body" >
+							<h2 class="card-title"
+								style="text-align: center; position: relative; right: 450px">贊助訂單</h2>
+							<div>
+								<input
+									style="border-radius: 40px; border-width: 2px; border-color: lightgrey; margin-left: 940px"
+									class="search-bar" type="text" name="search" id="searchBar"
+									placeholder="搜尋...">
+								<p class="btn btn-primary py-2 px-3" id="searchBtn">
+									<i class="fas fa-search-dollar"></i>
+								</p>
 							</div>
+
+							<div class="table-responsive" >
+								<table class="table table-hover"
+									style="text-align: center; width: 10%;" id="ordersTable">
+									<thead>
+										<tr>
+											<th><i class="mdi mdi-nutrition"></i>訂單編號</th>
+											<th><i class="mdi mdi-account-star"></i> 贊助人編號</th>
+											<th><i class="mdi mdi-file-image"></i> 專案圖片</th>
+											<th><i class="mdi mdi-counter"></i>專案編號</th>
+											<th><i class="mdi mdi-book"></i>專案名稱</th>
+											<th><i class="mdi mdi-coin"></i>贊助金額</th>
+											<th><i class="mdi mdi-pencil"></i></th>
+											<th><i class="mdi mdi-delete"></i></th>
+										</tr>
+									</thead>
+									<c:forEach items='${orders}' var='order' varStatus="status">
+										<tr>
+											<td>${order.sID}</td>
+											<td>
+
+												<div class="con-tooltip bottom">
+													<p>${order.mID}</p>
+													<div class="tooltip" style="font-weight: bold;">
+
+														<p>姓名 : ${order.sName}</p>
+														<p>電話 : ${order.sPhone}</p>
+														<p>地址 : ${order.sAddress}</p>
+														<p>信箱 : ${order.sEmail}</p>
+													</div>
+												</div>
+											</td>
+
+											<td><img width='50' height='50'
+												src="${order.projectImage}" class="img-rounded" /></td>
+											<td class="sPID">
+												<button type="button"
+													class="btn btn-inverse-primary btn-rounded btn-icon"
+													onclick="data(${status.index})">${order.sPID}</button>
+
+											</td>
+											<td>${order.sPName}</td>
+											<td>$${order.sTotal}</td>
+											<td>
+												<button type="button" id="update"
+													class="btn btn-inverse-warning btn-fw"
+													onclick='location.href="<c:url value='/order/${order.sID}'/>"'>修改</button>
+											</td>
+											<td>
+												<button type="button" id="delete"
+													class="btn btn-inverse-danger btn-fw"
+													onclick="deleteOrder(${order.sID})">刪除</button>
+											</td>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
+
 						</div>
-
-
-						<!-- main-panel ends -->
 					</div>
-					<!-- page-body-wrapper ends -->
+
+
+					<!-- main-panel ends -->
 				</div>
-				<!-- container-scroller -->
-				<!-- plugins:js -->
-				<script src="vendors/js/vendor.bundle.base.js"></script>
-				<!-- endinject -->
-				<!-- Plugin js for this page -->
-				<!-- End plugin js for this page -->
-				<!-- inject:js -->
-				<script src="js/off-canvas.js"></script>
-				<script src="js/hoverable-collapse.js"></script>
-				<script src="js/template.js"></script>
-				<script src="js/settings.js"></script>
-				<script src="js/todolist.js"></script>
-				<!-- endinject -->
-				<!-- Custom js for this page-->
-				<!-- End custom js for this page-->
+				<!-- page-body-wrapper ends -->
+			</div>
+			<!-- container-scroller -->
+			<!-- plugins:js -->
+			<script src="vendors/js/vendor.bundle.base.js"></script>
+			<!-- endinject -->
+			<!-- Plugin js for this page -->
+			<!-- End plugin js for this page -->
+			<!-- inject:js -->
+			<script src="js/off-canvas.js"></script>
+			<script src="js/hoverable-collapse.js"></script>
+			<script src="js/template.js"></script>
+			<script src="js/settings.js"></script>
+			<script src="js/todolist.js"></script>
+			<!-- endinject -->
+			<!-- Custom js for this page-->
+			<!-- End custom js for this page-->
 
 
-				<script>
+			<script>
 		function deleteOrder(deleteId) {
             $.ajax({
               url: "<spring:url value='/order/delete/" + deleteId +"'/>",
@@ -534,10 +674,14 @@
         	  
           }
           
+          
+          
 
         
 	
 	</script>
+	
+	
 </body>
 
 </html>

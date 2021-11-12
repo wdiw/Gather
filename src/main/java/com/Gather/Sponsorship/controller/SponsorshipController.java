@@ -71,11 +71,13 @@ public class SponsorshipController {
 	// 查詢所有訂單
 
 	@GetMapping("/orders")
-	public String list(Model model,HttpServletRequest reg) {
+	public String list(Model model) {
 		List<SponsorOrderBean> sBeans = sponsorOrderService.getOrders();
 		model.addAttribute("orders", sBeans);
 		return "Sponsorship/orders";
 	}
+	
+
 
 	// 查單筆
 	@GetMapping("/order/{sID}")

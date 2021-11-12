@@ -85,7 +85,7 @@ public class MemberRESTController {
 			// 找到會員
 			// 更新登入次數，存入資料庫
 			result.setLoginTimes(result.getLoginTimes()+1);
-			memberService.insertOrUpdateMember(theMember);
+			memberService.insertOrUpdateMember(result);
 			// 將會員資料放入session 供前端使用
 			request.getSession().setAttribute("memberData", result);
 			return new ResponseEntity<String>("Y", HttpStatus.OK);

@@ -206,7 +206,7 @@
 								<div class="form-group">
 									<label for="phone">回饋優惠</label> <input type="text"
 										class="form-control" placeholder="" name="sDiscount"
-										id="sDiscount" onchange="getDiscount();getTotal()" required="required">
+										id="sDiscount" onchange="getDiscount();getTotal()" required="required" value="${discount}">
 								</div>
 							</div>
 
@@ -231,7 +231,7 @@
 										<span>加碼贊助</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sBonus_confirm" value=""/></span>
 									</p>
 									<p class="d-flex">
-										<span>回饋金折抵</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sDiscount_confirm" value="" /></span>
+										<span>回饋金折抵</span> <span><input style="outline: none;border:0;background-color: rgba(0, 0, 0, 0);text-align: center;" id="sDiscount_confirm" value="$${discount}" /></span>
 									</p>
 									<hr>
 									<p class="d-flex total-price">

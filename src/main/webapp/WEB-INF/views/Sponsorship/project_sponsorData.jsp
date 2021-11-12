@@ -309,7 +309,7 @@ canvas{
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="<c:url value='/'></c:url>">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -341,16 +341,12 @@ canvas{
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+            <a class="nav-link" data-toggle="collapse" href="" aria-expanded="false" aria-controls="charts">
               <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Charts</span>
+              <span class="menu-title">金流管理</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
-              </ul>
-            </div>
+            
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
@@ -479,9 +475,9 @@ canvas{
             </div>
           </div>
           <div class="row">
-            <div class="col-md-7 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
+            <div class="col-md-7 grid-margin stretch-card" style="margin-left:280px; width: 300%">
+              <div class="card" >
+                <div class="card-body" style="">
                   <p class="card-title mb-0">訂單明細</p>
                   <div class="table-responsive">
                     <table class="table table-striped table-borderless">
