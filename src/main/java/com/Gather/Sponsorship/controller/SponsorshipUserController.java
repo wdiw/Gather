@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.model.ProjectPlanBean;
+import com.Gather.Project.service.ProjectPlanService;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.Sponsorship.model.FavoriteBean;
 import com.Gather.Sponsorship.model.SponsorOrderBean;
@@ -46,13 +47,15 @@ public class SponsorshipUserController {
 	ProjectService projectService;
 	MemberService memberService;
 	SponsorOrderService sponsorOrderService;
+	ProjectPlanService projectPlanService;
 
 	@Autowired
 	public SponsorshipUserController(ProjectService projectService, MemberService memberService,
-			SponsorOrderService sponsorOrderService) {
+			SponsorOrderService sponsorOrderService,ProjectPlanService projectPlanService) {
 		this.projectService = projectService;
 		this.memberService = memberService;
 		this.sponsorOrderService = sponsorOrderService;
+		this.projectPlanService=projectPlanService;
 	}
 
 	@GetMapping("/showProject/{pID}")
@@ -63,10 +66,21 @@ public class SponsorshipUserController {
 		FavoriteBean favoriteBean=sponsorOrderService.getFavoriteByMemberIDAndProjectID(mBean.getId(), pID);
 		List<FavoriteBean> favoriteBeans=sponsorOrderService.getFavoriteByMemberID(mBean.getId());
 		int favCount= favoriteBeans.size();
+		List<ProjectPlanBean> projectPlanList = projectPlanService.getProjectPlansByProjectBean(pBean);
+		request.getSession().setAttribute("projectPlanList", projectPlanList);
+		
 		request.getSession().setAttribute("favoriteBean", favoriteBean);
 		request.getSession().setAttribute("favCount", favCount);
 		request.getSession().setAttribute("pBean", pBean);
 		request.getSession().setAttribute("mBean",mBean);
+		
+		System.out.println("favoriteBean"+favoriteBean);
+		System.out.println("favCount"+favCount);
+		System.out.println("pBean"+pBean);
+		System.out.println("mBean"+mBean);
+		
+		
+		
 		
 		return "Sponsorship/project";
 	}
