@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
@@ -45,10 +46,11 @@ public class MemberPageController {
 	// ==========================SHOW
 	// PAGE=============================================
 	@GetMapping("/")
-	public String home() {
+	public String home(Model model) {
 		System.out.println("透過頁面控制器進入首頁");
-
-		return "index";
+		List<ProjectBean> result = projectService.getAllProjectBypStatus("通過");
+		model.addAttribute("allProject", result);
+		return "Project/allProjectInForestage";
 	}
 
 	@GetMapping("/addMember")

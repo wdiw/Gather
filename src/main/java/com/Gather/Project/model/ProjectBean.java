@@ -44,6 +44,7 @@ public class ProjectBean implements Serializable {
 	@OneToMany(mappedBy = "projectBean",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "projectBean",cascade = CascadeType.ALL)
 	Set<FavoriteBean> favoriteBeans=new HashSet<>();
 	
