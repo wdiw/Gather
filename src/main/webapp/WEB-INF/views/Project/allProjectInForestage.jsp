@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.Gather.member.entity.Member" %>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 			<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -98,11 +98,38 @@
 										</div>
 									</li>
 									<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-									<li class="nav-item"><a href="contact.html" class="nav-link">登入/登出</a></li>
-									<li class="nav-item"><a href="blog.html" class="nav-link">註冊/會員中心</a></li>
-									<li class="nav-item"><a href="contact.html" class="nav-link">管理員後台</a></li>
-									<li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span
-												class="icon-shopping_cart"></span>[0]</a></li>
+
+
+
+
+								<%Member memberData= (Member)session.getAttribute("memberData");
+									if (memberData == null) {%>
+									<li class="nav-item"><a href="/Gather/pages/member/register.html" class="nav-link">註冊</a></li>
+									<li class="nav-item"><a href="/Gather/pages/member/login.html" class="nav-link">登入</a></li>
+								<%} else {
+									  if(!memberData.getStatus().equals("管理員")){
+								%>
+								<li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
+								<li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
+									<%  } else{
+								%>
+								<li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
+								<li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
+								<li class="nav-item"><a href="/Gather/backend" class="nav-link">管理員後台</a></li>
+											
+								<%
+									}}
+								%>
+
+
+
+
+
+
+									<!--購物車-->
+									<li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link">
+										<span class="icon-shopping_cart"></span>[0]</a></li>
+									<!--購物車-->
 
 								</ul>
 							</div>
@@ -536,3 +563,4 @@
 				</body>
 
 				</html>
+				
