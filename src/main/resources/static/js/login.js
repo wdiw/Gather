@@ -49,7 +49,13 @@ $(function() {
 					}
 
 					if (data == 'N') {
-						$("#accountsp").html('帳號或密碼輸入錯誤，請重新輸入');
+						Swal.fire({
+							position: 'center',
+							title: '登入失敗',
+							text: '帳密有誤',
+							icon: 'error',
+							showConfirmButton: true
+						})
 					}
 				},
 				error: function(e) {
