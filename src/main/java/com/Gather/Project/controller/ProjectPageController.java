@@ -7,12 +7,11 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.model.ProjectPlanBean;
@@ -21,6 +20,7 @@ import com.Gather.Project.service.ProjectService;
 import com.Gather.member.entity.Member;
 
 @Controller
+@SessionAttributes("allProject")
 public class ProjectPageController {
 
 	ProjectService projectService;
@@ -63,11 +63,17 @@ public class ProjectPageController {
 		@GetMapping("/Project/project")
 		public String getProjectById(@RequestParam("pID") Integer pID, Model model) {
 			System.out.println("pID=" + pID);
-			model.addAttribute("project", projectService.getProjectById(pID));// 注意 是product 不是products
-			model.addAttribute("projectID", pID);// 注意 是product 不是products
+			ProjectBean projectBean = projectService.getProjectById(pID);
+			List<ProjectPlanBean> projectPlanList = projectPlanService.getProjectPlansByProjectBean(projectBean);
+			model.addAttribute("project", projectBean);//計畫本身
+			model.addAttribute("projectPlanList", projectPlanList);//計畫的所有方案
+			model.addAttribute("projectID", pID);
+			
 			return "Project/productdetail";
 									
 		}
+		
+		
 
 		// 跳轉到新增專案
 		@GetMapping("/Project/addProject")
@@ -80,24 +86,13 @@ public class ProjectPageController {
 		@GetMapping("/Project/allProjectInForestage")
 		public String allProjectInForestage(Model model,HttpServletRequest request) {
 			List<ProjectBean> result = projectService.getAllProjectBypStatus("通過");
+			
 			model.addAttribute("allProject", result);
 			return "Project/allProjectInForestage";
 		}
 		
 		
-//		// By Id 找尋單一資料並且跳轉(提供參考)
-//				@GetMapping("/Project/ProjectPlan")
-//				public String getProjectPlanByProjectPlanID(
-//						@RequestParam("ProjectPlanID") Integer ProjectPlanID,
-//						Model model) {
-//					
-//					ProjectPlanBean projectPlanBean = projectPlanService.getProjectPlanByProjectPlanID(ProjectPlanID);
-//					System.out.println("方案ID:"+projectPlanBean.getProjectPlanID());
-//					System.out.println("方案內容:"+projectPlanBean.getProjectPlanContent());
-//					
-//					return "Project/allProjectInForestage";
-//											
-//				}
+
 		
 		// find  Project By search 透過搜尋的關鍵字找到相關資料
 		
@@ -115,6 +110,10 @@ public class ProjectPageController {
 			return "Project/projectSearch";					
 		}	
 		
+		
+		
+		
+		
 		@GetMapping("/Project/category")
 		public String  getProjectBypStatusAndpCategory(
 				@RequestParam("category") String pCategory,Model model) {
@@ -123,6 +122,18 @@ public class ProjectPageController {
 			return "Project/projectCategory";					
 		}
 		
-
-	
+		
+		
+		
+//		//找通過審核的計畫並依分頁呈現
+//				@GetMapping("/Project/allProject")
+//				public String allProjecte(Model model,HttpServletRequest request) {
+//					List<ProjectBean> result = projectService.getAllProjectBypStatus("通過");
+//					model.addAttribute("allProject", result);
+//					return "Project/page";
+//				}
+				
+				
+				
+		
 }

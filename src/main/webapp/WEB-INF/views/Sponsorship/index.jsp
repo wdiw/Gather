@@ -28,7 +28,7 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="./"><img src="images/logo.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg" class="mr-2" alt="logo"/></a>
         <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -101,11 +101,11 @@
               <img src="images/faces/face28.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="/Gather/showMemberCenter">
+              <a class="dropdown-item">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item" href="/Gather/showLogout">
+              <a class="dropdown-item">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -298,7 +298,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/Gather/backend">
+            <a class="nav-link" href="index.html">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -355,12 +355,12 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">Forum</span>
+              <span class="menu-title">AD</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/Gather/Forum/adMain">討論區管理</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">廣告管理</a></li>
               </ul>
             </div>
           </li>

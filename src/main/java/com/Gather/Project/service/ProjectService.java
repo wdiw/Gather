@@ -3,6 +3,9 @@ package com.Gather.Project.service;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.Gather.Project.model.ProjectBean;
 
 public interface ProjectService {
@@ -35,5 +38,18 @@ public interface ProjectService {
 	//透過search找到相關資料
 	List<ProjectBean> getProjectBySearch(Set<String> search);
 	
+	//透過類別找所有計畫
 	List<ProjectBean>  getProjectBypStatusAndpCategory(String pStatus,String pCategory);
+	
+	//改變計畫累積金額
+	void updateProjectAmountBypID(Integer pID,Integer pAmountNow);
+	
+	//改變計畫被贊助次數
+	void updateProjectSponsorCountBypID(Integer pID,Integer sponsorCount);
+	
+	//查計畫熱門前10筆
+	List<ProjectBean> findProjectByOrderby();
+	
+//	//分頁
+	Page<ProjectBean> findBypStatusContaining(String pStatus,Pageable pageable);
 }

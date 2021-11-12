@@ -31,8 +31,20 @@
 					<link rel="stylesheet" href="../css/icomoon.css">
 					<link rel="stylesheet" href="../css/style.css">
 
-					<style>
 
+					<style>
+						.img-fluid {
+							max-width: 286px;
+							height: 286px;
+						}
+
+						.cat span {
+							color: rgb(14 124 236) !important
+						}
+
+						/* .progress {
+							background-color: black
+						} */
 					</style>
 				</head>
 
@@ -44,12 +56,14 @@
 									<div class="row d-flex">
 										<div class="col-md pr-4 d-flex topper align-items-center">
 											<div class="icon mr-2 d-flex justify-content-center align-items-center">
-												<span class="icon-phone2"></span></div>
+												<span class="icon-phone2"></span>
+											</div>
 											<span class="text">+ 1235 2355 98</span>
 										</div>
 										<div class="col-md pr-4 d-flex topper align-items-center">
 											<div class="icon mr-2 d-flex justify-content-center align-items-center">
-												<span class="icon-paper-plane"></span></div>
+												<span class="icon-paper-plane"></span>
+											</div>
 											<span class="text">youremail@email.com</span>
 										</div>
 										<div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
@@ -106,16 +120,16 @@
 						</div>
 					</div>
 
-					
+
 
 					<section class="ftco-section bg-light">
 
 
 						<div class="container">
-							
-							<div class="row" >
-								<div class="col-sm-12 col-md-12 col-lg-12 " >
-		
+
+							<div class="row">
+								<div class="col-sm-12 col-md-12 col-lg-12 ">
+
 									<input id="searchBar" name="searchBar" /><button id="searchBtn" name="searchBtn"
 										class="btn btn-primary">搜尋</button>
 								</div>
@@ -127,7 +141,7 @@
 
 
 
-										
+
 										<c:forEach items='${allProject}' var='project'>
 
 											<div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
@@ -141,35 +155,52 @@
 													<div class="text py-3 pb-4 px-3">
 														<div class="d-flex">
 															<div class="cat">
-																<!-- <span>將放類別</span> -->
+																<span>${project.pCategory}</span>
 															</div>
-															<div class="rating">
-																<p class="text-right mb-0">
-																	<a href="#"><span
-																			class="ion-ios-star-outline"></span></a>
-																	<a href="#"><span
-																			class="ion-ios-star-outline"></span></a>
-																	<a href="#"><span
-																			class="ion-ios-star-outline"></span></a>
-																	<a href="#"><span
-																			class="ion-ios-star-outline"></span></a>
-																	<a href="#"><span
-																			class="ion-ios-star-outline"></span></a>
-																</p>
+
+
+															<div>
+																<span class="EDate">${project.pEDate}</span>
 															</div>
+
+
+
 														</div>
-														<h3><a href="#">${project.pName}</a></h3>
+														<h3><a href="<c:url value='../showProject/${project.pID}' />">${project.pName}</a></h3>
 														<div class="pricing">
 															<p class="price">
 																<!-- <span class="mr-2 price-dc"></span> -->
-																<span class="price-sale">目標價:$${project.pTarget}</span>
+																<span
+																	class="price-sale">目標金額:NT$${project.pTarget}</span>
 															</p>
 														</div>
+
+														<div class="pricing">
+															<p class="price">
+																<!-- <span class="mr-2 price-dc"></span> -->
+																<span
+																	class="price-sale">累積贊助:NT$${project.pAmountNow}</span>
+															</p>
+														</div>
+														<p></p>
+														<div class="container">
+															
+
+															<div class="progress">
+																<div class="progress-bar" role="progressbar"
+																	aria-valuenow="0" aria-valuemin="0"
+																	aria-valuemax="100"
+																	style="width:${Math.round((project.pAmountNow/project.pTarget)*100)}%">
+																	
+																</div>
+															</div>
+														</div>
+
 														<!-- 有需要加入我的最愛可以用 -->
-														<!-- <p class="bottom-area d-flex px-3">
-		    							<a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-		    							<a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
-		    						</p> -->
+														<p class="bottom-area d-flex px-3">
+		    							
+		    							<a href="#" class="buy-now text-center py-2">我的最愛<span><i class="far fa-heart "></i></span></a>
+		    						</p>
 													</div>
 												</div>
 											</div>
@@ -195,8 +226,8 @@
 									</div>
 								</div>
 
-							
-								
+
+
 
 
 								<div class="col-md-4 col-lg-2">
@@ -224,12 +255,24 @@
 															role="tabpanel" aria-labelledby="headingFour">
 															<div class="panel-body">
 																<ul>
-																	<li><a href="<spring:url value='/Project/allProjectInForestage'/>">全部</a></li>
-																	<li><a href="<spring:url value='/Project/category?category=設計'/>">設計</a></li>
-																	<li><a href="<spring:url value='/Project/category?category=科技'/>">科技</a></li>
-																	<li><a href="<spring:url value='/Project/category?category=藝術'/>">藝術</a></li>
-																	<li><a href="<spring:url value='/Project/category?category=遊戲'/>">遊戲</a></li>
-																	<li><a href="<spring:url value='/Project/category?category=優質店家'/>">優質店家</a></li>
+																	<li><a
+																			href="<spring:url value='/Project/allProjectInForestage'/>">全部</a>
+																	</li>
+																	<li><a
+																			href="<spring:url value='/Project/category?category=設計'/>">設計</a>
+																	</li>
+																	<li><a
+																			href="<spring:url value='/Project/category?category=科技'/>">科技</a>
+																	</li>
+																	<li><a
+																			href="<spring:url value='/Project/category?category=藝術'/>">藝術</a>
+																	</li>
+																	<li><a
+																			href="<spring:url value='/Project/category?category=遊戲'/>">遊戲</a>
+																	</li>
+																	<li><a
+																			href="<spring:url value='/Project/category?category=優質店家'/>">優質店家</a>
+																	</li>
 																</ul>
 															</div>
 														</div>
@@ -434,11 +477,59 @@
 
 
 					<script>
+
 						$("#searchBtn").click(function () {
 							var search = $("#searchBar").val()
 							location.href = "<spring:url value='/Project/ProjectSearch?search=" + search + "'/>"
 						})
 
+					</script>
+
+					<script>
+
+						function difference(date1, date2) {
+							const date1utc = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+							const date2utc = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+							day = 1000 * 60 * 60 * 24;
+							return (date2utc - date1utc) / day
+						}
+
+						$(document).ready(function () {
+
+							var date = new Date();
+							
+
+							//今日日期涵式
+							const formatDate = (date) => {
+								let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+								return formatted_date;
+							}
+
+							$(".EDate").each(function () {
+								var projectDate = $(this).text();//取得每一計畫日期
+								var todate = formatDate(date);//今日日期
+
+								projectDate = projectDate.replace(/-/g, "/");
+								var projectDatetime = new Date(projectDate);
+
+								todate = todate.replace(/-/g, "/");
+								var todatetime = new Date(todate);
+
+								var time = projectDatetime.getTime() - todatetime.getTime();
+								var diffDay = parseInt(time / (1000 * 60 * 60 * 24));
+
+								if (diffDay >= 0) {
+									$(this).text("剩餘" + diffDay + "天")
+								}
+								else {
+									$(this).text("已結束")
+								}
+
+							
+								
+							})
+
+						})
 					</script>
 				</body>
 

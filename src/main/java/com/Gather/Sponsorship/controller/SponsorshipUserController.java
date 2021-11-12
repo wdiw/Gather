@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
@@ -31,6 +32,7 @@ import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.model.ProjectPlanBean;
 import com.Gather.Project.service.ProjectPlanService;
 import com.Gather.Project.service.ProjectService;
+import com.Gather.Sponsorship.model.FavoriteBean;
 import com.Gather.Sponsorship.model.SponsorOrderBean;
 import com.Gather.Sponsorship.model.SponsorshipBean;
 import com.Gather.Sponsorship.service.SponsorOrderService;
@@ -45,84 +47,144 @@ public class SponsorshipUserController {
 	ProjectService projectService;
 	MemberService memberService;
 	SponsorOrderService sponsorOrderService;
-	ProjectPlanService  projectPlanService;
-	
+	ProjectPlanService projectPlanService;
+
 	@Autowired
 	public SponsorshipUserController(ProjectService projectService, MemberService memberService,
-			SponsorOrderService sponsorOrderService,ProjectPlanService  projectPlanService) {
+			SponsorOrderService sponsorOrderService, ProjectPlanService projectPlanService) {
 		this.projectService = projectService;
 		this.memberService = memberService;
 		this.sponsorOrderService = sponsorOrderService;
-		this.projectPlanService=projectPlanService;
+		this.projectPlanService = projectPlanService;
 	}
 
-	
 	@GetMapping("/showProject/{pID}")
 	public String showProject(@PathVariable("pID") Integer pID, HttpServletRequest request) {
 		ProjectBean pBean = projectService.getProjectById(pID);
-		request.getSession().setAttribute("pBean", pBean);
+		Member member = (Member) request.getSession().getAttribute("memberData");
+		Member mBean = memberService.queryMemberById(member.getId());
+		FavoriteBean favoriteBean = sponsorOrderService.getFavoriteByMemberIDAndProjectID(mBean.getId(), pID);
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
 		List<ProjectPlanBean> projectPlanList = projectPlanService.getProjectPlansByProjectBean(pBean);
 		request.getSession().setAttribute("projectPlanList", projectPlanList);
-		
+		int favCount = favoriteBeans.size();
+		request.getSession().setAttribute("favoriteBean", favoriteBean);
+		request.getSession().setAttribute("favCount", favCount);
+		request.getSession().setAttribute("pBean", pBean);
+		request.getSession().setAttribute("mBean", mBean);
+
 		return "Sponsorship/project";
 	}
 
-	
-	
-	
 	@GetMapping("/payment")
-	public String payment(HttpServletRequest reg, HttpServletRequest request) {
+	public String payment(HttpServletRequest reg, HttpServletRequest request, @RequestParam("pPID") Integer pPID) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
-		Member mBean =  memberService.queryMemberById(member.getId());
+		Member mBean = memberService.queryMemberById(member.getId());
+		ProjectPlanBean pPBean = projectPlanService.getProjectPlanByProjectPlanID(pPID);
+		request.getSession().setAttribute("pPBean", pPBean);
 		request.getSession().setAttribute("mBean", mBean);
 		return "Sponsorship/payment";
-	}
-
-	@PostMapping("/newOrder")
-	@ResponseBody
-	public ResponseEntity<String> newOrder(@RequestParam("sPID") String sPID, @RequestParam("sPName") String sPName,
-			@RequestParam("projectImage") String projectImage, @RequestParam("mID") String mID,
-			@RequestParam("sName") String sName, @RequestParam("sPhone") String sPhone,
-			@RequestParam("sBonus") String sBonus, @RequestParam("sAddress") String sAddress,
-			@RequestParam("sEmail") String sEmail, @RequestParam("sAmount") String sAmount,
-			@RequestParam("sDiscount") String sDiscount, @RequestParam("paymentMethod") String paymentMethod
-
-	) throws IOException {
-
-		Integer sTotal = Integer.parseInt(sAmount) - Integer.parseInt(sDiscount) + Integer.parseInt(sBonus);
-		SponsorOrderBean sBean = new SponsorOrderBean(Integer.parseInt(mID), Integer.parseInt(sPID), sName, sPName,
-				paymentMethod, Integer.parseInt(sAmount), Integer.parseInt(sDiscount), Integer.parseInt(sBonus),
-				projectImage, sAddress, sPhone, sEmail, sTotal);
-
-		Long timeStamp = System.currentTimeMillis();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String sd = sdf.format(new Date(Long.parseLong(String.valueOf(timeStamp))));
-
-		sBean.setsTime(sd);
-		sBean.setStatus("待付款");
-		sponsorOrderService.insertOrder(sBean);
-
-		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	// 查詢贊助訂單
 
 	@GetMapping("/sponsorshipInfo")
-	public String sponsorshipInfo(HttpServletRequest reg, HttpServletRequest request) {
+	public String sponsorshipInfo(HttpServletRequest reg) {
 		Member member = (Member) reg.getSession().getAttribute("memberData");
-		Member mBean =  memberService.queryMemberById(member.getId());
-		List<SponsorOrderBean> sBean=sponsorOrderService.getOrdersByMemberID(mBean.getId());
-		request.getSession().setAttribute("sBean", sBean);
-		return "Sponsorship/sponsorshipInfo";
+		Member mBean = memberService.queryMemberById(member.getId());
+
+		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(mBean.getId());
+		if (sBean.isEmpty()) {
+			return "Sponsorship/noSponsorship";
+		} else {
+			reg.getSession().setAttribute("sBean", sBean);
+			System.out.println("登入者id" + mBean.getId());
+			return "Sponsorship/sponsorshipInfo";
+
+		}
 	}
 
-	// 查詢被贊助訂單
+	// 查詢及管理被贊助訂單
 
 	@GetMapping("/sponsoredInfo")
-	public String sponsoredInfo(Model model) {
-		List<SponsorOrderBean> sBeans = sponsorOrderService.getOrders();
-		model.addAttribute("sBeans", sBeans);
-		return "Sponsorship/orders";
+	public String sponsoredInfo(HttpServletRequest reg) {
+		Member member = (Member) reg.getSession().getAttribute("memberData");
+		Member mBean = memberService.queryMemberById(member.getId());
+		List<ProjectBean> pBean = projectService.getAllProjectBymID(mBean.getId());
+		if (pBean.isEmpty()) {
+			return "Sponsorship/noSponsorshiped";
+		}
+		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByProposerID(pBean.get(0).getmID());
+		reg.getSession().setAttribute("sBean", sBean);
+		return "Sponsorship/sponsoredInfo";
+
+	}
+
+	// 修改訂單狀態
+
+	@PostMapping("/editOrder/{sID}")
+	@ResponseBody
+	public ResponseEntity<String> addUpdateOrderInfo(@PathVariable("sID") int sID, HttpServletRequest reg,
+
+			@RequestParam("status") String status)
+
+			throws IOException {
+		Member member = (Member) reg.getSession().getAttribute("memberData");
+		Member mBean = memberService.queryMemberById(member.getId());
+
+		List<ProjectBean> pBean = projectService.getAllProjectBymID(mBean.getId());
+		List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByProposerID(pBean.get(0).getmID());
+		SponsorOrderBean sBean2 = sponsorOrderService.getOrderBySponsorshipID(sID);
+		sBean2.setStatus(status);
+
+		sponsorOrderService.updateOrder(sBean2);
+		return new ResponseEntity<String>(HttpStatus.OK);
+
+	}
+
+	// 加入我的收藏
+	@GetMapping("/favorite/{pID}")
+	public ResponseEntity<String> addFavorite(HttpServletRequest request, @PathVariable(name = "pID") String pID) {
+		Member member = (Member) request.getSession().getAttribute("memberData");
+		Member mBean = memberService.queryMemberById(member.getId());
+		ProjectBean pBean = projectService.getProjectById(Integer.parseInt(pID));
+		FavoriteBean favoriteBean = new FavoriteBean();
+		favoriteBean.setMember(mBean);
+		favoriteBean.setProjectBean(pBean);
+		sponsorOrderService.insertFavorite(favoriteBean);
+		return new ResponseEntity<String>(HttpStatus.OK);
+
+	}
+
+	// 移除我的收藏
+	@GetMapping("/delFavorite/{pID}")
+	public ResponseEntity<String> deleteFavorite(HttpServletRequest request, @PathVariable(name = "pID") String pID) {
+		Member member = (Member) request.getSession().getAttribute("memberData");
+		Member mBean = memberService.queryMemberById(member.getId());
+		ProjectBean pBean = projectService.getProjectById(Integer.parseInt(pID));
+		FavoriteBean favoriteBean = sponsorOrderService.getFavoriteByMemberIDAndProjectID(mBean.getId(),
+				Integer.parseInt(pID));
+		sponsorOrderService.deleteFavorite(favoriteBean);
+		return new ResponseEntity<String>(HttpStatus.OK);
+
+	}
+
+	// 查詢我的收藏
+
+	@GetMapping("/myFav/{mID}")
+	public String favList(HttpServletRequest request, @PathVariable(name = "mID") String mID) {
+		Member member = (Member) request.getSession().getAttribute("memberData");
+		Member mBean = memberService.queryMemberById(member.getId());
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+		ArrayList<ProjectBean> projectBeans = new ArrayList<ProjectBean>();
+		for (int i = 0; i < favoriteBeans.size(); i++) {
+			ProjectBean projectBean = favoriteBeans.get(i).getProjectBean();
+			projectBeans.add(projectBean);
+		}
+
+		request.getSession().setAttribute("projectBeans", projectBeans);
+		return "Sponsorship/favorite";
+
 	}
 
 }

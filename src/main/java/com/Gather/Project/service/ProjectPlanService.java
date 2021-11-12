@@ -13,4 +13,7 @@ public interface ProjectPlanService {
 		
 		//透過ProjectBean找到所有ProjectPlan
 		List<ProjectPlanBean> getProjectPlansByProjectBean(ProjectBean projectBean);
+		
+		//改變方案累積金額
+		void updateProjecPlantAmountByprojectPlanID(Integer projectPlanID,Integer projectPlanAmount);
 }

@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "Project")
@@ -34,10 +36,11 @@ public class ProjectBean implements Serializable {
 	private String pStatus;//專案狀態
 	private String reason;//狀態說明
 	private Integer pAmountNow;//累積金額
-	private String pCategory;
+	private String pCategory;//計畫類別
+	private Integer sponsorCount;//被贊助數
 	
-	
-	@OneToMany(mappedBy = "projectBean",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(mappedBy = "projectBean",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
 
 
@@ -51,7 +54,7 @@ public class ProjectBean implements Serializable {
 	// 更新的建構子
 	public ProjectBean(Integer pID, String pName, Integer pTarget, String pSDate,String pEDate,
 			String pImageCover,String pDescribe, String pContent, Integer mID,String pStatus,
-			String reason ) {
+			String reason,Integer sponsorCount) {
 	
 		this.pID = pID;
 		this.pName = pName;
@@ -64,6 +67,7 @@ public class ProjectBean implements Serializable {
 		this.mID = mID;
 		this.pStatus=pStatus;
 		this.reason=reason;
+		this.sponsorCount=sponsorCount;
 	}
 
 	
@@ -84,6 +88,7 @@ public class ProjectBean implements Serializable {
 		this.pStatus=pStatus;
 		this.reason=reason;
 		this.pCategory=pCategory;
+		this.sponsorCount=0;
 	}
 
 	
@@ -199,6 +204,15 @@ public class ProjectBean implements Serializable {
 
 	public void setpCategory(String pCategory) {
 		this.pCategory = pCategory;
+	}
+	
+
+	public Integer getSponsorCount() {
+		return sponsorCount;
+	}
+
+	public void setSponsorCount(Integer sponsorCount) {
+		this.sponsorCount = sponsorCount;
 	}
 	@Override
 	public String toString() {

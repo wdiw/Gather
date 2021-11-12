@@ -27,11 +27,11 @@ public class ProjectPlanBean implements Serializable {
 	private String 	projectPlanContent;//方案內容
 	private String ETA;//預計實現日期
 	private String 	projectPlanImage;//方案圖片路徑
-	
+	private Integer projectPlanAmount;
 	//private Integer pID;//方案對應的Project ID
 	
 	//多中有個一: 多方類別中，要設定對應的一方類別
-		@ManyToOne(fetch=FetchType.EAGER)
+		@ManyToOne(fetch=FetchType.LAZY)
 		@JoinColumn(name = "pID")
 		ProjectBean projectBean;
 
@@ -40,7 +40,8 @@ public class ProjectPlanBean implements Serializable {
 			
 		}
 
-		
+
+		//新增
 		public ProjectPlanBean( Integer projectPlanPrice, String projectPlanContent,
 				String ETA, String projectPlanImage, ProjectBean projectBean) {
 			
@@ -50,6 +51,19 @@ public class ProjectPlanBean implements Serializable {
 			this.ETA = ETA;
 			this.projectPlanImage = projectPlanImage;
 			this.projectBean = projectBean;
+			this.projectPlanAmount =0;
+		}
+
+		
+		
+
+		public Integer getProjectPlanAmount() {
+			return projectPlanAmount;
+		}
+
+
+		public void setProjectPlanAmount(Integer projectPlanAmount) {
+			this.projectPlanAmount = projectPlanAmount;
 		}
 
 
