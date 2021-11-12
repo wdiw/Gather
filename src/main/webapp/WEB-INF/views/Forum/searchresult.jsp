@@ -388,47 +388,39 @@
     	<thead>
     		<tr>
     			<th>文章編號</th>
-    			<th>文章分類</th>
 				<th>文章標題</th>
 				<th>文章內容</th>
-				<th>發文資訊</th>
+				<th>發文時間</th>
 				<th>最後修改時間</th>
 				<th>回覆數</th>
 			</tr>
 		</thead>
-		<c:forEach items='${AllForum}' var='forum' >
+		<c:forEach items='${SearchResult}' var='searchresult' >
 			<tr>
-<!-- 			<tr onclick="test()" > -->
-<%-- 			<tr onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
-<%-- 			value='/Project/project?pID=${project.pID}' --%>
 				<td>
-				<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.id}</a>
+				<a href="<c:url value='/Forum/detail?id=${searchresult.id}' />" style="color:black;" >缺分類${searchresult.id}</a>
 <%-- 				缺分類${forum.id} --%>
-				</td>
-				<td>
-				<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.postCategory}</a>
 				</td>
 				<td style="">
 <%-- 				<td onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
 					<div style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;">
 <%-- 					${forum.name} --%>
-						<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.name}</a>
+						<a href="<c:url value='/Forum/detail?id=${searchresult.id}' />" style="color:black;" >${searchresult.name}</a>
 					</div>
 				</td>
 				<td onMouseOver="this.style.backgroundColor='pink';" onMouseOut="this.style.backgroundColor='';">
 					<div id="post" name="post" class="showcontent" style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;" 
 					onMouseOver="this.style.backgroundColor='orange';" 
 					onMouseOut="this.style.backgroundColor='';">
-					${forum.post}
+					${searchresult.post}
 <!-- 					<button onclick="init()">TEST</button> -->
 					</div>
 				</td>
 				<td>
-				${forum.poster}<br>
-				${forum.postTime}
+				發文者:會員or管理員<br>
+				${searchresult.postTime}
 				</td>
-				
-				<td><br>${forum.postUpdateTime}</td>
+				<td>${searchresult.postUpdateTime}</td>
 				<td>回覆數123</td>
 <!-- 				<td> -->
 <%-- 					<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">編輯</a> --%>
@@ -444,25 +436,13 @@
 <!-- 	TTTTTTTTTTTTTTTTT -->
 	
 	<div>
-		<input class='search-bar' type='text' id='searchvalue' placeholder='輸入文章標題'>
+		<input class='search-bar' type='text' name='searchvalue' id='searchvalue' placeholder='輸入文章標題'>
 		<button id='search'>搜尋</button>
-<!-- 		<a id='search' style="cursor: pointer;">搜尋<span  class="icon ion-ios-search"></span></a> -->
+   
 	</div>
 	
-	<br><br>
-	<div>
-		<ul>
-			<li><a href="<spring:url value='/Forum/queryAll'/>">全部</a></li>
-			<li><a href="<spring:url value='/Forum/category?postCategory=公告'/>">公告</a></li>
-			<li><a href="<spring:url value='/Forum/category?postCategory=閒聊'/>">閒聊</a></li>
-			<li><a href="<spring:url value='/Forum/category?postCategory=討論'/>">討論</a></li>
-			<li><a href="<spring:url value='/Forum/category?postCategory=心得'/>">心得</a></li>
-		</ul>
-	</div>
-
-
-
-				<!-- 	TTTTTTTTTTTTTTTTT -->
+	
+<!-- 	TTTTTTTTTTTTTTTTT -->
 	
 	</div>
 	
@@ -483,35 +463,13 @@
 <script>
 
 $('#search').click(function() {
-    var searchvalue = $('#searchvalue').val(); //用變數searchvalue放輸入的東西
-//     alert(searchvalue); //測試是否抓到輸入的東西
-    location.href=  "<spring:url value='/Forum/searchresult?searchvalue=" + searchvalue + "'/>" //跳轉進@GetMapping對應的方法，也是網址
-									   //@GetMapping對應網址 ? 方法的@RequestParam對應的參數，這裡就是@RequestParam("searchvalue")
+    var searchvalue = $('#searchvalue').val(); //抓輸入的東西
+    alert(searchvalue);
+    location.href=  "<spring:url value='/Forum/searchresult?searchvalue=" + searchvalue + "'/>" //跳轉
+
 })
 
 
-// $(document).ready(function () {
-// 		var projectID = ${ project.pID };//抓專案ID
-// 		var mStatus = "${sessionScope.memberData.status}"//取得會員身分
-// 		var mID = "${sessionScope.memberData.id}"//取得會員身分
-
-// 		if (mStatus == '管理員') {
-// 			//管理員身分
-// 			$("#passButton").show();
-// 			$("#NotPassButton").show();
-// 			$("#sendButton").hide();
-
-// 		} else {
-// 			//會員身分
-
-// 			$("#sendButton").show();
-// 			$("#passButton").hide();
-// 			$("#NotPassButton").hide();
-// 			$(".form-control").attr("disabled", true)
-// 			$("#pDescribe").attr("disabled", false);
-// 			$("#pContent").attr("disabled", false);
-// 		}
-// 	})
 
 </script>
     
