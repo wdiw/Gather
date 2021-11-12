@@ -34,6 +34,7 @@
 							img.onerror = null; //控制不要一直觸發錯誤
 						}
 					</script>
+
 				</head>
 
 				<body>
@@ -347,8 +348,6 @@
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"><a class="nav-link"
 														href="pages/ui-features/buttons.html">會員管理</a></li>
-												<li class="nav-item"><a class="nav-link" href="./addMember">新增會員</a>
-												</li>
 											</ul>
 										</div>
 									</li>
@@ -431,20 +430,20 @@
 																	<th>姓名</th>
 																	<th>身分</th>
 																	<th>帳號</th>
-																	<th>密碼</th>
+																	<th>電話</th>
 																	<th>修改</th>
-																	<th>刪除</th>
+																	<th>停(復)權</th>
 																</tr>
 															</thead>
 															<c:forEach var='theMember' items='${members}'>
 																<tr>
 																	<td><img src="images/Members/${theMember.id}.jpg"
-																			alt="" onerror="nofind()"></td>
+																			alt=""></td>
 																	<td>${theMember.id}</td>
 																	<td>${theMember.name}</td>
-																	<td>${theMember.status}</td>
 																	<td>${theMember.account}</td>
-																	<td>${theMember.password}</td>
+																	<td>${theMember.status}</td>
+																	<td>${theMember.phone }</td>
 																	<td>
 																		<button type="button" id="update"
 																			class="btn btn-inverse-warning btn-fw"
@@ -452,9 +451,22 @@
 																			'memberUpdate/${theMember.id}'">修改</button>
 																	</td>
 																	<td>
-																		<button type="button" id="delete"
+																	<c:choose>
+																	    <c:when test="${theMember.status ne '停權' }">
+																	    	<button type="button" id="delete"
 																			class="btn btn-inverse-danger btn-fw"
-																			onclick="deleteOrder(${theMember.id})">刪除</button>
+																			onclick="suspended(${theMember.id});">停權
+																			</button>
+																	    </c:when>
+																	    	
+																	    <c:otherwise>
+																	        <button type="button" id="delete"
+																			class="btn btn-inverse-dark btn-fw"
+																			onclick="recovery(${theMember.id});">恢復
+																			</button>
+																	    </c:otherwise>
+																	</c:choose>
+																		
 																	</td>
 																</tr>
 															</c:forEach>
@@ -473,11 +485,12 @@
 									<div id="addEmployeeModal" class="modal fade">
 										<div class="modal-dialog">
 											<div class="modal-content" style="padding: 15%;">
-												<h4>新增會員</h4>
-												<form class="pt-3">
+												<h1 style="text-align: center;"><b>新增會員</b></h1>
+												<form class="pt-3" id="f">
 													<div class="form-group">
-														姓名:<input type="text" class="form-control form-control-lg"
-															id="text_name" placeholder="請輸入姓名">
+														姓名:<input type="text" name="name"
+															class="form-control form-control-lg" id="text_name"
+															placeholder="請輸入姓名">
 													</div>
 													<div class="form-group">
 														性別:
@@ -488,26 +501,42 @@
 													</div>
 
 													<div class="form-group">
-														帳號:<input type="email" class="form-control form-control-lg"
-															id="text_account" placeholder="請輸入Email">
+														帳號:<input type="email" name="email"
+															class="form-control form-control-lg" id="text_account"
+															placeholder="請輸入Email">
 													</div>
 													<div class="form-group">
-														密碼:<input type="password" class="form-control form-control-lg"
-															id="text_password" placeholder="請輸入密碼">
+														密碼:<input type="password" name="pwd"
+															class="form-control form-control-lg" id="text_password"
+															placeholder="請輸入密碼">
 													</div>
-													<!--TODO: 輸入生日-->
 													<div class="form-group">
-														生日:<input type="date" id="text_birthday" name="birthday" />
+														電話:<input type="text" name="phone"
+															class="form-control form-control-lg" id="text_phone"
+															placeholder="請輸入電話">
 													</div>
-													<!--TODO: 輸入地址-->
 													<div class="form-group">
-														地址:<input type="text" class="form-control form-control-lg"
-															id="text_address" placeholder="請輸入地址">
+														生日:<input type="date" name="birthday" id="text_birthday"
+															name="birthday" />
+													</div>
+													<div class="form-group">
+														地址:<input type="text" name="address"
+															class="form-control form-control-lg" id="text_address"
+															placeholder="請輸入地址">
 													</div>
 													<div class="mt-3">
-														<a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" id="add">
+														<a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+															id="add">
 															新增</a>
-													  </div>
+													</div>
+													<br>
+
+													<div id="f_restrict_only">
+														<a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+															id="auto">
+															一鍵輸入
+														</a>
+													</div>
 												</form>
 											</div>
 										</div>
@@ -527,125 +556,14 @@
 								<script src="js/template.js"></script>
 								<script src="js/settings.js"></script>
 								<script src="js/todolist.js"></script>
+								<script src="js/memberCRUD.js"></script>
+								<script src="js/jq_autofull.js"></script>
+
 								<!-- endinject -->
 								<!-- Custom js for this page-->
 								<!-- End custom js for this page-->
 
-								<script>
-									//新增開始
-									$("#add").click(function () {
-										let user_name = $('#text_name').val();
-										let user_account = $("#text_account").val();
-										let user_password = $("#text_password").val();
-										let user_birthday = $("#text_birthday").val();
-										let user_address = $("#text_address").val();
-										if (document.getElementsByName('sex')[0].checked) {
-											var user_sexual = '男';
-										} else {
-											var user_sexual = '女';
-										}
 
-										console.log(
-											"姓名" +
-											user_name + "帳號" +
-											user_account + "密碼" +
-											user_password + "生日" +
-											user_birthday + "地址" +
-											user_address + "性別" + user_sexual
-											//ok
-										)
-
-										if ($.trim(user_name) == '' |
-											$.trim(user_account) == '' |
-											$.trim(user_password) == '' |
-											$.trim(user_address) == '' |
-											$.trim(user_birthday) == '') {
-											alert('全為必填，不得空白!!');
-											(this).focus;
-											return;
-										}
-
-
-										var params = {
-											"name": '' + user_name,
-											"account": '' + user_account,
-											"password": '' + user_password,
-											"address": '' + user_address,
-											"sexual": '' + user_sexual,
-											"birthday": '' + user_birthday
-										};
-
-										$.ajax({
-											type: 'post',
-											url: '/Gather/api/register',
-											contentType: 'application/json',
-											data: JSON.stringify(params),
-											success: function (data) {
-												Swal.fire({
-													icon: 'success',
-													position: 'center',
-													title: '成功新增',
-												})
-												setTimeout(function () {
-													$("#div2").hide()
-													$(location).attr('href', '/Gather/showAllMember');
-												}, 1500);
-											},
-											error: function (e) {
-												console.log(e);
-											}
-										});
-									});
-									//新增結束
-
-
-									//刪除開始
-									function deleteOrder(deleteId) {
-										$.ajax({
-											url: "<spring:url value='/api/members/" + deleteId + "'/>",
-											type: 'delete',
-											contentType: "application/json; charset=utf-8",
-											data: {},
-											success: function (data) {
-												Swal.fire({
-													title: '刪除成功',
-													icon: 'success',
-													text: "已經刪除！",
-													position: 'center',
-
-												})
-												setTimeout(function () {
-													window.location.reload();
-												}, 1200);
-												/*
-												).then((result) => {
-													 if (result.isConfirmed) {
-													   location.href= "<c:url value='/members'/>";
-													 }
-												  })
-												  */
-											},
-											error: function (xhr, text) {
-												console.log(url);
-												console.log("status code: " + xhr.status);
-												console.log("error message: " + text);
-												Swal.fire({
-													title: '刪除失敗',
-													icon: 'error',
-													text: "此筆ID" + $("#id").val() + "不存在，請檢查後重試！",
-												})
-											}
-										});
-
-									};
-									//刪除結束
-
-
-
-
-
-
-								</script>
 				</body>
 
 				</html>

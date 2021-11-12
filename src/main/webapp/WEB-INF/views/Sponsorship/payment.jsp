@@ -139,11 +139,11 @@
 								<div class="form-group">
 									<div class="col-lg-6 mb-5 ftco-animate">
 										<a
-											href="./${pPBean.projectPlanImage}"
+											href="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg"
 											class="image-popup prod-img-bg"> <img
-											src="./${pPBean.projectPlanImage}"
+											src="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg"
 											class="img-fluid" alt="Colorlib Template" id="projectImage" ></a>
-											<input type="hidden" name="projectImage" value="./${pPBean.projectPlanImage}">
+											<input type="hidden" name="projectImage" value="./images/Project/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你/走走化妝桌椅｜與你一起變美的夥伴，獻給認真愛美的你_Cover.jpg">
 										<div class="col-md-6">
 											<div class="form-group">
 											<input type="hidden" name="sPName" value="${pBean.pName}">
@@ -169,7 +169,7 @@
 								</div>
 								<div class="form-group">
 									<label for="postcodezip">連絡電話</label> <input type="text"
-										class="form-control" placeholder="" value="${mBean.phone}"
+										class="form-control" placeholder="" value="0935623709"
 										name="sPhone" id="sPhone">
 								</div>
 							</div>
@@ -180,10 +180,9 @@
 								<div class="form-group">
 									<label for="streetaddress">加碼贊助</label>
 									<div style="position: relative;">
-									
 										<i class="fas fa-dollar-sign"
 											style="position: absolute; left: 10px; top: 18px; font-size: 22px; text-align: center;"></i>
-										<input type="number" class="form-control" placeholder="0" min="0"
+										<input type="number" class="form-control" placeholder="0"
 											style="padding-left: 32PX; font-size: 20px; padding-bottom: 8px"
 											name="sBonus" id="sBonus">
 									</div>

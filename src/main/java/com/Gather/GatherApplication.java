@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 
+
 @SpringBootApplication
 public class GatherApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GatherApplication.class, args);
-		
 	}
 
 	@Bean

@@ -135,8 +135,7 @@
 						       
 						        
 					           	<td class="quantity">
-						        	<p type='button' class="btn btn-primary py-3 px-4" id="button" onclick="delFav(${pBean.pID})"><i class="fas fa-trash-alt"></i></p>
-<%-- 						        	<button type='button' style="border: 0;background-color: white" id="button" onclick="delFav(${pBean.pID})"><i class="fas fa-trash-alt"></i></button> --%>
+						        	<button type='button' class="btn btn-primary py-3 px-4" id="button" onclick="delFav(${pBean.pID})"><i class="fas fa-trash-alt"></i></button>
 						        </td>
 						   
 						      </tr><!-- END TR-->
@@ -286,8 +285,8 @@
 		});
 		  function delFav(pID) {
               $.ajax({
-                url: "<c:url value='/delFavorite/" + pID +"'/>",
-                // url: "<c:url value='/delFavorite/131'/>",
+//                 url: "<c:url value='/favorite/" + pID +"'/>",
+                url: "<c:url value='/delFavorite/131'/>",
                 type: 'get',
                 contentType: "application/json; charset=utf-8",
                 data: {},

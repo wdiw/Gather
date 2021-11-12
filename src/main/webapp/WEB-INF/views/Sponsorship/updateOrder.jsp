@@ -7,6 +7,7 @@
 <html lang="en">
 <!-- <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"> -->
 </script>
+ -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <head>
   <!-- Required meta tags -->
@@ -111,14 +112,14 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="../images/faces/face28.jpg" alt="profile"/>
+              <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="/Gather/showMemberCenter">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="/Gather/showLogout">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -311,7 +312,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../../index.html">
+            <a class="nav-link" href="/Gather/backend">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -368,12 +369,12 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">AD</span>
+              <span class="menu-title">Forum</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../pages/icons/mdi.html">廣告管理</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/Gather/Forum/adMain">討論區管理</a></li>
               </ul>
             </div>
           </li>

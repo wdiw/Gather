@@ -2,8 +2,6 @@ package com.Gather.Sponsorship.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.service.ProjectService;
 
 import com.Gather.Sponsorship.model.SponsorOrderBean;
@@ -53,10 +50,10 @@ public class SponsorshipPageController {
 //		return "Sponsorship/payment";
 //	}
 
-//	@GetMapping("/favorite")
-//	public String favorite() {
-//		return "Sponsorship/favorite";
-//	}
+	@GetMapping("/favorite")
+	public String favorite() {
+		return "Sponsorship/favorite";
+	}
 
 	// 跳轉付款頁面
 	@PostMapping("/goECPay")
@@ -82,16 +79,7 @@ public class SponsorshipPageController {
 
 		sBean.setsTime(sd);
 		sBean.setStatus("已付款");
-		Integer pAmountNow=0;
 		sponsorOrderService.insertOrder(sBean);
-		List<SponsorOrderBean> sBean_toatl=sponsorOrderService.getOrdersByPIDAndStatus(Integer.parseInt(sPID), sBean.getStatus());
-		for(int i=0;i<sBean_toatl.size();i++) {
-			 Integer sTotal_select= sBean_toatl.get(i).getsTotal();
-			 pAmountNow += sTotal_select;
-		}
-		
-		sBean.setpAmountNow(pAmountNow);
-		sponsorOrderService.updateOrder(sBean);
 
 
 		String tradeNo = "Gather" + sBean.getsID();
@@ -119,19 +107,5 @@ public class SponsorshipPageController {
 		return form;
 
 	}
-	
-	@GetMapping("/sponsorshipSearch")
-	public String  getSponsorshipBySearch(
-			@RequestParam("search") String search,Model model) {
-		
-		System.out.println("search:"+search);
-		Set<String> searchName=new HashSet<>();
-		searchName.add("%"+search+"%");
-		
-		System.out.println(searchName);
-		List<SponsorOrderBean> result = sponsorOrderService.getSponsorshipBySearch(searchName);
-		model.addAttribute("sBean",result);
-		return "Sponsorship/sponsorshipSearch";					
-	}	
 
 }

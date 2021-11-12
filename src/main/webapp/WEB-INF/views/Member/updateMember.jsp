@@ -395,20 +395,50 @@
                   </p>
                   <form  id="form" class="forms-sample">
                     <div class="form-group">
-                      會員編號<input name="id" id="id" class="form-control" value="${targetMember.id}" readonly="readonly">
+                      會員編號<input name="id" type="number" id="id" class="form-control" value="${targetMember.id}" readonly="readonly">
                     </div>
+
                     <div class="form-group">
                       姓名<input id="name" name="name" class="form-control" value="${targetMember.name}" type='text'>
                     </div>
+
                     <div class="form-group">
-                      身分<input id="status" name="status" class="form-control" value="${targetMember.status}" type='text'>
+                      性別:
+                      <c:choose>
+                      	<c:when test="${targetMember.sexual eq '男'}">
+                        	<input type="radio" value="男" name="sex" readonly="readonly" checked> 男
+                        </c:when>
+                      
+                        <c:otherwise>
+                        	<input type="radio" value="女" name="sex" readonly="readonly" checked> 女
+                        </c:otherwise>
+					            </c:choose>
                     </div>
+
                     <div class="form-group">
-                      帳號<input id="account" name="account" class="form-control" value="${targetMember.account}"  type='text'>
+                      身分<input id="status" name="status" value="${targetMember.status}" class="form-control" type='text'>
                     </div>
+
                     <div class="form-group">
-                      密碼<input id="password" name="password" class="form-control" value="${targetMember.password}"  type='text'>
+                      帳號<input id="account" name="account" value="${targetMember.account}" class="form-control" type='text'>
                     </div>
+
+                    <div class="form-group">
+                      密碼<input id="password" name="password"  value="${targetMember.password}" class="form-control" type='text'>
+                    </div>
+                    
+                    <div class="form-group">
+                      電話:<input type="text" name="phone"  value="${targetMember.phone}" id="text_phone" placeholder="請輸入電話" class="form-control" >
+                    </div>
+
+                    <div class="form-group">
+                      生日:<input type="date" name="birthday" value="${targetMember.birthday}" id="text_birthday" name="birthday"  />
+                    </div>
+
+                    <div class="form-group">
+                      地址:<input type="text" name="address" value="${targetMember.address}" class="form-control form-control-lg" id="text_address" placeholder="請輸入地址">
+                    </div>
+
                     <div class="form-group">
                       <label>上傳圖片</label>
                       <input type="file" name="memberImage" class="file-upload-default" id="memberImage">
@@ -460,13 +490,13 @@
   <!-- End custom js for this page-->
   
   <script type="text/javascript">
-		$('#projectImage').change(function() {
-			var projectImage = $("#projectImage")[0].files[0];
+		$('#memberImage').change(function() {
+			var memberImage = $("#memberImage")[0].files[0];
 			var reader = new FileReader;
 			reader.onload = function(e) {
 				$('#showPic').attr('src', e.target.result);
 			}
-			reader.readAsDataURL(projectImage);
+			reader.readAsDataURL(memberImage);
 		})
 		
 		function update(updateId){

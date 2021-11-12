@@ -1,26 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>贊助訂單</title>
+<title>Minishop - Free Bootstrap 4 Template by Colorlib</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
 	rel="stylesheet">
-	   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
 <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="css/animate.css">
@@ -86,7 +76,7 @@
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item dropdown active"><a
+					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -95,7 +85,8 @@
 								Product</a> <a class="dropdown-item" href="cart.html">Cart</a> <a
 								class="dropdown-item" href="checkout.html">Checkout</a>
 						</div></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+					<li class="nav-item active"><a href="about.html"
+						class="nav-link">About</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 					<li class="nav-item cta cta-colored"><a href="cart.html"
@@ -114,83 +105,127 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span>
+						<span class="mr-2"><a href="index.html">Forgot</a></span> <span>Password</span>
 					</p>
-					<h1 class="mb-0 bread">贊助清單</h1>
+					<h1 class="mb-0 bread">忘記密碼</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<section class="ftco-section ftco-cart">
-		
-<!-- 			<div class="search"> -->
-<!-- 				<input style="border-radius: 40px;border-width: 2px;border-color: lightgrey;margin-left: 60px" class="search-bar" type="text" name="search" id="search" -->
-<!-- 					placeholder="搜尋..."> -->
-<!-- 				<p class="btn btn-primary py-2 px-3"> -->
-<!-- 					<i class="fas fa-search-dollar"></i></p> -->
-<!-- 			</div> -->
-			
-			<div>
-				<p style="margin-left: 60px">
-					<a href="sponsoredInfo" class="btn btn-primary py-3 px-4">被贊助清單</a>
-					<div>
-				<input style="border-radius: 40px;border-width: 2px;border-color: lightgrey;margin-left: 940px" class="search-bar" type="text" name="search" id="search"
-					placeholder="搜尋...">
-				<p class="btn btn-primary py-2 px-3" id="searchBtn">
-					<i class="fas fa-search-dollar"></i></p>
+
+	<section class="ftco-section testimony-section"
+		style="border: 10px black solid; padding: 10px">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-5" style="border: 2px black solid;">
+					<img src="/Gather/images/forgotPassword.jpg" alt="" style="max-width: 100%;
+					max-height: 100%;">
 				</div>
-				
-				</p>
-			</div>
-				
-
-
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 ftco-animate">
-						<div class="cart-list">
-							<table class="table">
-								<thead class="thead-primary">
-									<tr class="text-center">
-										<th width="18%">方案名稱</th>
-										<th>贊助方案</th>
-										<th>贊助金額</th>
-										<th>付款方式</th>
-										<th>訂單狀態</th>
-										<th>訂單時間</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items='${sBean}' var='sBean'>
-										<tr class="text-center">
-											<td class="product-remove">${sBean.sPName}</td>
-
-											<td class="image-prod"><img width='80' height='80'
-												src="${sBean.projectImage}" class="img-circle" /></td>
-
-											<td class="product-name">$${sBean.sTotal}</td>
-											<td class="price">${sBean.paymentMethod}</td>
-
-											<td class="price">${sBean.status}</td>
-
-											<td class="quantity">${sBean.sTime}</td>
-
-
-										</tr>
-										<!-- END TR-->
-
-
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
+				<div class="col-lg-7">
+					<div class="heading-section ftco-animate mb-5">
+						<h3 class="mb-4">為用戶安全,我們將帶您重設密碼.</h3>
+						<p>若信箱屬實,我們將會發送重設信件到您的信箱.</p>
 					</div>
-				</div>
+					<div class="col-md-6 order-md-last d-flex"  >
+						<!--FROM表單本體-->
+						<form class="bg-white contact-form"  style="padding-left: 0%;padding-right: 0%;padding-top: 0%;">
+							<div class="form-group">
+								<input type="text" class="form-control" id="mail" placeholder="在此輸入您的信箱" style="width: 400px;">
+							</div>
+						
+							<div class="form-group">
+								<input type="button" value="發送" id="send"
+									class="btn btn-primary py-3 px-5" style="text-align: center;">
+							</div>
+						</form>
 
+
+
+					</div>
+
+					<!--  -->
+				</div>
 			</div>
+		</div>
 	</section>
 
+	<section class="ftco-gallery">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8 heading-section text-center mb-4 ftco-animate">
+					<h2 class="mb-4">Follow Us On Instagram</h2>
+					<p>Far far away, behind the word mountains, far from the
+						countries Vokalia and Consonantia, there live the blind texts.
+						Separated they live in</p>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid px-0">
+			<div class="row no-gutters">
+				<div class="col-md-4 col-lg-2 ftco-animate">
+					<a href="images/gallery-1.jpg"
+						class="gallery image-popup img d-flex align-items-center"
+						style="background-image: url(images/gallery-1.jpg);">
+						<div
+							class="icon mb-4 d-flex align-items-center justify-content-center">
+							<span class="icon-instagram"></span>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-lg-2 ftco-animate">
+					<a href="images/gallery-2.jpg"
+						class="gallery image-popup img d-flex align-items-center"
+						style="background-image: url(images/gallery-2.jpg);">
+						<div
+							class="icon mb-4 d-flex align-items-center justify-content-center">
+							<span class="icon-instagram"></span>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-lg-2 ftco-animate">
+					<a href="images/gallery-3.jpg"
+						class="gallery image-popup img d-flex align-items-center"
+						style="background-image: url(images/gallery-3.jpg);">
+						<div
+							class="icon mb-4 d-flex align-items-center justify-content-center">
+							<span class="icon-instagram"></span>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-lg-2 ftco-animate">
+					<a href="images/gallery-4.jpg"
+						class="gallery image-popup img d-flex align-items-center"
+						style="background-image: url(images/gallery-4.jpg);">
+						<div
+							class="icon mb-4 d-flex align-items-center justify-content-center">
+							<span class="icon-instagram"></span>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-lg-2 ftco-animate">
+					<a href="images/gallery-5.jpg"
+						class="gallery image-popup img d-flex align-items-center"
+						style="background-image: url(images/gallery-5.jpg);">
+						<div
+							class="icon mb-4 d-flex align-items-center justify-content-center">
+							<span class="icon-instagram"></span>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-lg-2 ftco-animate">
+					<a href="images/gallery-6.jpg"
+						class="gallery image-popup img d-flex align-items-center"
+						style="background-image: url(images/gallery-6.jpg);">
+						<div
+							class="icon mb-4 d-flex align-items-center justify-content-center">
+							<span class="icon-instagram"></span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<footer class="ftco-footer ftco-section">
 		<div class="container">
@@ -279,7 +314,8 @@
 						</script>
 						All rights reserved | This template is made with <i
 							class="icon-heart color-danger" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>
+							href="https://colorlib.com" target="_blank">Colorlib</a>.
+						Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					</p>
 				</div>
@@ -316,48 +352,7 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
-
-	<script>
-		$(document).ready(function() {
-
-			var quantitiy = 0;
-			$('.quantity-right-plus').click(function(e) {
-
-				// Stop acting like a button
-				e.preventDefault();
-				// Get the field name
-				var quantity = parseInt($('#quantity').val());
-
-				// If is not undefined
-
-				$('#quantity').val(quantity + 1);
-
-				// Increment
-
-			});
-
-			$('.quantity-left-minus').click(function(e) {
-				// Stop acting like a button
-				e.preventDefault();
-				// Get the field name
-				var quantity = parseInt($('#quantity').val());
-
-				// If is not undefined
-
-				// Increment
-				if (quantity > 0) {
-					$('#quantity').val(quantity - 1);
-				}
-			});
-
-		});
-		
-		$("#searchBtn").click(function () {
-			var search = $("#searchBar").val()
-			location.href = "<spring:url value='/sponsorshipSearch?search=" + search + "'/>"
-		})
-
-	</script>
-
+	<script src="js/sweetalert2.all.min.js"></script>
+	<script src="js/forgotPassword.js"></script>
 </body>
 </html>

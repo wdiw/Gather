@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.StringJoiner;
@@ -32,6 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
 import com.Gather.util.Mail;
+import com.Gather.util.SHA256Util;
 
 @RestController
 @RequestMapping("/api")
@@ -43,7 +45,31 @@ public class MemberRESTController {
 	public MemberRESTController(MemberService memberService) {
 		this.memberService = memberService;
 	}
+	
+	@GetMapping("/restricted")
+	public String restricted() {
+		return "to see this text you need to be logged in!";
+	}
 
+	@PostMapping("/forgotPassword")
+	public ResponseEntity<String> forgotPassword(@RequestBody Member theMember,HttpServletRequest request){
+		Member theDataBaseMember = memberService.findByAccount(theMember.getAccount());
+		if (theDataBaseMember != null) {
+			// 產生六碼亂數
+			int MAX = 999999;
+			int min = 100000;
+			int random = (int) (Math.random() * (MAX - min + 1)) + min;
+			String randomSixDigitStr = String.valueOf(random);
+			String secretHashCode = SHA256Util.getSHA256StrJava(theDataBaseMember.getAccount()+randomSixDigitStr);
+			theDataBaseMember.setPassword(secretHashCode);
+			memberService.insertOrUpdateMember(theDataBaseMember);
+			String message = "http://localhost:8080/Gather/passwordReset/"+secretHashCode;
+			Mail.SendGmail("Gather.WebService@gmail.com", theDataBaseMember.getAccount(), "Gather募資平台-密碼重設", message);
+			return new ResponseEntity<String>("Y", HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("N", HttpStatus.OK);
+	}
+	
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody Member theMember, HttpServletRequest request) {
 		System.out.println("登入: 前端收到的資料" + theMember);
@@ -51,6 +77,10 @@ public class MemberRESTController {
 		System.out.println("登入:資料庫搜尋的結果" + result);
 		if (result != null) {
 			// 找到會員
+			// 更新登入次數，存入資料庫
+			result.setLoginTimes(result.getLoginTimes()+1);
+			memberService.insertOrUpdateMember(result);
+			// 將會員資料放入session 供前端使用
 			request.getSession().setAttribute("memberData", result);
 			return new ResponseEntity<String>("Y", HttpStatus.OK);
 //			return new ResponseEntity<String>("<meta http-equiv='refresh' content=0;URL='https://www.baidu.com/'>", HttpStatus.OK);
@@ -104,27 +134,17 @@ public class MemberRESTController {
 			System.out.println("驗證成功，準備加入資料庫");
 			Member theMember = (Member) req.getSession().getAttribute("registerData");
 			theMember.setStatus("會員");//賦予會員的身分
-			memberService.addMember(theMember);
+			memberService.insertOrUpdateMember(theMember);
 			System.out.println("會員資料加入資料庫成功");
 			//使用預設大頭貼
-			String rootDirectory = req.getServletContext().getRealPath("/").replace("webapp", "resources");
-			String destDirectory = rootDirectory + "static\\images\\Members\\";
-			
-			final String INPUT_FILE_PATH = destDirectory+"default.jpg"; // 被複製的檔案路徑及檔名
-			final String OUTPUT_FILE_PATH = destDirectory+theMember.getId()+".jpg"; // 已複製的檔案路徑及檔名
-
-			try ( FileOutputStream fos = new FileOutputStream(new File(OUTPUT_FILE_PATH))) {
-			    Path inputPath = new File(INPUT_FILE_PATH).toPath();
-			    Files.copy(inputPath, fos);
-			} catch (IOException e) {
-			    e.printStackTrace();
-			}
+			useDefaultUserPhoto(req, theMember);
 			return new ResponseEntity<String>("Y", HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("N", HttpStatus.OK);
 
 	}
 
+	
 	@GetMapping("/members")
 	public List<Member> getMembers() {
 		return memberService.queryMemberAll();
@@ -135,13 +155,18 @@ public class MemberRESTController {
 		return memberService.queryMemberById(memberId);
 	}
 
+	//新增會員(後台)
 	@PostMapping("/members")
-	public Member addMember(@RequestBody Member theMember) {
+	public Member addMember(@RequestBody Member theMember,
+							HttpServletRequest req) {
 		// 清洗前端資料，確保ID為0或null，使insertOrUpdate成功判斷
 		// 但因為我這邊使用的是Integer，所以不能用0 要用null
 		theMember.setId(null);
-		System.out.println(theMember);
-		memberService.addMember(theMember);
+		//預設一般會員
+		theMember.setStatus("會員");
+		memberService.insertOrUpdateMember(theMember);
+		//使用預設大頭貼
+		useDefaultUserPhoto(req, theMember);
 		return theMember;
 	}
 
@@ -149,27 +174,62 @@ public class MemberRESTController {
 	@PutMapping("/members")
 	public Member updateMember(@RequestBody Member theMember) {
 //		System.out.println(theMember);
-		memberService.addMember(theMember);
+		memberService.insertOrUpdateMember(theMember);
 		return theMember;
 	}
 
 	// 改密碼
 	@PutMapping("/members/changePassword")
-	public Member changePassword(@RequestBody Member theMember, HttpServletRequest request) {
+	public ResponseEntity<String> changePassword(@RequestBody Member theMember, HttpServletRequest request) {
 		System.out.println("改密碼:前端進來的資料" + theMember);
 		Member sessionMemberData = (Member) request.getSession().getAttribute("memberData");
 		System.out.println("改密碼:Session的資料" + sessionMemberData);
 		sessionMemberData.setPassword(theMember.getPassword());
 		System.out.println("改密碼:即將送進Service層的會員資料" + sessionMemberData);
-		memberService.changePwdById(sessionMemberData);
-		return sessionMemberData;
+		memberService.insertOrUpdateMember(sessionMemberData);
+		request.getSession().removeAttribute("memberData");
+		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
-
+	
+	//停權
+	@GetMapping("/suspended/{memberId}")
+	public ResponseEntity<String> suspendedMember(@PathVariable Integer memberId) {
+		Member theMember = memberService.queryMemberById(memberId);
+		theMember.setStatus("停權");
+		memberService.insertOrUpdateMember(theMember);
+		return new ResponseEntity<String>("Y", HttpStatus.OK);
+	}
+	
+	//恢復
+		@GetMapping("/recovery/{memberId}")
+		public ResponseEntity<String> recoveryMember(@PathVariable Integer memberId) {
+			Member theMember = memberService.queryMemberById(memberId);
+			theMember.setStatus("會員");
+			memberService.insertOrUpdateMember(theMember);
+			return new ResponseEntity<String>("Y", HttpStatus.OK);
+		}
+	
+	
 	// 刪除
 	@DeleteMapping("/members/{memberId}")
 	public String deleteMember(@PathVariable Integer memberId) {
 		memberService.deleteMemberById(memberId);
 		return "The member\t" + memberId + "\thas been deleted!";
+	}
+	
+	private void useDefaultUserPhoto(HttpServletRequest req, Member theMember) {
+		String rootDirectory = req.getServletContext().getRealPath("/").replace("webapp", "resources");
+		String destDirectory = rootDirectory + "static\\images\\Members\\";
+		
+		final String INPUT_FILE_PATH = destDirectory+"default.jpg"; // 被複製的檔案路徑及檔名
+		final String OUTPUT_FILE_PATH = destDirectory+theMember.getId()+".jpg"; // 已複製的檔案路徑及檔名
+
+		try ( FileOutputStream fos = new FileOutputStream(new File(OUTPUT_FILE_PATH))) {
+		    Path inputPath = new File(INPUT_FILE_PATH).toPath();
+		    Files.copy(inputPath, fos);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
 	}
 
 }

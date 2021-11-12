@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.Gather.Sponsorship.model.FavoriteBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -43,8 +44,10 @@ public class ProjectBean implements Serializable {
 	@OneToMany(mappedBy = "projectBean",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
 
-
-
+	@OneToMany(mappedBy = "projectBean",cascade = CascadeType.ALL)
+	Set<FavoriteBean> favoriteBeans=new HashSet<>();
+	
+	
 
 	// 空的建構子
 	public ProjectBean() {
@@ -218,5 +221,16 @@ public class ProjectBean implements Serializable {
 	public String toString() {
 		return "ProjectBean [pID=" + pID + ", pName=" + pName + ",pTarget=" + pTarget + ",pDescribe=" + pDescribe + "]";
 	}
+
+	public Set<FavoriteBean> getFavoriteBeans() {
+		return favoriteBeans;
+	}
+
+	public void setFavoriteBeans(Set<FavoriteBean> favoriteBeans) {
+		this.favoriteBeans = favoriteBeans;
+	}
+
+
+	
 
 }
