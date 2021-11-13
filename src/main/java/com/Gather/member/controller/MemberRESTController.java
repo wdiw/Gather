@@ -64,7 +64,7 @@ public class MemberRESTController {
 			theDataBaseMember.setPassword(secretHashCode);
 			memberService.insertOrUpdateMember(theDataBaseMember);
 			String message = "http://localhost:8080/Gather/passwordReset/"+secretHashCode;
-			Mail.SendGmail("", theDataBaseMember.getAccount(), "Gather募資平台-密碼重設", message);
+			Mail.SendGmail("Gather.WebService@gmail.com", theDataBaseMember.getAccount(), "Gather募資平台-密碼重設", message);
 			return new ResponseEntity<String>("Y", HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("N", HttpStatus.OK);
@@ -115,7 +115,7 @@ public class MemberRESTController {
 			// 信件內容，內含認證碼
 			String message = theMember.getName()+gender+ "您好!歡迎您使用Gather，以下是您的認證碼" + random;
 			// 寄信
-			Mail.SendGmail("", theMember.getAccount(), "Gather募資平台-帳號驗證", message);
+			Mail.SendGmail("Gather.WebService@gmail.com", theMember.getAccount(), "Gather募資平台-帳號驗證", message);
 			System.out.println("成功寄信");
 			// 將會員資料先預存在session 等待加入
 			req.getSession().setAttribute("registerData", theMember);
@@ -134,6 +134,7 @@ public class MemberRESTController {
 			System.out.println("驗證成功，準備加入資料庫");
 			Member theMember = (Member) req.getSession().getAttribute("registerData");
 			theMember.setStatus("會員");//賦予會員的身分
+			theMember.setLoginTimes(0);
 			memberService.insertOrUpdateMember(theMember);
 			System.out.println("會員資料加入資料庫成功");
 			//使用預設大頭貼
