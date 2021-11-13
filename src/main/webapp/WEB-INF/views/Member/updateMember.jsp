@@ -455,8 +455,9 @@
 							height="300" alt="請選擇照片" id="showPic" class="img-rounded">
 					</div>
                     <button id="btnAdd" type='button' name='submit' class="btn btn-primary mr-2" onclick="update(${theMember.id})">送出</button>
-                    <button class="btn btn-light">取消</button>
+                    
                   </form>
+                    <a href="/Gather/showAllMember"><button class="btn btn-light">取消</button></a>
                 </div>
               
             </div>

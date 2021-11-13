@@ -165,6 +165,7 @@ public class MemberRESTController {
 		theMember.setId(null);
 		//預設一般會員
 		theMember.setStatus("會員");
+		theMember.setLoginTimes(0);
 		memberService.insertOrUpdateMember(theMember);
 		//使用預設大頭貼
 		useDefaultUserPhoto(req, theMember);
