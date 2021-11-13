@@ -293,7 +293,7 @@ public class MemberPageController {
 			return "上傳失敗," + e.getMessage();
 		}
 
-		return "sample";
+		return "Member/member_center";
 	}
 
 	private void savePhotoByUpdatePage(Member theMember, MultipartFile photo, HttpServletRequest req)
