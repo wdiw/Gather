@@ -215,12 +215,7 @@
                   data-size="large" data-count="true" style="display: none;"></div>
                 <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async"
                   defer="defer"></script>
-                <div id="fb-root"></div>
-                <script async defer crossorigin="anonymous"
-                  src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0" nonce="GqQI2z3c"></script>
-                <div class="fb-share-button" data-href="http://localhost:8080/Gather/showProject/${pBean.pID}"
-                  data-layout="button_count" data-size="large"><a target="_blank" href=""
-                    class="fb-xfbml-parse-ignore">分享</a></div>
+                
 
               </div>
             </div>

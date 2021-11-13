@@ -1,32 +1,25 @@
 package com.Gather.Sponsorship.controller;
 
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
+import java.io.OutputStreamWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Date;
 import java.util.List;
 
-import javax.print.attribute.standard.Sides;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.Gather.Activity.model.ActivityBean;
 import com.Gather.Activity.service.ActivityParticipationService;
@@ -37,12 +30,11 @@ import com.Gather.Project.service.ProjectPlanService;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.Sponsorship.model.FavoriteBean;
 import com.Gather.Sponsorship.model.SponsorOrderBean;
-import com.Gather.Sponsorship.model.SponsorshipBean;
 import com.Gather.Sponsorship.service.SponsorOrderService;
-import com.Gather.Sponsorship.service.SponsorshipService;
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
-import com.google.gson.Gson;
+
+import java.awt.Desktop;
 
 @Controller
 public class SponsorshipUserController {
@@ -248,5 +240,32 @@ public class SponsorshipUserController {
 		
 
 	}
+	
+	//匯出資料
+	
+	@GetMapping("/Csv")
+    public ResponseEntity<String> activityLoginOutput() throws SQLException, IOException {
+     
+     FileOutputStream fos=new FileOutputStream(new File("D:/admin/sponsorship.csv"));
+     OutputStreamWriter osw=new OutputStreamWriter(fos,"MS950");
+     BufferedWriter fileWriter = new BufferedWriter(osw);
+        fileWriter.write("訂單編號,會員編號,贊助計畫,贊助者,贊助金額,聯絡電話,聯絡地址,聯絡信箱,訂單狀態,訂單時間");
+        List<SponsorOrderBean> sBean= sponsorOrderService.getOrders();
+        for (SponsorOrderBean s: sBean) {
+         String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",
+          s.getsID(),s.getmID(),s.getsPName(),s.getsName(),s.getsTotal(),s.getsPhone(),s.getsAddress(),s.getsEmail(),s.getStatus(),s.getsTime());
+                   
+                  fileWriter.newLine();
+                  fileWriter.write(line);                         
+     }
+        fileWriter.close();
+        osw.close();
+//        File orders = new File("D:/admin/sponsorship.csv");
+//        Desktop.getDesktop().open(orders);
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+	
+	
+	
 
 }
