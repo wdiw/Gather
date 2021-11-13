@@ -131,7 +131,8 @@ public class SponsorshipPageController {
 		String form = all.aioCheckOut(obj, null);
 		
 		Member mBean=memberService.queryMemberById(Integer.parseInt(mID));
-		Mail.SendGmail("",mBean.getAccount(),"Gather贊助平台付款成功通知", mBean.getName()+"您好!\n"+"您的訂單"+tradeNo.toString()+"已成功贊助"+sPName+"專案，贊助總額為"+sTotal+"元\n"+"非常感謝您對本平台的喜愛，再次感謝您的贊助!");
+		String content="親愛的"+mBean.getName()+"您好!<br>您的訂單:"+tradeNo.toString()+"，已成功贊助「"+sPName+"」專案，贊助總額為:"+sTotal+"元，<br>非常感謝您對本平台的喜愛，再次感謝您的贊助!";
+		Mail.SendGmail("Gather.WebService@gmail.com",mBean.getAccount(),"Gather贊助平台付款成功通知",content);
 		System.out.println("成功寄信");
 		return form;
 

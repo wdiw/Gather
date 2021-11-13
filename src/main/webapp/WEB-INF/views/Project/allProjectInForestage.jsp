@@ -66,9 +66,20 @@
 											</div>
 											<span class="text">Gather.WebService@gmail.com</span>
 										</div>
-										<div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-											<span class="text">3-5 Business days delivery &amp; Free Returns</span>
+										<h3>
+											<a href="#">${project.pName}</a>
+										</h3>
+										<div class="pricing">
+											<p class="price">
+												<!-- <span class="mr-2 price-dc"></span> -->
+												<span class="price-sale">目標價:$${project.pTarget}</span>
+											</p>
 										</div>
+										<!-- 有需要加入我的最愛可以用 -->
+										<!-- <p class="bottom-area d-flex px-3">
+		    							<a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+		    							<a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+		    						</p> -->
 									</div>
 								</div>
 							</div>
@@ -130,6 +141,19 @@
 													<!--購物車-->
 
 
+
+					</div>
+					<div class="row mt-5">
+						<div class="col text-center">
+							<div class="block-27">
+								<ul>
+									<li><a href="#">&lt;</a></li>
+									<li class="active"><span>1</span></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">5</a></li>
+									<li><a href="#">&gt;</a></li>
 								</ul>
 							</div>
 						</div>
@@ -146,10 +170,9 @@
 							</div>
 						</div>
 					</div>
+				</div>
 
 
-
-					<section class="ftco-section bg-light">
 
 
 						<div class="container">
@@ -236,6 +259,8 @@
 										</c:forEach>
 
 
+								<div class="panel-group" id="accordion" role="tablist"
+									aria-multiselectable="true">
 
 
 									</div>
@@ -243,13 +268,18 @@
 										<div class="col text-center">
 											<div class="block-27">
 												<ul>
-													<li><a href="#">&lt;</a></li>
-													<li class="active"><span>1</span></li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#">5</a></li>
-													<li><a href="#">&gt;</a></li>
+													<li><a
+														href="<spring:url value='/Project/allProjectInForestage'/>">全部</a></li>
+													<li><a
+														href="<spring:url value='/Project/category?category=設計'/>">設計</a></li>
+													<li><a
+														href="<spring:url value='/Project/category?category=科技'/>">科技</a></li>
+													<li><a
+														href="<spring:url value='/Project/category?category=藝術'/>">藝術</a></li>
+													<li><a
+														href="<spring:url value='/Project/category?category=遊戲'/>">遊戲</a></li>
+													<li><a
+														href="<spring:url value='/Project/category?category=優質店家'/>">優質店家</a></li>
 												</ul>
 											</div>
 										</div>
@@ -316,18 +346,45 @@
 								</div>
 							</div>
 						</div>
-						</div>
-					</section>
 
-					<section class="ftco-gallery">
-						<div class="container">
-							<div class="row justify-content-center">
-								<div class="col-md-8 heading-section text-center mb-4 ftco-animate">
-									<h2 class="mb-4">Follow Us On Instagram</h2>
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and
-										Consonantia, there live the blind texts. Separated they live in</p>
-								</div>
-							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+
+	<section class="ftco-gallery">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8 heading-section text-center mb-4 ftco-animate">
+					<h2 class="mb-4">Follow Us On Instagram</h2>
+					<p>Far far away, behind the word mountains, far from the
+						countries Vokalia and Consonantia, there live the blind texts.
+						Separated they live in</p>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid px-0">
+			<div class="row no-gutters">
+				<div class="col-md-4 col-lg-2 ftco-animate">
+					<a href="../images/gallery-1.jpg"
+						class="gallery image-popup img d-flex align-items-center"
+						style="background-image: url(../images/gallery-1.jpg);">
+						<div
+							class="icon mb-4 d-flex align-items-center justify-content-center">
+							<span class="icon-instagram"></span>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-lg-2 ftco-animate">
+					<a href="../images/gallery-2.jpg"
+						class="gallery image-popup img d-flex align-items-center"
+						style="background-image: url(../images/gallery-2.jpg);">
+						<div
+							class="icon mb-4 d-flex align-items-center justify-content-center">
+							<span class="icon-instagram"></span>
 						</div>
 						<div class="container-fluid px-0">
 							<div class="row no-gutters">
@@ -510,8 +567,11 @@
 
 						$("#searchBtn").click(function () {
 							var search = $("#searchBar").val()
-							location.href = "<spring:url value='/Project/ProjectSearch?search=" + search + "'/>"
+							location.href = "<spring:url value='/Project/ProjectSearch?search="
+									+ search + "'/>"
 						})
+	</script>
+</body>
 
 					</script>
 

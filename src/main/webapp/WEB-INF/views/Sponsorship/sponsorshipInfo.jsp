@@ -55,14 +55,14 @@
 								class="icon mr-2 d-flex justify-content-center align-items-center">
 								<span class="icon-phone2"></span>
 							</div>
-							<span class="text"></span>
+							<span class="text">+ 1235 2355 98</span>
 						</div>
 						<div class="col-md pr-4 d-flex topper align-items-center">
 							<div
 								class="icon mr-2 d-flex justify-content-center align-items-center">
 								<span class="icon-paper-plane"></span>
 							</div>
-							<span class="text"></span>
+							<span class="text">youremail@email.com</span>
 						</div>
 						<div
 							class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
@@ -134,10 +134,10 @@
 <!-- 			</div> -->
 			
 			<div>
-				<p style="margin-left: 60px">
+				<p style="margin-left: 205px">
 					<a href="sponsoredInfo" class="btn btn-primary py-3 px-4">被贊助清單</a>
 					<div>
-				<input style="border-radius: 40px;border-width: 2px;border-color: lightgrey;margin-left: 940px" class="search-bar" type="text" name="search" id="searchBar"
+				<input style="border-radius: 40px;border-width: 2px;border-color: lightgrey;margin-left: 1090px" class="search-bar" type="text" name="search" id="searchBar"
 					placeholder="搜尋...">
 				<p class="btn btn-primary py-2 px-3" id="searchBtn">
 					<i class="fas fa-search-dollar"></i></p>
@@ -155,6 +155,7 @@
 							<table class="table">
 								<thead class="thead-primary">
 									<tr class="text-center">
+									<th>訂單編號</th>
 										<th width="18%">方案名稱</th>
 										<th>贊助方案</th>
 										<th>贊助金額</th>
@@ -166,6 +167,7 @@
 								<tbody>
 									<c:forEach items='${sBean}' var='sBean'>
 										<tr class="text-center">
+										<td class="price">${sBean.sID}</td>
 											<td class="product-remove">${sBean.sPName}</td>
 
 											<td class="image-prod"><a href="./showProject/${sBean.sPID}"><img width='80' height='80'
