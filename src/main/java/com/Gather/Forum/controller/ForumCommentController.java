@@ -87,10 +87,11 @@ public class ForumCommentController {
 //	}
 	
 	
-	//C
+	//C 新增留言
 	@PostMapping(path = "/Forum/addforumcomment") 
 	@ResponseBody
-	public ResponseEntity<String> add(@RequestParam("forumcomment") String forumcomment, @RequestParam("id")Integer id,
+	public ResponseEntity<String> add(@RequestParam("forumcomment") String forumcomment, 
+			@RequestParam("id")Integer id,
 			HttpServletRequest request,Model model)  {
 		
 //		System.out.println(forumcomment);
@@ -100,9 +101,11 @@ public class ForumCommentController {
 		Date date = new Date();
 		String forumcommentTime = timeFormat.format(date);
 		
+		//
 		ForumBean forumBean = forumService.getForumById(id);
 		Member member = (Member)request.getSession().getAttribute("memberData"); //member.getId()
-		ForumCommentBean forumCommentBean = new ForumCommentBean(member.getName(),forumcomment,forumcommentTime,forumBean);
+//		ForumCommentBean forumCommentBean = new ForumCommentBean(member.getName(),forumcomment,forumcommentTime,forumBean);
+		ForumCommentBean forumCommentBean = new ForumCommentBean(member.getName(),forumcomment,forumcommentTime,forumBean,member.getId()); //T
 		Set<ForumCommentBean> list = new LinkedHashSet<ForumCommentBean>();
 		list.add(forumCommentBean);
 		forumBean.setForumcomment(list);

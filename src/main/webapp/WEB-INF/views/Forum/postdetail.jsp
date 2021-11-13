@@ -122,6 +122,7 @@
               <div class="desc align-self-md-center">
                 分類 : ${forum.postCategory}<br>
                 作者 : ${forum.poster}<br>
+<%--                 作者ID : ${forum.posterID}<br> --%>
                 時間 : ${forum.postTime}
               </div>
             </div>
@@ -141,6 +142,20 @@
 <!--                 <a href="#" class="tag-cloud-link">Travel</a> -->
 <!--               </div> -->
             </div>
+            
+            <button id="updateButton" type='button' name='updateButton' 
+            class="btn btn-primary mr-2" onclick="updatebtn(${forum.id})">更新文章</button>
+            
+            <button id="deleteButton" type='button' name='deleteButton' 
+            class="btn btn-danger" onclick="deletebtn(${forum.id})">刪除文章</button>
+            
+            <button id="returnButton" type='button' name='returnButton' 
+            class="btn btn-primary mr-2" onclick='location.href="<c:url value='/allposts' />"'>回討論區</button>
+            
+            
+            <br><br>
+            
+            
             
             <!-- 作者 -->
 <!--             <div class="about-author d-flex p-4 bg-light"> -->
@@ -227,78 +242,79 @@
             <div class="sidebar-box">
               <form action="#" class="search-form">
                 <div class="form-group">
-                  <span class="icon ion-ios-search"></span>
-                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                  <a id="search" style="cursor: pointer;"><span class="icon ion-ios-search"></span></a>
+                  <input type="text" class="form-control" id="searchvalue" placeholder="輸入文章標題">
                 </div>
               </form>
             </div>
             <div class="sidebar-box ftco-animate">
             	<h3 CLASS="heading">Categories</h3>
               <ul class="categories">
-                <li><a href="#">Bags <span>(12)</span></a></li>
-                <li><a href="#">Shoes <span>(22)</span></a></li>
-                <li><a href="#">Dress <span>(37)</span></a></li>
-                <li><a href="#">Accessories <span>(42)</span></a></li>
-                <li><a href="#">Makeup <span>(14)</span></a></li>
-                <li><a href="#">Beauty <span>(140)</span></a></li>
+                <li><a href="<spring:url value='/allposts'/>">全部</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=公告'/>">公告</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=閒聊'/>">閒聊</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=討論'/>">討論</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=心得'/>">心得</a></li>
               </ul>
             </div>
 
-            <div class="sidebar-box ftco-animate">
-              <h3 CLASS="heading">Recent Blog</h3>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+<!--             <div class="sidebar-box ftco-animate"> -->
+<!--               <h3 CLASS="heading">Recent Blog</h3> -->
+<!--               <div class="block-21 mb-4 d-flex"> -->
+<!--                 <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a> -->
+<!--                 <div class="text"> -->
+<!--                   <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3> -->
+<!--                   <div class="meta"> -->
+<!--                     <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div> -->
+<!--                     <div><a href="#"><span class="icon-person"></span> Admin</a></div> -->
+<!--                     <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
+<!--                   </div> -->
+<!--                 </div> -->
+<!--               </div> -->
+<!--               <div class="block-21 mb-4 d-flex"> -->
+<!--                 <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a> -->
+<!--                 <div class="text"> -->
+<!--                   <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3> -->
+<!--                   <div class="meta"> -->
+<!--                     <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div> -->
+<!--                     <div><a href="#"><span class="icon-person"></span> Admin</a></div> -->
+<!--                     <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
+<!--                   </div> -->
+<!--                 </div> -->
+<!--               </div> -->
+<!--               <div class="block-21 mb-4 d-flex"> -->
+<!--                 <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a> -->
+<!--                 <div class="text"> -->
+<!--                   <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3> -->
+<!--                   <div class="meta"> -->
+<!--                     <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div> -->
+<!--                     <div><a href="#"><span class="icon-person"></span> Admin</a></div> -->
+<!--                     <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
+<!--                   </div> -->
+<!--                 </div> -->
+<!--               </div> -->
+<!--             </div> -->
 
-            <div class="sidebar-box ftco-animate">
-              <h3 CLASS="heading">Tag Cloud</h3>
-              <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">shop</a>
-                <a href="#" class="tag-cloud-link">products</a>
-                <a href="#" class="tag-cloud-link">shirt</a>
-                <a href="#" class="tag-cloud-link">jeans</a>
-                <a href="#" class="tag-cloud-link">shoes</a>
-                <a href="#" class="tag-cloud-link">dress</a>
-                <a href="#" class="tag-cloud-link">coats</a>
-                <a href="#" class="tag-cloud-link">jumpsuits</a>
-              </div>
-            </div>
+            <!-- 右邊選項 -->
+<!--             <div class="sidebar-box ftco-animate"> -->
+<!--               <h3 CLASS="heading">Tag Cloud</h3> -->
+<!--               <div class="tagcloud"> -->
+<!--                 <a href="#" class="tag-cloud-link">shop</a> -->
+<!--                 <a href="#" class="tag-cloud-link">products</a> -->
+<!--                 <a href="#" class="tag-cloud-link">shirt</a> -->
+<!--                 <a href="#" class="tag-cloud-link">jeans</a> -->
+<!--                 <a href="#" class="tag-cloud-link">shoes</a> -->
+<!--                 <a href="#" class="tag-cloud-link">dress</a> -->
+<!--                 <a href="#" class="tag-cloud-link">coats</a> -->
+<!--                 <a href="#" class="tag-cloud-link">jumpsuits</a> -->
+<!--               </div> -->
+<!--             </div> -->
 
-            <div class="sidebar-box ftco-animate">
-              <h3 class="heading">Paragraph</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-            </div>
+            <!-- 右邊選項 -->
+<!--             <div class="sidebar-box ftco-animate"> -->
+<!--               <h3 class="heading">Paragraph</h3> -->
+<!--               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p> -->
+<!--             </div> -->
           </div>
 
         </div>
@@ -464,14 +480,30 @@
   
   <script>
   
+  var mStatus = "${sessionScope.memberData.status}"//取得會員身分
+  var mID = "${sessionScope.memberData.id}"//取得會員身分
+  var form = document.getElementById("form") 
+  
+  if (mStatus == "管理員") {
+	  alert("管理員");
+  } else {
+	  if ( mID == "${forum.posterID}" ) {
+		  alert("你是發文仔");
+		  $("#updateButton").show();
+		  $("#deleteButton").show();
+	  } else {
+		  alert("你不是發文仔");
+		  $("#updateButton").hide();
+		  $("#deleteButton").hide();
+	  }
+	  
+  }
+  
+  
+  
+  
   $(document).ready(function(){
-	  
-// 	  $('#post').summernote({ //#後面放id屬性值
-// 		  placeholder: '請輸入文章內容',
-// 		  tabsize: 2,
-// 		  height: 100,
-// 	  });
-	  
+
 	  $('#forumcomment').summernote({
 		  placeholder: '請輸入留言',
 		  tabsize: 2,
@@ -479,6 +511,75 @@
 	  });
 	  
   });
+  
+  
+  //搜尋
+  $('#search').click(function() {
+	    var searchvalue = $('#searchvalue').val(); //用變數searchvalue放輸入的東西
+//	    alert(searchvalue); //測試是否抓到輸入的東西
+	    location.href=  "<spring:url value='/searchresults?searchvalue=" + searchvalue + "'/>" //跳轉進@GetMapping對應的方法，也是網址
+										   //@GetMapping對應網址 ? 方法的@RequestParam對應的參數，這裡就是@RequestParam("searchvalue")
+												   
+  })
+  
+  
+				//刪除按鈕
+				function deletebtn(id) {
+					
+					Swal.fire({
+						title: '確定刪除?',
+						text: "你將刪除此計畫!",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonText: '刪除!',
+						cancelButtonText: '取消!',
+// 						reverseButtons: true
+					}).then((result) => {
+						if (result.isConfirmed) {
+
+							var url = "<spring:url value='/postdetail/" + id + "'/>";
+
+							$.ajax({
+								url: url,
+								type: 'DELETE',
+								data: {},
+								
+								success: function (data) {
+									Swal.fire({
+										position: 'center',
+										icon: 'success',
+										title: '刪除成功',
+									
+// 										timer: 3000,
+										timerProgressBar: true,
+										showConfirmButton: false,
+									})
+									location.href = "<spring:url value='/allposts'/>";
+								},
+								error: function (xhr, text) {
+// 									swalWithBootstrapButtons.fire(
+									Swal.fire(
+										'失敗', 
+										'刪除失敗，請確認 ', 
+										'error'
+									)
+								}
+							})
+						
+						} else if (
+							result.dismiss === Swal.DismissReason.cancel
+						) {
+							Swal.fire(
+								'取消',
+								'已取消刪除 ',
+								'success'
+							)
+						}
+					})
+				} //function deletebtn(id)  
+  
+  
+  
 					//送出留言
 					$("#addcomment").click(function() { //對應button的id屬性值addcomment
 // 						alert("!!!");

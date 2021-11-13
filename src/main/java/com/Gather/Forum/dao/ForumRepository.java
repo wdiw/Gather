@@ -11,4 +11,7 @@ public interface ForumRepository extends JpaRepository<ForumBean, Integer>,Forum
 	//分類
 	List<ForumBean> findByPostCategory(String forumcategory);
 	
+//	//倒序排列
+//	List<ForumBean> findByIdOrderByidDesc();
+	
 }

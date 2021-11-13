@@ -190,7 +190,7 @@
           <div class="col-lg-4 sidebar ftco-animate">
             <div class="sidebar-box">
 <%--             <a href="<c:url value='/Forum/add' />" class="btn py-3 px-4 btn-primary">發表文章</a><br><br> --%>
-            <a href="<c:url value='/addposts' />" class="btn py-3 px-4 btn-primary">發表文章</a><br><br>
+            <a id="po" href="<c:url value='/addposts' />" class="btn py-3 px-4 btn-primary">發表文章</a><br><br>
               <form action="#" class="search-form">
                 <div class="form-group">
                   <a id="search" style="cursor: pointer;"><span class="icon ion-ios-search"></span></a>
@@ -208,10 +208,10 @@
                 <li><a href="<spring:url value='/postcategory?postCategory=心得'/>">心得</a></li>
               </ul>
             </div>
-
-
-        </div>
-      </div>
+          </div>
+          
+        </div> <!-- 外層row -->
+      </div> <!-- container -->
     </section> <!-- .section -->
 
     <section class="ftco-gallery">
@@ -377,7 +377,33 @@
 	    location.href=  "<spring:url value='/searchresults?searchvalue=" + searchvalue + "'/>" //跳轉進@GetMapping對應的方法，也是網址
 										   //@GetMapping對應網址 ? 方法的@RequestParam對應的參數，這裡就是@RequestParam("searchvalue")
 	})
-	
+
+
+
+		var mStatus = "${sessionScope.memberData.status}"//取得會員身分
+		var mID = "${sessionScope.memberData.id}"//取得會員身分
+
+		if ( mStatus !== "" ) {
+				$("#po").show();
+		} else {
+			$("#po").hide();
+		}
+			
+
+
+
+// 		var mStatus = "${sessionScope.memberData.status}"//取得會員身分
+// 		var mID = "${sessionScope.memberData.id}"//取得會員身分
+
+// 		if (mStatus == '管理員') {
+// 			//管理員身分
+// 			$("#po").hide();
+
+// 		} else {
+// 			//會員身分
+// 			$("#po").show();
+// 		}
+		
 	</script>
 
 </body>

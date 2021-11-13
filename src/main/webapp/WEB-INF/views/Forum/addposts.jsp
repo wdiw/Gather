@@ -93,74 +93,53 @@
       </div>
     </div>
 
-    <section class="ftco-section ftco-degree-bg">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 order-lg-last ftco-animate">
 						<div class="row">
-		          
-		          <form  id="form" class="forms-sample">
-                    <div class="form-group">
-                      <label>文章分類</label>
-                      <select name="postCategory">
-                        <option selected>公告</option>
-                        <option>閒聊</option>
-                        <option>討論</option>
-                        <option>心得</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label>文章標題</label>
-                      <input type="text" id="name" name="name" class="form-control" placeholder="請輸入文章標題">
-                    </div>
-                    <div>
-						<label>文章內容</label>
-						<textarea id="post" name="post" cols="100" rows="7" class="form-control" ></textarea>
-					</div>
 					
-					<button type='submit' id="addbtn" name="submit" class="btn btn-primary mr-2">送出</button>
-                  </form>
-		          
-		          
-		          <c:forEach items='${AllForum}' var='forum'>
-		          <div class="col-md-12 d-flex ftco-animate">
-		            <div class="blog-entry align-self-stretch d-md-flex">
-<!-- 		              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');"> -->
-<!-- 		              </a> -->
-		              <div class="text d-block pl-md-4">
-		              	<div class="meta mb-3">
-		                  <div><a href="#">${forum.postTime}</a></div>
-		                  <div><a href="#">${forum.poster}</a></div>
-<!-- 		                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div> -->
-		                </div>
-		                <h3 class="heading"><a href="<c:url value='/postdetail?id=${forum.id}' />">[${forum.postCategory}] ${forum.name}</a></h3>
-		                <!-- 文章內容顯示有問題 -->
-<%-- 		                <p style="width:400px; white-space:nowrap;overflow: hidden; text-overflow:ellipsis; ">${forum.post}</p> --%>
-		                <p>..........</p>
-		                <p><a href="<c:url value='/postdetail?id=${forum.id}' />	" class="btn btn-primary py-2 px-3">Read more</a></p>
-		              </div>
-		            </div>
-		          </div>
-		          </c:forEach>
+					<br>
+<%-- 					<form id="form" class="billing-form"> --%>
+					<form id="form">
+						<h3 class="mb-4 billing-heading">發布文章</h3>
+						<div class="row align-items-end">
+							
+							<div class="w-100"></div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>文章分類</label>
+									<div class="select-wrap">
+<!-- 										<div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
+										<select name="postCategory" class="form-control">
+											<option selected>公告</option>
+											<option>閒聊</option>
+											<option>討論</option>
+											<option>心得</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="w-100"></div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>文章標題</label>
+									<input type="text" id="name" name="name" class="form-control" placeholder="請輸入文章標題">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>文章內容</label>
+									<textarea id="post" name="post" cols="200" rows="15" class="form-control" ></textarea>
+								</div>
+								<button type='submit' id="addbtn" name="submit" class="btn btn-primary mr-2">送出</button>
+							</div>
+							
+						</div>
+					</form>
 		          
 						</div>
-						
-		        <!-- 頁數 -->
-<!-- 		        <div class="row mt-2"> -->
-<!-- 		          <div class="col"> -->
-<!-- 		            <div class="block-27"> -->
-<!-- 		              <ul> -->
-<!-- 		                <li><a href="#">&lt;</a></li> -->
-<!-- 		                <li class="active"><span>1</span></li> -->
-<!-- 		                <li><a href="#">2</a></li> -->
-<!-- 		                <li><a href="#">3</a></li> -->
-<!-- 		                <li><a href="#">4</a></li> -->
-<!-- 		                <li><a href="#">5</a></li> -->
-<!-- 		                <li><a href="#">&gt;</a></li> -->
-<!-- 		              </ul> -->
-<!-- 		            </div> -->
-<!-- 		          </div> -->
-<!-- 		        </div> -->
+							<br><br>
+							<br><br>
           </div> <!-- .col-md-8 -->
           
           <div class="col-lg-4 sidebar ftco-animate">
@@ -182,10 +161,10 @@
                 <li><a href="<spring:url value='/postcategory?postCategory=心得'/>">心得</a></li>
               </ul>
             </div>
-
-
-        </div>
-      </div>
+          
+          </div>
+        </div> <!-- 外層row -->
+      </div> <!-- container -->
     </section> <!-- .section -->
 
     <section class="ftco-gallery">
@@ -353,13 +332,47 @@
   
 	<script>
 	
+	
+	var mStatus = "${sessionScope.memberData.status}"//取得會員身分
+	var mID = "${sessionScope.memberData.id}"//取得會員id
+
+	if (mStatus == '管理員') {
+		//管理員身分
+// 		$("#passButton").show();
+// 		$("#NotPassButton").show();
+// 		$("#sendButton").hide();
+		$("#addbtn").hide();
+
+	} else {
+		//會員身分
+// 		if ( mID ==  ) {
+			
+// 		}
+
+// 		$("#sendButton").show();
+// 		$("#passButton").hide();
+// 		$("#NotPassButton").hide();
+// 		$(".form-control").attr("disabled", true)
+// 		$("#pDescribe").attr("disabled", false);
+// 		$("#pContent").attr("disabled", false);
+		$("#addbtn").show();
+	}	
+	
+	
+	
 	$('#post').summernote({  //#後面放id屬性值
-//		alert("進入summernote"); //沒跳
 		placeholder: '請輸入文章內容',
 		tabsize: 2,
-      height: 100,
+		height: 100,
 	});
 	
+	
+	$('#search').click(function() {
+	    var searchvalue = $('#searchvalue').val(); //用變數searchvalue放輸入的東西
+// 	    alert(searchvalue); //測試是否抓到輸入的東西
+	    location.href=  "<spring:url value='/searchresults?searchvalue=" + searchvalue + "'/>" //跳轉進@GetMapping對應的方法，也是網址
+										   //@GetMapping對應網址 ? 方法的@RequestParam對應的參數，這裡就是@RequestParam("searchvalue")
+	})
 	
 	
 	var form = document.getElementById("form");

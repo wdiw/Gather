@@ -573,6 +573,8 @@
 					var form = document.getElementById("form")
 					var formData = new FormData(form);
 					var url = "<spring:url value='/Forum/detail/" + id + "'/>";
+// 					alert(form);
+// 					alert(formData);
 
 					$.ajax({
 						url: url,
@@ -617,7 +619,7 @@
 						showCancelButton: true,
 						confirmButtonText: '刪除!',
 						cancelButtonText: '取消!',
-						reverseButtons: true
+// 						reverseButtons: true
 					}).then((result) => {
 						if (result.isConfirmed) {
 
@@ -634,7 +636,7 @@
 										icon: 'success',
 										title: '刪除成功',
 									
-										timer: 3000,
+// 										timer: 3000,
 										timerProgressBar: true,
 										showConfirmButton: false,
 									})

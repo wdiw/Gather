@@ -29,5 +29,8 @@ public interface ForumService {
 	//搜尋
 	List<ForumBean> findByPostCategory(String forumcategory);
 	
+//	//倒序排列
+//	List<ForumBean> findByIdOrderByidDesc();
+	
 	
 }
