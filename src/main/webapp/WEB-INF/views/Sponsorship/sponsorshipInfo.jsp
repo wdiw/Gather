@@ -153,6 +153,7 @@
 							<table class="table">
 								<thead class="thead-primary">
 									<tr class="text-center">
+									<th>訂單編號</th>
 										<th width="18%">方案名稱</th>
 										<th>贊助方案</th>
 										<th>贊助金額</th>
@@ -164,6 +165,7 @@
 								<tbody>
 									<c:forEach items='${sBean}' var='sBean'>
 										<tr class="text-center">
+										<td class="price">${sBean.sID}</td>
 											<td class="product-remove">${sBean.sPName}</td>
 
 											<td class="image-prod"><a href="./showProject/${sBean.sPID}"><img width='80' height='80'
