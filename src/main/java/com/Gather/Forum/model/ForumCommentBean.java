@@ -23,7 +23,7 @@ public class ForumCommentBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer forumcommentID; //留言id
-	private Integer forumcommenterID; //留言id
+	private Integer forumcommenterID; //留言人id
 	private String forumcommenter; //留言人
 	@Column(columnDefinition = "nvarchar(max)") //通常不建議用，因為換資料庫的話這行指令不一定能用
 	private String forumcomment; //留言
@@ -43,7 +43,7 @@ public class ForumCommentBean implements Serializable {
 	public ForumCommentBean() {
 	}
 	
-	public ForumCommentBean(Integer forumcommentID, String forumcommenter, String forumcomment,
+	public ForumCommentBean(Integer forumcommentID, String forumcommenter, String forumcomment, 
 			String forumcommentTime) {
 		this.forumcommentID = forumcommentID;
 		this.forumcommenter = forumcommenter;
@@ -51,11 +51,23 @@ public class ForumCommentBean implements Serializable {
 		this.forumcommentTime = forumcommentTime;
 	}
 
-	public ForumCommentBean(String forumcommenter, String forumcomment, String forumcommentTime,ForumBean forumBean) {
+	//C 新增留言
+	public ForumCommentBean(String forumcommenter, String forumcomment, 
+			String forumcommentTime, ForumBean forumBean) {
 		this.forumcommenter = forumcommenter;
 		this.forumcomment = forumcomment;
 		this.forumcommentTime = forumcommentTime;
 		this.forumBean=forumBean;
+	}
+	
+	//C 新增留言 T
+	public ForumCommentBean(String forumcommenter, String forumcomment, 
+			String forumcommentTime, ForumBean forumBean, Integer forumcommenterID) {
+		this.forumcommenter = forumcommenter;
+		this.forumcomment = forumcomment;
+		this.forumcommentTime = forumcommentTime;
+		this.forumBean=forumBean;
+		this.forumcommenterID = forumcommenterID;
 	}
 	
 	

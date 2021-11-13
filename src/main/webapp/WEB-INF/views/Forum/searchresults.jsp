@@ -38,6 +38,7 @@
 		    		<div class="row d-flex">
 		    			<div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
+<<<<<<< HEAD
 						    <span class="text"></span>
 					    </div>
 					    <div class="col-md pr-4 d-flex topper align-items-center">
@@ -245,6 +246,239 @@
     </section> <!-- .section -->
 
   
+=======
+						    <span class="text">+ 1235 2355 98</span>
+					    </div>
+					    <div class="col-md pr-4 d-flex topper align-items-center">
+					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
+						    <span class="text">youremail@email.com</span>
+					    </div>
+					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+		  </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">Minishop</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="shop.html">Shop</a>
+                <a class="dropdown-item" href="product-single.html">Single Product</a>
+                <a class="dropdown-item" href="cart.html">Cart</a>
+                <a class="dropdown-item" href="checkout.html">Checkout</a>
+              </div>
+            </li>
+	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+	          <li class="nav-item active"><a href="blog.html" class="nav-link">Blog</a></li>
+	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
+            <h1 class="mb-0 bread">Blog</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 order-lg-last ftco-animate">
+						<div class="row">
+		          <c:forEach items='${SearchResult}' var='searchresult'>
+		          <div class="col-md-12 d-flex ftco-animate">
+		            <div class="blog-entry align-self-stretch d-md-flex">
+<!-- 		              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');"> -->
+<!-- 		              </a> -->
+		              <div class="text d-block pl-md-4">
+		              	<div class="meta mb-3">
+		                  <div><a href="#">${searchresult.postTime}</a></div>
+		                  <div><a href="#">${searchresult.poster}</a></div>
+<!-- 		                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div> -->
+		                </div>
+		                <h3 class="heading"><a href="<c:url value='/postdetail?id=${searchresult.id}' />">[${searchresult.postCategory}] ${searchresult.name}</a></h3>
+		                <!-- 文章內容顯示有問題 -->
+<%-- 		                <p style="width:400px; white-space:nowrap;overflow: hidden; text-overflow:ellipsis; ">${forum.post}</p> --%>
+		                <p>..........</p>
+		                <p><a href="<c:url value='/postdetail?id=${searchresult.id}' />	" class="btn btn-primary py-2 px-3">Read more</a></p>
+		              </div>
+		            </div>
+		          </div>
+		          </c:forEach>
+		          
+<!-- 		          <table class="table table-hover"> -->
+
+<!-- 							<thead> -->
+<!-- 								<tr width=""> -->
+<!-- 									<th width="10%">文章分類</th> -->
+<!-- 									<th width="55%">文章標題</th> -->
+<!-- 									<th width="35%">發文資訊</th> -->
+<!-- 								</tr> -->
+<!-- 							</thead> -->
+<%-- 							<c:forEach items='${AllForum}' var='forum'> --%>
+<%-- 								<tr onclick='location.href="<c:url value='/postdetail?id=${forum.id}' />"' style="cursor: pointer;" > --%>
+<!-- 									<td> -->
+<%-- 										<a href="<c:url value='/Forum/detail?id=${forum.id}' />" --%>
+<%-- 										style="color: black;">${forum.postCategory}</a> --%>
+<!-- 									</td> -->
+<!-- 									<td style=""> -->
+<%-- 										<div style="width: 100%; white-space: normal; word-wrap: break-word;  --%>
+<%-- <!-- 										word-break: break-all; cursor: pointer;"> --> --%>
+<%-- 											<a href="<c:url value='/Forum/detail?id=${forum.id}' />" --%>
+<%-- 											style="color: black;">${forum.name}</a> --%>
+<!-- 										</div> -->
+<!-- 									</td> -->
+<!-- 									<td> -->
+<%-- 										${forum.poster}<br>  --%>
+<%-- 										${forum.postTime}<br> --%>
+<!-- 										最後修改時間<br> -->
+<%-- 										${forum.postUpdateTime} --%>
+<!-- 									</td> -->
+<!-- 								</tr> -->
+<%-- 							</c:forEach> --%>
+<!-- 						</table> -->
+		          
+<!-- 		          <div class="col-md-12 d-flex ftco-animate"> -->
+<!-- 		            <div class="blog-entry align-self-stretch d-md-flex"> -->
+<!-- 		              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_6.jpg');"> -->
+<!-- 		              </a> -->
+<!-- 		              <div class="text d-block pl-md-4"> -->
+<!-- 		              	<div class="meta mb-3"> -->
+<!-- 		                  <div><a href="#">TESTApril 9, 2019</a></div> -->
+<!-- 		                  <div><a href="#">TEST</a></div> -->
+<!-- 		                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div> -->
+<!-- 		                </div> -->
+<!-- 		                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3> -->
+<!-- 		                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p> -->
+<!-- 		                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p> -->
+<!-- 		              </div> -->
+<!-- 		            </div> -->
+<!-- 		          </div> -->
+						</div>
+						
+		        <!-- 頁數 -->
+<!-- 		        <div class="row mt-2"> -->
+<!-- 		          <div class="col"> -->
+<!-- 		            <div class="block-27"> -->
+<!-- 		              <ul> -->
+<!-- 		                <li><a href="#">&lt;</a></li> -->
+<!-- 		                <li class="active"><span>1</span></li> -->
+<!-- 		                <li><a href="#">2</a></li> -->
+<!-- 		                <li><a href="#">3</a></li> -->
+<!-- 		                <li><a href="#">4</a></li> -->
+<!-- 		                <li><a href="#">5</a></li> -->
+<!-- 		                <li><a href="#">&gt;</a></li> -->
+<!-- 		              </ul> -->
+<!-- 		            </div> -->
+<!-- 		          </div> -->
+<!-- 		        </div> -->
+          </div> <!-- .col-md-8 -->
+          
+          <div class="col-lg-4 sidebar ftco-animate">
+            <div class="sidebar-box">
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <a id="search" style="cursor: pointer;"><span class="icon ion-ios-search"></span></a>
+                  <input type="text" class="form-control" id="searchvalue" placeholder="輸入文章標題">
+                </div>
+              </form>
+            </div>
+            <div class="sidebar-box ftco-animate">
+            	<h3 class="heading">Categories</h3>
+              <ul class="categories">
+                <li><a href="<spring:url value='/allposts'/>">全部</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=公告'/>">公告</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=閒聊'/>">閒聊</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=討論'/>">討論</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=心得'/>">心得</a></li>
+              </ul>
+            </div>
+
+
+        </div>
+      </div>
+    </section> <!-- .section -->
+
+    <section class="ftco-gallery">
+    	<div class="container">
+    		<div class="row justify-content-center">
+    			<div class="col-md-8 heading-section text-center mb-4 ftco-animate">
+            <h2 class="mb-4">Follow Us On Instagram</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+          </div>
+    		</div>
+    	</div>
+    	<div class="container-fluid px-0">
+    		<div class="row no-gutters">
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-1.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-1.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-2.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-2.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-3.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-3.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-4.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-4.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-5.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-5.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-6.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-6.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+        </div>
+    	</div>
+    </section>
+
+>>>>>>> refs/heads/forum
     <footer class="ftco-footer ftco-section">
       <div class="container">
       	<div class="row">

@@ -61,13 +61,17 @@ public class ForumServiceImpl implements ForumService {
 		return forumRepository.findforumBytitle(forumtitles);
 	}
 	
-	//搜尋
+	//分類
 	@Override
 	public List<ForumBean> findByPostCategory(String forumcategory) {
-	
 		return forumRepository.findByPostCategory(forumcategory);
-		
 	}
+	
+//	//倒序排列
+//	@Override
+//	public List<ForumBean> findByIdOrderByidDesc() {
+//		return forumRepository.findByIdOrderByidDesc();
+//	}
 	
 	
 }

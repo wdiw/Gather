@@ -26,15 +26,9 @@ public class ActivityParticipationBean {
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer activityParticipationid;
 	
-	
-
-	
-	
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "activityid")
 	private ActivityBean activityBean;
-	
 	
 	private Integer m_id;
 	
@@ -99,15 +93,6 @@ public class ActivityParticipationBean {
 
 
 
-   
-
-
-
-
-
-
-
-
 
 
 
@@ -143,26 +128,14 @@ public class ActivityParticipationBean {
 	}
 
 
-
-
-
-
 	public void setM_id(Integer m_id) {
 		this.m_id = m_id;
 	}
 
 
-
-
-
-
 	public String getLogintime() {
 		return logintime;
 	}
-
-
-
-
 
 
 	public void setLogintime(String logintime) {

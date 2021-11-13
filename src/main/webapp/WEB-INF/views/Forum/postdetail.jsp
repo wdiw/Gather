@@ -440,76 +440,161 @@
   
   <script>
   
-  $(document).ready(function(){
-	  
-// 	  $('#post').summernote({ //#後面放id屬性值
-// 		  placeholder: '請輸入文章內容',
-// 		  tabsize: 2,
-// 		  height: 100,
-// 	  });
-	  
-	  $('#forumcomment').summernote({
-		  placeholder: '請輸入留言',
-		  tabsize: 2,
-		  height: 100,
-	  });
-	  
-  });
-					//送出留言
-					$("#addcomment").click(function() { //對應button的id屬性值addcomment
-// 						alert("!!!");
-						var forumcomment = $('#forumcomment').val(); //抓id屬性值為forumcomment的value屬性值
-						var id = $('#id').val(); //抓id屬性值為id的value屬性值
-           
-			            Swal.fire({
-			                title: '您確定要送出嗎？',
-// 							text:forumcomment, //測試是否抓到輸入的東西
-			                icon: 'question',
-			                showCancelButton: true,
-//			                 closeOnConfirm: true,
-			            }).then((result) => {
-			                if (result.isConfirmed) {
-			                    $.ajax({
-			                        type:"post", //對應@PostMapping
-			                        url:"<spring:url value='/Forum/addforumcomment'/>", //對應@PostMapping
-			                        data:{forumcomment:forumcomment,id:id},	//?		                       
-									
-			                        success: function(data){
-			                            Swal.fire({
-			                            	title: '已新增成功！',
-			                            	icon: 'success',
-			                            }).then((result)=>{
-			                            	if (result.isConfirmed) {
-// 			                            		location.href= "<spring:url value='/Forum/detail/" + id + "'/>";
-			                            		location.href= "<spring:url value='/postdetail?id=" + ${forum.id} + "'/>";
-			                            	}
-			                            })
-			                            
-			                        },
-			                        error: function(e, text){
-			                        	
-			                        	Swal.fire({
-			                            	title: '新增失敗！請先登入會員!',
-			                            	icon: 'error',
-			                            })
-			                        	
-			                            console.log(e.status);
-			                            console.log(text);
-			                        }
-			                    })
-			                } else if (result.dismiss === Swal.DismissReason.cancel) {
-			                    Swal.fire({
-			                        icon: 'error',
-			                        title: '已取消送出請求',
-			                        text: '您的變更將不會被儲存!'
-			                    })
-			                }
-			            }) 
-
-					 }) //$("#addbtn").click(function
-				
-			</script>
+    var mStatus = "${sessionScope.memberData.status}"//取得會員身分
+    var mID = "${sessionScope.memberData.id}"//取得會員身分
+    var form = document.getElementById("form") 
+    
+    if (mStatus == "管理員") {
+      alert("管理員");
+    } else {
+      if ( mID == "${forum.posterID}" ) {
+        alert("你是發文仔");
+        $("#updateButton").show();
+        $("#deleteButton").show();
+      } else {
+        alert("你不是發文仔");
+        $("#updateButton").hide();
+        $("#deleteButton").hide();
+      }
+      
+    }
+    
+    
+    
+    
+    $(document).ready(function(){
   
+      $('#forumcomment').summernote({
+        placeholder: '請輸入留言',
+        tabsize: 2,
+        height: 100,
+      });
+      
+    });
+    
+    
+    //搜尋
+    $('#search').click(function() {
+        var searchvalue = $('#searchvalue').val(); //用變數searchvalue放輸入的東西
+  //	    alert(searchvalue); //測試是否抓到輸入的東西
+        location.href=  "<spring:url value='/searchresults?searchvalue=" + searchvalue + "'/>" //跳轉進@GetMapping對應的方法，也是網址
+                         //@GetMapping對應網址 ? 方法的@RequestParam對應的參數，這裡就是@RequestParam("searchvalue")
+                             
+    })
+    
+    
+          //刪除按鈕
+          function deletebtn(id) {
+            
+            Swal.fire({
+              title: '確定刪除?',
+              text: "你將刪除此計畫!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: '刪除!',
+              cancelButtonText: '取消!',
+  // 						reverseButtons: true
+            }).then((result) => {
+              if (result.isConfirmed) {
+  
+                var url = "<spring:url value='/postdetail/" + id + "'/>";
+  
+                $.ajax({
+                  url: url,
+                  type: 'DELETE',
+                  data: {},
+                  
+                  success: function (data) {
+                    Swal.fire({
+                      position: 'center',
+                      icon: 'success',
+                      title: '刪除成功',
+                    
+  // 										timer: 3000,
+                      timerProgressBar: true,
+                      showConfirmButton: false,
+                    })
+                    location.href = "<spring:url value='/allposts'/>";
+                  },
+                  error: function (xhr, text) {
+  // 									swalWithBootstrapButtons.fire(
+                    Swal.fire(
+                      '失敗', 
+                      '刪除失敗，請確認 ', 
+                      'error'
+                    )
+                  }
+                })
+              
+              } else if (
+                result.dismiss === Swal.DismissReason.cancel
+              ) {
+                Swal.fire(
+                  '取消',
+                  '已取消刪除 ',
+                  'success'
+                )
+              }
+            })
+          } //function deletebtn(id)  
+    
+    
+    
+            //送出留言
+            $("#addcomment").click(function() { //對應button的id屬性值addcomment
+  // 						alert("!!!");
+              var forumcomment = $('#forumcomment').val(); //抓id屬性值為forumcomment的value屬性值
+              var id = $('#id').val(); //抓id屬性值為id的value屬性值
+             
+                    Swal.fire({
+                        title: '您確定要送出嗎？',
+  // 							text:forumcomment, //測試是否抓到輸入的東西
+                        icon: 'question',
+                        showCancelButton: true,
+  //			                 closeOnConfirm: true,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                type:"post", //對應@PostMapping
+                                url:"<spring:url value='/Forum/addforumcomment'/>", //對應@PostMapping
+                                data:{forumcomment:forumcomment,id:id},	//?		                       
+                    
+                                success: function(data){
+                                    Swal.fire({
+                                      title: '已新增成功！',
+                                      icon: 'success',
+                                    }).then((result)=>{
+                                      if (result.isConfirmed) {
+  // 			                            		location.href= "<spring:url value='/Forum/detail/" + id + "'/>";
+                                        location.href= "<spring:url value='/postdetail?id=" + ${forum.id} + "'/>";
+                                      }
+                                    })
+                                    
+                                },
+                                error: function(e, text){
+                                  
+                                  Swal.fire({
+                                      title: '新增失敗！請先登入會員!',
+                                      icon: 'error',
+                                    })
+                                  
+                                    console.log(e.status);
+                                    console.log(text);
+                                }
+                            })
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: '已取消送出請求',
+                                text: '您的變更將不會被儲存!'
+                            })
+                        }
+                    }) 
+  
+             }) //$("#addbtn").click(function
+          
+        </script>
+    
   
   
     

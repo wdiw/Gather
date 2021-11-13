@@ -1,6 +1,5 @@
 package com.Gather.Forum.controller;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,7 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.Gather.Forum.model.ForumBean;
 import com.Gather.Forum.model.ForumCommentBean;
@@ -156,6 +153,7 @@ public class ForumController {
 	public String queryAllPost(Model model) {
 		
 		List<ForumBean> result = forumservice.getAllForum();
+//		List<ForumBean> result2 = forumservice.findByIdOrderByidDesc();
 		model.addAttribute("AllForum",result);
 		return "/Forum/allposts"; //上面網址用的jsp
 		
@@ -205,21 +203,23 @@ public class ForumController {
 //		
 //	}
 	
-	//新C
+	//新C 後
 	@PostMapping(path = "/Forum/add") 
 	public ResponseEntity<String> add(@RequestParam("postCategory") String postCategory, 
 			@RequestParam("name") String name, 
 			@RequestParam("post") String post, 
 //			@RequestParam("fImage") MultipartFile fImage,
 			HttpServletRequest request) throws MalformedURLException {
-		System.out.println("測試");
+
 		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		String postTime = timeFormat.format(date);
 		
 		Member member = (Member)request.getSession().getAttribute("memberData"); //T
-		ForumBean fBean=new ForumBean(postCategory, name, post, postTime, postTime, member.getName()); //T
+//		ForumBean fBean=new ForumBean(postCategory, name, post, postTime, postTime, member.getName());
+		ForumBean fBean=new ForumBean(postCategory, name, post, postTime, postTime, member.getName(), member.getId()); //T
 		forumservice.addForum(fBean);
+		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
@@ -227,7 +227,7 @@ public class ForumController {
 //		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
 	
-	//新C
+	//新C 前
 	@PostMapping(path = "/addposts") 
 	public ResponseEntity<String> addo(@RequestParam("postCategory") String postCategory, 
 			@RequestParam("name") String name, 
@@ -240,7 +240,8 @@ public class ForumController {
 		String postTime = timeFormat.format(date);
 		
 		Member member = (Member)request.getSession().getAttribute("memberData"); //T
-		ForumBean fBean=new ForumBean(postCategory, name, post, postTime, postTime, member.getName()); //T
+//		ForumBean fBean=new ForumBean(postCategory, name, post, postTime, postTime, member.getName());
+		ForumBean fBean=new ForumBean(postCategory, name, post, postTime, postTime, member.getName(), member.getId()); //T
 		forumservice.addForum(fBean);
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -248,6 +249,7 @@ public class ForumController {
 		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(fBean));
 //		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
+	
 	
 //	//舊D
 //	@PostMapping("/Forum/delete")
@@ -258,11 +260,21 @@ public class ForumController {
 //		
 //	}
 	
-	//新D
+	//新D 後
 //	@DeleteMapping(path = "/Forum/delete/{id}") //path自己隨便設，要對應jsp?用adDelete.jsp刪除
 	@DeleteMapping(path = "/Forum/detail/{id}") //path自己隨便設，要對應jsp?用detail.jsp刪除
 	@ResponseBody
 	public String deleteForumById(@PathVariable("id") int id) {
+		
+		forumservice.deleteForumById(id);
+		return "Delete OK"; //不會顯示因為有@ResponseBody
+		
+	}
+	
+	//新D 前
+	@DeleteMapping(path = "/postdetail/{id}")
+	@ResponseBody
+	public String deleteForumByIdo(@PathVariable("id") int id) {
 		
 		forumservice.deleteForumById(id);
 		return "Delete OK"; //不會顯示因為有@ResponseBody
