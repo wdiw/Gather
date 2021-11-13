@@ -486,7 +486,7 @@
 															<option value="科技">科技</option>
 															<option value="設計">設計</option>
 															<option value="藝術"> 藝術</option>
-															<option value="教育">教育</option>
+															<option value="遊戲">遊戲</option>
 															<option value="挺好店">挺好店</option>
 
 														</select>

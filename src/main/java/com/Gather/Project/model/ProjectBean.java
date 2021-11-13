@@ -43,7 +43,7 @@ public class ProjectBean implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "projectBean",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "projectBean",cascade = CascadeType.ALL)
 	Set<FavoriteBean> favoriteBeans=new HashSet<>();
 	
@@ -91,6 +91,7 @@ public class ProjectBean implements Serializable {
 		this.pStatus=pStatus;
 		this.reason=reason;
 		this.pCategory=pCategory;
+		this.pAmountNow=0;
 		this.sponsorCount=0;
 	}
 
