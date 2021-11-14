@@ -55,6 +55,10 @@
 							height: 400px;
 							width: 100%;
 						}
+
+						.btn{
+							color: white;
+						}
 					</style>
 				</head>
 
@@ -64,9 +68,9 @@
 						<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 							<div
 								class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-								<a class="navbar-brand brand-logo mr-5" href="../index.html"><img
+								<a class="navbar-brand brand-logo mr-5" href="/Gather"><img
 										src="../images/logo.svg" class="mr-2" alt="logo" /></a>
-								<a class="navbar-brand brand-logo-mini" href="../index.html"><img
+								<a class="navbar-brand brand-logo-mini" href="/Gather"><img
 										src="../images/logo-mini.svg" alt="logo" /></a>
 							</div>
 							<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -696,7 +700,7 @@
 									//管理者按通過
 									$("#passButton").click(function () {
 
-										alert("按下通過")
+										
 										$("#pStatus").val("通過");//把狀態改為通過
 										var pStatus = $("#pStatus").val();
 										//var reason = $("#reason").val("已通過審核並上架");
@@ -741,7 +745,7 @@
 
 									//管理者按不通過
 									$("#NotPassButton").click((async () => {
-										// var reason="AA";
+										
 
 										const { value: text } = await Swal.fire({
 											input: 'textarea',
@@ -779,13 +783,13 @@
 												})
 											},
 											error: function (xhr, text) {
-												console.log("status code: " + xhr.status);
-												console.log("error message: " + text);
-												Swal.fire({
-													title: '更新失敗',
-													icon: 'error',
-													text: "更新失敗",
-												})
+												// console.log("status code: " + xhr.status);
+												// console.log("error message: " + text);
+												// Swal.fire({
+												// 	title: '更新失敗',
+												// 	icon: 'error',
+												// 	text: "更新失敗",
+												// })
 											}
 
 										})

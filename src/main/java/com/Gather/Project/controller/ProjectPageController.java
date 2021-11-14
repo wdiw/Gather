@@ -39,29 +39,17 @@ public class ProjectPageController {
 	// 管理者查詢所有提案
 		@GetMapping("/Project/allProjectInBackstage")
 		public String list(Model model,HttpServletRequest request) {
-			Member memberData = (Member)request.getSession().getAttribute("memberData");
-			String mStatus = memberData.getStatus();
-			
-			if(mStatus.equals("會員")) {
-				//會員
-				List<ProjectBean> result = projectService.getAllProjectBymID(memberData.getId());
-				model.addAttribute("allproject", result);
-				
-			}else {
 				//管理者
 				List<ProjectBean> result = projectService.getAllProject();
 				model.addAttribute("allproject", result);
-				
-			}
 			return "Project/allproject";
 		}
 		
 		
 		
-	
-		// By Id 找尋單一資料並且跳轉
-		@GetMapping("/Project/project")
-		public String getProjectById(@RequestParam("pID") Integer pID, Model model) {
+		// 管理者者查看計畫詳細內容
+		@GetMapping("/Project/managerProjectDetail")
+		public String managerGetProjectById(@RequestParam("pID") Integer pID, Model model) {
 			System.out.println("pID=" + pID);
 			ProjectBean projectBean = projectService.getProjectById(pID);
 			List<ProjectPlanBean> projectPlanList = projectPlanService.getProjectPlansByProjectBean(projectBean);
@@ -72,6 +60,40 @@ public class ProjectPageController {
 			return "Project/productdetail";
 									
 		}
+		
+		
+		
+		// 會員查詢所有提案
+				@GetMapping("/Project/userProjects")
+				public String userProjectList(Model model,HttpServletRequest request) {
+					Member memberData = (Member)request.getSession().getAttribute("memberData");
+						
+						List<ProjectBean> result = projectService.getAllProjectBymID(memberData.getId());
+						model.addAttribute("allproject", result);
+					return "Project/userProjects";
+				}
+		
+		
+	
+		
+		
+		
+	
+		// 使用者查看計畫詳細內容
+		@GetMapping("/Project/userProjectDetail")
+		public String getProjectById(@RequestParam("pID") Integer pID, Model model) {
+			System.out.println("pID=" + pID);
+			ProjectBean projectBean = projectService.getProjectById(pID);
+			List<ProjectPlanBean> projectPlanList = projectPlanService.getProjectPlansByProjectBean(projectBean);
+			model.addAttribute("project", projectBean);//計畫本身
+			model.addAttribute("projectPlanList", projectPlanList);//計畫的所有方案
+			model.addAttribute("projectID", pID);
+			
+			return "Project/userProjectDetail";
+									
+		}
+		
+		
 		
 		
 

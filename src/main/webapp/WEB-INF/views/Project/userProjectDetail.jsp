@@ -149,7 +149,6 @@
 							border: 1px solid #3288d8;
 							color: #3288d8;
 						}
-						
 					</style>
 				</head>
 
@@ -163,7 +162,7 @@
 					<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 						id="ftco-navbar">
 						<div class="container">
-							<a class="navbar-brand" href="/Gather">Gather</a>
+							<a class="navbar-brand" href="./">Gather</a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="oi oi-menu"></span> Menu
@@ -230,7 +229,7 @@
 					<div class="hero-wrap hero-bread" style="background-image: url('/Gather/images/bg_6.jpg');">
 						<div class="container">
 							<div class="row no-gutters slider-text align-items-center justify-content-center">
-								<h1 style="font-weight: bold;">提出計畫</h1>
+								<h1 style="font-weight: bold;">詳細計畫內容</h1>
 
 							</div>
 						</div>
@@ -248,229 +247,179 @@
 									<div class="col-8 grid-margin stretch-card">
 										<div class="card">
 											<div class="card-body">
-
-
+											
 												<p class="card-description">
 
 												</p>
 												<form id="form" class="forms-sample">
+													<div class="form-group">
+														<label for='pID'>計畫編號</label>
+														<input name="pID" id="pID" class="form-control"
+															value="${project.pID}" readonly>
+													</div>
 
 
 													<div class="form-group">
 														<label for="pName">計畫名稱</label>
-														<input id="pName" name="pName" class="form-control" type='text'>
+														<input id="pName" name="pName" class="form-control"
+															value="${project.pName}" type='text'>
 													</div>
-
 													<div class="form-group">
 														<label for="pTarget">計畫目標金額</label>
 														<input id="pTarget" name="pTarget" class="form-control"
-															type='number' value="10000" min="100" step="100">
-
+															value="${project.pTarget}" type='text'>
 													</div>
+
+
 
 													<div class="form-group">
 														<label for="pSDate">計畫開始日期</label>
 														<input id="pSDate" name="pSDate" class="form-control"
-															type='Date' >
+															value="${project.pSDate}" type='Date'>
 													</div>
 
 													<div class="form-group">
 														<label for="pEDate">計畫結束日期</label>
 														<input id="pEDate" name="pEDate" class="form-control"
-															type='Date'>
+															value="${project.pEDate}" type='Date'>
 													</div>
 
-													<div class="form-group">
-														<label for="pEDate">請選擇計畫類別</label>
-														<select class="form-control" id="pCategory" name="pCategory">
-															<option value="科技">科技</option>
-															<option value="設計">設計</option>
-															<option value="藝術"> 藝術</option>
-															<option value="教育">教育</option>
-															<option value="挺好店">挺好店</option>
-
-														</select>
-													</div>
 
 													<div class="form-group">
-														<label>計畫封面</label>
-														<input type="file" name="pImage" class="file-upload-default"
-															id="pImage">
+														<label>更換封面</label>
+														<input type="file" name="changeImageCover"
+															class="file-upload-default" id="changeImageCover">
+
 														<div class="input-group col-xs-12">
 															<input type="text" class="form-control file-upload-info"
 																disabled placeholder="上傳圖片">
 
 															<span class="input-group-append">
 																<button class="file-upload-browse btn btn-primary"
-																	type="button">上傳</button>
+																	type="button" id="coverImageUpload">上傳</button>
 															</span>
 														</div>
 													</div>
 
+
 													<div class="form-group">
 
-														<img style="position: relative; left: 250px" src="" width="350"
-															height="300" alt="請選擇照片" id="pImageCover" name="pImageCover"
+														<img style="position: relative; left: 250px"
+															src="../${project.pImageCover}" width="350" height="300"
+															alt="請選擇照片" id="pImageCover" name="pImageCover"
 															class="img-rounded">
 													</div>
 
-
-													<div class="form-group" >
-														<label for="pDescribe">計畫簡述</label>
+													<div class="form-group">
+														<label for="pDescribe">計畫描述</label>
 														<textarea rows="4" cols="50" id="pDescribe" name="pDescribe"
-															class="form-control"></textarea>
-													</div>
-
-													<div class="form-group" >
-													<label>計畫完整內容</label>
-													<textarea id="pContent"  name="pContent" class="form-control"></textarea>
-													</div>
-
-													
-
-
-													<!--回饋方案一-->
-													<div class="form-group">
-														<label for="projectPlanPrice1">回饋方案1金額</label>
-														<input id="projectPlanPrice1" name="projectPlanPrice1"
-															class="form-control" type='number' value="10000" min="100"
-															>
-
+															class="form-control">${project.pDescribe}</textarea>
 													</div>
 
 													<div class="form-group">
-														<label for="ETA1">回饋方案1預計實現時間</label>
-														<input id="ETA1" name="ETA1" class="form-control" type='month'>
-													</div>
-
-													<div class="form-group">
-														<label for="projectPlanContent1">回饋方案1內容</label>
-														<textarea rows="4" cols="50" id="projectPlanContent1"
-															name="projectPlanContent1" class="form-control" placeholder="內容項目請以正斜線(/)作為換行符號"></textarea>
+														<label for="pContent">計畫完整內容</label>
+														<textarea rows="4" cols="50" id="pContent" name="pContent"
+															class="form-control">${project.pContent}</textarea>
 													</div>
 
 
-													<div class="form-group">
-														<label>回饋方案1圖片</label>
-														<input type="file" name="projectPlanImage1"
-															class="file-upload-default" id="projectPlanImage1">
-														<div class="input-group col-xs-12">
-															<input type="text" class="form-control file-upload-info"
-																disabled placeholder="上傳圖片">
+													<c:forEach items='${projectPlanList}' var='projectPlan'
+														varStatus="status">
 
-															<span class="input-group-append">
-																<button class="file-upload-browse btn btn-primary"
-																	type="button">上傳</button>
-															</span>
+														<!--回饋方案一-->
+														<div class="form-group">
+															<label
+																for="projectPlanPrice${status.count}">回饋方案${status.count}金額</label>
+															<input id="projectPlanPrice${status.count}"
+																name="projectPlanPrice${status.count}"
+																class="form-control" type='number'
+																value="${projectPlan.projectPlanPrice}" min="100"
+																step="100">
+
 														</div>
-													</div>
-
-													<div class="form-group">
-
-														<img style="position: relative; left: 250px" src="" width="350"
-															height="300" alt="請選擇圖片" id="projectPlanImageCover1"
-															name="projectPlanImageCover1" class="img-rounded">
-													</div>
-
-
-
-													<!--回饋方案二-->
-													<div class="form-group">
-														<label for="projectPlanPrice2">回饋方案2金額</label>
-														<input id="projectPlanPrice2" name="projectPlanPrice2"
-															class="form-control" type='number' min="100">
-
-													</div>
-
-													<div class="form-group">
-														<label for="ETA2">回饋方案2預計實現時間</label>
-														<input id="ETA2" name="ETA2" class="form-control" type='month'>
-													</div>
-
-													<div class="form-group">
-														<label for="projectPlanContent2">回饋方案2內容</label>
-														<textarea rows="4" cols="50" id="projectPlanContent2"
-															name="projectPlanContent2" class="form-control" placeholder="內容項目請以正斜線(/)作為換行符號"></textarea>
-													</div>
-
-
-													<div class="form-group">
-														<label>回饋方案2圖片</label>
-														<input type="file" name="projectPlanImage2"
-															class="file-upload-default" id="projectPlanImage2">
-														<div class="input-group col-xs-12">
-															<input type="text" class="form-control file-upload-info"
-																disabled placeholder="上傳圖片">
-
-															<span class="input-group-append">
-																<button class="file-upload-browse btn btn-primary"
-																	type="button">上傳</button>
-															</span>
+														<div class="form-group">
+															<label
+																for="ETA${status.count}">回饋方案${status.count}預計實現時間</label>
+															<input id="ETA${status.count}" name="ETA${status.count}"
+																value="${projectPlan.ETA}" class="form-control"
+																type='month'>
 														</div>
-													</div>
 
-													<div class="form-group">
-
-														<img style="position: relative; left: 250px" src="" width="350"
-															height="300" alt="請選擇圖片" id="projectPlanImageCover2"
-															name="projectPlanImageCover2" class="img-rounded">
-													</div>
-
-
-													<!--回饋方案三-->
-													<div class="form-group">
-														<label for="projectPlanPrice3">回饋方案3金額</label>
-														<input id="projectPlanPrice3" name="projectPlanPrice3"
-															class="form-control" type='number' min="100">
-
-													</div>
-
-													<div class="form-group">
-														<label for="ETA3">回饋方案3預計實現時間</label>
-														<input id="ETA3" name="ETA3" class="form-control" type='month'>
-													</div>
-
-													<div class="form-group">
-														<label for="projectPlanContent3">回饋方案3內容</label>
-														<textarea rows="4" cols="50" id="projectPlanContent3"
-															name="projectPlanContent3" class="form-control" placeholder="內容項目請以正斜線(/)作為換行符號"></textarea>
-													</div>
-
-
-													<div class="form-group">
-														<label>回饋方案3圖片</label>
-														<input type="file" name="projectPlanImage3"
-															class="file-upload-default" id="projectPlanImage3">
-														<div class="input-group col-xs-12">
-															<input type="text" class="form-control file-upload-info"
-																disabled placeholder="上傳圖片">
-
-															<span class="input-group-append">
-																<button class="file-upload-browse btn btn-primary"
-																	type="button">上傳</button>
-															</span>
+														<div class="form-group">
+															<label
+																for="projectPlanContent${status.count}">回饋方案${status.count}內容</label>
+															<textarea rows="4" cols="50"
+																id="projectPlanContent${status.count}"
+																name="projectPlanContent${status.count}"
+																class="form-control">${projectPlan.projectPlanContent}</textarea>
 														</div>
-													</div>
+
+
+														<div class="form-group">
+															<label>回饋方案${status.count}圖片</label>
+															<input type="file" name="projectPlanImage${status.count}"
+																class="file-upload-default"
+																id="projectPlanImage${status.count}">
+															<div class="input-group col-xs-12">
+																<input type="text" class="form-control file-upload-info"
+																	disabled placeholder="上傳圖片">
+
+																<span class="input-group-append">
+																	<button class="file-upload-browse btn btn-primary"
+																		type="button" disabled>上傳</button>
+																</span>
+															</div>
+														</div>
+
+
+														<div class="form-group">
+
+															<img style="position: relative; left: 250px"
+																src="../${projectPlan.projectPlanImage}" width="350"
+																height="300" alt="請選擇圖片"
+																id="projectPlanImageCover${status.count}"
+																name="projectPlanImageCover${status.count}"
+																class="img-rounded">
+														</div>
+
+
+													</c:forEach>
+
+
+
 
 													<div class="form-group">
-
-														<img style="position: relative; left: 250px" src="" width="350"
-															height="300" alt="請選擇圖片" id="projectPlanImageCover3"
-															name="projectPlanImageCover3" class="img-rounded">
+														<label for="pStatus">狀態</label>
+														<input id="pStatus" name="pStatus" class="form-control"
+															value="${project.pStatus}" type='text'>
 													</div>
-													
-												
-													<button id="test"  name='test'
-													class="btn btn-primary mr-2">一鍵輸入</button>
 
-													<button id="addProject" type='submit' name='addProject'
-														class="btn btn-primary mr-2">送出</button>
+
+													<div class="form-group">
+														<label for="reason">狀態說明</label>
+														<textarea rows="4" cols="50" id="reason" name="reason"
+															class="form-control">${project.reason}</textarea>
+													</div>
+
+
+
+													<!-- 以下為按鈕 -->
+													<button id="sendButton" type='button' name='updateButton'
+														class="btn btn-primary mr-2">送出審核</button>
+
+
+													<button id="passButton" type='button' name='passButton'
+														class="btn btn-info">通過</button>
+
+													<button id="NotPassButton" type='button' name='NotPassButton'
+														class="btn btn-warning">不通過</button>
+
+													<button id="deleteButton" type='button' name='deleteButton'
+														class="btn btn-danger">刪除</button>
 
 												</form>
-
-
-
 											</div>
+
 										</div>
 
 
@@ -610,143 +559,273 @@
 						<script src="/Gather/js/member-center.js"></script>
 
 
-						<script>
-							$("#pImageCover").hide();//一開始圖片隱藏
-							$("#projectPlanImageCover1").hide();//一開始圖片隱藏
-							$("#projectPlanImageCover2").hide();//一開始圖片隱藏
-							$("#projectPlanImageCover3").hide();//一開始圖片隱藏
+						<script type="text/javascript">
 
-							//當更換封面
-							$("#pImage").on("change", function () {
-								var changeImageCover = $("#pImage")[0].files[0];
-								var reader = new FileReader;
-								reader.onload = function (e) {
-									$('#pImageCover').attr('src', e.target.result);
-								}
-								reader.readAsDataURL(changeImageCover);
-								$("#pImageCover").show();//圖片顯示
-
-							});
-
-							//當更換回饋一圖片
-							$("#projectPlanImage1").on("change", function () {
-								var changeImageCover = $("#projectPlanImage1")[0].files[0];
-								var reader = new FileReader;
-								reader.onload = function (e) {
-									$('#projectPlanImageCover1').attr('src', e.target.result);
-								}
-								reader.readAsDataURL(changeImageCover);
-								$("#projectPlanImageCover1").show();//圖片顯示
-
-							});
-
-							//當更換回饋二圖片
-							$("#projectPlanImage2").on("change", function () {
-								var changeImageCover = $("#projectPlanImage2")[0].files[0];
-								var reader = new FileReader;
-								reader.onload = function (e) {
-									$('#projectPlanImageCover2').attr('src', e.target.result);
-								}
-								reader.readAsDataURL(changeImageCover);
-								$("#projectPlanImageCover2").show();//圖片顯示
-
-							});
-
-							//當更換回饋一圖片
-							$("#projectPlanImage3").on("change", function () {
-								var changeImageCover = $("#projectPlanImage3")[0].files[0];
-								var reader = new FileReader;
-								reader.onload = function (e) {
-									$('#projectPlanImageCover3').attr('src', e.target.result);
-								}
-								reader.readAsDataURL(changeImageCover);
-								$("#projectPlanImageCover3").show();//圖片顯示
-
-							});
-
-
-
-							//送出
-							$("#form").on("submit", function (e) {
-							
-								e.preventDefault();
-							
-
-								var form = document.getElementById("form");
-								var formData = new FormData(form);//把表單的資料裝成data
-								var url = "<spring:url value='/Project/addProject'/>"
-
-
-								$.ajax({
-									// 'Content-Type': 'multipart/form-data',
-									// 使用 multipart/form-data 在此不需要設定 Content-Type。
-									contentType: false, //required
-									processData: false, // required
-									mimeType: 'multipart/form-data',
-									url: url,
-									type: "POST",
-
-									data: formData,
-
-									success: function (data) {
-										Swal.fire({
-											title: '提交成功',
-											icon: 'success',
-											text: "已經提交計畫，請待管理員審核！",
-											position: 'center',
-
-										}).then((result) => {
-											if (result.isConfirmed) {
-												location.href = "<c:url value='/Project/userProjects'/>";
-											}
-										})
-									},
-									error: function (xhr, text) {
-										console.log("status code: " + xhr.status);
-										console.log("error message: " + text);
-										Swal.fire({
-											title: '提交失敗',
-											icon: 'error',
-											text: "計畫提交失敗",
-										})
-									}
-								})
-
-							})//送出結束
-
-
-						</script>
-
-						<script>
 							$(document).ready(function () {
 								$('#pContent').summernote();
-							});
+
+
+								var projectID = ${ project.pID };//抓專案ID
+								var mStatus = "${sessionScope.memberData.status}"//取得會員身分
+
+
+								if (mStatus == '管理員') {
+									//管理員身分
+									$("#passButton").show();
+									$("#NotPassButton").show();
+									$("#sendButton").hide();
+
+
+
+
+								} else {
+									//會員身分
+
+									$("#sendButton").show();
+									$("#passButton").hide();
+									$("#NotPassButton").hide();
+									$("#deleteButton").hide();
+									// $(".form-control").attr("disabled", true)
+									$(".form-control").attr("readonly", true)
+									$("#pDescribe").attr("readonly", false);
+									$("#pContent").attr("readonly", false);
+								}
+
+
+
+
+								//當更換圖片
+								$("#changeImageCover").on("change", function () {
+									var changeImageCover = $("#changeImageCover")[0].files[0];
+									var reader = new FileReader;
+									reader.onload = function (e) {
+										$('#pImageCover').attr('src', e.target.result);
+									}
+									reader.readAsDataURL(changeImageCover);
+
+								});
+
+
+								//管理者按通過
+								$("#passButton").click(function () {
+
+									alert("按下通過")
+									$("#pStatus").val("通過");//把狀態改為通過
+									var pStatus = $("#pStatus").val();
+									//var reason = $("#reason").val("已通過審核並上架");
+
+
+
+									var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
+									$.ajax({
+										url: url,
+										type: 'PUT',
+										data: { pStatus: pStatus, reason: "已通過審核並上架" },
+										success: function (data) {
+											Swal.fire({
+												title: '更新成功',
+												icon: 'success',
+												text: "已經更新！",
+												position: 'center',
+
+											}).then((result) => {
+												if (result.isConfirmed) {
+													location.href = "<c:url value='/Project/allProjectInBackstage'/>";
+												}
+											})
+										},
+										error: function (xhr, text) {
+											console.log("status code: " + xhr.status);
+											console.log("error message: " + text);
+											Swal.fire({
+												title: '更新失敗',
+												icon: 'error',
+												text: "更新失敗",
+											})
+										}
+
+									})
+								})
+
+
+
+								//管理者按不通過
+								$("#NotPassButton").click((async () => {
+									// var reason="AA";
+
+									const { value: text } = await Swal.fire({
+										input: 'textarea',
+										inputLabel: 'Message',
+										inputPlaceholder: 'Type your message here...',
+										inputAttributes: {
+											'aria-label': 'Type your message here'
+										},
+										showCancelButton: true,
+										height: 20
+
+									})
+
+
+									$("#pStatus").val("未通過");//把狀態改為未通過
+									var pStatus = $("#pStatus").val();
+									var reason = text;//存管理員所寫的理由
+
+									var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
+									$.ajax({
+										url: url,
+										type: 'PUT',
+										data: { pStatus: pStatus, reason: reason },
+										success: function (data) {
+											Swal.fire({
+												title: '更新成功',
+												icon: 'success',
+												text: "已經更新！",
+												position: 'center',
+
+											}).then((result) => {
+												if (result.isConfirmed) {
+													location.href = "<c:url value='/Project/allProjectInBackstage'/>";
+												}
+											})
+										},
+										error: function (xhr, text) {
+											console.log("status code: " + xhr.status);
+											console.log("error message: " + text);
+											Swal.fire({
+												title: '更新失敗',
+												icon: 'error',
+												text: "更新失敗",
+											})
+										}
+
+									})
+
+								}))//NotPassButton End
+
+
+
+								//使用者按送出審核
+								$("#sendButton").click(function () {
+									$(".form-control").attr("disabled", false);//送出前必須把所有input欄位解開，不然table取不到值
+									var pStatus = $("#pStatus").val("待審核");//把狀態改為待審核
+									var reason = $("#reason").val("請待管理員進行審核");
+									var form = document.getElementById("form")
+									var formData = new FormData(form);
+									var url = "<spring:url value='/Project/theProject/" + projectID + "'/>";
+
+
+									$.ajax({
+										url: url,
+										type: 'PUT',
+										data: formData,
+										contentType: false, //required
+										processData: false, // required
+										mimeType: 'multipart/form-data',
+										success: function (data) {
+											Swal.fire({
+												title: '更新成功',
+												icon: 'success',
+												text: "已經送出審核！",
+												position: 'center',
+
+											}).then((result) => {
+												if (result.isConfirmed) {
+													location.href = "<c:url value='/Project/userProjects'/>";
+												}
+											})
+										},
+										error: function (xhr, text) {
+											console.log("status code: " + xhr.status);
+											console.log("error message: " + text);
+											Swal.fire({
+												title: '更新失敗',
+												icon: 'error',
+												text: "送出審核失敗",
+											})
+										}
+									});
+								})
+
+
+
+
+
+
+								//刪除按鈕
+								$("#deleteButton").click(function () {
+
+									const swalWithBootstrapButtons = Swal.mixin({
+										customClass: {
+											confirmButton: 'btn btn-success',
+											cancelButton: 'btn btn-danger'
+										},
+										buttonsStyling: false
+									})
+
+
+									swalWithBootstrapButtons.fire({
+										title: '確定刪除?',
+										text: "你將刪除此計畫!",
+										icon: 'warning',
+										showCancelButton: true,
+										confirmButtonText: '刪除!',
+										cancelButtonText: '取消!',
+										reverseButtons: true
+									}).then((result) => {
+										if (result.isConfirmed) {
+
+											var url = "<spring:url value='/Project/theProject/" + projectID + "'/>";
+
+											$.ajax({
+												url: url,
+												type: 'DELETE',
+												data: {},
+
+												success: function (data) {
+													Swal.fire({
+														position: 'center',
+														icon: 'success',
+														title: '刪除成功',
+
+														timer: 3000,
+														timerProgressBar: true,
+														showConfirmButton: false,
+													})
+													location.href = "<c:url value='/Project/allProjectInBackstage'/>";
+												},
+												error: function (xhr, text) {
+													swalWithBootstrapButtons.fire(
+														'失敗',
+														'刪除失敗，請確認有此紀錄 ',
+														'error'
+													)
+												}
+											})
+
+
+										}
+
+										else if (
+											/* Read more about handling dismissals below */
+											result.dismiss === Swal.DismissReason.cancel
+										) {
+											swalWithBootstrapButtons.fire(
+												'取消',
+												'已取消刪除 ',
+												'success'
+											)
+										}
+									})
+								})//刪除按鈕結束
+
+
+
+
+
+
+							})//read function 結束
 
 						</script>
-
-						<script>
-							// 	//一鍵輸入
-							$("#test").click(function (e) {
-								e.preventDefault();
-								$('#pName').val("不可思議UV消毒自潔音波電動牙刷");
-								$('#pTarget').val(500000)
-								$('#pSDate').val("2021-11-16")
-								$('#pEDate').val('2021-12-30')
-								$('#pCategory').val("科技")
-								$('#pDescribe').val("刷頭暴露在外只要一個月，細菌數就可能破10億。Lumio專利自動伸縮刷頭自帶UV殺菌艙，細菌殺光光，蘋果風金屬高顏值，清潔力台灣牙醫師也說讚。疫情結束後旅遊攜帶超方便!")
-
-								$('#projectPlanPrice1').val(1500)
-								$('#ETA1').val('2022-02')
-								$('#projectPlanContent1').val('不可思議UV消毒自潔音波電動牙刷 x1/刷頭 X3/磁吸充電器 X1')
-
-								$('#projectPlanPrice2').val(2700)
-								$('#ETA2').val('2022-02')
-								$('#projectPlanContent2').val('不可思議UV消毒自潔音波電動牙刷 x2/刷頭 X6/磁吸充電器 X2')
-
-								$('#pContent').summernote('editor.pasteHTML', '<span style="color: rgb(0, 0, 0); font-family: inherit; font-size: 2.5rem;">產品內容</span><br></p><p><span style="font-weight: bolder; color: rgb(63, 63, 63); font-family: Rubik, -apple-system, BlinkMacSystemFont, &quot;segoe ui&quot;, 微軟正黑體, &quot;microsoft jhenghei&quot;, sans-serif; font-size: 15px;"><span class="wysiwyg-color-blue" style="color: rgb(51, 102, 169);">大部分的人每天早晚會刷牙，我們使用牙刷用來保持口腔衛生，那大家關注過牙刷的衛生嗎？<br></span></span><span style="font-weight: bolder; color: rgb(63, 63, 63); font-family: Rubik, -apple-system, BlinkMacSystemFont, &quot;segoe ui&quot;, 微軟正黑體, &quot;microsoft jhenghei&quot;, sans-serif; font-size: 15px;"><span class="wysiwyg-color-blue" style="color: rgb(51, 102, 169);">這時候，來一把 Lumio｜不可思議自動伸縮UV殺菌音波電動牙刷，就能輕易解決以</span></span><span class="wysiwyg-color-red" style="color: rgb(196, 80, 89); font-family: Rubik, -apple-system, BlinkMacSystemFont, &quot;segoe ui&quot;, 微軟正黑體, &quot;microsoft jhenghei&quot;, sans-serif; font-size: 15px;"><span style="font-weight: bolder;"><span class="wysiwyg-color-blue" style="color: rgb(51, 102, 169);">上困擾！<br></span></span></span><span style="color: rgb(63, 63, 63); font-family: Rubik, -apple-system, BlinkMacSystemFont, &quot;segoe ui&quot;, 微軟正黑體, &quot;microsoft jhenghei&quot;, sans-serif; font-size: 15px;"><span class="wysiwyg-color-red" style="color: rgb(196, 80, 89);"><span style="font-weight: bolder;">後疫情時代來臨，Covid-19持續變種並四處在空氣中散佈，是時候加強你的衛生防護措施了！</span></span><span style="font-weight: bolder;"><span class="wysiwyg-color-red" style="color: rgb(196, 80, 89);">！');
-							})//一鍵輸入結束
-						</script>
-
 				</body>
 
 				</html>

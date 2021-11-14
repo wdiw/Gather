@@ -220,9 +220,9 @@ public class MemberPageController {
 	}
 
 	@GetMapping("/showMemberCenter")
-	public String showMemberCenter(Model model, HttpServletRequest req) {
+	public String showMemberCenter(Model model, HttpSession session) {
 		System.out.println("透過頁面控制器進入會員中心");
-		Member theMember = (Member) req.getSession().getAttribute("memberData");
+		Member theMember = (Member) session.getAttribute("memberData");
 		System.out.println("debug: id為" + theMember.getId());
 		model.addAttribute("allproject", projectService.getAllProjectBymID(theMember.getId()));
 		System.out.println(projectService.getAllProjectBymID(theMember.getId()));

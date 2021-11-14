@@ -400,7 +400,6 @@
 										<div class="collapse" id="charts">
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"><a class="nav-link" href="orders">訂單管理</a></li>
-												<li class="nav-item"><a class="nav-link" href="addorder">新增訂單</a></li>
 											</ul>
 										</div>
 									</li>
@@ -439,9 +438,6 @@
 											<div class="card">
 												<div class="card-body">
 													<h4 class="card-title">計畫清單</h4>
-													<button type="button" id="update"
-																			class="btn btn-inverse-warning btn-fw" 
-																			onclick='location.href="<c:url value='/Project/addProject' />"'>新增計畫</button>
 													<div class="table-responsive">
 														<table id="allProjectTable" class="table table-hover">
 															<thead>
@@ -469,7 +465,7 @@
 																	<td>
 																		<button type="button" id="update"
 																			class="btn btn-inverse-warning btn-fw"
-																			onclick='location.href="<c:url value='/Project/project?pID=${project.pID}' />"'>詳細資料</button>
+																			onclick='location.href="<c:url value='/Project/managerProjectDetail?pID=${project.pID}' />"'>詳細資料</button>
 																	</td>
 
 																</tr>

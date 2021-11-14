@@ -93,6 +93,7 @@ public class ProjectBean implements Serializable {
 		this.reason=reason;
 		this.pCategory=pCategory;
 		this.sponsorCount=0;
+		this.pAmountNow=0;
 	}
 
 	

@@ -150,7 +150,7 @@
                       <a href="/Gather/userpage" class="btn btn-inverse-success btn-fw" style="font-size: 26px;">
                         活動登陸
                       </a><br>
-                      <a href="/Gather/Project/allProjectInBackstage" class="btn btn-inverse-success btn-fw"
+                      <a href="/Gather/Project/userProjects" class="btn btn-inverse-success btn-fw"
                         style="font-size: 26px;">
                         計劃管理
                       </a><br>
