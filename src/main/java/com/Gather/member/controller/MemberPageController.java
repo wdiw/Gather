@@ -49,7 +49,7 @@ public class MemberPageController {
 	// ==========================一鍵登入 ==========================
 	@GetMapping("/oneKeyloginMember")
 	public String oneKeyloginMember(HttpSession session) {
-		Member member = memberService.queryMemberById(94);
+		Member member = memberService.queryMemberById(93);
 		session.setAttribute("memberData", member);
 		return "Project/allProjectInForestage";
 	}
@@ -73,6 +73,7 @@ public class MemberPageController {
 				int favCount = favoriteBeans.size();
 				session.setAttribute("favCount", favCount);
 				session.setAttribute("mBean", member);
+				
 				List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(member.getId());
 				if (!sBean.isEmpty()) {
 					session.setAttribute("sBean", sBean);
