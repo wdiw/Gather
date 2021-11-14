@@ -297,7 +297,7 @@ public class MemberPageController {
 			System.out.println(destFileName);
 			destFile.getParentFile().mkdirs();
 			file.transferTo(destFile);
-			m.addAttribute("fileName", theMember.getId());
+//			m.addAttribute("fileName", theMember.getId());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return "上傳失敗," + e.getMessage();
@@ -306,7 +306,7 @@ public class MemberPageController {
 			return "上傳失敗," + e.getMessage();
 		}
 
-		return "Member/member_center";
+		return "Project/allProjectInForestage";
 	}
 
 	private void savePhotoByUpdatePage(Member theMember, MultipartFile photo, HttpServletRequest req)

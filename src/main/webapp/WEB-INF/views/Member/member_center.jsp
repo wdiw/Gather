@@ -343,7 +343,8 @@
                     </div>
                     <div class="mt-3">
                       <input type="submit" value="立刻上傳"
-                        class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                        class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                        id="updatePhoto">
                     </div>
                   </form>
 

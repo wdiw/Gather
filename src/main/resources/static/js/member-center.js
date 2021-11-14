@@ -9,6 +9,14 @@ $(function () {
         }
         reader.readAsDataURL(memberImage);
     })
+    /*
+    $('#updatePhoto').click(function () {
+        setTimeout(function () {
+            $("#div2").hide();
+            $(location).attr('href', './');
+        }, 1000);
+    })
+     */
 
     //修改密碼
     $('#change').click(function () {
