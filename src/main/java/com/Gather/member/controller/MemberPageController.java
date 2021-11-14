@@ -133,7 +133,7 @@ public class MemberPageController {
 			count++;
 
 		}
-		// 使用泡沫排序法，排出前三名
+		// 使用泡沫排序法，將整個Array排序一遍
 		int n = loginArray.length;
 		int temp = 0;
 		String tempForName = "";

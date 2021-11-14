@@ -26,7 +26,7 @@ $(function() {
 
 			$.ajax({
 				type: 'post',
-				url: 'http://localhost:8080/Gather/api/login/',
+				url: '/Gather/api/login/',
 				contentType: 'application/json',
 				data: JSON.stringify(params),
 				success: function(data) {
