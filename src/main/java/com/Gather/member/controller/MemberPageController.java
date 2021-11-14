@@ -5,10 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,41 +37,50 @@ public class MemberPageController {
 	private MemberService memberService;
 	private ProjectService projectService;
 	private SponsorOrderService sponsorOrderService;
-	
+
 	@Autowired
-	public MemberPageController(
-			MemberService memberService, 
-			ProjectService projectService,
-			SponsorOrderService sponsorOrderService
-			) {
+	public MemberPageController(MemberService memberService, ProjectService projectService,
+			SponsorOrderService sponsorOrderService) {
 		this.sponsorOrderService = sponsorOrderService;
 		this.memberService = memberService;
 		this.projectService = projectService;
 	}
 
-	// ==========================SHOW
-	// PAGE=============================================
+	// ==========================一鍵登入 ==========================
+	@GetMapping("/oneKeyloginMember")
+	public String oneKeyloginMember(HttpSession session) {
+		Member member = memberService.queryMemberById(94);
+		session.setAttribute("memberData", member);
+		return "Project/allProjectInForestage";
+	}
+	@GetMapping("/oneKeyloginAdmin")
+	public String oneKeyloginAdmin(HttpSession session) {
+		Member admin = memberService.queryMemberById(4);
+		session.setAttribute("memberData", admin);
+		return "Project/allProjectInForestage";
+	}
+	
+
+	// ==========================SHOW PAGE========================
 	@GetMapping("/")
-	public String home(Model model,HttpServletRequest reg) {
-		System.out.println("透過頁面控制器進入首頁");
-		List<ProjectBean> result = projectService.getAllProjectBypStatus("通過");
-		model.addAttribute("allProject", result);
-		
-		Member member = (Member) reg.getSession().getAttribute("memberData");
-		
-		if(member!=null) {
-			List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(member.getId());
-			int favCount = favoriteBeans.size();
-			reg.getSession().setAttribute("favCount", favCount);
-			reg.getSession().setAttribute("mBean", member);
-			
-			List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(member.getId());
-			if (!sBean.isEmpty()) {
-				reg.getSession().setAttribute("sBean", sBean);
+	public String home(HttpSession session) {
+		if (session.getAttribute("allProject") == null) {
+			List<ProjectBean> result = projectService.getAllProjectBypStatus("通過");
+			session.setAttribute("allProject", result);
+			Member member = (Member) session.getAttribute("memberData");
+			if (member != null) {
+				List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(member.getId());
+				int favCount = favoriteBeans.size();
+				session.setAttribute("favCount", favCount);
+				session.setAttribute("mBean", member);
+				List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(member.getId());
+				if (!sBean.isEmpty()) {
+					session.setAttribute("sBean", sBean);
+				}
 			}
 		}
 		return "Project/allProjectInForestage";
-		}
+	}
 
 	@GetMapping("/addMember")
 	public String addMember() {
@@ -115,7 +126,8 @@ public class MemberPageController {
 			}
 			// 年齡
 			Integer theYearMemberBirth = Integer.parseInt(member.getBirthday().substring(0, 4));
-			Integer theMemberAge = 2021 - theYearMemberBirth;
+			int nowYear = java.time.LocalDate.now().getYear();
+			Integer theMemberAge = nowYear - theYearMemberBirth;
 			if (theMemberAge > 8 && theMemberAge < 17) {
 				groupA = groupA + 1;
 			} else if (theMemberAge >= 18 && theMemberAge < 35) {

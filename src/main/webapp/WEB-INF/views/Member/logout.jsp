@@ -38,19 +38,18 @@ td {
 </style>
 </head>
 <body>
-<%session.invalidate(); %>
+<%session.removeAttribute("memberData"); %>
 <%
-String content = "2" + ";URL=" + "./";
+String content = "0.2" + ";URL=" + "./";
 response.setHeader("REFRESH", content); %>
 
 <script>
 Swal.fire({
 	  position: 'center',
 	  icon: 'success',
-	 <%--title: 'Your work has been saved', --%>
-	  title: <%="'您以登出，期待再度光臨!<br>3秒後自動為您跳回到首頁'"%>,
+	  title: <%="'您以登出，期待再度光臨!<br>自動為您跳回到首頁'"%>,
 	  showConfirmButton: false,
-	  timer: 1500
+	  timer: 1000
 	})
 </script>
 </body>
