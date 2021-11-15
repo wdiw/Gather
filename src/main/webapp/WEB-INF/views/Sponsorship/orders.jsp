@@ -12,6 +12,12 @@
 	font-weight: bold;
 	
 }
+span{
+	font-size:14px
+}
+
+
+
 /*tooltip Box*/
 .con-tooltip {
 	/* position: relative; */
@@ -30,10 +36,10 @@
 	visibility: hidden;
 	z-index: 1;
 	opacity: .40;
-	width: 280px;
+	width: 320px;
 	height: 120px;
 	text-align: center;
-	padding: 23px 50px 10px;
+	padding: 24px 50px 10px;
 	background: #e5f3d5;
 	color: #333;
 	position: absolute;
@@ -160,7 +166,7 @@
 			<div
 				class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
 				<a class="navbar-brand brand-logo mr-5" href="index.html"><img
-					src="images/logo.svg" class="mr-2" alt="logo" /></a> <a
+					 width="80px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a> <a
 					class="navbar-brand brand-logo-mini" href="index.html"><img
 					src="images/logo-mini.svg" alt="logo" /></a>
 			</div>
@@ -519,9 +525,9 @@
 			<div class="content-wrapper">
 				<div class="row" style="margin: auto;">
 
-					<div class="card" style="margin-left: 20px;">
+					<div class="card" style="margin-left: 3px;">
 						<div class="card-body" >
-						<button id="csv" class="btn btn-inverse-secondary btn-fw">匯出csv檔</button>
+						<button id="csv" class="btn btn-inverse-secondary btn-fw" style="font-size:14px">匯出csv檔</button>
 							<h1 class="card-title"
 								style="text-align: center; position: relative; right: 45px;font-size: 30px">贊助訂單</h1>
 <!-- 							<div> -->
@@ -539,53 +545,53 @@
 									style="text-align: center; width: 10%;font-size: 10px" id="ordersTable">
 									<thead>
 										<tr ">
-											<th><i class="mdi mdi-nutrition"></i>訂單編號</th>
-											<th><i class="mdi mdi-account-star"></i> 贊助人編號</th>
-											<th><i class="mdi mdi-file-image"></i> 專案圖片</th>
-											<th><i class="mdi mdi-counter"></i>專案編號</th>
-											<th><i class="mdi mdi-book"></i>專案名稱</th>
-											<th><i class="mdi mdi-coin"></i>贊助金額</th>
-											<th><i class="mdi mdi-pencil"></i></th>
-											<th><i class="mdi mdi-delete"></i></th>
+											<th><span><i class="mdi mdi-nutrition"></i>訂單編號<span></th>
+											<th><span><i class="mdi mdi-account-star"></i> 贊助人編號<span></th>
+											<th><span><i class="mdi mdi-file-image"></i> 專案圖片<span></th>
+											<th><span><i class="mdi mdi-counter"></i>專案編號<span></th>
+											<th><span><i class="mdi mdi-book"></i>專案名稱<span></th>
+											<th><span><i class="mdi mdi-coin"></i>贊助金額<span></th>
+											<th><span><i class="mdi mdi-pencil"></i><span></th>
+											<th><span><i class="mdi mdi-delete"></i><span></th>
 										</tr>
 									</thead>
 									<c:forEach items='${orders}' var='order' varStatus="status">
 										<tr>
-											<td>${order.sID}</td>
-											<td>
+											<td><span>${order.sID}<span></td>
+											<td><span>
 
 												<div class="con-tooltip bottom">
-													<p>${order.mID}</p>
+													<p><span>${order.mID}</span></p>
 													<div class="tooltip" style="font-weight: bold;">
 
-														<p>姓名 : ${order.sName}</p>
-														<p>電話 : ${order.sPhone}</p>
-														<p>地址 : ${order.sAddress}</p>
-														<p>信箱 : ${order.sEmail}</p>
+														<p><span>姓名 : ${order.sName}</span></p>
+														<p><span>電話 : ${order.sPhone}</span></p>
+														<p><span>地址 : ${order.sAddress}</span></p>
+														<p><span>信箱 : ${order.sEmail}</span></p>
 													</div>
 												</div>
-											</td>
+											<span></td>
 
-											<td><img width='50' height='50'
-												src="${order.projectImage}" class="img-rounded" /></td>
+											<td><span><img width='50' height='50'
+												src="${order.projectImage}" class="img-rounded" /><span></td>
 											<td class="sPID">
 												<button type="button"
 													class="btn btn-inverse-primary btn-rounded btn-icon"
 													onclick="data(${status.index})">${order.sPID}</button>
 
-											</td>
-											<td>${order.sPName}</td>
-											<td>$${order.sTotal}</td>
-											<td>
+											<span></td>
+											<td><span>${order.sPName}<span></td>
+											<td><span>$${order.sTotal}<span></td>
+											<td><span>
 												<button type="button" id="update"
 													class="btn btn-inverse-warning btn-fw"
 													onclick='location.href="<c:url value='/order/${order.sID}'/>"'>修改</button>
-											</td>
-											<td>
+											<span></td>
+											<td><span>
 												<button type="button" id="delete"
 													class="btn btn-inverse-danger btn-fw"
 													onclick="deleteOrder(${order.sID})">刪除</button>
-											</td>
+											<span></td>
 										</tr>
 									</c:forEach>
 								</table>

@@ -51,12 +51,24 @@ public class MemberPageController {
 	public String oneKeyloginMember(HttpSession session) {
 		Member member = memberService.queryMemberById(93);
 		session.setAttribute("memberData", member);
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(member.getId());
+		int favCount = favoriteBeans.size();
+		session.setAttribute("favCount", favCount);
+		session.setAttribute("mBean", member);
+		
+		
 		return "Project/allProjectInForestage";
 	}
 	@GetMapping("/oneKeyloginAdmin")
 	public String oneKeyloginAdmin(HttpSession session) {
 		Member admin = memberService.queryMemberById(4);
 		session.setAttribute("memberData", admin);
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(admin.getId());
+		int favCount = favoriteBeans.size();
+		session.setAttribute("favCount", favCount);
+		session.setAttribute("mBean", admin);
+		
+	
 		return "Project/allProjectInForestage";
 	}
 	
@@ -64,7 +76,7 @@ public class MemberPageController {
 	// ==========================SHOW PAGE========================
 	@GetMapping("/")
 	public String home(HttpSession session) {
-		if (session.getAttribute("allProject") == null) {
+//		if (session.getAttribute("allProject") == null) {
 			List<ProjectBean> result = projectService.getAllProjectBypStatus("通過");
 			session.setAttribute("allProject", result);
 			Member member = (Member) session.getAttribute("memberData");
@@ -79,7 +91,7 @@ public class MemberPageController {
 					session.setAttribute("sBean", sBean);
 				}
 			}
-		}
+//		}
 		return "Project/allProjectInForestage";
 	}
 

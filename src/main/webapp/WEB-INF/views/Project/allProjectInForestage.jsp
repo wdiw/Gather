@@ -146,7 +146,6 @@
 								href="/Gather/myFav/${mBean.id}" class="nav-link"><i
 									class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
 						</c:when>
-
 					</c:choose>
 					<!--購物車-->
 
