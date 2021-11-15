@@ -6,6 +6,11 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+*{
+font-size: 15px;
+}
+</style>
 <head>
 <title>Payment</title>
 <meta charset="utf-8">
@@ -44,7 +49,6 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="goto-here">
-<i class="fas fa-dollar-sign"></i>
 	<div class="py-1 bg-black">
 		<div class="container">
 			<div
@@ -118,7 +122,7 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span>
+						<span class="mr-2"><a href="index.html">Sponsorship</a></span> <span>Confirm</span>
 					</p>
 					<h1 class="mb-0 bread">贊助確認</h1>
 				</div>
@@ -135,20 +139,21 @@
 						<div class="row align-items-end" style="position: relative">
 							<div class="col-md-6" align="center">
 								<div class="form-group">
-									<div class="col-lg-6 mb-5 ftco-animate">
+<!-- 									<div class="col-lg-6 mb-5 ftco-animate"> -->
 										<a
 											href="./${pPBean.projectPlanImage}"
 											class="image-popup prod-img-bg"> <img
 											src="./${pPBean.projectPlanImage}"
 											class="img-fluid" alt="Colorlib Template" id="projectImage" ></a>
 											<input type="hidden" name="projectImage" value="./${pPBean.projectPlanImage}">
-										<div class="col-md-6">
+										<div class="col-md-12">
 											<div class="form-group">
 											<input type="hidden" name="sPName" value="${pBean.pName}">
-												<label for="lastname">${pBean.pName}</label>
+												<label for="lastname" style="display: inline-block;
+  text-align: left">${pPBean.projectPlanContent}</label>
 											</div>
 										</div>
-									</div>
+<!-- 									</div> -->
 								</div>
 							</div>
 							<input type="hidden" value="${mBean.id}" name="mID">

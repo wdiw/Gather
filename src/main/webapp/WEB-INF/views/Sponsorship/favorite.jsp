@@ -5,6 +5,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+*{
+font-size: 20px;
+}
+</style>
   <head>
     <title>被贊助訂單</title>
     <meta charset="utf-8">
@@ -123,7 +128,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span></p>
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">My</a></span> <span>Favorite</span></p>
             <h1 class="mb-0 bread">我的收藏</h1>
           </div>
         </div>
@@ -140,9 +145,9 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
-						        <th width="25%">專案圖片</th>
-						        <th>專案名稱</th>
-						        <th style="width:1px">贊助進度</th>
+						        <th width="6%">專案圖片</th>
+						        <th width="15%">專案名稱</th>
+						        <th width="10%">贊助進度</th>
 						        <th>贊助截止日</th>
 						        <th>移除</th>
 						      </tr>
