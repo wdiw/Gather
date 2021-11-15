@@ -40,7 +40,7 @@ public class ActivityPageController {
 	}
 	
 	
-	// 查詢所有提案
+	
 		@GetMapping("/sapageactivity")
 		public String sapageactivity(Model model) {
 	
@@ -57,7 +57,7 @@ public class ActivityPageController {
 		}
 		
 
-		// 查詢所有提案
+		
 			@GetMapping("/lottery")
 			public String lottery(Model model,HttpServletRequest request) {
 				Member member=(Member)request.getSession().getAttribute("memberData");

@@ -184,7 +184,7 @@ public class ActivityAjaxController {
 				
 				
 				String activityLogin=member.getName()+"您好，您已成功登錄活動，活動名稱:"+activity.getName();
-				Mail.SendGmail("", "ChillSeph0729@gmail.com", "Gather活動登錄成功通知",activityLogin);
+				Mail.SendGmail("Gather.WebService@gmail.com", "ChillSeph0729@gmail.com", "Gather活動登錄成功通知",activityLogin);
 				
 				
 			
@@ -205,7 +205,7 @@ public class ActivityAjaxController {
 			Member member = (Member)request.getSession().getAttribute("memberData");
 			ActivityBean activity=activityParticipationService.getActivityParticipationBeanById(id).getActivityBean();
 			String activityLogin=member.getName()+"您好，您成功取消活動，活動名稱:"+activity.getName();
-			Mail.SendGmail("", "ChillSeph0729@gmail.com", "Gather取消活動登錄通知",activityLogin);
+			Mail.SendGmail("Gather.WebService@gmail.com", "ChillSeph0729@gmail.com", "Gather取消活動登錄通知",activityLogin);
 					activityParticipationService.deleteActivityParticipationByactivityParticipationid(id);
 				
 					
@@ -215,8 +215,11 @@ public class ActivityAjaxController {
 		//輸出Json資料
 		@GetMapping("/GatherActivityOutput")
 		public ResponseEntity<String> activityOutput() throws SQLException, IOException {
-			
-			FileOutputStream fos=new FileOutputStream(new File("C://Gather//GatherActivityOutput//GatherActivityOutput.json"));
+			File file=new File("C://Gather//GatherActivityOutput//");
+			 if(!file.exists()) {
+			     file.mkdirs();
+			    }
+			FileOutputStream fos=new FileOutputStream(new File(file,"GatherActivityOutput.json"));
 			OutputStreamWriter osw=new OutputStreamWriter(fos);
 			BufferedWriter fileWriter = new BufferedWriter(osw);
 		    fileWriter.write("活動ID, 活動名稱,活動內容,活動開始日期,活動結束日期,發布時間,活動類別");
@@ -237,8 +240,11 @@ public class ActivityAjaxController {
 		//輸出Json資料
 				@GetMapping("/GatherActivityLoginOutput")
 				public ResponseEntity<String> activityLoginOutput() throws SQLException, IOException {
-					
-					FileOutputStream fos=new FileOutputStream(new File("C://Gather//GatherActivityLoginOutput//GatherActivityLoginOutput.json"));
+					File file=new File("C://Gather//GatherActivityLoginOutput//");
+					 if(!file.exists()) {
+					     file.mkdirs();
+					    }
+					FileOutputStream fos=new FileOutputStream(new File(file,"GatherActivityLoginOutput.json"));
 					OutputStreamWriter osw=new OutputStreamWriter(fos);
 					BufferedWriter fileWriter = new BufferedWriter(osw);
 				    fileWriter.write("活動登錄ID, 活動ID,活動名稱,活動登錄時間,會員ID,會員名稱");
@@ -264,7 +270,7 @@ public class ActivityAjaxController {
 					
 					Member member = (Member)request.getSession().getAttribute("memberData");
 					String lotteryreultmail=member.getName()+"您好，恭喜您參加Gather線上抽獎活動抽中:"+lotteryesult;
-					Mail.SendGmail("", "ChillSeph0729@gmail.com", "Gather線上抽獎中獎通知",lotteryreultmail);
+					Mail.SendGmail("Gather.WebService@gmail.com", "ChillSeph0729@gmail.com", "Gather線上抽獎中獎通知",lotteryreultmail);
 
 					
 				    return new ResponseEntity<String>(HttpStatus.OK);

@@ -39,13 +39,33 @@
 
 
 					<script>
-						$(function () {
-
-
-							$('#allActivityTable').DataTable();
-
-
-						})
+					
+					$(document).ready(function () {
+							$('#allActivityTable').DataTable({
+								"language": {
+									"processing": "處理中...",
+									"loadingRecords": "載入中...",
+									"lengthMenu": "顯示筆數 MENU ",
+									"zeroRecords": "沒有符合的結果",
+									"info": "顯示第 START 至 END 項結果，共 TOTAL 項",
+									"infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+									"infoFiltered": "(從 MAX 項結果中過濾)",
+									"infoPostFix": "",
+									"search": "搜尋:",
+									"paginate": {
+										"first": "第一頁",
+										"previous": "上一頁",
+										"next": "下一頁",
+										"last": "最後一頁"
+									},
+									"aria": {
+										"sortAscending": ": 升冪排列",
+										"sortDescending": ": 降冪排列"
+									}
+								},
+								"order": [[0, "desc"]]
+							});
+						});
 
 					</script>
 					<style>
@@ -62,6 +82,55 @@
 							word-wrap: break-word;
 							word-break: break-all;
 						}
+
+      /* 調整按鈕顏色 */
+      .btn.btn-primary {
+       background: #3288d8;
+       border: 1px solid #3288d8;
+       color: #fff;
+      }
+
+      /* 調整按鈕hover */
+      .btn.btn-primary:hover {
+       background: #fff;
+       border: 1px solid #3288d8;
+       color: #3288d8;
+      }
+      
+      .btn {
+       font-size: 16px;
+      }
+
+      #managerProjectOutputCSV,#managerProjectOutputJson{
+       font-size: 8px;
+      }
+
+      /* 調整按鈕顏色 */
+      .btn-inverse-warning:not(.btn-inverse-light) {
+       background: #3288d8;
+       border: 1px solid #3288d8;
+       color: #fff;
+      }
+
+      /* 調整按鈕hover */
+      .btn-inverse-warning:not(.btn-inverse-light):hover {
+       background: #fff;
+       border: 1px solid #3288d8;
+       color: #3288d8;
+      }
+
+
+      .sidebar .nav .nav-item .nav-link .menu-title {
+       color: inherit;
+       display: inline-block;
+       font-size: 18px;
+       line-height: 1;
+       vertical-align: middle;
+      }
+      
+      span{
+       font-size: 18px;
+      }
 					</style>
 				</head>
 
@@ -71,9 +140,8 @@
 						<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 							<div
 								class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-								<a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg"
-										class="mr-2" alt="logo" /></a> <a class="navbar-brand brand-logo-mini"
-									href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
+								<a class="navbar-brand brand-logo mr-5" href="index.html"><img
+									width="80px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a>
 							</div>
 							<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
 								<button class="navbar-toggler navbar-toggler align-self-center" type="button"
@@ -209,7 +277,7 @@
 									<div class="tab-pane fade show active scroll-wrapper" id="todo-section"
 										role="tabpanel" aria-labelledby="todo-section">
 										<div class="add-items d-flex px-3 mb-0">
-											<form class="form w-100">
+											<form class="form w-100" id="form">
 												<div class="form-group d-flex">
 													<input type="text" class="form-control todo-list-input"
 														placeholder="Add To-do">
@@ -448,10 +516,10 @@
 								<div class="content-wrapper">
 									<div class="row">
 
-										<div class="col-lg-12 grid-margin stretch-card">
-											<div class="card">
-												<div class="card-body">
-													<h4 class="card-title">活動清單</h4> <a
+										<div class="col-lg-12 grid-margin stretch-card"  >
+											<div class="card"  >
+												<div class="card-body" >
+													<h2 class="card-title">活動清單</h2> <a
 														href="<spring:url value='/addActivity' />"
 														class="btn btn-primary">新增活動</a>
 													<button class="btn btn-primary" id='outputdata'>資料輸出</button>
@@ -459,46 +527,46 @@
 													<%-- Add class <code>.table-hover</code> --%>
 														<!--                   </p> -->
 														<div class="table-responsive">
-															<table class="table table-hover" id='allActivityTable'>
+															<table class="table table-hover" id='allActivityTable' >
 																<thead>
 																	<tr>
-																		<th>活動編號</th>
-																		<th>活動名稱</th>
-																		<th>活動圖片</th>
-																		<th>開始日期</th>
-																		<th>結束日期</th>
-																		<th>活動內容</th>
-																		<th>活動登錄人數</th>
-																		<th>活動編輯</th>
+																		<th><span>活動編號</span></th>
+																		<th><span>活動名稱</span></th>
+																		<th><span>活動圖片</span></th>
+																		<th><span>開始日期</span></th>
+																		<th><span>結束日期</span></th>
+																		<th><span>活動內容</span></th>
+																		<th><span>活動登錄人數</span></th>
+																		<th><span>活動編輯</span></th>
 
 																	</tr>
 																</thead>
 
 																<c:forEach items='${activities}' var='activity'>
 																	<tr>
-																		<td class='activityid'>${activity.id}</td>
-																		<td>
+																		<td class='activityid'>${activity.id}</span></td>
+																		<td><span>
 																			<div class='warp'><span class='activityname'>${activity.name}</span></div>
-																		</td>
-																		<td><img width='50' height='50'
+																		</span></td>
+																		<td><span><img width='50' height='50'
 																				src="<c:url value='/ActivitygetPicture/${activity.id}'/>"
-																				class="img-rounded" /></td>
-																		<td>${activity.beginDate}</td>
-																		<td>${activity.endDate}</td>
-																		<td>
+																				class="img-rounded" /></span></td>
+																		<td><span>${activity.beginDate}</span></td>
+																		<td><span>${activity.endDate}</span></td>
+																		<td><span>
 																			<div class="warp">${activity.description}
 																			</div>
-																		</td>
-																		<td class="participationcount">${activity.participationcount}</td>
+																		</span></td>
+																		<td class="participationcount">${activity.participationcount}</span></td>
 
 
-																		<td>
+																		<td><span>
 
 																			<a href="<spring:url value='/Activity/activity?id=${activity.id}' />"
 																				class="btn btn-primary">詳細內容
 																			</a>
 
-																		</td>
+																		</span></td>
 																	</tr>
 																</c:forEach>
 															</table>

@@ -365,7 +365,7 @@
 
 						$('#js-start').on('click', function () {
 							if(activityParticipationid!=""){
-								alert(activityParticipationid);
+							
 							$('#js-start').hide();
 							$('.js-img-shake').show();
 							$('.js-img-ok').hide();
