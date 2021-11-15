@@ -47,6 +47,7 @@ public class MemberPageController {
 	}
 
 	// ==========================一鍵登入 ==========================
+	//讓我的收藏正常顯示
 	@GetMapping("/oneKeyloginMember")
 	public String oneKeyloginMember(HttpSession session) {
 		Member member = memberService.queryMemberById(93);
@@ -59,6 +60,7 @@ public class MemberPageController {
 		
 		return "Project/allProjectInForestage";
 	}
+	//讓我的收藏正常顯示
 	@GetMapping("/oneKeyloginAdmin")
 	public String oneKeyloginAdmin(HttpSession session) {
 		Member admin = memberService.queryMemberById(4);
@@ -75,6 +77,7 @@ public class MemberPageController {
 
 	// ==========================SHOW PAGE========================
 	@GetMapping("/")
+	//讓我的收藏正常顯示
 	public String home(HttpSession session) {
 //		if (session.getAttribute("allProject") == null) {
 			List<ProjectBean> result = projectService.getAllProjectBypStatus("通過");

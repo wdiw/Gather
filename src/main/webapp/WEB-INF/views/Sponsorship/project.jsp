@@ -118,7 +118,7 @@
 						</div>
 					</nav>
       <!-- END nav -->
-
+<!-- 更改排版 -->
       <div class="hero-wrap hero-bread" style="background-image: url('../images/bg_6.jpg');">
         <div class="container">
           <div class="row no-gutters slider-text align-items-center justify-content-center">
