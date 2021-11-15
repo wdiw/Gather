@@ -519,8 +519,9 @@
 			<div class="content-wrapper">
 				<div class="row" style="margin: auto;">
 
-					<div class="card" style="margin-left: 80px;">
+					<div class="card" style="margin-left: 20px;">
 						<div class="card-body" >
+						<button id="csv" class="btn btn-inverse-secondary btn-fw">匯出csv檔</button>
 							<h1 class="card-title"
 								style="text-align: center; position: relative; right: 45px;font-size: 30px">贊助訂單</h1>
 <!-- 							<div> -->
@@ -675,12 +676,40 @@
         	  
           }
           
-          
-          
-
-        
 	
 	</script>
+	 <script>
+       $('#csv').click(function () {
+                  var url = "<c:url value='/Csv/'/>";
+                  $.ajax({
+                    url: url,
+                    type: 'get',
+                    contentType: "application/json; charset=utf-8",
+                    data: {},
+                    success: function (data) {
+                      Swal.fire({
+                        title: '匯出成功',
+                        icon: 'success',
+                        text: "已匯出全部訂單資料！ 按OK回訂單管理首頁！",
+                        position: 'center',
+
+                      })
+                    },
+                    error: function (xhr, text) {
+                      console.log("status code: " + xhr.status);
+                      console.log("error message: " + text);
+                      Swal.fire({
+                        title: '匯出失敗',
+                        icon: 'error',
+                        text: "匯出失敗，請重新嘗試!",
+                      })
+                    }
+                  });
+
+                });
+
+              
+     </script>
 	
 	
 </body>

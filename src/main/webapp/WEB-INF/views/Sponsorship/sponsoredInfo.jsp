@@ -124,8 +124,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span></p>
-            <h1 class="mb-0 bread">My Wishlist</h1>
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Sponsored</a></span> <span>List</span></p>
+            <h1 class="mb-0 bread">被贊助清單</h1>
           </div>
         </div>
       </div>
@@ -133,7 +133,7 @@
 
     <section class="ftco-section ftco-cart" >
     <div>
-    <p class="text-center"><a href="sponsorshipInfo" class="btn btn-primary py-3 px-4">贊助清單</a></p>
+    <p style="margin-left: 205px"><a href="sponsorshipInfo" class="btn btn-primary py-3 px-4">贊助清單</a></p>
     
     </div>
 			<div class="container">

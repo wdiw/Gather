@@ -6,6 +6,11 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+*{
+font-size: 15px;
+}
+</style>
 <head>
 <title>Payment</title>
 <meta charset="utf-8">
@@ -19,13 +24,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet"
-	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-	crossorigin="anonymous" />
-	 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
+ <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
 	rel="stylesheet">
@@ -123,7 +122,7 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span>
+						<span class="mr-2"><a href="index.html">Sponsorship</a></span> <span>Confirm</span>
 					</p>
 					<h1 class="mb-0 bread">贊助確認</h1>
 				</div>
@@ -140,20 +139,21 @@
 						<div class="row align-items-end" style="position: relative">
 							<div class="col-md-6" align="center">
 								<div class="form-group">
-									<div class="col-lg-6 mb-5 ftco-animate">
+<!-- 									<div class="col-lg-6 mb-5 ftco-animate"> -->
 										<a
 											href="./${pPBean.projectPlanImage}"
 											class="image-popup prod-img-bg"> <img
 											src="./${pPBean.projectPlanImage}"
 											class="img-fluid" alt="Colorlib Template" id="projectImage" ></a>
 											<input type="hidden" name="projectImage" value="./${pPBean.projectPlanImage}">
-										<div class="col-md-6">
+										<div class="col-md-12">
 											<div class="form-group">
 											<input type="hidden" name="sPName" value="${pBean.pName}">
-												<label for="lastname">${pBean.pName}</label>
+												<label for="lastname" style="display: inline-block;
+  text-align: left">${pPBean.projectPlanContent}</label>
 											</div>
 										</div>
-									</div>
+<!-- 									</div> -->
 								</div>
 							</div>
 							<input type="hidden" value="${mBean.id}" name="mID">
