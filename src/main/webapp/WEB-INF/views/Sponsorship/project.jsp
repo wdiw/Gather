@@ -60,7 +60,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 						id="ftco-navbar">
 						<div class="container">
-							<a class="navbar-brand" href="./">Gather</a>
+							<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="oi oi-menu"></span> Menu
@@ -108,7 +108,7 @@
 																		class="fas fa-hand-holding-heart"></i>[${favCount}]</a>
 															</li>
 														</c:when>
-
+															
 													</c:choose>
 													<!--購物車-->
 
@@ -118,15 +118,13 @@
 						</div>
 					</nav>
       <!-- END nav -->
-
+<!-- 更改排版 -->
       <div class="hero-wrap hero-bread" style="background-image: url('../images/bg_6.jpg');">
         <div class="container">
           <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-              <p class="breadcrumbs">
-                <span class="mr-2"><a href="index.html">Home</a></span> <span>Shop</span>
-              </p>
-              <h1 class="mb-0 bread">Shop</h1>
+            
+              <h1 class="mb-0 bread">計畫內容</h1>
             </div>
           </div>
         </div>
@@ -141,60 +139,13 @@
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
               <h3>${pBean.pName}</h3>
-              <div class="rating d-flex">
-                <p class="text-left mr-4">
-                  <a href="#" class="mr-2">5.0</a> <a href="#"><span class="ion-ios-star-outline"></span></a> <a
-                    href="#"><span class="ion-ios-star-outline"></span></a> <a href="#"><span
-                      class="ion-ios-star-outline"></span></a> <a href="#"><span
-                      class="ion-ios-star-outline"></span></a> <a href="#"><span
-                      class="ion-ios-star-outline"></span></a>
-                </p>
-                <p class="text-left mr-4">
-                  <a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
-                </p>
-                <p class="text-left">
-                  <a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
-                </p>
-              </div>
+              
               <p class="price">
-                <span>$${pBean.pTarget}</span>
+                <span>$${pBean.pTarget}.NTD</span>
               </p>
 
               <p>${pBean.pDescribe}</p>
-              <div class="row mt-4">
-                <div class="col-md-6">
-                  <div class="form-group d-flex">
-                    <div class="select-wrap">
-                      <div class="icon">
-                        <span class="ion-ios-arrow-down"></span>
-                      </div>
-                      <select name="" id="" class="form-control">
-                        <option value="">方案一</option>
-                        <option value="">方案二</option>
-                        <option value="">方案三</option>
-                        <option value="">方案四</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="input-group col-md-6 d-flex mb-3">
-                  <span class="input-group-btn mr-2">
-                    <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
-                      <i class="ion-ios-remove"></i>
-                    </button>
-                  </span> <input type="text" id="quantity" name="quantity" class="quantity form-control input-number"
-                    value="1" min="1" max="100"> <span class="input-group-btn ml-2">
-                    <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-                      <i class="ion-ios-add"></i>
-                    </button>
-                  </span>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-md-12">
-                  <p style="color: #000;">80 piece available</p>
-                </div>
-              </div>
+              
               <div>
 
                 <c:choose>
@@ -209,12 +160,13 @@
                     </button>
                   </c:otherwise>
                 </c:choose>
-
+                <br>
+                <br>
                 <div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3"
                   data-url="http://localhost:8080/Gather/showProject/${pBean.pID}" data-color="default"
                   data-size="large" data-count="true" style="display: none;"></div>
                 <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async"
-                  defer="defer"></script>
+                  ></script>
                 
 
               </div>
@@ -225,13 +177,12 @@
             <div class="col-md-12 nav-link-wrap">
               <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1"
-                  role="tab" aria-controls="v-pills-1" aria-selected="true">Description</a>
+                  role="tab" aria-controls="v-pills-1" aria-selected="true" style="width:553px">贊助內容</a>
 
-                <a class="nav-link ftco-animate mr-lg-1" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2"
-                  role="tab" aria-controls="v-pills-2" aria-selected="false">Manufacturer</a>
+            
 
                 <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab"
-                  aria-controls="v-pills-3" aria-selected="false">Reviews</a>
+                  aria-controls="v-pills-3" aria-selected="false" style="width:553px">討論區</a>
 
               </div>
             </div>
@@ -242,7 +193,7 @@
 
                 <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
                   <div class="p-4">
-                    <h3 class="mb-4">贊助內容</h3>
+                    
                     <div class="row" id="ProjectContentText">
                       <div class="col-sm-10">
                         <p>${pBean.pContent}</p>
@@ -273,17 +224,7 @@
                   </div>
                 </div>
 
-                <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
-                  <div class="p-4">
-                    <h3 class="mb-4">Manufactured By Nike</h3>
-                    <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it
-                      would have been rewritten a thousand times and everything that was left from its origin would be
-                      the word "and" and the Little Blind Text should turn around and return to its own, safe country.
-                      But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy
-                      Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency,
-                      where they abused her for their.</p>
-                  </div>
-                </div>
+               
                 <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
                   <div class="row p-4">
                     <div class="col-md-7">

@@ -7,7 +7,7 @@
 <html lang="en">
 <style>
 *{
-font-size: 20px;
+font-size: 15px;
 }
 </style>
   <head>
@@ -65,7 +65,7 @@ font-size: 20px;
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 						id="ftco-navbar">
 						<div class="container">
-							<a class="navbar-brand" href="./">Gather</a>
+							<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="oi oi-menu"></span> Menu
@@ -146,8 +146,8 @@ font-size: 20px;
 						    <thead class="thead-primary">
 						      <tr class="text-center">
 						        <th width="6%">專案圖片</th>
-						        <th width="15%">專案名稱</th>
-						        <th width="10%">贊助進度</th>
+						        <th width="12%">專案名稱</th>
+						        <th width="6%">贊助進度</th>
 						        <th>贊助截止日</th>
 						        <th>移除</th>
 						      </tr>

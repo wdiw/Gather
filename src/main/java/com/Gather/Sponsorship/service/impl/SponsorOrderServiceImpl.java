@@ -123,10 +123,10 @@ public class SponsorOrderServiceImpl implements SponsorOrderService{
 	}
 
 
-	@Override
-	public List<SponsorOrderBean> getOrdersBySearch(Set<String> search) {
-		return sponsorOrderRepository.findOrdersBySearch(search);
-	}
+//	@Override
+//	public List<SponsorOrderBean> getOrdersBySearch(Set<String> search) {
+//		return sponsorOrderRepository.findOrdersBySearch(search);
+//	}
 
 
 	@Override

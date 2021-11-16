@@ -10,6 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
@@ -61,7 +62,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 						id="ftco-navbar">
 						<div class="container">
-							<a class="navbar-brand" href="./">Gather</a>
+							<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="oi oi-menu"></span> Menu
@@ -133,7 +134,7 @@
 
     <section class="ftco-section ftco-cart" >
     <div>
-    <p style="margin-left: 205px"><a href="sponsorshipInfo" class="btn btn-primary py-3 px-4">贊助清單</a></p>
+    <p style="margin-left: 205px;"><a href="sponsorshipInfo" class="btn btn-primary py-3 px-4" style="font-size:16px">贊助清單</a></p>
     
     </div>
 			<div class="container">
@@ -142,14 +143,14 @@
     				<div class="cart-list">
 	    				<table class="table">
 						    <thead class="thead-primary">
-						      <tr class="text-center">
+						      <tr class="text-center" >
 						        <th width="25%">方案名稱</th>
 						        <th>贊助方案</th>
 						        <th style="width:1px">贊助人</th>
 						        <th>連絡電話</th>
 						        <th>寄送地址</th>
 						        <th>贊助金額</th>
-						        <th>付款方式</th>
+						        <th width="10%">付款方式</th>
 						        <th>訂單狀態</th>
 						        <th>訂單時間</th>
 						        <th>修改</th>
@@ -168,7 +169,7 @@
 						        <td class="price sName">${sBean.sName}</td>
 						        <td class="price sPhone">${sBean.sPhone}</td>
 						        <td class="product-name sAddress">${sBean.sAddress}</td>
-						        <td class="price sTotal">${sBean.sTotal}</td>
+						        <td class="price sTotal">$${sBean.sTotal}</td>
 						        <td class="price paymentMethod">${sBean.paymentMethod}</td>
 						        
 								<td class="price ">
@@ -347,7 +348,13 @@
 					
 				data:data,
 				success: function (data) {
-					alert("已完成訂單狀態修改🎊")
+					Swal.fire({
+                  title: '更新成功',
+                  icon: 'success',
+                  text: "已經更新訂單狀態！",
+                  position: 'center',
+
+                })
 					location.reload();
 				
 				},

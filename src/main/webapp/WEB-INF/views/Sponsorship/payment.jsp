@@ -10,6 +10,14 @@
 *{
 font-size: 15px;
 }
+
+.billing-form label {
+    color: #000000;
+    font-size: 22px !important;
+}
+.billing-form .form-control {
+    font-size: 16px !important;
+}
 </style>
 <head>
 <title>Payment</title>
@@ -47,6 +55,7 @@ font-size: 15px;
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body class="goto-here">
 	<div class="py-1 bg-black">
@@ -83,35 +92,62 @@ font-size: 15px;
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="/Gather">Gather</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
+							<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="oi oi-menu"></span> Menu
+							</button>
 
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item dropdown active"><a
-						class="nav-link dropdown-toggle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="shop.html">Shop</a> <a
-								class="dropdown-item" href="product-single.html">Single
-								Product</a> <a class="dropdown-item" href="cart.html">Cart</a> <a
-								class="dropdown-item" href="checkout.html">Checkout</a>
-						</div></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item cta cta-colored"><a
-						href="/Gather/myFav/${mBean.id}" class="nav-link"><i class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
+							<div class="collapse navbar-collapse" id="ftco-nav">
+								<ul class="navbar-nav ml-auto">
+
+									<li class="nav-item dropdown active">
+										
+										<div class="dropdown-menu" aria-labelledby="dropdown04">
+											<a class="dropdown-item" href="shop.html">Shop</a>
+											<a class="dropdown-item" href="product-single.html">Single Product</a>
+											<a class="dropdown-item" href="cart.html">Cart</a>
+											<a class="dropdown-item" href="checkout.html">Checkout</a>
+										</div>
+									</li>
+									<li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
 
 
-				</ul>
-			</div>
-		</div>
+
+
+								<c:choose>
+                    <c:when test="${memberData!=null}">
+                      <li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
+                      <li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
+                      <c:choose>
+                        <c:when test="${memberData.status eq '管理員'}">
+                          <li class="nav-item"><a href="/Gather/backend" class="nav-link">管理員後台</a></li>
+                        </c:when>
+                      </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                      <li class="nav-item"><a href="/Gather/pages/member/register.html" class="nav-link">註冊</a></li>
+                      <li class="nav-item"><a href="/Gather/pages/member/login.html" class="nav-link">登入</a></li>
+                    </c:otherwise>
+                  </c:choose>
+
+
+													<!--我的最愛-->
+													<c:choose>
+														<c:when test="${mBean.id!=null}">
+															<li class="nav-item cta cta-colored"><a
+																	href="/Gather/myFav/${mBean.id}" class="nav-link"><i
+																		class="fas fa-hand-holding-heart"></i>[${favCount}]</a>
+															</li>
+														</c:when>
+															
+													</c:choose>
+													<!--購物車-->
+
+
+								</ul>
+							</div>
+						</div>
 	</nav>
 	<!-- END nav -->
 
@@ -146,11 +182,11 @@ font-size: 15px;
 											src="./${pPBean.projectPlanImage}"
 											class="img-fluid" alt="Colorlib Template" id="projectImage" ></a>
 											<input type="hidden" name="projectImage" value="./${pPBean.projectPlanImage}">
-										<div class="col-md-12">
+										<div class="col-md-12" style="padding:0px">
 											<div class="form-group">
 											<input type="hidden" name="sPName" value="${pBean.pName}">
-												<label for="lastname" style="display: inline-block;
-  text-align: left">${pPBean.projectPlanContent}</label>
+												<p for="lastname" style="display: inline-block;padding:0;
+  text-align: left">${pPBean.projectPlanContent}</p>
 											</div>
 										</div>
 <!-- 									</div> -->
@@ -248,24 +284,24 @@ font-size: 15px;
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="radio">
-												<label><input type="radio" name="paymentMethod"
-													class="mr-2" value="信用卡">ECPay</label>
+												<p><input type="radio" name="paymentMethod"
+													class="mr-2" value="信用卡">ECPay</p>
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="radio">
-												<label><input type="radio" name="paymentMethod"
-													class="mr-2" value="Line Pay">Line Pay</label>
+												<p><input type="radio" name="paymentMethod"
+													class="mr-2" value="Line Pay">Line Pay</p>
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="checkbox">
-												<label><input type="checkbox" value="" class="mr-2">
-													我已閱讀並接受條款和條件</label>
+												<p><input type="checkbox" value="" class="mr-2">
+													我已閱讀並接受條款和條件</p>
 											</div>
 										</div>
 									</div>

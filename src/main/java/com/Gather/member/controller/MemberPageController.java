@@ -47,24 +47,39 @@ public class MemberPageController {
 	}
 
 	// ==========================一鍵登入 ==========================
+	//讓我的收藏正常顯示
 	@GetMapping("/oneKeyloginMember")
 	public String oneKeyloginMember(HttpSession session) {
 		Member member = memberService.queryMemberById(93);
 		session.setAttribute("memberData", member);
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(member.getId());
+		int favCount = favoriteBeans.size();
+		session.setAttribute("favCount", favCount);
+		session.setAttribute("mBean", member);
+		
+		
 		return "Project/allProjectInForestage";
 	}
+	//讓我的收藏正常顯示
 	@GetMapping("/oneKeyloginAdmin")
 	public String oneKeyloginAdmin(HttpSession session) {
 		Member admin = memberService.queryMemberById(4);
 		session.setAttribute("memberData", admin);
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(admin.getId());
+		int favCount = favoriteBeans.size();
+		session.setAttribute("favCount", favCount);
+		session.setAttribute("mBean", admin);
+		
+	
 		return "Project/allProjectInForestage";
 	}
 	
 
 	// ==========================SHOW PAGE========================
 	@GetMapping("/")
+	//讓我的收藏正常顯示
 	public String home(HttpSession session) {
-		if (session.getAttribute("allProject") == null) {
+//		if (session.getAttribute("allProject") == null) {
 			List<ProjectBean> result = projectService.getAllProjectBypStatus("通過");
 			session.setAttribute("allProject", result);
 			Member member = (Member) session.getAttribute("memberData");
@@ -79,7 +94,7 @@ public class MemberPageController {
 					session.setAttribute("sBean", sBean);
 				}
 			}
-		}
+//		}
 		return "Project/allProjectInForestage";
 	}
 
