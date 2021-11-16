@@ -149,6 +149,14 @@
 							border: 1px solid #3288d8;
 							color: #3288d8;
 						}
+
+						#navBarTop {
+   						 max-width: 1850px;
+						}
+
+						.nav-link{
+							font-size: 16px !important;
+							}
 					</style>
 				</head>
 
@@ -161,8 +169,9 @@
 					<!-- partial:../../partials/_navbar.html -->
 					<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 						id="ftco-navbar">
-						<div class="container">
-							<a class="navbar-brand" href="./">Gather</a>
+						<div class="container" id="navBarTop">
+							<a href="/Gather">
+								<img style="margin-left:10px;" width="100px" height="80px"  src="/Gather/images/G.png"></a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="oi oi-menu"></span> Menu

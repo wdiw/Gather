@@ -73,9 +73,9 @@
 							font-size: 16px;
 						}
 
-						#managerProjectOutputCSV,#managerProjectOutputJson{
+						/* #managerProjectOutputCSV,#managerProjectOutputJson{
 							font-size: 8px;
-						}
+						} */
 
 						/* 調整按鈕顏色 */
 						.btn-inverse-warning:not(.btn-inverse-light) {
@@ -92,15 +92,15 @@
 						}
 
 
-						.sidebar .nav .nav-item .nav-link .menu-title {
+						/* .sidebar .nav .nav-item .nav-link .menu-title {
 							color: inherit;
 							display: inline-block;
 							font-size: 18px;
 							line-height: 1;
 							vertical-align: middle;
-						}
+						} */
 						
-						span{
+						.tableSpan{
 							font-size: 18px;
 						}
 
@@ -491,27 +491,27 @@
 														<table id="allProjectTable" class="table table-hover">
 															<thead>
 																<tr>
-																	<th><span>計畫編號</span></th>
-																	<th><span>計畫名稱</span></th>
+																	<th><span class="tableSpan">計畫編號</span></th>
+																	<th><span class="tableSpan">計畫名稱</span></th>
 																	<!-- <th>計畫圖片</th> -->
 																	<th><span>計畫目標</span></th>
 
-																	<th><span>計劃狀態</span></th>
-																	<th><span>詳細資料</span></th>
+																	<th><span class="tableSpan">計劃狀態</span></th>
+																	<th><span class="tableSpan">詳細資料</span></th>
 																</tr>
 															</thead>
 															<c:forEach items='${allproject}' var='project'>
 																<tr>
-																	<td><span>${project.pID}</span></span></td>
-																	<td><span>${project.pName}</span></td>
+																	<td><span class="tableSpan">${project.pID}</span></span></td>
+																	<td><span class="tableSpan">${project.pName}</span></td>
 																	<!-- <td><span><img width='50' height='50'
 																			src="/Gather/${project.pImageCover}"
 																			class="img-rounded" /></span></td> -->
 
-																	<td><span>${project.pTarget}</span></td>
-																	<td><span>${project.pStatus}</span></td>
+																	<td><span class="tableSpan">${project.pTarget}</span></td>
+																	<td><span class="tableSpan">${project.pStatus}</span></td>
 
-																	<td><span>
+																	<td><span >
 																		<button type="button" id="update"
 																			class="btn btn-inverse-warning btn-fw"
 																			onclick='location.href="<c:url value='/Project/managerProjectDetail?pID=${project.pID}' />"'>詳細資料</button>

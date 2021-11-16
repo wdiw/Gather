@@ -47,7 +47,7 @@
           </div>
           <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container" id="navBarTop">
-             <a href="/Gather"> <img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png"></a>
+             <a href="/Gather"> <img style="margin-left:10px;" width="100px" height="90px"  src="/Gather/images/G.png"></a>
               
               
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"

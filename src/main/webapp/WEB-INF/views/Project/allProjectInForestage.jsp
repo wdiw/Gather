@@ -67,6 +67,10 @@
 #content{
     max-width: 1400px;
 }
+
+#searchBtn{
+	font-size: 16px !important;
+}
 </style>
 </head>
 
@@ -99,6 +103,7 @@
 								class="dropdown-item" href="checkout.html">Checkout</a>
 						</div>
 					</li>
+					
 					<li class="nav-item"><a href="/Gather/allposts"
 						class="nav-link">Blog</a></li>
 
@@ -112,6 +117,7 @@
 							<li class="nav-item"><a href="/Gather/showLogout"
 								class="nav-link">登出</a></li>
 							<c:choose>
+								
 								<c:when test="${memberData.status eq '管理員'}">
 									<li class="nav-item"><a href="/Gather/backend"
 										class="nav-link">管理員後台</a></li>
@@ -119,10 +125,16 @@
 							</c:choose>
 						</c:when>
 						<c:otherwise>
-						<li class="nav-item"><a href="/Gather/oneKeyloginMember"
-								class="nav-link">一鍵登入會員</a></li>
-					<li class="nav-item"><a href="/Gather/oneKeyloginAdmin"
-								class="nav-link">一鍵登入管理員</a></li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">快速登入</a>
+								<div class="dropdown-menu" aria-labelledby="dropdown04">
+								 <a class="dropdown-item" href="/Gather/oneKeyloginMember">會員</a>
+								  <a class="dropdown-item" href="/Gather/oneKeyloginBass">提案者</a>
+								  <a class="dropdown-item" href="/Gather/oneKeyloginAdmin">管理員</a>
+								</div>
+							</li>
+							  
+	
 							<li class="nav-item"><a
 								href="/Gather/pages/member/register.html" class="nav-link">註冊</a></li>
 							<li class="nav-item"><a
@@ -268,8 +280,6 @@
 
 
 
-					<section class="ftco-section bg-light">
-
 
 
 				<div class="col-md-4 col-lg-2">
@@ -279,6 +289,8 @@
 							<div class="fancy-collapse-panel">
 
 
+								<div class="panel-group" id="accordion" role="tablist"
+									aria-multiselectable="true">
 
 
 									<div class="panel panel-default">

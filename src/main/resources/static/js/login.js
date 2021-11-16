@@ -47,6 +47,16 @@ $(function() {
 
 
 					}
+					
+					if(data == 'NN'){
+						Swal.fire({
+							position: 'center',
+							title: '登入失敗',
+							text: '您的帳號已經遭到停權',
+							icon: 'error',
+							showConfirmButton: true
+						})
+					}
 
 					if (data == 'N') {
 						Swal.fire({
