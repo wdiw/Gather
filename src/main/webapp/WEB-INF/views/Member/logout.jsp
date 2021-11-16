@@ -38,7 +38,7 @@ td {
 </style>
 </head>
 <body>
-<%session.removeAttribute("memberData"); %>
+
 <%
 String content = "0.2" + ";URL=" + "./";
 response.setHeader("REFRESH", content); %>

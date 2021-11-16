@@ -243,10 +243,11 @@
                   </thead>
                   <c:forEach items='${allproject}' var='project'>
                     <tr>
-                      <td style="background-image: url(/Gather/${project.pImageCover});
+                      <!-- <td style="background-image: url(/Gather/${project.pImageCover} );
                                    background-size: cover;
                                    background-position: center;
-                                   padding: 55px;"></td>
+                                   padding: 55px;"></td> -->
+                      <td style="padding:0%;border:0px;"><img src="/Gather/${project.pImageCover}" style="width:239px; height: 200px;" alt=""></td>
                       <!-- <td>${project.pID}</td> -->
                       <td><a href="/Gather/showProject/${project.pID}"
                           style="font-size: larger;color: black;">${project.pName}</a></td>

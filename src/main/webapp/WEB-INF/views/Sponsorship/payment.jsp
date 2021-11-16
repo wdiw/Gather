@@ -213,7 +213,7 @@ font-size: 15px;
 									
 										<i class="fas fa-dollar-sign"
 											style="position: absolute; left: 10px; top: 18px; font-size: 22px; text-align: center;"></i>
-										<input type="number" class="form-control" placeholder="0" min="0"
+										<input type="number" class="form-control" placeholder="0" min="0" 
 											style="padding-left: 32PX; font-size: 20px; padding-bottom: 8px"
 											name="sBonus" id="sBonus" onchange="getBonus();getTotal()" required="required">
 									</div>

@@ -214,8 +214,11 @@ public class MemberPageController {
 	}
 
 	@GetMapping("/showLogout")
-	public String showLogout() {
+	public String showLogout(HttpSession session) {
 		System.out.println("透過頁面控制器，進入登出頁面");
+		session.removeAttribute("memberData");
+		session.removeAttribute("favCount");
+		session.removeAttribute("mBean");
 		return "Member/logout";
 	}
 
