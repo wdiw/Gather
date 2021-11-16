@@ -242,7 +242,7 @@ font-size: 15px;
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="towncity">地址</label> <input type="text"
-										class="form-control" placeholder="" value="桃園市中壢區中央路300號"
+										class="form-control" placeholder="" value="${mBean.address}"
 										name="sAddress" id="sAddress" required="required">
 								</div>
 							</div>

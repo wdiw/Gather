@@ -63,7 +63,8 @@ public class MemberRESTController {
 			String secretHashCode = SHA256Util.getSHA256StrJava(theDataBaseMember.getAccount()+randomSixDigitStr);
 			theDataBaseMember.setPassword(secretHashCode);
 			memberService.insertOrUpdateMember(theDataBaseMember);
-			String message = "http://localhost:8080/Gather/passwordReset/"+secretHashCode;
+			 
+			String message = "請點擊下方連結進行密碼重設<br>"+"<a href=\'http://localhost:8080/Gather/passwordReset/"+secretHashCode+"'"+">重設連結</a>";
 			Mail.SendGmail("Gather.WebService@gmail.com", theDataBaseMember.getAccount(), "Gather募資平台-密碼重設", message);
 			return new ResponseEntity<String>("Y", HttpStatus.OK);
 		}

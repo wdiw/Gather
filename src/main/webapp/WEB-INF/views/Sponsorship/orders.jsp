@@ -18,6 +18,8 @@
 
 
 
+
+
 /*tooltip Box*/
 .con-tooltip {
 	/* position: relative; */
@@ -87,6 +89,11 @@
 	left: 40%;
 	transform: rotate(180deg);
 }
+
+
+
+
+						
 </style>
 
 
@@ -508,7 +515,7 @@
 					<li class="nav-item"><a class="nav-link"
 						data-toggle="collapse" href="#icons" aria-expanded="false"
 						aria-controls="icons"> <i class="icon-contract menu-icon"></i>
-							<span class="menu-title">AD</span> <i class="menu-arrow"></i>
+							<span class="menu-title">Forum</span> <i class="menu-arrow"></i>
 					</a>
 						<div class="collapse" id="icons">
 							<ul class="nav flex-column sub-menu">
