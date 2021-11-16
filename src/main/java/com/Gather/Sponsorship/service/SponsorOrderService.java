@@ -36,7 +36,7 @@ public interface SponsorOrderService {
 
 	void deleteBysID(Integer sID);
 	
-	List<SponsorOrderBean> getOrdersBySearch(Set<String> search);
+//	List<SponsorOrderBean> getOrdersBySearch(Set<String> search);
 	
 	List<SponsorOrderBean> getOrdersByPID(Integer pID);
 	

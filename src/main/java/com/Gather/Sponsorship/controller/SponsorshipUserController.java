@@ -85,7 +85,7 @@ public class SponsorshipUserController {
 	  ProjectPlanBean pPBean = projectPlanService.getProjectPlanByProjectPlanID(pPID);
 	  Integer planAmount =pPBean.getProjectPlanPrice();
 	  List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
-	  ActivityBean discountActivity=activityService.getActivityById(2);
+	  ActivityBean discountActivity=activityService.getActivityById(18);
 	  int favCount = favoriteBeans.size();
 	  
 	  if(activityParticipationService.findActivityParticipationByM_idAndActivityId(discountActivity, member.getId())!=null) {
@@ -244,7 +244,7 @@ public class SponsorshipUserController {
 	//匯出資料
 	
 	@GetMapping("/Csv")
-    public ResponseEntity<String> activityLoginOutput() throws SQLException, IOException {
+    public ResponseEntity<String> ordersCSV() throws SQLException, IOException {
      
      FileOutputStream fos=new FileOutputStream(new File("D:/admin/sponsorship.csv"));
      OutputStreamWriter osw=new OutputStreamWriter(fos,"MS950");
