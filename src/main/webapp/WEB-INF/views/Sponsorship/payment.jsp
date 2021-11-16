@@ -171,7 +171,7 @@ font-size: 15px;
 			<div class="row justify-content-center">
 				<div class="col-xl-10 ftco-animate">
 					<form id="form" action="./goECPay" class="billing-form" method="POST">
-						<h3 class="mb-4 billing-heading">贊助明細</h3>
+						<p style="font-size:30px;color:black" class="mb-4 billing-heading">贊助明細</p>
 						<div class="row align-items-end" style="position: relative">
 							<div class="col-md-6" align="center">
 								<div class="form-group">
@@ -185,7 +185,7 @@ font-size: 15px;
 										<div class="col-md-12" style="padding:0px">
 											<div class="form-group">
 											<input type="hidden" name="sPName" value="${pBean.pName}">
-												<p for="lastname" style="display: inline-block;padding:0;
+												<p for="lastname" style="padding:0;
   text-align: left">${pPBean.projectPlanContent}</p>
 											</div>
 										</div>
