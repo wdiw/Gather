@@ -148,7 +148,7 @@
 		<section class="ftco-section ftco-degree-bg">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 ftco-animate">
+          <div class="col-lg-8 ">
             
             <!-- 內文 -->
             <h1 class="mb-3">[${forum.postCategory}] ${forum.name}</h1>
