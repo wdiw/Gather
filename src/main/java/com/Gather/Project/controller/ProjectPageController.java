@@ -40,7 +40,7 @@ public class ProjectPageController {
 		@GetMapping("/Project/allProjectInBackstage")
 		public String list(Model model,HttpServletRequest request) {
 				//管理者
-				List<ProjectBean> result = projectService.getAllProject();
+				List<ProjectBean> result = projectService.getAllProjectsNopContent();
 				model.addAttribute("allproject", result);
 			return "Project/allproject";
 		}

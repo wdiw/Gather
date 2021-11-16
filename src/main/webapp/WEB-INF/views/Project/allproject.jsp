@@ -11,6 +11,7 @@
 					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 					<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+					<!-- <link rel="stylesheet" href="js/sweetalert2.all.min.js"> -->
 
 					<!-- Required meta tags -->
 					<meta charset="utf-8">
@@ -30,40 +31,80 @@
 
 					<!-- Datatable-->
 					<link rel="stylesheet" type="text/css"
-						href="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.css" defer/>
+						href="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.css" defer />
 					<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.js"
-						defer></script> 
+						defer></script>
 
-						<script>
-					
-									$(document).ready(function () {
-								$('#allProjectTable').DataTable({
-									"language": {
-										"processing": "處理中...",
-										"loadingRecords": "載入中...",
-										"lengthMenu": "顯示筆數 _MENU_ ",
-										"zeroRecords": "沒有符合的結果",
-										"info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-										"infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
-										"infoFiltered": "(從 _MAX_ 項結果中過濾)",
-										"infoPostFix": "",
-										"search": "搜尋:",
-										"paginate": {
-											"first": "第一頁",
-											"previous": "上一頁",
-											"next": "下一頁",
-											"last": "最後一頁"
-										},
-										"aria": {
-											"sortAscending": ": 升冪排列",
-											"sortDescending": ": 降冪排列"
-										}
+					<script>
+
+						$(document).ready(function () {
+							$('#allProjectTable').DataTable({
+								"language": {
+									"processing": "處理中...",
+									"loadingRecords": "載入中...",
+									"lengthMenu": "顯示筆數 _MENU_ ",
+									"zeroRecords": "沒有符合的結果",
+									"info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+									"infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+									"infoFiltered": "(從 _MAX_ 項結果中過濾)",
+									"infoPostFix": "",
+									"search": "搜尋:",
+									"paginate": {
+										"first": "第一頁",
+										"previous": "上一頁",
+										"next": "下一頁",
+										"last": "最後一頁"
+									},
+									"aria": {
+										"sortAscending": ": 升冪排列",
+										"sortDescending": ": 降冪排列"
 									}
-								});
+								},
+								"order": [[0, "desc"]]
 							});
-			
-			
-								</script>
+						});
+
+
+					</script>
+
+
+					<style>
+						.btn {
+							font-size: 16px;
+						}
+
+						#managerProjectOutputCSV,#managerProjectOutputJson{
+							font-size: 8px;
+						}
+
+						/* 調整按鈕顏色 */
+						.btn-inverse-warning:not(.btn-inverse-light) {
+							background: #3288d8;
+							border: 1px solid #3288d8;
+							color: #fff;
+						}
+
+						/* 調整按鈕hover */
+						.btn-inverse-warning:not(.btn-inverse-light):hover {
+							background: #fff;
+							border: 1px solid #3288d8;
+							color: #3288d8;
+						}
+
+
+						.sidebar .nav .nav-item .nav-link .menu-title {
+							color: inherit;
+							display: inline-block;
+							font-size: 18px;
+							line-height: 1;
+							vertical-align: middle;
+						}
+						
+						span{
+							font-size: 18px;
+						}
+
+					</style>
 				</head>
 
 				<body>
@@ -72,9 +113,12 @@
 						<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 							<div
 								class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-								<a class="navbar-brand brand-logo mr-5" href="index.html"><img src="/Gather/images/logo.svg"
-										class="mr-2" alt="logo" /></a> <a class="navbar-brand brand-logo-mini"
-									href="index.html"><img src="/Gather/images/logo-mini.svg" alt="logo" /></a>
+								<a class="navbar-brand brand-logo mr-5" href="/Gather">
+									<img  width="50px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a>
+										
+										<!-- <a
+									class="navbar-brand brand-logo-mini" href="/Gather"><img
+										src="/Gather/images/logo-mini.svg" alt="logo" /></a> -->
 							</div>
 							<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
 								<button class="navbar-toggler navbar-toggler align-self-center" type="button"
@@ -437,36 +481,41 @@
 										<div class="col-lg-12 grid-margin stretch-card">
 											<div class="card">
 												<div class="card-body">
-													<h4 class="card-title">計畫清單</h4>
+													<button type="button" id="managerProjectOutputCSV"
+														class="btn btn-inverse-warning btn-fw">輸出CSV</button>
+													
+														<button type="button" id="managerProjectOutputJson"
+														class="btn btn-inverse-warning btn-fw">輸出Json</button>
+													<!-- <h4 class="card-title">計畫清單</h4> -->
 													<div class="table-responsive">
 														<table id="allProjectTable" class="table table-hover">
 															<thead>
 																<tr>
-																	<th>計畫編號</th>
-																	<th>計畫名稱</th>
+																	<th><span>計畫編號</span></th>
+																	<th><span>計畫名稱</span></th>
 																	<!-- <th>計畫圖片</th> -->
-																	<th>計畫目標</th>
-																
-																	<th>計劃狀態</th>
-																	<th>詳細資料</th>
+																	<th><span>計畫目標</span></th>
+
+																	<th><span>計劃狀態</span></th>
+																	<th><span>詳細資料</span></th>
 																</tr>
 															</thead>
 															<c:forEach items='${allproject}' var='project'>
 																<tr>
-																	<td>${project.pID}</td>
-																	<td>${project.pName}</td>
-																	<!-- <td><img width='50' height='50'
+																	<td><span>${project.pID}</span></span></td>
+																	<td><span>${project.pName}</span></td>
+																	<!-- <td><span><img width='50' height='50'
 																			src="/Gather/${project.pImageCover}"
-																			class="img-rounded" /></td> -->
-																		
-																	<td>${project.pTarget}</td>
-																	<td>${project.pStatus}</td>
+																			class="img-rounded" /></span></td> -->
 
-																	<td>
+																	<td><span>${project.pTarget}</span></td>
+																	<td><span>${project.pStatus}</span></td>
+
+																	<td><span>
 																		<button type="button" id="update"
 																			class="btn btn-inverse-warning btn-fw"
 																			onclick='location.href="<c:url value='/Project/managerProjectDetail?pID=${project.pID}' />"'>詳細資料</button>
-																	</td>
+																	</span></td>
 
 																</tr>
 															</c:forEach>
@@ -489,6 +538,64 @@
 								<script src="js/template.js"></script>
 								<script src="js/settings.js"></script>
 								<script src="js/todolist.js"></script>
+
+								<script>
+									$("#managerProjectOutputCSV").click(function () {
+										var url = "<spring:url value='/Project/projectsOutput'/>"
+										$.ajax({
+											url: url,
+											type: "GET",
+											data:{type:"csv",pStatus:"manager"},
+											success: function (data) {
+												Swal.fire({
+													title: '已轉出',
+													icon: 'success',
+													text: "資料已轉出 路徑:C:/Gather/FileOutput",
+													position: 'center'
+													
+												})
+											},error: function (xhr, text) {
+										
+										Swal.fire({
+											title: '失敗',
+											icon: 'error',
+											text: "失敗"
+										})
+									}
+
+										})
+
+									});//CSV END
+
+
+									$("#managerProjectOutputJson").click(function () {
+										var url = "<spring:url value='/Project/projectsOutput'/>"
+										$.ajax({
+											url: url,
+											type: "GET",
+											data:{type:"csv",pStatus:"manager"},
+											success: function (data) {
+												Swal.fire({
+													title: '已轉出',
+													icon: 'success',
+													text: "資料已轉出 路徑:C:/Gather/FileOutput",
+													position: 'center',
+
+												})
+											},error: function (xhr, text) {
+										
+										Swal.fire({
+											title: '失敗',
+											icon: 'error',
+											text: "失敗",
+										})
+									}
+
+										})
+
+									})
+
+								</script>
 
 
 

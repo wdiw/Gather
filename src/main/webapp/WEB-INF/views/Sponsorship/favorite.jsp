@@ -7,14 +7,7 @@
 <html lang="en">
 <style>
 *{
-font-size: 15px;
-}
-#navBarTop {
-    max-width: 1850px;
-}
-
-.nav-link{
- font-size: 16px !important;
+font-size: 20px;
 }
 </style>
   <head>
@@ -53,7 +46,17 @@ font-size: 15px;
     		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
 	    		<div class="col-lg-12 d-block">
 		    		<div class="row d-flex">
-		    			
+		    			<div class="col-md pr-4 d-flex topper align-items-center">
+					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
+						    <span class="text"></span>
+					    </div>
+					    <div class="col-md pr-4 d-flex topper align-items-center">
+					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
+						    <span class="text"></span>
+					    </div>
+					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+					    </div>
 				    </div>
 			    </div>
 		    </div>
@@ -61,8 +64,8 @@ font-size: 15px;
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 						id="ftco-navbar">
-						<div class="container" id="navBarTop">
-							<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+						<div class="container">
+							<a class="navbar-brand" href="./">Gather</a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="oi oi-menu"></span> Menu
@@ -143,8 +146,8 @@ font-size: 15px;
 						    <thead class="thead-primary">
 						      <tr class="text-center">
 						        <th width="6%">專案圖片</th>
-						        <th width="12%">專案名稱</th>
-						        <th width="6%">贊助進度</th>
+						        <th width="15%">專案名稱</th>
+						        <th width="10%">贊助進度</th>
 						        <th>贊助截止日</th>
 						        <th>移除</th>
 						      </tr>
@@ -170,7 +173,7 @@ font-size: 15px;
 						        
 <!-- 					        <td class="quantity"> -->
 								<td>
-						        	<p type='button' class="btn btn-primary py-3 px-4" id="button" onclick="delFav(${projectBeans.pID})"><i class="fas fa-trash-alt"></i></p>
+						        	<p type='button' class="btn btn-primary py-3 px-4" id="button" onclick="delFav(${pBean.pID})"><i class="fas fa-trash-alt"></i></p>
 <%-- 						        	<button type='button' style="border: 0;background-color: white" id="button" onclick="delFav(${pBean.pID})"><i class="fas fa-trash-alt"></i></button> --%>
 						        </td>
 						   

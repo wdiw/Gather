@@ -48,6 +48,8 @@
 							background: #3288d8;
 							border: 1px solid #3288d8;
 							color: #fff;
+							border-radius: 20px;
+
 						}
 
 						/* 調整按鈕hover */
@@ -67,6 +69,13 @@
 							text-align: left;
 						}
 
+						#navBarTop {
+							max-width: 1850px;
+						}
+
+						.nav-link {
+							font-size: 16px !important;
+						}
 					</style>
 				</head>
 
@@ -74,10 +83,14 @@
 					<div class="py-1 bg-black">
 
 					</div>
+
 					<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 						id="ftco-navbar">
-						<div class="container">
-							<a class="navbar-brand" href="./">Gather</a>
+						<div class="container" id="navBarTop">
+							<a href="/Gather"> <img style="margin-left:10px;" width="130px" height="100px"
+									src="/Gather/images/G.png"></a>
+
+
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="oi oi-menu"></span> Menu
@@ -190,9 +203,9 @@
 												style="font-size: 26px;">
 												活動登陸
 											</a><br>
-											<a href="/Gather/Project/allProjectInBackstage"
+											<a href="/Gather/Project/userProjects"
 												class="btn btn-inverse-success btn-fw" style="font-size: 26px;">
-												計劃管理
+												計畫管理
 											</a><br>
 											<a href="/Gather/sponsorshipInfo" class="btn btn-inverse-success btn-fw"
 												style="font-size: 26px;">
@@ -208,19 +221,17 @@
 												data-toggle="modal" style="font-size: 26px;">
 												修改密碼
 											</a><br>
-											<!--
 
-                        <a href="#addEmployeeModal" class="btn btn-inverse-success btn-fw" data-toggle="modal"
-                        style="font-size: 26px;">
-                        帳號綁定
-                      </a>
-                    -->
 										</div>
 									</div>
 								</div>
 
 								<div>
 									<a href="/Gather/Project/addProject" class="btn btn-primary py-3 px-4">新增計畫</a>
+									<button type="button" id="userProjectOutputCSV"
+										class="btn btn-primary py-3 px-4">輸出CSV</button>
+									<button type="button" id="userProjectOutputJson"
+										class="btn btn-primary py-3 px-4">輸出Json</button>
 								</div>
 								<table class="table table-hover">
 									<thead>
@@ -261,7 +272,7 @@
 													</div>
 												</div>
 											</td>
-											
+
 											<td><span style="font-size: larger;color: black;">${project.pStatus}</span>
 											</td>
 											<td><span
@@ -423,7 +434,7 @@
 								</div>
 							</div>
 						</div>
-					
+
 						<footer class="ftco-footer ftco-section">
 							<div class="container">
 								<div class="row">
@@ -543,6 +554,92 @@
 						<script src="/Gather/js/main.js"></script>
 						<script src="/Gather/js/sweetalert2.all.min.js"></script>
 						<script src="/Gather/js/member-center.js"></script>
+
+						<script>
+							$("#userProjectOutputCSV").click(function () {
+								var url = "<spring:url value='/Project/projectsOutput'/>"
+								$.ajax({
+									url: url,
+									type: "GET",
+									data: { type: "csv", pStatus: "user" },
+									success: function (data) {
+										Swal.fire({
+											title: '已轉出',
+											icon: 'success',
+											text: "資料已轉出 路徑:C:/Gather/FileOutput",
+											position: 'center',
+
+										})
+									}, error: function (xhr, text) {
+
+										Swal.fire({
+											title: '失敗',
+											icon: 'error',
+											text: "失敗",
+										})
+									}
+
+								})
+
+							});//CSV END
+
+
+							$("#userProjectOutputJson").click(function () {
+								var url = "<spring:url value='/Project/projectsOutput'/>"
+								$.ajax({
+									url: url,
+									type: "GET",
+									data: { type: "csv", pStatus: "user" },
+									success: function (data) {
+										Swal.fire({
+											title: '已轉出',
+											icon: 'success',
+											text: "資料已轉出 路徑:C:/Gather/FileOutput",
+											position: 'center',
+
+										})
+									}, error: function (xhr, text) {
+
+										Swal.fire({
+											title: '失敗',
+											icon: 'error',
+											text: "失敗",
+										})
+									}
+
+								})
+
+							})
+
+
+							$("#userProjectOutputJson").click(function () {
+								var url = "<spring:url value='/Project/projectsOutput'/>"
+								$.ajax({
+									url: url,
+									type: "GET",
+									data: { type: "json", pStatus: "user" },
+									success: function (data) {
+										Swal.fire({
+											title: '已轉出',
+											icon: 'success',
+											text: "資料已轉出！",
+											position: 'center',
+
+										})
+									}, error: function (xhr, text) {
+
+										Swal.fire({
+											title: '失敗',
+											icon: 'error',
+											text: "失敗",
+										})
+									}
+
+								})
+
+							})
+
+						</script>
 				</body>
 
 				</html>

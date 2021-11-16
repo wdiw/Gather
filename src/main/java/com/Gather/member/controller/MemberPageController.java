@@ -47,57 +47,36 @@ public class MemberPageController {
 	}
 
 	// ==========================一鍵登入 ==========================
-	//讓我的收藏正常顯示
 	@GetMapping("/oneKeyloginMember")
 	public String oneKeyloginMember(HttpSession session) {
 		Member member = memberService.queryMemberById(93);
 		session.setAttribute("memberData", member);
-		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(member.getId());
-		int favCount = favoriteBeans.size();
-		session.setAttribute("favCount", favCount);
-		session.setAttribute("mBean", member);
-		
-		
 		return "Project/allProjectInForestage";
 	}
-	//讓我的收藏正常顯示
 	@GetMapping("/oneKeyloginAdmin")
 	public String oneKeyloginAdmin(HttpSession session) {
 		Member admin = memberService.queryMemberById(4);
 		session.setAttribute("memberData", admin);
-		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(admin.getId());
-		int favCount = favoriteBeans.size();
-		session.setAttribute("favCount", favCount);
-		session.setAttribute("mBean", admin);
-		
-	
 		return "Project/allProjectInForestage";
 	}
 	
 
 	// ==========================SHOW PAGE========================
 	@GetMapping("/")
-	//讓我的收藏正常顯示
 	public String home(HttpSession session) {
-//		if (session.getAttribute("allProject") == null) {
-			List<ProjectBean> result = projectService.getAllProjectBypStatus("通過");
-			session.setAttribute("allProject", result);
-			Member member = (Member) session.getAttribute("memberData");
-			if (member != null) {
-				System.out.println("已經登入");
-				List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(member.getId());
-				int favCount = favoriteBeans.size();
-				session.setAttribute("favCount", favCount);
-				session.setAttribute("mBean", member);
-				
-				List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(member.getId());
-				if (!sBean.isEmpty()) {
-					session.setAttribute("sBean", sBean);
-				}
-			}else {
-				System.out.println("沒有登入");
+		List<ProjectBean> result = projectService.getAllProjectsNopContent();//撈計畫不含計畫內容方法
+		session.setAttribute("allProject", result);
+		Member member = (Member) session.getAttribute("memberData");
+		if (member != null) {
+			List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(member.getId());
+			int favCount = favoriteBeans.size();
+			session.setAttribute("favCount", favCount);
+			session.setAttribute("mBean", member);
+			List<SponsorOrderBean> sBean = sponsorOrderService.getOrdersByMemberID(member.getId());
+			if (!sBean.isEmpty()) {
+				session.setAttribute("sBean", sBean);
 			}
-//		}
+		}
 		return "Project/allProjectInForestage";
 	}
 
@@ -220,12 +199,8 @@ public class MemberPageController {
 	}
 
 	@GetMapping("/showLogout")
-	public String showLogout(HttpSession session) {
+	public String showLogout() {
 		System.out.println("透過頁面控制器，進入登出頁面");
-		session.removeAttribute("memberData");
-		session.removeAttribute("favCount");
-		session.removeAttribute("mBean");
-		session.removeAttribute("sBean");
 		return "Member/logout";
 	}
 

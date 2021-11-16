@@ -728,22 +728,22 @@
 							// 	//一鍵輸入
 							$("#test").click(function (e) {
 								e.preventDefault();
-								$('#pName').val("不可思議UV消毒自潔音波電動牙刷");
-								$('#pTarget').val(500000)
+								$('#pName').val("每月限量製造200個，日本職人創意設計之木皮革皮夾");
+								$('#pTarget').val(50000)
 								$('#pSDate').val("2021-11-16")
 								$('#pEDate').val('2021-12-30')
-								$('#pCategory').val("科技")
-								$('#pDescribe').val("刷頭暴露在外只要一個月，細菌數就可能破10億。Lumio專利自動伸縮刷頭自帶UV殺菌艙，細菌殺光光，蘋果風金屬高顏值，清潔力台灣牙醫師也說讚。疫情結束後旅遊攜帶超方便!")
+								$('#pCategory').val("設計")
+								$('#pDescribe').val("兼顧【輕薄】和【便利性】，收納方便。使用日本最高級的枥木皮革。創新設計，獨特使用體驗，日本大阪職人的每個月200個限量製作!")
 
-								$('#projectPlanPrice1').val(1500)
+								$('#projectPlanPrice1').val(3200)
 								$('#ETA1').val('2022-02')
-								$('#projectPlanContent1').val('不可思議UV消毒自潔音波電動牙刷 x1/刷頭 X3/磁吸充電器 X1')
+								$('#projectPlanContent1').val('➤ SHUTTO QUARTET 大阪職人設計皮夾 x 1 /（六色任選：駝色、橙色、棕色、綠色、海軍藍色、黑色）/➤專用 BOX x 1')
 
-								$('#projectPlanPrice2').val(2700)
+								$('#projectPlanPrice2').val(4500)
 								$('#ETA2').val('2022-02')
-								$('#projectPlanContent2').val('不可思議UV消毒自潔音波電動牙刷 x2/刷頭 X6/磁吸充電器 X2')
+								$('#projectPlanContent2').val('➤ SHUTTO QUARTET 大阪職人設計皮夾 x 2 /（六色任選：駝色、橙色、棕色、綠色、海軍藍色、黑色）/➤專用 BOX x 2')
 
-								$('#pContent').summernote('editor.pasteHTML', '<span style="color: rgb(0, 0, 0); font-family: inherit; font-size: 2.5rem;">產品內容</span><br></p><p><span style="font-weight: bolder; color: rgb(63, 63, 63); font-family: Rubik, -apple-system, BlinkMacSystemFont, &quot;segoe ui&quot;, 微軟正黑體, &quot;microsoft jhenghei&quot;, sans-serif; font-size: 15px;"><span class="wysiwyg-color-blue" style="color: rgb(51, 102, 169);">大部分的人每天早晚會刷牙，我們使用牙刷用來保持口腔衛生，那大家關注過牙刷的衛生嗎？<br></span></span><span style="font-weight: bolder; color: rgb(63, 63, 63); font-family: Rubik, -apple-system, BlinkMacSystemFont, &quot;segoe ui&quot;, 微軟正黑體, &quot;microsoft jhenghei&quot;, sans-serif; font-size: 15px;"><span class="wysiwyg-color-blue" style="color: rgb(51, 102, 169);">這時候，來一把 Lumio｜不可思議自動伸縮UV殺菌音波電動牙刷，就能輕易解決以</span></span><span class="wysiwyg-color-red" style="color: rgb(196, 80, 89); font-family: Rubik, -apple-system, BlinkMacSystemFont, &quot;segoe ui&quot;, 微軟正黑體, &quot;microsoft jhenghei&quot;, sans-serif; font-size: 15px;"><span style="font-weight: bolder;"><span class="wysiwyg-color-blue" style="color: rgb(51, 102, 169);">上困擾！<br></span></span></span><span style="color: rgb(63, 63, 63); font-family: Rubik, -apple-system, BlinkMacSystemFont, &quot;segoe ui&quot;, 微軟正黑體, &quot;microsoft jhenghei&quot;, sans-serif; font-size: 15px;"><span class="wysiwyg-color-red" style="color: rgb(196, 80, 89);"><span style="font-weight: bolder;">後疫情時代來臨，Covid-19持續變種並四處在空氣中散佈，是時候加強你的衛生防護措施了！</span></span><span style="font-weight: bolder;"><span class="wysiwyg-color-red" style="color: rgb(196, 80, 89);">！');
+								$('#pContent').summernote('editor.pasteHTML', '<span style="font-size: 0.875rem;">你也常遇到此狀況嗎?</span><br></p><ul style="color: rgb(63, 63, 63); font-family: Rubik, -apple-system, BlinkMacSystemFont, " segoe="" ui",="" 微軟正黑體,="" "microsoft="" jhenghei",="" sans-serif;="" font-size:="" 15px;"=""><li>覺得<u><span style="font-weight: bolder;">皮夾太厚重，攜帶使用不便</span></u>，放進口袋內鼓鼓的，好難看</li><li>想要拿出來的<u><span style="font-weight: bolder;">卡片或零錢，常常要找很久</span></u>，讓人等待的時間好尷尬….</li><li>市面上的皮夾外型設計都大同小異，<span style="font-weight: bolder;"><u>缺乏自己風格</u></span></li><li><span style="font-weight: bolder;"><u>中國製</u></span>的品質，價格便宜但<u><span style="font-weight: bolder;">耐用度沒有信心</span></u></li></ul><p><span style="color: rgb(63, 63, 63); font-size: 0.875rem;"><br></span></p><p><span style="color: rgb(63, 63, 63); font-size: 0.875rem;">來自日本大阪皮革職人打造的SHUTTO QUARTET原創設計皮夾</span><br></p><p><span style="color: rgb(63, 63, 63); font-family: Rubik, -apple-system, BlinkMacSystemFont, " segoe="" ui",="" 微軟正黑體,="" "microsoft="" jhenghei",="" sans-serif;="" font-size:="" 15px;"=""><br></span></p><ul style="color: rgb(63, 63, 63); font-family: Rubik, -apple-system, BlinkMacSystemFont, " segoe="" ui",="" 微軟正黑體,="" "microsoft="" jhenghei",="" sans-serif;="" font-size:="" 15px;"=""><li>打開皮夾，內容物一目了然，不浪費尋找東西的時間</li><li>兼顧<u><span style="font-weight: bolder;">【輕薄】和【便利性】</span></u>，收納方便</li><li>完全日本製，使用<u><span style="font-weight: bolder;">最高品質的枥木皮革</span></u></li><li>取得<u><span style="font-weight: bolder;">日本專利的獨家設計</span></u>，多種顏色選擇，適合各性別年齡族群</li><li>自己使用或是親友贈禮都相當合適</li></ul><p>');
 							})//一鍵輸入結束
 						</script>
 

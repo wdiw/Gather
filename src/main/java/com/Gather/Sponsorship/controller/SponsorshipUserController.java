@@ -244,7 +244,7 @@ public class SponsorshipUserController {
 	//匯出資料
 	
 	@GetMapping("/Csv")
-    public ResponseEntity<String> ordersCSV() throws SQLException, IOException {
+    public ResponseEntity<String> activityLoginOutput() throws SQLException, IOException {
      
      FileOutputStream fos=new FileOutputStream(new File("D:/admin/sponsorship.csv"));
      OutputStreamWriter osw=new OutputStreamWriter(fos,"MS950");

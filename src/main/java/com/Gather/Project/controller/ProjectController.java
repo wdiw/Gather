@@ -1,11 +1,14 @@
 package com.Gather.Project.controller;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +17,6 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,12 +24,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -38,17 +37,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.Gather.Activity.model.ActivityBean;
 import com.Gather.Project.model.ProjectBean;
 import com.Gather.Project.model.ProjectPlanBean;
 import com.Gather.Project.service.ProjectService;
 import com.Gather.member.entity.Member;
 import com.Gather.member.service.MemberService;
 import com.Gather.util.Mail;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 
 
 @RestController
@@ -133,6 +128,8 @@ public class ProjectController {
 		Member memberData = (Member) request.getSession().getAttribute("memberData");
 		Integer mID = memberData.getId();
 		Integer sponsorCount = projectService.getProjectById(pID).getSponsorCount();//取得已被贊助數
+		Integer  pAmountNow= projectService.getProjectById(pID).getpAmountNow();//取得累積金額
+		
 
 		// 如果圖片沒有換掉，先把原路徑抓出來，再丟回去
 		if (pImage.isEmpty()) {
@@ -140,7 +137,7 @@ public class ProjectController {
 			String filePath = projectService.getProjectById(pID).getpImageCover();
 			
 			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pSDate, pEDate, filePath, pDescribe, pContent, mID,
-					pStatus,reason,sponsorCount);
+					pStatus,reason,sponsorCount,pAmountNow);
 			projectService.updateProject(pBean);
 
 		} else {
@@ -167,7 +164,7 @@ public class ProjectController {
 
 			filePath += pName + "/" + pName + "_Cover" + ext;
 			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pSDate, pEDate, filePath, pDescribe, pContent, mID,
-					pStatus,reason,sponsorCount);
+					pStatus,reason,sponsorCount,pAmountNow);
 			projectService.updateProject(pBean);
 		}
 
@@ -452,15 +449,50 @@ public class ProjectController {
 	 
 	 
 	
-	 @GetMapping(path = "/Project/order")
-		public ResponseEntity<String>  getTopTenProjec(){
-		 List<ProjectBean> proBean = projectService.findProjectByOrderby();
-		 for (ProjectBean projectBean : proBean) {
-			System.out.println("依序的贊助次數"+projectBean.getSponsorCount()); 
-		}
-		 return new ResponseEntity<String>("Y", HttpStatus.OK);	
-	 }
+//	 @GetMapping(path = "/Project/order")
+//		public ResponseEntity<String>  getTopTenProject(){
+//		 List<ProjectBean> proBean = projectService.findProjectByOrderby();
+//		 for (ProjectBean projectBean : proBean) {
+//			System.out.println("依序的贊助次數"+projectBean.getSponsorCount()); 
+//		}
+//		 return new ResponseEntity<String>("Y", HttpStatus.OK);	
+//	 }
 	 
+	 
+//	//輸出資料
+			@GetMapping("Project/projectsOutput")
+			public ResponseEntity<String> managerProjectsOutput(
+					@RequestParam("type") String type,
+					@RequestParam("pStatus") String pStatus
+					) throws SQLException, IOException {
+				
+				
+				File file = new File("C://Gather//FileOutput//");
+				
+				if(!file.exists()) {
+					file.mkdirs();
+				}
+				
+				FileOutputStream fos=new FileOutputStream(new File(file,pStatus+"ProjectsOutput."+type));
+				
+				OutputStreamWriter osw=new OutputStreamWriter(fos,"MS950");
+				BufferedWriter fileWriter = new BufferedWriter(osw);
+				
+			    fileWriter.write("計畫編號, 計畫名稱,計畫目標,計畫狀態");
+			    
+			    List<ProjectBean> allProjects = projectService.getAllProjectsNopContent();
+			    
+			    for (ProjectBean projectBean : allProjects) {
+			    	String line = String.format("%s,%s,%s,%s",projectBean.getpID(),projectBean.getpName(),
+			    			projectBean.getpTarget(),projectBean.getpStatus() );
+		                 
+		                fileWriter.newLine();
+		                fileWriter.write(line); 
+				}
+			    fileWriter.close();
+			    osw.close();
+			    return new ResponseEntity<String>(HttpStatus.OK);
+			}
 	 
 	
 	

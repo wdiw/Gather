@@ -12,7 +12,12 @@ public interface ProjectService {
 
 	//找所有計畫資料
     List<ProjectBean> getAllProject();
+  
+    //管理者找所有計畫資料(不包括計畫內容)
+    List<ProjectBean>  getAllProjectsNopContent( );
 	
+    
+    
     //依據id 找單筆資料
 	public ProjectBean getProjectById(Integer pID);
 	

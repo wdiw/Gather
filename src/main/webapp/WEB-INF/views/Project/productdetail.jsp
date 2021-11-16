@@ -50,15 +50,29 @@
 							width: 30em;
 							padding: .75em;
 						}
-
+						/* summerNore */
 						.note-editing-area .note-editable {
 							height: 400px;
 							width: 100%;
 						}
 
-						.btn{
-							color: white;
+						.sidebar .nav .nav-item .nav-link .menu-title {
+							color: inherit;
+							display: inline-block;
+							font-size: 18px;
+							line-height: 1;
+							vertical-align: middle;
 						}
+
+						#passButton,#NotPassButton,#deleteButton{
+							color: white;
+							font-size: 16px;
+						}
+
+						label, .form-control{
+							font-size: 18px !important;
+						}
+
 					</style>
 				</head>
 
@@ -68,8 +82,7 @@
 						<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 							<div
 								class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-								<a class="navbar-brand brand-logo mr-5" href="/Gather"><img
-										src="../images/logo.svg" class="mr-2" alt="logo" /></a>
+								<a class="navbar-brand brand-logo mr-5" href="/Gather"><img  width="50px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a>
 								<a class="navbar-brand brand-logo-mini" href="/Gather"><img
 										src="../images/logo-mini.svg" alt="logo" /></a>
 							</div>
@@ -148,7 +161,7 @@
 									<li class="nav-item nav-profile dropdown">
 										<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 											id="profileDropdown">
-											<img src="../images/faces/face28.jpg" alt="profile" />
+											<img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile" />
 										</a>
 										<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
 											aria-labelledby="profileDropdown">
@@ -371,7 +384,7 @@
 							<nav class="sidebar sidebar-offcanvas" id="sidebar">
 								<ul class="nav">
 									<li class="nav-item">
-										<a class="nav-link" href="../../index.html">
+										<a class="nav-link" href="/Gather/backend">
 											<i class="icon-grid menu-icon"></i>
 											<span class="menu-title">Dashboard</span>
 										</a>
@@ -386,7 +399,9 @@
 										<div class="collapse" id="ui-basic">
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"> <a class="nav-link"
-														href="../pages/ui-features/buttons.html">會員管理</a></li>
+														href="/Gather/showAllMember">會員管理</a></li>
+												<li class="nav-item"><a class="nav-link" href="/Gather/addMember">新增會員</a>
+												</li>
 											</ul>
 										</div>
 									</li>
@@ -400,7 +415,7 @@
 										<div class="collapse" id="form-elements">
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"><a class="nav-link"
-														href="../pages/forms/basic_elements.html">全部活動</a></li>
+														href="/Gather/Activity/selectall">全部活動</a></li>
 											</ul>
 										</div>
 									</li>
@@ -413,8 +428,8 @@
 										</a>
 										<div class="collapse" id="charts">
 											<ul class="nav flex-column sub-menu">
-												<li class="nav-item"> <a class="nav-link" href="../orders">訂單管理</a></li>
-												<li class="nav-item"> <a class="nav-link" href="../addorder">新增訂單</a>
+												<li class="nav-item"> <a class="nav-link" href="/Gather/orders">訂單管理</a></li>
+												<li class="nav-item"> <a class="nav-link" href="/Gather/addorder">新增訂單</a>
 												</li>
 											</ul>
 										</div>
@@ -429,24 +444,22 @@
 										<div class="collapse" id="tables">
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"> <a class="nav-link"
-														href="../pages/tables/basic-table.html">專案管理</a></li>
+														href="/Gather/Project/allProjectInBackstage">專案管理</a></li>
 											</ul>
 										</div>
 									</li>
-									<li class="nav-item">
-										<a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
-											aria-controls="icons">
-											<i class="icon-contract menu-icon"></i>
-											<span class="menu-title">AD</span>
-											<i class="menu-arrow"></i>
-										</a>
-										<div class="collapse" id="icons">
-											<ul class="nav flex-column sub-menu">
-												<li class="nav-item"> <a class="nav-link"
-														href="../pages/icons/mdi.html">廣告管理</a></li>
-											</ul>
-										</div>
-									</li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#icons"
+										aria-expanded="false" aria-controls="icons"> <i
+											class="icon-contract menu-icon"></i>
+										<span class="menu-title">Forum</span> <i class="menu-arrow"></i>
+									</a>
+									<div class="collapse" id="icons">
+										<ul class="nav flex-column sub-menu">
+											<li class="nav-item"><a class="nav-link"
+													href="/Gather/Forum/adMain">討論區管理</a></li>
+										</ul>
+									</div>
+								</li>
 								</ul>
 							</nav>
 							<!-- partial -->
@@ -458,7 +471,7 @@
 									<div class="col-12 grid-margin stretch-card">
 										<div class="card">
 											<div class="card-body">
-												<h4 class="card-title">詳細內容</h4>
+												
 												<p class="card-description">
 
 												</p>

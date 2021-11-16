@@ -28,12 +28,24 @@ public class ProjectServiceImpl implements ProjectService {
 		this.projectRepository = projectRepository;
 	}
 
-	// 找所有資料
+	
+	// 找所有資料(包含計畫內容)
 	@Override
 	public List<ProjectBean> getAllProject() {
 		return projectRepository.findAll();
 	}
+	
+	//管理者找所有計畫資料(不包括計畫內容)
+	@Override
+	public List<ProjectBean> getAllProjectsNopContent() {
+		// TODO Auto-generated method stub
+		return projectRepository.getAllProjectsNopContent();
+	}
 
+	
+	
+	
+	
 	
 	
 	// 透過id找
@@ -68,6 +80,7 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectRepository.findBymID(mID);
 	}
 
+	
 	//管理者審核計畫通過或不通過
 	@Override
 	public void updateStatusBypID(Integer pID, String pStatus,String reason ) {
@@ -123,6 +136,9 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectBean> findProjectByOrderby() {
 		return projectRepository.findProjectByOrderby();
 	}
+
+
+	
 	
 	
 	

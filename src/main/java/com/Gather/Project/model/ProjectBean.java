@@ -58,7 +58,7 @@ public class ProjectBean implements Serializable {
 	// 更新的建構子
 	public ProjectBean(Integer pID, String pName, Integer pTarget, String pSDate,String pEDate,
 			String pImageCover,String pDescribe, String pContent, Integer mID,String pStatus,
-			String reason,Integer sponsorCount) {
+			String reason,Integer sponsorCount,Integer pAmountNow) {
 	
 		this.pID = pID;
 		this.pName = pName;
@@ -72,6 +72,7 @@ public class ProjectBean implements Serializable {
 		this.pStatus=pStatus;
 		this.reason=reason;
 		this.sponsorCount=sponsorCount;
+		this.pAmountNow=pAmountNow;
 	}
 
 	

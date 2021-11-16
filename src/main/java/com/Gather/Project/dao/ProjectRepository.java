@@ -14,14 +14,36 @@ public interface ProjectRepository extends JpaRepository<ProjectBean,Integer >,P
 	
 	
 
-	//由會員ID找到他所提的所有計畫
+	//由會員ID找到他所提的所有計畫(不包括計畫內容，以免拖慢)
+	//List<ProjectBean>  findBymID(Integer mID);
+	@Query(value="SELECT pID,pName,pTarget,pDescribe,pImageCover,pSDate,pEDate,mId,pStatus,"
+			+ "pAmountNow,reason,pCategory,sponsorCount,'' as pContent FROM Project where mId=:mID order by pID desc",nativeQuery=true)
 	List<ProjectBean>  findBymID(Integer mID);
 	
-	//找審核通過的全部計畫
+	
+	
+	//找審核通過的全部計畫(不包含計畫內容，以免拖慢)
+	@Query(value="SELECT pID,pName,pTarget,pDescribe,pImageCover,pSDate,pEDate,mId,pStatus,"
+			+ "pAmountNow,reason,pCategory,sponsorCount,'' as pContent FROM Project where pStatus='通過'"
+			+ "order by pID desc",nativeQuery=true)
 	List<ProjectBean>  findBypStatus(String pStatus);
 	
 	
 	
+	
+	//給管理者看所有計畫，不包含計畫內容
+	@Query(value="SELECT pID,pName,pTarget,pDescribe,pImageCover,pSDate,pEDate,mId,pStatus,"
+			+ "pAmountNow,reason,pCategory,sponsorCount,'' as pContent FROM Project order by pID desc",nativeQuery=true)
+	List<ProjectBean>  getAllProjectsNopContent( );
+	
+	
+	
+	
+	
+	
+	
+	
+	//依據類別搜尋
 	 @Query("select p from ProjectBean p where p.pStatus = ?1 and p.pCategory = ?2 ")
 	 List<ProjectBean> findBypStatusAndpCategory(String pStatus,String pCategory);
 	
