@@ -1,7 +1,10 @@
 package com.Gather.Activity.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import org.springframework.data.jpa.repository.Query;
 
 import com.Gather.Activity.model.ActivityBean;
 
@@ -22,4 +25,16 @@ public interface ActivityService {
 	
 	//修改
 	public void updateActivity(ActivityBean activityBean);
+	
+	
+	//關鍵字查詢活動
+	 List<ActivityBean> searchActivity(Set<String> names);
+	 
+	 @Query("select p from ActivityBean p where  p.category = ?1 ")
+		List<ActivityBean>  findActivityByCategory(String category);
+
+	
+	
+
 }
+

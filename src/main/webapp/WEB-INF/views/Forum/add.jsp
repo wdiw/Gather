@@ -5,8 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
-</script>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <head>
   <!-- Required meta tags -->
@@ -14,12 +13,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Gather Admin</title>
   <!-- plugins:css -->
-  <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
   <link rel="stylesheet" href="../vendors/feather/feather.css">
   <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
@@ -40,8 +44,11 @@
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
+<!--         <a class="navbar-brand brand-logo mr-5" href="../../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a> -->
+<!--         <a class="navbar-brand brand-logo-mini" href="../../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a> -->
+        <a class="navbar-brand brand-logo mr-5" href="/Gather">
+        <img  width="50px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" />
+        </a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -109,8 +116,8 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
+            <a class="nav-link dropdown-toggle" href="/Gather/images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
+              <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -309,103 +316,119 @@
       <!-- partial:../../partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../../index.html">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Member</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">會員管理</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
-              <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Activity</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="form-elements">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">全部活動</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-              <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Sponsorship</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="orders">訂單管理</a></li>
-                <li class="nav-item"> <a class="nav-link" href="addorder">新增訂單</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-              <i class="icon-grid-2 menu-icon"></i>
-              <span class="menu-title">Projects</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="tables">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">專案管理</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-              <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">AD</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="icons">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">廣告管理</a></li>
-              </ul>
-            </div>
-          </li>
+          <li class="nav-item"><a class="nav-link"
+						href="/Gather/backend"> <i class="icon-grid menu-icon"></i> <span
+							class="menu-title">Dashboard</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#ui-basic" aria-expanded="false"
+						aria-controls="ui-basic"> <i class="icon-layout menu-icon"></i>
+							<span class="menu-title">Member</span> <i class="menu-arrow"></i>
+					</a>
+						<div class="collapse" id="ui-basic">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"><a class="nav-link"
+									href="../pages/ui-features/buttons.html">會員管理</a></li>
+							</ul>
+						</div></li>
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#form-elements" aria-expanded="false"
+						aria-controls="form-elements"> <i
+							class="icon-columns menu-icon"></i> <span class="menu-title">Activity</span>
+							<i class="menu-arrow"></i>
+					</a>
+						<div class="collapse" id="form-elements">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"><a class="nav-link"
+									href="../pages/forms/basic_elements.html">全部活動</a></li>
+							</ul>
+						</div></li>
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#charts" aria-expanded="false"
+						aria-controls="charts"> <i class="icon-bar-graph menu-icon"></i>
+							<span class="menu-title">Sponsorship</span> <i class="menu-arrow"></i>
+					</a>
+						<div class="collapse" id="charts">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"><a class="nav-link" href="../orders">訂單管理</a></li>
+								<li class="nav-item"><a class="nav-link" href="../addorder">新增訂單</a>
+								</li>
+							</ul>
+						</div></li>
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#tables" aria-expanded="false"
+						aria-controls="tables"> <i class="icon-grid-2 menu-icon"></i>
+							<span class="menu-title">Projects</span> <i class="menu-arrow"></i>
+					</a>
+						<div class="collapse" id="tables">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"><a class="nav-link"
+									href="../pages/tables/basic-table.html">專案管理</a></li>
+							</ul>
+						</div></li>
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#icons" aria-expanded="false"
+						aria-controls="icons"> <i class="icon-contract menu-icon"></i>
+							<span class="menu-title">Forum</span> <i class="menu-arrow"></i>
+					</a>
+						<div class="collapse" id="icons">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"><a class="nav-link"
+									href="/Gather/Forum/queryAll">討論區管理</a></li>
+							</ul>
+						</div>
         </ul>
       </nav>
+      
+      
+      
       <!-- partial -->
       <div class="main-panel">        
         <div class="content-wrapper">
-     
-           
-            
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">新增活動</h4>
-                 
+                  <h2 >發布公告</h2><br>
                   <form  id="form" class="forms-sample">
                     <div class="form-group">
-                      <label for="exampleInputName1">文章標題</label>
-                      <input type="text" class="form-control" name="name" id="name" >
+                      <label>文章分類</label>
+                      <select name="postCategory">
+                        <option selected>公告</option>
+                        <option>閒聊</option>
+                        <option>討論</option>
+                        <option>心得</option>
+                      </select>
                     </div>
-                  
                     <div class="form-group">
-                      <label>文章內容</label>
-                      <textarea name="post" id="post" cols="100" rows="7" ></textarea>
+                      <label>文章標題</label>
+                      <input type="text" id="name" name="name" class="form-control" placeholder="請輸入文章標題">
                     </div>
-                 
-					<button id="btnAdd" type='submit' name='submit' class="btn btn-primary mr-2">送出</button>
+<!--                     <div class="form-group"> -->
+<!--                       <label>文章內容</label> -->
+<!--                       <textarea id="post" name="post" cols="100" rows="7" placeholder="請輸入文章內容" class="form-control"></textarea> -->
+<!--                     </div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label>上傳圖片</label>  -->
+<!-- 						<input type="file" name="pImage"  -->
+<!-- 						class="file-upload-default" id="pImage"> -->
+<!-- 						<div class="input-group col-xs-12"> -->
+<!-- 							<input type="text" class="form-control file-upload-info" -->
+<!-- 							disabled placeholder="上傳圖片"> -->
+<!-- 							<span class="input-group-append"> -->
+<!-- 							<button class="file-upload-browse btn btn-primary" type="button">上傳</button> -->
+<!-- 							</span> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 					<img style="position: relative; left: 250px" src="" width="350" -->
+<!-- 					height="300" alt="請選擇照片" id="fImageCover" name="fImageCover" class="img-rounded"> -->
+<!-- 					</div> -->
+					<div >
+						<label>文章內容</label>
+						<textarea id="post" name="post" cols="100" rows="7" class="form-control" ></textarea>
+					</div>
 					
-                    <a href="<spring:url value='/Activity/sapage' />" class="btn btn-primary mr-2">
-						返回
-					</a>
-				
+					<button type='submit' id="addbtn" name="submit" class="btn btn-primary mr-2">送出</button>
                   </form>
                 </div>
               
@@ -420,6 +443,9 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
+  
+  
+  
   <!-- container-scroller -->
   <!-- plugins:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
@@ -441,78 +467,121 @@
   <script src="../js/select2.js"></script>
   <!-- End custom js for this page-->
   
+  <!-- 要用Swal.fire需要引用下面兩個 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <!-- 若需相容 IE11，要加載 Promise Polyfill-->
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  
+  
+  
   <script>
-
   
-
-
-
-  
-  
-  
-  
-
-
-
-        var form = document.getElementById("form");
+//   	$(document).ready(function(){
+  		$('#post').summernote({  //#後面放id屬性值
+//   			alert("進入summernote"); //沒跳
+  			placeholder: '請輸入文章內容',
+  			tabsize: 2,
+  	        height: 100,
+//   	        callbacks: {
+//   	        	onImageUpload: function(files) {
+//   	        		// upload image to server and create imgNode
+//   	        		$summernote.summernote('insertNode', imgNode);
+//   	        	}
+//   	        }
+  	        
+  		});
+  		
+  		//summernote.image.upload
+  		$('#summernote').on('summernote.image.upload', function(we, files) {
+  			//upload image to server and create imgNode
+  			$summernote.summernote('insertNode', imgNode);
+  		});
+  		
+//   	})
+  		
+  		var form = document.getElementById("form");
 		
-		
-		
-		 $("#btnAdd").click(function () {
-        $("#form").on("submit", function(e){
+		$("#addbtn").click(function() { //對應button的id屬性值，也就是addbtn
+			$("#form").on("submit", function(e) { //對應button的??屬性值??，不是name屬性值
             /* =====for formData&MultipartFile =====*/
-            var formData = new FormData(form);
+            e.preventDefault(); //不要按完按鈕就跳頁面
+//             var form = document.getElementById("form");
+    		var formData = new FormData(form); //把表單的資料裝成data
+    		var url = "<spring:url value='/Forum/add'/>"
             
             /* =====for JSON =====*/
             
-          
-            
             //改用ajax傳送 棄用原本的form傳送
-            e.preventDefault();
+    		//Success
+//     		$.ajax({
+            	
+//             	contentType: false, //required
+//     			processData: false, // required
+//     			url: url,
+//     			type: "POST",
+//     			data: formData,
+    			
+//     			success: function (data) {
+//     				alert("success");
+//     				location.replace("<spring:url value='/Forum/queryAll'/>");  
+//     			},
+//     			error: function (response) {
+//     				alert('response status: ' + response.status);
+//     			}
+            	
+//          })
             
-       	
-           
+            
             Swal.fire({
                 title: '您確定要送出嗎？',
                 icon: 'question',
-               
                 showCancelButton: true,
+//                 closeOnConfirm: true,
             }).then((result) => {
                 if (result.isConfirmed) {
+                	
                     $.ajax({
                         type:"post",
-                        url:"<spring:url value='/Forum/add'/>",
+                        url:"<spring:url value='/Forum/add'/>", //要放@PostMapping對應的網址
                         data: formData,
-        //                 data: json,
-        //                 dataType:"json",
-        //                 contentType: "application/json; charset=utf-8",
+                        //data: json,
+                        //dataType:"json",
+                        //contentType: "application/json; charset=utf-8",
                         contentType: false, //required
                         processData: false, // required
-                        /*一定要加*/
-                        mimeType: 'multipart/form-data', //有圖片就要加這行
-                        /*一定要加*/
+                        //mimeType: 'multipart/form-data', //有圖片就要一定要加這行
                         success: function(data){
-                            var jsonData = JSON.parse(data);
+//                             var jsonData = JSON.parse(data); //會讓下面跳不出來!!!!!!!
                             
-
-                            
-                            // console.log(html);
-
                             Swal.fire({
-                                title: '已新增成功！',
-                                icon: 'success',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.href= "<spring:url value='/Forum/queryAll'/>";
-                                  }
-                                })
-                                    
+                            	title: '已新增成功！',
+                            	icon: 'success',
+                            }).then((result)=>{
+                            	if (result.isConfirmed) {
+                            		location.href= "<spring:url value='/Forum/queryAll'/>";
+                            	}
+                            })
+                            
                         },
                         error: function(e, text){
+                        	
+                        	Swal.fire({
+                            	title: '新增失敗！',
+                            	icon: 'error',
+                            })
+//                             .then((result)=>{
+//                             	if (result.isConfirmed) {
+//                             		location.href= "<spring:url value='/Forum/queryAll'/>";
+//                             	}
+//                             })
+                        	
                             console.log(e.status);
                             console.log(text);
                         }
-                    })
+                    }) //$.ajax({
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     Swal.fire({
                         icon: 'error',
@@ -520,10 +589,10 @@
                         text: '您的變更將不會被儲存!'
                     })
                 }
-            })
-        })
+            }) //then((result) => {
+        }) //$("#form").on("submit", function(e){
         
-		 })
+		 }) //$("#addbtn").click(function
     </script>
   
 </body>

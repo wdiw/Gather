@@ -4,482 +4,471 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<!-- Required meta tags -->
+<title>Gather募資—分享你我的好想法</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Gather Admin</title>
-<!-- plugins:css -->
-<link rel="stylesheet" href="../vendors/feather/feather.css">
-<link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
-<link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
-<!-- endinject -->
-<!-- Plugin css for this page -->
-<!-- End plugin css for this page -->
-<!-- inject:css -->
-<link rel="stylesheet" href="../css/vertical-layout-light/style.css">
-<!-- endinject -->
-<link rel="shortcut icon" href="../images/favicon.png" />
-<style>
 
-.warp{width:80%;white-space:normal;word-wrap:break-word;word-break:break-all;}
-.warp1{width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;}
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
+	rel="stylesheet">
+
+<link rel="stylesheet" href="/Gather/css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="/Gather/css/animate.css">
+
+<link rel="stylesheet" href="/Gather/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/Gather/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="/Gather/css/magnific-popup.css">
+
+<link rel="stylesheet" href="/Gather/css/aos.css">
+
+<link rel="stylesheet" href="/Gather/css/ionicons.min.css">
+
+<link rel="stylesheet" href="/Gather/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="/Gather/css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="/Gather/css/flaticon.css">
+<link rel="stylesheet" href="/Gather/css/icomoon.css">
+<link rel="stylesheet" href="/Gather/css/style.css">
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+<style>
+.img-fluid {
+	max-width: 286px;
+	height: 286px;
+}
+
+.cat span {
+	color: rgb(14, 124, 236) !important
+}
+
+.collapsed{
+ font-size: 20px !important;
+}
+
+#collapseFour a{
+ font-size: 20px !important;
+}
+/* .progress {
+							background-color: black
+						} */
+
+						#navBarTop {
+    max-width: 1850px;
+}
+
+.nav-link{
+ font-size: 16px !important;
+}
 </style>
 </head>
 
-<body>
-	<div class="container-scroller">
-		<!-- partial:../../partials/_navbar.html -->
-		<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+<body class="goto-here">
+	<div class="py-1 bg-black">
+		<div class="container" >
 			<div
-				class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-				<a class="navbar-brand brand-logo mr-5" href="index.html"><img
-					src="../images/logo.svg" class="mr-2" alt="logo" /></a> <a
-					class="navbar-brand brand-logo-mini" href="index.html"><img
-					src="../images/logo-mini.svg" alt="logo" /></a>
-			</div>
-			<div
-				class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-				<button class="navbar-toggler navbar-toggler align-self-center"
-					type="button" data-toggle="minimize">
-					<span class="icon-menu"></span>
-				</button>
-				<ul class="navbar-nav mr-lg-2">
-					<li class="nav-item nav-search d-none d-lg-block">
-						<div class="input-group">
-							<div class="input-group-prepend hover-cursor"
-								id="navbar-search-icon">
-								<span class="input-group-text" id="search"> <i
-									class="icon-search"></i>
-								</span>
+				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+				<div class="col-lg-12 d-block">
+					<div class="row d-flex">
+						<div class="col-md pr-4 d-flex topper align-items-center">
+							<div
+								class="icon mr-2 d-flex justify-content-center align-items-center">
+								<span class="icon-phone2"></span>
 							</div>
-							<input type="text" class="form-control" id="navbar-search-input"
-								placeholder="Search now" aria-label="search"
-								aria-describedby="search">
+						
+						</div>
+						<div class="col-md pr-4 d-flex topper align-items-center">
+							<div
+								class="icon mr-2 d-flex justify-content-center align-items-center">
+								<span class="icon-paper-plane"></span>
+							</div>
+							
+						</div>
+						<div
+							class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar">
+		<div class="container"  id="navBarTop">
+			<a href="/Gather">
+				<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+
+					<li class="nav-item dropdown active">
+
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item" href="shop.html">Shop</a> <a
+								class="dropdown-item" href="product-single.html">Single
+								Product</a> <a class="dropdown-item" href="cart.html">Cart</a> <a
+								class="dropdown-item" href="checkout.html">Checkout</a>
 						</div>
 					</li>
+					<li class="nav-item"><a href="/Gather/allposts"
+						class="nav-link">Blog</a></li>
+
+
+					
+					
+						<c:choose>
+							<c:when test="${memberData!=null}">
+								<li class="nav-item"><a href="/Gather/showMemberCenter"
+									class="nav-link">會員中心</a></li>
+								<li class="nav-item"><a href="/Gather/showLogout"
+									class="nav-link">登出</a></li>
+								<c:choose>
+									
+									<c:when test="${memberData.status eq '管理員'}">
+										<li class="nav-item"><a href="/Gather/backend"
+											class="nav-link">管理員後台</a></li>
+									</c:when>
+								</c:choose>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">快速登入</a>
+									<div class="dropdown-menu" aria-labelledby="dropdown04">
+									 <a class="dropdown-item" href="/Gather/oneKeyloginMember">會員</a>
+									  <a class="dropdown-item" href="/Gather/oneKeyloginBass">提案者</a>
+									  <a class="dropdown-item" href="/Gather/oneKeyloginAdmin">管理員</a>
+									</div>
+								</li>
+								  
+		
+								<li class="nav-item"><a
+									href="/Gather/pages/member/register.html" class="nav-link">註冊</a></li>
+								<li class="nav-item"><a
+									href="/Gather/pages/member/login.html" class="nav-link">登入</a></li>
+							</c:otherwise>
+						</c:choose>
+
+
+					<!--我的最愛-->
+					<c:choose>
+						<c:when test="${mBean.id!=null}">
+							<li class="nav-item cta cta-colored"><a
+								href="/Gather/myFav/${mBean.id}" class="nav-link"><i
+									class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
+						</c:when>
+
+					</c:choose>
+					<!--購物車-->
+
+
 				</ul>
-				<ul class="navbar-nav navbar-nav-right">
-					<li class="nav-item dropdown"><a
-						class="nav-link count-indicator dropdown-toggle"
-						id="notificationDropdown" href="#" data-toggle="dropdown"> <i
-							class="icon-bell mx-0"></i> <span class="count"></span>
-					</a>
-						<div
-							class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-							aria-labelledby="notificationDropdown">
-							<p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-							<a class="dropdown-item preview-item">
-								<div class="preview-thumbnail">
-									<div class="preview-icon bg-success">
-										<i class="ti-info-alt mx-0"></i>
-									</div>
-								</div>
-								<div class="preview-item-content">
-									<h6 class="preview-subject font-weight-normal">Application
-										Error</h6>
-									<p class="font-weight-light small-text mb-0 text-muted">
-										Just now</p>
-								</div>
-							</a> <a class="dropdown-item preview-item">
-								<div class="preview-thumbnail">
-									<div class="preview-icon bg-warning">
-										<i class="ti-settings mx-0"></i>
-									</div>
-								</div>
-								<div class="preview-item-content">
-									<h6 class="preview-subject font-weight-normal">Settings</h6>
-									<p class="font-weight-light small-text mb-0 text-muted">
-										Private message</p>
-								</div>
-							</a> <a class="dropdown-item preview-item">
-								<div class="preview-thumbnail">
-									<div class="preview-icon bg-info">
-										<i class="ti-user mx-0"></i>
-									</div>
-								</div>
-								<div class="preview-item-content">
-									<h6 class="preview-subject font-weight-normal">New user
-										registration</h6>
-									<p class="font-weight-light small-text mb-0 text-muted">2
-										days ago</p>
-								</div>
-							</a>
-						</div></li>
-					<li class="nav-item nav-profile dropdown"><a
-						class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-						id="profileDropdown"> <img src="../images/faces/face28.jpg"
-							alt="profile" />
-					</a>
-						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-							aria-labelledby="profileDropdown">
-							<a class="dropdown-item"> <i class="ti-settings text-primary"></i>
-								Settings
-							</a> <a class="dropdown-item"> <i
-								class="ti-power-off text-primary"></i> Logout
-							</a>
-						</div></li>
-					<li class="nav-item nav-settings d-none d-lg-flex"><a
-						class="nav-link" href="#"> <i class="icon-ellipsis"></i>
-					</a></li>
-				</ul>
-				<button
-					class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
-					type="button" data-toggle="offcanvas">
-					<span class="icon-menu"></span>
-				</button>
 			</div>
-		</nav>
-		<!-- partial -->
-		<div class="container-fluid page-body-wrapper">
-			<!-- partial:../../partials/_settings-panel.html -->
-			<div class="theme-setting-wrapper">
-				<div id="settings-trigger">
-					<i class="ti-settings"></i>
-				</div>
-				<div id="theme-settings" class="settings-panel">
-					<i class="settings-close ti-close"></i>
-					<p class="settings-heading">SIDEBAR SKINS</p>
-					<div class="sidebar-bg-options selected" id="sidebar-light-theme">
-						<div class="img-ss rounded-circle bg-light border mr-3"></div>
-						Light
-					</div>
-					<div class="sidebar-bg-options" id="sidebar-dark-theme">
-						<div class="img-ss rounded-circle bg-dark border mr-3"></div>
-						Dark
-					</div>
-					<p class="settings-heading mt-2">HEADER SKINS</p>
-					<div class="color-tiles mx-0 px-4">
-						<div class="tiles success"></div>
-						<div class="tiles warning"></div>
-						<div class="tiles danger"></div>
-						<div class="tiles info"></div>
-						<div class="tiles dark"></div>
-						<div class="tiles default"></div>
-					</div>
+		</div>
+	</nav>
+	<!-- END nav -->
+
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('/Gather/images/bg_6.jpg');">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<!-- <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Shop</span></p> -->
+					<p class="breadcrumbs">
+					 <span>Activity</span>
+					</p>
+					<h1 class="mb-0 bread">Gather活動頁面</h1>
 				</div>
 			</div>
-			<div id="right-sidebar" class="settings-panel">
-				<i class="settings-close ti-close"></i>
-				<ul class="nav nav-tabs border-top" id="setting-panel"
-					role="tablist">
-					<li class="nav-item"><a class="nav-link active" id="todo-tab"
-						data-toggle="tab" href="#todo-section" role="tab"
-						aria-controls="todo-section" aria-expanded="true">TO DO LIST</a></li>
-					<li class="nav-item"><a class="nav-link" id="chats-tab"
-						data-toggle="tab" href="#chats-section" role="tab"
-						aria-controls="chats-section">CHATS</a></li>
-				</ul>
-				<div class="tab-content" id="setting-content">
-					<div class="tab-pane fade show active scroll-wrapper"
-						id="todo-section" role="tabpanel" aria-labelledby="todo-section">
-						<div class="add-items d-flex px-3 mb-0">
-							<form class="form w-100">
-								<div class="form-group d-flex">
-									<input type="text" class="form-control todo-list-input"
-										placeholder="Add To-do">
-									<button type="submit"
-										class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
-								</div>
-							</form>
-						</div>
-						<div class="list-wrapper px-3">
-							<ul class="d-flex flex-column-reverse todo-list">
-								<li>
-									<div class="form-check">
-										<label class="form-check-label"> <input
-											class="checkbox" type="checkbox"> Team review meeting
-											at 3.00 PM
-										</label>
-									</div> <i class="remove ti-close"></i>
-								</li>
-								<li>
-									<div class="form-check">
-										<label class="form-check-label"> <input
-											class="checkbox" type="checkbox"> Prepare for
-											presentation
-										</label>
-									</div> <i class="remove ti-close"></i>
-								</li>
-								<li>
-									<div class="form-check">
-										<label class="form-check-label"> <input
-											class="checkbox" type="checkbox"> Resolve all the low
-											priority tickets due today
-										</label>
-									</div> <i class="remove ti-close"></i>
-								</li>
-								<li class="completed">
-									<div class="form-check">
-										<label class="form-check-label"> <input
-											class="checkbox" type="checkbox" checked> Schedule
-											meeting for next week
-										</label>
-									</div> <i class="remove ti-close"></i>
-								</li>
-								<li class="completed">
-									<div class="form-check">
-										<label class="form-check-label"> <input
-											class="checkbox" type="checkbox" checked> Project
-											review
-										</label>
-									</div> <i class="remove ti-close"></i>
-								</li>
-							</ul>
-						</div>
-						<h4 class="px-3 text-muted mt-5 font-weight-light mb-0">Events</h4>
-						<div class="events pt-4 px-3">
-							<div class="wrapper d-flex mb-2">
-								<i class="ti-control-record text-primary mr-2"></i> <span>Feb
-									11 2018</span>
-							</div>
-							<p class="mb-0 font-weight-thin text-gray">Creating component
-								page build a js</p>
-							<p class="text-gray mb-0">The total number of sessions</p>
-						</div>
-						<div class="events pt-4 px-3">
-							<div class="wrapper d-flex mb-2">
-								<i class="ti-control-record text-primary mr-2"></i> <span>Feb
-									7 2018</span>
-							</div>
-							<p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
-							<p class="text-gray mb-0 ">Call Sarah Graves</p>
-						</div>
-					</div>
-					<!-- To do section tab ends -->
-					<div class="tab-pane fade" id="chats-section" role="tabpanel"
-						aria-labelledby="chats-section">
-						<div
-							class="d-flex align-items-center justify-content-between border-bottom">
-							<p
-								class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
-							<small
-								class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">See
-								All</small>
-						</div>
-						<ul class="chat-list">
-							<li class="list active">
-								<div class="profile">
-									<img src="../../images/faces/face1.jpg" alt="image"><span
-										class="online"></span>
-								</div>
-								<div class="info">
-									<p>Thomas Douglas</p>
-									<p>Available</p>
-								</div> <small class="text-muted my-auto">19 min</small>
-							</li>
-							<li class="list">
-								<div class="profile">
-									<img src="images/faces/face2.jpg" alt="image"><span
-										class="offline"></span>
-								</div>
-								<div class="info">
-									<div class="wrapper d-flex">
-										<p>Catherine</p>
-									</div>
-									<p>Away</p>
-								</div>
-								<div class="badge badge-success badge-pill my-auto mx-2">4</div>
-								<small class="text-muted my-auto">23 min</small>
-							</li>
-							<li class="list">
-								<div class="profile">
-									<img src="images/faces/face3.jpg" alt="image"><span
-										class="online"></span>
-								</div>
-								<div class="info">
-									<p>Daniel Russell</p>
-									<p>Available</p>
-								</div> <small class="text-muted my-auto">14 min</small>
-							</li>
-							<li class="list">
-								<div class="profile">
-									<img src="images/faces/face4.jpg" alt="image"><span
-										class="offline"></span>
-								</div>
-								<div class="info">
-									<p>James Richardson</p>
-									<p>Away</p>
-								</div> <small class="text-muted my-auto">2 min</small>
-							</li>
-							<li class="list">
-								<div class="profile">
-									<img src="images/faces/face5.jpg" alt="image"><span
-										class="online"></span>
-								</div>
-								<div class="info">
-									<p>Madeline Kennedy</p>
-									<p>Available</p>
-								</div> <small class="text-muted my-auto">5 min</small>
-							</li>
-							<li class="list">
-								<div class="profile">
-									<img src="images/faces/face6.jpg" alt="image"><span
-										class="online"></span>
-								</div>
-								<div class="info">
-									<p>Sarah Graves</p>
-									<p>Available</p>
-								</div> <small class="text-muted my-auto">47 min</small>
-							</li>
-						</ul>
-					</div>
-					<!-- chat tab ends -->
+		</div>
+	</div>
+
+
+
+	<section class="ftco-section bg-light">
+
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12 ">
+
+				<input class='search-bar' type='text' name='search' id='searchvalue'  placeholder='輸入活動名稱' style="width: 120px;">
+				<button id='search' class="btn btn-primary ">搜尋</button>
 				</div>
 			</div>
-			<!-- partial -->
-			<!-- partial:../../partials/_sidebar.html -->
-			<nav class="sidebar sidebar-offcanvas" id="sidebar">
-				<ul class="nav">
-					<li class="nav-item"><a class="nav-link"
-						href="../../index.html"> <i class="icon-grid menu-icon"></i> <span
-							class="menu-title">Dashboard</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link"
-						data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-						aria-controls="ui-basic"> <i class="icon-layout menu-icon"></i>
-							<span class="menu-title">Member</span> <i class="menu-arrow"></i>
-					</a>
-						<div class="collapse" id="ui-basic">
-							<ul class="nav flex-column sub-menu">
-								<li class="nav-item"><a class="nav-link"
-									href="pages/ui-features/buttons.html">會員管理</a></li>
-							</ul>
-						</div></li>
-					<li class="nav-item"><a class="nav-link"
-						data-toggle="collapse" href="<spring:url value='/Activity/selectall' />" aria-expanded="false"
-						aria-controls="form-elements"> <i
-							class="icon-columns menu-icon"></i> <span class="menu-title">Activity</span>
-							<i class="menu-arrow"></i>
-					</a>
-						<div class="collapse" id="form-elements">
-							<ul class="nav flex-column sub-menu">
-								<li class="nav-item"><a class="nav-link"
-									href="<spring:url value='/Activity/selectall' />">全部活動</a></li>
-							</ul>
-						</div></li>
-					<li class="nav-item"><a class="nav-link"
-						data-toggle="collapse" href="#charts" aria-expanded="false"
-						aria-controls="charts"> <i class="icon-bar-graph menu-icon"></i>
-							<span class="menu-title">Sponsorship</span> <i class="menu-arrow"></i>
-					</a>
-						<div class="collapse" id="charts">
-							<ul class="nav flex-column sub-menu">
-								<li class="nav-item"><a class="nav-link" href="orders">訂單管理</a></li>
-								<li class="nav-item"><a class="nav-link" href="addorder">新增訂單</a></li>
-							</ul>
-						</div></li>
-					<li class="nav-item"><a class="nav-link"
-						data-toggle="collapse" href="#tables" aria-expanded="false"
-						aria-controls="tables"> <i class="icon-grid-2 menu-icon"></i>
-							<span class="menu-title">Projects</span> <i class="menu-arrow"></i>
-					</a>
-						<div class="collapse" id="tables">
-							<ul class="nav flex-column sub-menu">
-								<li class="nav-item"><a class="nav-link"
-									href="pages/tables/basic-table.html">專案管理</a></li>
-							</ul>
-						</div></li>
-					<li class="nav-item"><a class="nav-link"
-						data-toggle="collapse" href="#icons" aria-expanded="false"
-						aria-controls="icons"> <i class="icon-contract menu-icon"></i>
-							<span class="menu-title">AD</span> <i class="menu-arrow"></i>
-					</a>
-						<div class="collapse" id="icons">
-							<ul class="nav flex-column sub-menu">
-								<li class="nav-item"><a class="nav-link"
-									href="pages/icons/mdi.html">廣告管理</a></li>
-							</ul>
-						</div></li>
-				</ul>
-			</nav>
-			<!-- partial -->
-			<div class="main-panel">
-				<div class="content-wrapper">
+
+			<div class="row">
+				<div class="col-md-8 col-lg-10 order-md-last">
 					<div class="row">
 
-						<div class="col-lg-6 grid-margin stretch-card">
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title">活動清單</h4>    
-									<!--                   <p class="card-description"> -->
-									<%--                     Add class <code>.table-hover</code> --%>
-									<!--                   </p> -->
-									<div class="table-responsive"  >
-										<table class="table table-hover" >
-											<thead>
-												<tr>
-													<th>活動編號</th>
-													<th>活動名稱</th>
-													<th>活動圖片</th>
-													<th>開始日期</th>
-													<th>結束日期</th>									
-													<th>活動內容</th>
-													<th>活動登錄</th>
-													
-												</tr>
-											</thead>
-											
-											<c:forEach items='${activities}' var='activity' >
-												<tr>
-													<td>${activity.id}</td>
-													<td><div class="warp">${activity.name}</div></td>
-													<td><img width='50' height='50'
-														src="<c:url value='/ActivitygetPicture/${activity.id}'/>"
-														class="img-rounded" /></td>						
-													<td>${activity.beginDate}</td>
-													<td>${activity.endDate}</td>
-													<td><div class="warp">${activity.description}</div></td>
-													
+
+
+
+					
+		    			<c:forEach items='${activities}' var='activity' >
+
+		    			<div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
+		    		
+		    				<div class="product d-flex flex-column">
+		    					<img class="img-fluid" src="<c:url value='/ActivitygetPicture/${activity.id}'/>"  width="350" height="300"  class="img-rounded">
+		    						<!-- <span class="status">50% Off</span> -->
+		    						<div class="overlay"></div>
+		    					</a>
+		    					<div class="text py-3 pb-4 px-3">
+		    						<div class="d-flex">
+		    							
+				    						<span>開始日期:${activity.beginDate}<br>
+											結束日期:${activity.endDate}</span>
+			    				
+			    					</div>
+
+									
+		    						<h3><a href="#">${activity.name}</a></h3>
+		  							<div class="pricing" style="text-align: center;">
+			    						<p class="price">
+											<!-- <span class="mr-2 price-dc"></span> -->
+									
+															<a href="<spring:url value='/activitylogin?id=${activity.id}' />" 
+								                                	class="btn btn-primary py-3 px-4">活動登錄
+							                                             	</a>
+			    					</div>
+									<!-- 有需要加入我的最愛可以用 -->
+			    					<!-- <p class="bottom-area d-flex px-3">
+		    							<a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+		    							<a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+		    						</p> -->
+		    					</div>
+		    				</div>
+		    			</div>
+					</c:forEach>
+
+
+
+
+
+					</div>
+					<div class="row mt-5">
+						<div class="col text-center">
+							<div class="block-27">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+				<div class="col-md-4 col-lg-2">
+					<div class="sidebar">
+						<div class="sidebar-box-2">
+			
+							<div class="fancy-collapse-panel">
+
+
+								<div class="panel-group" id="accordion" role="tablist"
+									aria-multiselectable="true">
+
+
+									<div class="panel panel-default">
+										<div class="panel-heading" role="tab" id="headingFour">
+											<h4 class="panel-title">
+												<a class="collapsed" data-toggle="collapse"
+													data-parent="#accordion" href="#collapseFour"
+													aria-expanded="false" aria-controls="collapseThree">活動分類
+												</a>
+											</h4>
+										</div>
+										<div id="collapseFour" class="panel-collapse collapse"
+											role="tabpanel" aria-labelledby="headingFour">
+											<div class="panel-body">
 												
-													<td>
-													
-															<button class="btn btn-primary">活動登錄</button>
-													</td>
-												</tr>
-											</c:forEach>
-										</table>
+													<ul>
+														<li><a href="<spring:url value='/userpage'/>">全部活動</a></li>
+														<li><a href="<spring:url value='/activityCategory?category=課程講座'/>">課程講座</a></li>
+														<li><a href="<spring:url value='/activityCategory?category=優惠活動'/>">優惠活動</a></li>
+														<li><a href="<spring:url value='/activityCategory?category=提案競賽'/>">提案競賽</a></li>
+														<li><a href="<spring:url value='/activityCategory?category=線上抽獎'/>">線上抽獎</a></li>
+														<li><a href="<spring:url value='/lottery'/>">抽獎頁面</a></li>
+														
+													</ul>
+												
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 
-
-						<!-- main-panel ends -->
+						</form>
 					</div>
-					<!-- page-body-wrapper ends -->
 				</div>
-				<!-- container-scroller -->
-				<!-- plugins:js -->
-				<script src="vendors/js/vendor.bundle.base.js"></script>
-				<!-- endinject -->
-				<!-- Plugin js for this page -->
-				<!-- End plugin js for this page -->
-				<!-- inject:js -->
-				<script src="js/off-canvas.js"></script>
-				<script src="js/hoverable-collapse.js"></script>
-				<script src="js/template.js"></script>
-				<script src="js/settings.js"></script>
-				<script src="js/todolist.js"></script>
-				<!-- endinject -->
-				<!-- Custom js for this page-->
-				<!-- End custom js for this page-->
+			</div>
+		</div>
+		</div>
+	</section>
+
+	
+
+	<footer class="ftco-footer ftco-section">
+		<div class="container">
+			<div class="row">
+				<div class="mouse">
+					<a href="#" class="mouse-icon">
+						<div class="mouse-wheel">
+							<span class="ion-ios-arrow-up"></span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="row mb-5">
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Gather</h2>
+						<p>Far far away, behind the word mountains, far from the
+							countries Vokalia and Consonantia.</p>
+						<ul
+							class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+							<li class="ftco-animate"><a href="#"><span
+									class="icon-twitter"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span
+									class="icon-facebook"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span
+									class="icon-instagram"></span></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4 ml-md-5">
+						<h2 class="ftco-heading-2">Menu</h2>
+						<ul class="list-unstyled">
+							<li><a href="#" class="py-2 d-block">Shop</a></li>
+							<li><a href="#" class="py-2 d-block">About</a></li>
+							<li><a href="#" class="py-2 d-block">Journal</a></li>
+							<li><a href="#" class="py-2 d-block">Contact Us</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Help</h2>
+						<div class="d-flex">
+							<ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+								<li><a href="#" class="py-2 d-block">Shipping
+										Information</a></li>
+								<li><a href="#" class="py-2 d-block">Returns &amp;
+										Exchange</a></li>
+								<li><a href="#" class="py-2 d-block">Terms &amp;
+										Conditions</a></li>
+								<li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
+							</ul>
+							<ul class="list-unstyled">
+								<li><a href="#" class="py-2 d-block">FAQs</a></li>
+								<li><a href="#" class="py-2 d-block">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Have a Questions?</h2>
+						<div class="block-23 mb-3">
+							<ul>
+								<li><span class="icon icon-map-marker"></span><span
+									class="text">203 Fake St. Mountain View, San Francisco,
+										California, USA</span></li>
+								<li><a href="#"><span class="icon icon-phone"></span><span
+										class="text">+2 392 3929 210</span></a></li>
+								<li><a href="#"><span class="icon icon-envelope"></span><span
+										class="text">info@yourdomain.com</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+
+					<p>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>document.write(new Date().getFullYear());</script>
+						All rights reserved | Gather
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 
 
-		
+
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+							<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke="#eeeeee" />
+							<circle class="path" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+						</svg>
+	</div>
+
+
+	<script src="/Gather/js/jquery.min.js"></script>
+	<script src="/Gather/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/Gather/js/popper.min.js"></script>
+	<script src="/Gather/js/bootstrap.min.js"></script>
+	<script src="/Gather/js/jquery.easing.1.3.js"></script>
+	<script src="/Gather/js/jquery.waypoints.min.js"></script>
+	<script src="/Gather/js/jquery.stellar.min.js"></script>
+	<script src="/Gather/js/owl.carousel.min.js"></script>
+	<script src="/Gather/js/jquery.magnific-popup.min.js"></script>
+	<script src="/Gather/js/aos.js"></script>
+	<script src="/Gather/js/jquery.animateNumber.min.js"></script>
+	<script src="/Gather/js/bootstrap-datepicker.js"></script>
+	<script src="/Gather/js/scrollax.min.js"></script>
+	<!-- <script src="/Gather/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+	<!-- <script src="/Gather/js/google-map.js"></script> -->
+	<script src="/Gather/js/main.js"></script>
+
+
+	<script>
+	   $('#search').click(function(){
+
+		      var search=$('#searchvalue').val();
+		   
+		      
+		      
+		      location.href=  "<spring:url value='/search?search=" + search + "'/>"
+			
+		      
+		      
+
+			  
+
+
+				}
+				
+				);
+
+
+					</script>
+
 </body>
 
 </html>
-
-

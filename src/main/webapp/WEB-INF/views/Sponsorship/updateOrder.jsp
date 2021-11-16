@@ -41,8 +41,10 @@
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img
+					width="80px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a> <a
+					class="navbar-brand brand-logo-mini" href="index.html"><img
+					src="images/logo-mini.svg" alt="logo" /></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -110,8 +112,8 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="../images/faces/face28.jpg" alt="profile"/>
+            <a class="nav-link dropdown-toggle" href="/Gather/images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
+              <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -368,7 +370,7 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">AD</span>
+              <span class="menu-title">Forum</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
@@ -386,56 +388,68 @@
            
             
             <div class="col-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title" style="text-align: center;">修改訂單</h4>
-                  <p class="card-description" style="text-align: center;">
+              <div class="card" style="width: 600px;margin-left: 300px ;font-size:16px">
+                <div class="card-body" style="margin: auto;">
+                  <h4 class="card-title" style="text-align: center; font-size:20px">修改訂單</h4>
+                  <p class="card-description" style="text-align: center; font-size:18px">
                     Edit Order
                   </p>
                   <form  id="form" class="forms-sample">
-                    <div class="form-group">
-                    <i class="mdi mdi-nutrition"></i>
-                      <label for='sID'>訂單編號</label>
-                      <input name="sID" id="sID" class="form-control" value="${sBean.sID}" readonly="readonly">
-                    </div>
-                    <div class="form-group">
-                    <i class="mdi mdi-account-star"></i> 
-                      <label for="sName">贊助者</label>
-                      <input id="sName" name="sName" class="form-control" value="${sBean.sName}" type='text'>
-                    </div>
-                    <div class="form-group">
-                    <i class="mdi mdi-counter"></i>
-                      <label for="sPID">專案編號</label>
-                      <input id="sPID" name="sPID" class="form-control" value="${sBean.sPID}" type='text'>
-                    </div>
-                    <div class="form-group">
-                    <i class="mdi mdi-book"></i>
-                      <label for="sPName">專案名稱</label>
-                      <input id="sPName" name="sPName" class="form-control" value="${sBean.sPName}"  type='text'>
-                    </div>
-                    <div class="form-group">
-                    <i class="mdi mdi-coin"></i>
-                      <label for="sAmount">贊助金額</label>
-                      <input id="sAmount" name="sAmount" class="form-control" value="${sBean.sAmount}"  type='text'>
-                    </div>
-                    <div class="form-group">
-                    <i class="mdi mdi-file-image"></i>
-                      <label>上傳圖片</label>
-                      <input type="file" name="projectImage" class="file-upload-default" id="projectImage">
-                      <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="上傳圖片" >
-                        <span class="input-group-append">
-                          <button class="file-upload-browse btn btn-primary" type="button">上傳</button>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="form-group">
-					
-						<img style="position: relative; left: 250px" src="<c:url value='/getPicture/${sBean.sID}'/>" width="350"
-							height="300" alt="請選擇照片" id="showPic" class="img-rounded">
+                  
+                      <div class="form-group">
+						<img style="position: relative;left: 30px" src="../${sBean.projectImage}" width="210"
+							height="150" alt="" id="showPic" class="img-rounded">
 					</div>
-                    <button id="btnAdd" type='button' name='submit' class="btn btn-primary mr-2" onclick="update(${sBean.sID})">送出</button>
-                    <button class="btn btn-light">取消</button>
+					
+					
+                    <div class="form-group" >
+                    <i class="mdi mdi-nutrition" style="position: relative;left: -60px;top: 28px"></i>
+                      <label for='sID' style="position: relative;left: -60px;top: 28px">訂單編號</label>
+                      <input name="sID" id="sID" class="form-control" value="${sBean.sID}" readonly="readonly" style="width: 270px;text-align: center;position: relative;left: 40px ">
+                    </div>
+					
+                    <div class="form-group">
+                    <i class="mdi mdi-counter" style="position: relative;left: -60px;top:29px"></i>
+                      <label for="sPID" style="position: relative;left: -60px;top:29px">專案編號</label>
+                      <input id="sPID" name="sPID" class="form-control" value="${sBean.sPID}" type='text' readonly="readonly" style="width: 270px;text-align: center;position: relative;left: 40px ">
+                    </div>
+                    <div class="form-group">
+                    <i class="mdi mdi-book" style="position: relative;left: -60px;top:29px"></i>
+                      <label for="sPName" style="position: relative;left: -60px;top:29px">專案名稱</label>
+                      <input id="sPName" name="sPName" class="form-control" value="${sBean.sPName}"  type='text' readonly="readonly" style="width: 270px;text-align: center;position: relative;left: 40px ">
+                    </div>
+                  
+                    <div class="form-group">
+                    <i class="mdi mdi-account-star" style="position: relative;left: -60px;top:29px"></i> 
+                      <label for="sName" style="position: relative;left: -60px;top:29px">贊助者</label>
+                      <input id="sName" name="sName" class="form-control" value="${sBean.sName}" type='text' style="width: 270px;text-align: center;position: relative;left: 40px ">
+                    </div>
+                    <div class="form-group">
+                    <i class="mdi mdi-cellphone-android" style="position: relative;left: -60px;top:29px"></i>
+                      <label for="sPhone" style="position: relative;left: -60px;top:29px">聯絡電話</label>
+                      <input id="sPhone" name="sPhone" class="form-control" value="${sBean.sPhone}"  type='text' style="width: 270px;text-align: center;position: relative;left: 40px ">
+                    </div>
+                    
+                    <div class="form-group">
+                    <i class="mdi mdi-home-map-marker" style="position: relative;left: -60px;top:29px"></i>
+                      <label for="sAddress" style="position: relative;left: -60px;top:29px">聯絡地址</label>
+                      <input id="sAddress" name="sAddress" class="form-control" value="${sBean.sAddress}"  type='text' style="width: 270px;text-align: center;position: relative;left: 40px ">
+                    </div>
+                    
+                    <div class="form-group">
+                    <i class="mdi mdi-email-open" style="position: relative;left: -60px;top:29px"></i>
+                      <label for="sEmail" style="position: relative;left: -60px;top:29px">聯絡信箱</label>
+                      <input id="sEmail" name="sEmail" class="form-control" value="${sBean.sEmail}"  type='text' style="width: 270px;text-align: center;position: relative;left: 40px ">
+                    </div>
+                    
+                    <div class="form-group">
+                    <i class="mdi mdi-coin" style="position: relative;left: -60px;top:29px"></i>
+                    <label for="sAmount" style="position: relative;left: -60px;top:29px">贊助金額</label>
+                      <input id="sAmount" name="sAmount" class="form-control" value="${sBean.sAmount}"  type='text' readonly="readonly" style="width: 270px;text-align: center;position: relative;left: 40px ">
+                    </div>
+                    
+                    <button id="btnAdd" type='button' name='submit' class="btn btn-primary mr-2" onclick="update(${sBean.sID})" style="position: relative;left: 100px;top:3px">送出</button>
+                    <button class="btn btn-light" style="position: relative;left: 100px;top:3px" onclick="cancel(${sBean.sID})" >取消</button>
                   </form>
                 </div>
               
@@ -471,15 +485,15 @@
   
   <script type="text/javascript">
   
-		$('#projectImage').change(function() {
-			var projectImage = $("#projectImage")[0].files[0];
-			var reader = new FileReader;
-			reader.onload = function(e) {
-				$('#showPic').attr('src', e.target.result);
-			}
-			reader.readAsDataURL(projectImage);
+// 		$('#projectImage').change(function() {
+// 			var projectImage = $("#projectImage")[0].files[0];
+// 			var reader = new FileReader;
+// 			reader.onload = function(e) {
+// 				$('#showPic').attr('src', e.target.result);
+// 			}
+// 			reader.readAsDataURL(projectImage);
 			  
-		})
+// 		})
 		
 		function update(updateId){
 		var form = document.getElementById("form")
@@ -528,6 +542,10 @@
                   }
             });
 		};
+		
+		function cancel(sID){
+			 location.href= "<c:url value='/orders'/>";
+		}
 		
 	</script>
 </body>

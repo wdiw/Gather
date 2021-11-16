@@ -26,7 +26,7 @@ $(function() {
 
 			$.ajax({
 				type: 'post',
-				url: 'http://localhost:8080/Gather/api/login/',
+				url: '/Gather/api/login/',
 				contentType: 'application/json',
 				data: JSON.stringify(params),
 				success: function(data) {
@@ -47,9 +47,25 @@ $(function() {
 
 
 					}
+					
+					if(data == 'NN'){
+						Swal.fire({
+							position: 'center',
+							title: '登入失敗',
+							text: '您的帳號已經遭到停權',
+							icon: 'error',
+							showConfirmButton: true
+						})
+					}
 
 					if (data == 'N') {
-						$("#accountsp").html('帳號或密碼輸入錯誤，請重新輸入');
+						Swal.fire({
+							position: 'center',
+							title: '登入失敗',
+							text: '帳密有誤',
+							icon: 'error',
+							showConfirmButton: true
+						})
 					}
 				},
 				error: function(e) {

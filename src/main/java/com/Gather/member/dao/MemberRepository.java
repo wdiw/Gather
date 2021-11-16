@@ -9,4 +9,9 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 	//登入
 	Member findByAccountAndPassword(String account, String password);
 	
+	//用帳號找會員
+	Member findByAccount(String account);
+	
+	//用密碼找會員
+	Member findByPassword(String password);
 }

@@ -5,7 +5,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
+<!-- 
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
+ -->
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <head>
@@ -108,16 +110,16 @@
               </a>
             </div>
           </li>
-          <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
-              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
+           <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="/Gather/images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
+              <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="/Gather/showMemberCenter">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="/Gather/showLogout">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -310,7 +312,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../../index.html">
+            <a class="nav-link" href="/Gather/backend">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -367,12 +369,12 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">AD</span>
+              <span class="menu-title">Forum</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../pages/icons/mdi.html">廣告管理</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/Gather/Forum/adMain">討論區管理</a></li>
               </ul>
             </div>
           </li>
@@ -393,20 +395,50 @@
                   </p>
                   <form  id="form" class="forms-sample">
                     <div class="form-group">
-                      會員編號<input name="id" id="id" class="form-control" value="${targetMember.id}" readonly="readonly">
+                      會員編號<input name="id" type="number" id="id" class="form-control" value="${targetMember.id}" readonly="readonly">
                     </div>
+
                     <div class="form-group">
                       姓名<input id="name" name="name" class="form-control" value="${targetMember.name}" type='text'>
                     </div>
+
                     <div class="form-group">
-                      身分<input id="status" name="status" class="form-control" value="${targetMember.status}" type='text'>
+                      性別:
+                      <c:choose>
+                      	<c:when test="${targetMember.sexual eq '男'}">
+                        	<input type="radio" value="男" name="sex" readonly="readonly" checked> 男
+                        </c:when>
+                      
+                        <c:otherwise>
+                        	<input type="radio" value="女" name="sex" readonly="readonly" checked> 女
+                        </c:otherwise>
+					            </c:choose>
                     </div>
+
                     <div class="form-group">
-                      帳號<input id="account" name="account" class="form-control" value="${targetMember.account}"  type='text'>
+                      身分<input id="status" name="status" value="${targetMember.status}" class="form-control" type='text'>
                     </div>
+
                     <div class="form-group">
-                      密碼<input id="password" name="password" class="form-control" value="${targetMember.password}"  type='text'>
+                      帳號<input id="account" name="account" value="${targetMember.account}" class="form-control" type='text'>
                     </div>
+
+                    <div class="form-group">
+                      密碼<input id="password" name="password"  value="${targetMember.password}" class="form-control" type='text'>
+                    </div>
+                    
+                    <div class="form-group">
+                      電話:<input type="text" name="phone"  value="${targetMember.phone}" id="text_phone" placeholder="請輸入電話" class="form-control" >
+                    </div>
+
+                    <div class="form-group">
+                      生日:<input type="date" name="birthday" value="${targetMember.birthday}" id="text_birthday" name="birthday"  />
+                    </div>
+
+                    <div class="form-group">
+                      地址:<input type="text" name="address" value="${targetMember.address}" class="form-control form-control-lg" id="text_address" placeholder="請輸入地址">
+                    </div>
+
                     <div class="form-group">
                       <label>上傳圖片</label>
                       <input type="file" name="memberImage" class="file-upload-default" id="memberImage">
@@ -423,8 +455,9 @@
 							height="300" alt="請選擇照片" id="showPic" class="img-rounded">
 					</div>
                     <button id="btnAdd" type='button' name='submit' class="btn btn-primary mr-2" onclick="update(${theMember.id})">送出</button>
-                    <button class="btn btn-light">取消</button>
+                    
                   </form>
+                    <a href="/Gather/showAllMember"><button class="btn btn-light">取消</button></a>
                 </div>
               
             </div>
@@ -458,13 +491,13 @@
   <!-- End custom js for this page-->
   
   <script type="text/javascript">
-		$('#projectImage').change(function() {
-			var projectImage = $("#projectImage")[0].files[0];
+		$('#memberImage').change(function() {
+			var memberImage = $("#memberImage")[0].files[0];
 			var reader = new FileReader;
 			reader.onload = function(e) {
 				$('#showPic').attr('src', e.target.result);
 			}
-			reader.readAsDataURL(projectImage);
+			reader.readAsDataURL(memberImage);
 		})
 		
 		function update(updateId){

@@ -1,25 +1,39 @@
 package com.Gather.Forum.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.Gather.Forum.model.ForumBean;
 
 
 public interface ForumService {
 	
-	//新增
+	//R all
+	List<ForumBean> getAllForum();
+	
+	//R by id
+	public ForumBean getForumById(Integer fID);
+	
+	//C
 	public void addForum(ForumBean fBean);
 	
-	//依據id刪單筆資料
-	public void deleteForumById(Integer fID);
-	
-	//修改
+	//U
 	public void updateForum(ForumBean fBean);
 	
-	//找所有計畫資料
-    List<ForumBean> getAllForum();
+	//D by id
+	public void deleteForumById(Integer fID);
 	
-    //依據id 找單筆資料
-	public ForumBean getForumById(Integer fID);
+	//文章搜尋
+	List<ForumBean> findforumBytitle(Set<String> forumtitles);
+	
+	//文章分類
+	List<ForumBean> findByPostCategory(String forumcategory);
+	
+	//會員分類 T
+	List<ForumBean> getAllByPosterId(Integer posterID);
+	
+	//文章倒序排列
+	List<ForumBean> findByIdOrderByIdDesc();
+	
 	
 }

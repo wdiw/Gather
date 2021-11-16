@@ -4,8 +4,7 @@
 			<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 				<!DOCTYPE html>
 				<html lang="en">
-				<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
-				</script>
+				<!-- <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script> -->
 				<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 				<head>
@@ -30,6 +29,51 @@
 					<link rel="stylesheet" href="../css/vertical-layout-light/style.css">
 					<!-- endinject -->
 					<link rel="shortcut icon" href="../images/favicon.png" />
+
+					<!-- include summernote css/js -->
+					<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+						rel="stylesheet">
+					<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js" defer></script>
+
+
+
+					<style>
+						/* 改變text樣式 */
+						.swal2-popup {
+							width: 40em;
+							font-size: 1.6rem !important;
+							font-family: Georgia, serif;
+						}
+
+						.swal2-textarea {
+							height: 10em;
+							width: 30em;
+							padding: .75em;
+						}
+						/* summerNore */
+						.note-editing-area .note-editable {
+							height: 400px;
+							width: 100%;
+						}
+
+						.sidebar .nav .nav-item .nav-link .menu-title {
+							color: inherit;
+							display: inline-block;
+							font-size: 18px;
+							line-height: 1;
+							vertical-align: middle;
+						}
+
+						#passButton,#NotPassButton,#deleteButton{
+							color: white;
+							font-size: 16px;
+						}
+
+						label, .form-control{
+							font-size: 18px !important;
+						}
+
+					</style>
 				</head>
 
 				<body>
@@ -38,9 +82,8 @@
 						<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 							<div
 								class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-								<a class="navbar-brand brand-logo mr-5" href="../index.html"><img
-										src="../images/logo.svg" class="mr-2" alt="logo" /></a>
-								<a class="navbar-brand brand-logo-mini" href="../index.html"><img
+								<a class="navbar-brand brand-logo mr-5" href="/Gather"><img  width="50px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a>
+								<a class="navbar-brand brand-logo-mini" href="/Gather"><img
 										src="../images/logo-mini.svg" alt="logo" /></a>
 							</div>
 							<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -147,7 +190,7 @@
 						<!-- partial -->
 						<div class="container-fluid page-body-wrapper">
 							<!-- partial:../../partials/_settings-panel.html -->
-							<div class="theme-setting-wrapper">
+							<!-- <div class="theme-setting-wrapper">
 								<div id="settings-trigger"><i class="ti-settings"></i></div>
 								<div id="theme-settings" class="settings-panel">
 									<i class="settings-close ti-close"></i>
@@ -168,7 +211,7 @@
 										<div class="tiles default"></div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<div id="right-sidebar" class="settings-panel">
 								<i class="settings-close ti-close"></i>
 								<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
@@ -356,7 +399,9 @@
 										<div class="collapse" id="ui-basic">
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"> <a class="nav-link"
-														href="../pages/ui-features/buttons.html">會員管理</a></li>
+														href="/Gather/showAllMember">會員管理</a></li>
+												<li class="nav-item"><a class="nav-link" href="/Gather/addMember">新增會員</a>
+												</li>
 											</ul>
 										</div>
 									</li>
@@ -370,7 +415,7 @@
 										<div class="collapse" id="form-elements">
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"><a class="nav-link"
-														href="../pages/forms/basic_elements.html">全部活動</a></li>
+														href="/Gather/Activity/selectall">全部活動</a></li>
 											</ul>
 										</div>
 									</li>
@@ -383,8 +428,8 @@
 										</a>
 										<div class="collapse" id="charts">
 											<ul class="nav flex-column sub-menu">
-												<li class="nav-item"> <a class="nav-link" href="../orders">訂單管理</a></li>
-												<li class="nav-item"> <a class="nav-link" href="../addorder">新增訂單</a>
+												<li class="nav-item"> <a class="nav-link" href="/Gather/orders">訂單管理</a></li>
+												<li class="nav-item"> <a class="nav-link" href="/Gather/addorder">新增訂單</a>
 												</li>
 											</ul>
 										</div>
@@ -399,24 +444,22 @@
 										<div class="collapse" id="tables">
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"> <a class="nav-link"
-														href="../pages/tables/basic-table.html">專案管理</a></li>
+														href="/Gather/Project/allProjectInBackstage">專案管理</a></li>
 											</ul>
 										</div>
 									</li>
-									<li class="nav-item">
-										<a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
-											aria-controls="icons">
-											<i class="icon-contract menu-icon"></i>
-											<span class="menu-title">Forum</span>
-											<i class="menu-arrow"></i>
-										</a>
-										<div class="collapse" id="icons">
-											<ul class="nav flex-column sub-menu">
-												<li class="nav-item"> <a class="nav-link"
-														href="/Gather/Forum/adMain">討論區管理</a></li>
-											</ul>
-										</div>
-									</li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#icons"
+										aria-expanded="false" aria-controls="icons"> <i
+											class="icon-contract menu-icon"></i>
+										<span class="menu-title">Forum</span> <i class="menu-arrow"></i>
+									</a>
+									<div class="collapse" id="icons">
+										<ul class="nav flex-column sub-menu">
+											<li class="nav-item"><a class="nav-link"
+													href="/Gather/Forum/adMain">討論區管理</a></li>
+										</ul>
+									</div>
+								</li>
 								</ul>
 							</nav>
 							<!-- partial -->
@@ -428,7 +471,7 @@
 									<div class="col-12 grid-margin stretch-card">
 										<div class="card">
 											<div class="card-body">
-												<h4 class="card-title">詳細內容</h4>
+												
 												<p class="card-description">
 
 												</p>
@@ -436,8 +479,9 @@
 													<div class="form-group">
 														<label for='pID'>計畫編號</label>
 														<input name="pID" id="pID" class="form-control"
-															value="${project.pID}" disabled>
+															value="${project.pID}" readonly>
 													</div>
+
 
 													<div class="form-group">
 														<label for="pName">計畫名稱</label>
@@ -445,16 +489,25 @@
 															value="${project.pName}" type='text'>
 													</div>
 													<div class="form-group">
-														<label for="pTarget">計畫目標</label>
+														<label for="pTarget">計畫目標金額</label>
 														<input id="pTarget" name="pTarget" class="form-control"
 															value="${project.pTarget}" type='text'>
 													</div>
 
+
+
 													<div class="form-group">
-														<label for="pDescribe">計畫描述</label>
-														<textarea rows="4" cols="50" id="pDescribe" name="pDescribe"
-															class="form-control">${project.pDescribe}</textarea>
+														<label for="pSDate">計畫開始日期</label>
+														<input id="pSDate" name="pSDate" class="form-control"
+															value="${project.pSDate}" type='Date'>
 													</div>
+
+													<div class="form-group">
+														<label for="pEDate">計畫結束日期</label>
+														<input id="pEDate" name="pEDate" class="form-control"
+															value="${project.pEDate}" type='Date'>
+													</div>
+
 
 													<div class="form-group">
 														<label>更換封面</label>
@@ -467,11 +520,10 @@
 
 															<span class="input-group-append">
 																<button class="file-upload-browse btn btn-primary"
-																	type="button">上傳</button>
+																	type="button" id="coverImageUpload">上傳</button>
 															</span>
 														</div>
 													</div>
-
 
 
 													<div class="form-group">
@@ -482,20 +534,100 @@
 															class="img-rounded">
 													</div>
 
-													<button id="updateButton" type='button' name='updateButton'
-														class="btn btn-primary mr-2"
-														onclick="update(${project.pID})">存檔</button>
+													<div class="form-group">
+														<label for="pDescribe">計畫描述</label>
+														<textarea rows="4" cols="50" id="pDescribe" name="pDescribe"
+															class="form-control">${project.pDescribe}</textarea>
+													</div>
+
+													<div class="form-group">
+														<label for="pContent">計畫完整內容</label>
+														<textarea rows="4" cols="50" id="pContent" name="pContent"
+															class="form-control">${project.pContent}</textarea>
+													</div>
+
+												
+													<c:forEach   items='${projectPlanList}' var='projectPlan' varStatus="status">
+														
+														<!--回饋方案一-->
+														<div class="form-group">
+															<label for="projectPlanPrice${status.count}">回饋方案${status.count}金額</label>
+															<input id="projectPlanPrice${status.count}"   name="projectPlanPrice${status.count}"
+																class="form-control" type='number' value="${projectPlan.projectPlanPrice}"
+																min="100" step="100">
+
+														</div>
+														<div class="form-group">
+															<label for="ETA${status.count}">回饋方案${status.count}預計實現時間</label>
+															<input id="ETA${status.count}" name="ETA${status.count}" 
+															value="${projectPlan.ETA}" class="form-control" type='month'>
+														</div>
+	
+														<div class="form-group">
+															<label for="projectPlanContent${status.count}">回饋方案${status.count}內容</label>
+															<textarea rows="4" cols="50" id="projectPlanContent${status.count}"
+																name="projectPlanContent${status.count}" class="form-control">${projectPlan.projectPlanContent}</textarea>
+														</div>
+	
+	
+														<div class="form-group">
+															<label>回饋方案${status.count}圖片</label>
+															<input type="file" name="projectPlanImage${status.count}"
+																class="file-upload-default" id="projectPlanImage${status.count}">
+															<div class="input-group col-xs-12">
+																<input type="text" class="form-control file-upload-info"
+																	disabled placeholder="上傳圖片">
+	
+																<span class="input-group-append">
+																	<button class="file-upload-browse btn btn-primary"
+																		type="button" disabled>上傳</button>
+																</span>
+															</div>
+														</div>
+														
+														
+														<div class="form-group">
+	
+															<img style="position: relative; left: 250px" src="../${projectPlan.projectPlanImage}" width="350"
+																
+																height="300" alt="請選擇圖片" id="projectPlanImageCover${status.count}"
+																name="projectPlanImageCover${status.count}" class="img-rounded">
+														</div>
+
+														
+													</c:forEach> 
+
+													
+
+
+													<div class="form-group">
+														<label for="pStatus">狀態</label>
+														<input id="pStatus" name="pStatus" class="form-control"
+															value="${project.pStatus}" type='text'>
+													</div>
+
+
+													<div class="form-group">
+														<label for="reason">狀態說明</label>
+														<textarea rows="4" cols="50" id="reason" name="reason"
+															class="form-control">${project.reason}</textarea>
+													</div>
+
+
+
+													<!-- 以下為按鈕 -->
+													<button id="sendButton" type='button' name='updateButton'
+														class="btn btn-primary mr-2">送出審核</button>
+
+
+													<button id="passButton" type='button' name='passButton'
+														class="btn btn-info">通過</button>
+
+													<button id="NotPassButton" type='button' name='NotPassButton'
+														class="btn btn-warning">不通過</button>
 
 													<button id="deleteButton" type='button' name='deleteButton'
-														class="btn btn-danger"
-														onclick="deleteBtn(${project.pID})">刪除</button>
-
-
-
-
-
-
-
+														class="btn btn-danger" >刪除</button> 
 
 												</form>
 											</div>
@@ -533,123 +665,272 @@
 
 							<script type="text/javascript">
 
-								//當更換圖片
-								$("#changeImageCover").on("change", function () {
-									var changeImageCover = $("#changeImageCover")[0].files[0];
-									var reader = new FileReader;
-									reader.onload = function (e) {
-										$('#pImageCover').attr('src', e.target.result);
+								$(document).ready(function () {
+									$('#pContent').summernote();
+
+
+									var projectID = ${ project.pID };//抓專案ID
+									var mStatus = "${sessionScope.memberData.status}"//取得會員身分
+
+
+									if (mStatus == '管理員') {
+										//管理員身分
+										$("#passButton").show();
+										$("#NotPassButton").show();
+										$("#sendButton").hide();
+
+
+
+
+									} else {
+										//會員身分
+
+										$("#sendButton").show();
+										$("#passButton").hide();
+										$("#NotPassButton").hide();
+										$("#deleteButton").hide();
+										// $(".form-control").attr("disabled", true)
+										$(".form-control").attr("readonly", true)
+										$("#pDescribe").attr("readonly", false);
+										$("#pContent").attr("readonly", false);
 									}
-									reader.readAsDataURL(changeImageCover);
-
-								});
 
 
 
-								function update(updateId) {
-									// alert(updateId);
-									var form = document.getElementById("form")
-									var formData = new FormData(form);
-									var url = "<spring:url value='/Project/theProject/" + updateId + "'/>";
 
-									$.ajax({
-										url: url,
-										type: 'PUT',
-										data: formData,
-										contentType: false, //required
-										processData: false, // required
-										mimeType: 'multipart/form-data',
-										success: function (data) {
-											Swal.fire({
-												title: '更新成功',
-												icon: 'success',
-												text: "已經更新！",
-												position: 'center',
-
-											}).then((result) => {
-												if (result.isConfirmed) {
-													location.href = "<c:url value='/Project/allproject'/>";
-												}
-											})
-										},
-										error: function (xhr, text) {
-											console.log("status code: " + xhr.status);
-											console.log("error message: " + text);
-											Swal.fire({
-												title: '更新失敗',
-												icon: 'error',
-												text: "更新失敗",
-											})
+									//當更換圖片
+									$("#changeImageCover").on("change", function () {
+										var changeImageCover = $("#changeImageCover")[0].files[0];
+										var reader = new FileReader;
+										reader.onload = function (e) {
+											$('#pImageCover').attr('src', e.target.result);
 										}
+										reader.readAsDataURL(changeImageCover);
+
 									});
-								};
 
 
-								function deleteBtn(deleteId) {
+									//管理者按通過
+									$("#passButton").click(function () {
 
-									const swalWithBootstrapButtons = Swal.mixin({
-										customClass: {
-											confirmButton: 'btn btn-success',
-											cancelButton: 'btn btn-danger'
-										},
-										buttonsStyling: false
+										
+										$("#pStatus").val("通過");//把狀態改為通過
+										var pStatus = $("#pStatus").val();
+										//var reason = $("#reason").val("已通過審核並上架");
+
+
+
+										var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
+										$.ajax({
+											url: url,
+											type: 'PUT',
+											data: { pStatus: pStatus, reason: "已通過審核並上架" },
+											success: function (data) {
+												Swal.fire({
+													title: '更新成功',
+													icon: 'success',
+													text: "已經更新！",
+													position: 'center',
+
+												}).then((result) => {
+													if (result.isConfirmed) {
+														location.href = "<c:url value='/Project/allProjectInBackstage'/>";
+													}
+												})
+											},
+											error: function (xhr, text) {
+												console.log("status code: " + xhr.status);
+												console.log("error message: " + text);
+												Swal.fire({
+													title: '更新失敗',
+													icon: 'error',
+													text: "更新失敗",
+												})
+											}
+
+										})
 									})
 
 
-									swalWithBootstrapButtons.fire({
-										title: '確定刪除?',
-										text: "你將刪除此計畫!",
-										icon: 'warning',
-										showCancelButton: true,
-										confirmButtonText: '刪除!',
-										cancelButtonText: '取消!',
-										reverseButtons: true
-									}).then((result) => {
-										if (result.isConfirmed) {
-
-											var url = "<spring:url value='/Project/theProject/" + deleteId + "'/>";
-
-											$.ajax({
-												url: url,
-												type: 'DELETE',
-												data: {},
-
-												success: function (data) {
-													Swal.fire({
-														position: 'center',
-														icon: 'success',
-														title: '刪除成功',
-													
-														timer: 3000,
-														timerProgressBar: true,
-														showConfirmButton: false,
-													})
-													location.href = "<c:url value='/Project/allproject'/>";
-												},
-												error: function (xhr, text) {
-													swalWithBootstrapButtons.fire(
-														'失敗',
-														'刪除失敗，請確認有此紀錄 ',
-														'error'
-													)
-												}
-											})
 
 
-										}
 
-										else if (
-											/* Read more about handling dismissals below */
-											result.dismiss === Swal.DismissReason.cancel
-										) {
-											swalWithBootstrapButtons.fire(
-												'取消',
-												'已取消刪除 ',
-												'success'
-											)
-										}
+
+									//管理者按不通過
+									$("#NotPassButton").click((async () => {
+										
+
+										const { value: text } = await Swal.fire({
+											input: 'textarea',
+											inputLabel: 'Message',
+											inputPlaceholder: 'Type your message here...',
+											inputAttributes: {
+												'aria-label': 'Type your message here'
+											},
+											showCancelButton: true,
+											height: 20
+
+										})
+
+
+										$("#pStatus").val("未通過");//把狀態改為未通過
+										var pStatus = $("#pStatus").val();
+										var reason = text;//存管理員所寫的理由
+
+										var url = "<spring:url value='/Project/theProject/changeStatus/" + projectID + "'/>";
+										$.ajax({
+											url: url,
+											type: 'PUT',
+											data: { pStatus: pStatus, reason: reason },
+											success: function (data) {
+												Swal.fire({
+													title: '更新成功',
+													icon: 'success',
+													text: "已經更新！",
+													position: 'center',
+
+												}).then((result) => {
+													if (result.isConfirmed) {
+														location.href = "<c:url value='/Project/allProjectInBackstage'/>";
+													}
+												})
+											},
+											error: function (xhr, text) {
+												// console.log("status code: " + xhr.status);
+												// console.log("error message: " + text);
+												// Swal.fire({
+												// 	title: '更新失敗',
+												// 	icon: 'error',
+												// 	text: "更新失敗",
+												// })
+											}
+
+										})
+
+									}))//NotPassButton End
+
+
+
+									//使用者按送出審核
+									$("#sendButton").click(function () {
+										$(".form-control").attr("disabled", false);//送出前必須把所有input欄位解開，不然table取不到值
+										var pStatus = $("#pStatus").val("待審核");//把狀態改為待審核
+										var reason = $("#reason").val("請待管理員進行審核");
+										var form = document.getElementById("form")
+										var formData = new FormData(form);
+										var url = "<spring:url value='/Project/theProject/" + projectID + "'/>";
+
+
+										$.ajax({
+											url: url,
+											type: 'PUT',
+											data: formData,
+											contentType: false, //required
+											processData: false, // required
+											mimeType: 'multipart/form-data',
+											success: function (data) {
+												Swal.fire({
+													title: '更新成功',
+													icon: 'success',
+													text: "已經送出審核！",
+													position: 'center',
+
+												}).then((result) => {
+													if (result.isConfirmed) {
+														location.href = "<c:url value='/Project/allProjectInBackstage'/>";
+													}
+												})
+											},
+											error: function (xhr, text) {
+												console.log("status code: " + xhr.status);
+												console.log("error message: " + text);
+												Swal.fire({
+													title: '更新失敗',
+													icon: 'error',
+													text: "送出審核失敗",
+												})
+											}
+										});
 									})
-								}
+
+
+
+
+
+
+									//刪除按鈕
+									$("#deleteButton").click(function () {
+
+										const swalWithBootstrapButtons = Swal.mixin({
+											customClass: {
+												confirmButton: 'btn btn-success',
+												cancelButton: 'btn btn-danger'
+											},
+											buttonsStyling: false
+										})
+
+
+										swalWithBootstrapButtons.fire({
+											title: '確定刪除?',
+											text: "你將刪除此計畫!",
+											icon: 'warning',
+											showCancelButton: true,
+											confirmButtonText: '刪除!',
+											cancelButtonText: '取消!',
+											reverseButtons: true
+										}).then((result) => {
+											if (result.isConfirmed) {
+
+												var url = "<spring:url value='/Project/theProject/" + projectID + "'/>";
+
+												$.ajax({
+													url: url,
+													type: 'DELETE',
+													data: {},
+
+													success: function (data) {
+														Swal.fire({
+															position: 'center',
+															icon: 'success',
+															title: '刪除成功',
+
+															timer: 3000,
+															timerProgressBar: true,
+															showConfirmButton: false,
+														})
+														location.href = "<c:url value='/Project/allProjectInBackstage'/>";
+													},
+													error: function (xhr, text) {
+														swalWithBootstrapButtons.fire(
+															'失敗',
+															'刪除失敗，請確認有此紀錄 ',
+															'error'
+														)
+													}
+												})
+
+
+											}
+
+											else if (
+												/* Read more about handling dismissals below */
+												result.dismiss === Swal.DismissReason.cancel
+											) {
+												swalWithBootstrapButtons.fire(
+													'取消',
+													'已取消刪除 ',
+													'success'
+												)
+											}
+										})
+									})//刪除按鈕結束
+
+
+
+
+
+
+								})//read function 結束
 
 							</script>
 				</body>

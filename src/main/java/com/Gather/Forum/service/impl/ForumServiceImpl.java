@@ -1,6 +1,7 @@
 package com.Gather.Forum.service.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,34 +25,59 @@ public class ForumServiceImpl implements ForumService {
 	}
 	
 	
-	//查全部
+	//R all
 	@Override
 	public List<ForumBean> getAllForum() {
 		return forumRepository.findAll();
 	}
 	
-	//查ById
+	//R by id
 	@Override
 	public ForumBean getForumById(Integer fID) {
 		return forumRepository.getById(fID);
 	}
 	
-	//新
+	//C
 	@Override
 	public void addForum(ForumBean fBean ) {
 		forumRepository.save(fBean);
 	}
 	
-	//改
+	//U
 	@Override
 	public void updateForum(ForumBean fBean ) {
 		forumRepository.save(fBean);
 	}
 	
-	//刪
+	//D
 	@Override
 	public void deleteForumById(Integer fID) {
 		forumRepository.deleteById(fID);
 	}
+	
+	//文章搜尋
+	@Override
+	public List<ForumBean> findforumBytitle(Set<String> forumtitles) {
+		return forumRepository.findforumBytitle(forumtitles);
+	}
+	
+	//文章分類
+	@Override
+	public List<ForumBean> findByPostCategory(String forumcategory) {
+		return forumRepository.findByPostCategory(forumcategory);
+	}
+	
+	//會員分類 T
+	@Override
+	public List<ForumBean> getAllByPosterId(Integer posterID) {
+		return forumRepository.findByPosterID(posterID);
+	}
+	
+	//文章倒序排列
+	@Override
+	public List<ForumBean> findByIdOrderByIdDesc() {
+		return forumRepository.findByIdOrderByIdDesc();
+	}
+	
 	
 }

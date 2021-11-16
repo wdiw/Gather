@@ -7,6 +7,98 @@
 <html>
 <head>
 
+<style>
+* {
+	font-weight: bold;
+	
+}
+.tableSpan{
+	font-size:14px
+}
+
+
+
+
+
+/*tooltip Box*/
+.con-tooltip {
+	/* position: relative; */
+	/* background: #fafdff; */
+	background-color: rgb(255, 255, 255);
+	border-radius: 500px;
+	/* padding: 0 20px; */
+	/* margin: 300px; */
+	display: inline-flexbox;
+	transition: all 0.3s ease-in-out;
+	cursor: default;
+}
+
+/*tooltip */
+.tooltip {
+	visibility: hidden;
+	z-index: 1;
+	opacity: .40;
+	width: 320px;
+	height: 120px;
+	text-align: center;
+	padding: 24px 50px 10px;
+	background: #e5f3d5;
+	color: #333;
+	position: absolute;
+	top: -100%;
+	left: -10%;
+	border-radius: 9px;
+	font: 16px;
+	transform: translateY(9px);
+	transition: all 0.3s ease-in-out;
+	box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
+}
+/* tooltip  after*/
+.tooltip::after {
+	content: " ";
+	width: 0;
+	height: 0;
+
+	/* border-style: solid;
+  border-width: 12px 12.5px 0 12.5px;
+  border-color: #d7e1f1 transparent transparent transparent; */
+
+	/* position: absolute; */
+	/* left: 40%; */
+}
+
+.con-tooltip:hover .tooltip {
+	visibility: visible;
+	transform: translateY(-10px);
+	opacity: 1;
+	transition: .3s linear;
+	animation: odsoky 1s ease-in-out infinite alternate;
+}
+
+.bottom:hover {
+	transform: translateY(6px);
+}
+
+.bottom .tooltip {
+	top: 180%;
+	left: 0%;
+}
+
+.bottom .tooltip::after {
+	top: -17%;
+	left: 40%;
+	transform: rotate(180deg);
+}
+
+
+
+
+						
+</style>
+
+
+
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script
@@ -27,11 +119,51 @@
 <!-- endinject -->
 <!-- Plugin css for this page -->
 <!-- End plugin css for this page -->
-  <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+<link rel="stylesheet"
+	href="vendors/mdi/css/materialdesignicons.min.css">
 <!-- inject:css -->
 <link rel="stylesheet" href="css/vertical-layout-light/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="images/favicon.png" />
+
+
+<!-- Datatable-->
+					<link rel="stylesheet" type="text/css"
+						href="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.css" defer/>
+					<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.js"
+						defer></script> 
+
+						<script>
+					
+									$(document).ready(function () {
+								$('#ordersTable').DataTable({
+									"language": {
+										"processing": "處理中...",
+										"loadingRecords": "載入中...",
+										"lengthMenu": "顯示筆數 _MENU_ ",
+										"zeroRecords": "沒有符合的結果",
+										"info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+										"infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+										"infoFiltered": "(從 _MAX_ 項結果中過濾)",
+										"infoPostFix": "",
+										"search": "搜尋:",
+										"paginate": {
+											"first": "第一頁",
+											"previous": "上一頁",
+											"next": "下一頁",
+											"last": "最後一頁"
+										},
+										"aria": {
+											"sortAscending": ": 升冪排列",
+											"sortDescending": ": 降冪排列"
+										}
+									}
+								});
+							});
+			
+			
+								</script>
+
 </head>
 
 <body>
@@ -41,7 +173,7 @@
 			<div
 				class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
 				<a class="navbar-brand brand-logo mr-5" href="index.html"><img
-					src="images/logo.svg" class="mr-2" alt="logo" /></a> <a
+					width="50px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a> <a
 					class="navbar-brand brand-logo-mini" href="index.html"><img
 					src="images/logo-mini.svg" alt="logo" /></a>
 			</div>
@@ -113,11 +245,9 @@
 								</div>
 							</a>
 						</div></li>
-					<li class="nav-item nav-profile dropdown"><a
-						class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-						id="profileDropdown"> <img src="images/faces/face28.jpg"
-							alt="profile" />
-					</a>
+					<li class="nav-item nav-profile dropdown"> <a class="nav-link dropdown-toggle" href="/Gather/images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
+              <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/>
+            </a>
 						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
 							aria-labelledby="profileDropdown">
 							<a class="dropdown-item"> <i class="ti-settings text-primary"></i>
@@ -368,14 +498,9 @@
 					<li class="nav-item"><a class="nav-link"
 						data-toggle="collapse" href="#charts" aria-expanded="false"
 						aria-controls="charts"> <i class="icon-bar-graph menu-icon"></i>
-							<span class="menu-title">Sponsorship</span> <i class="menu-arrow"></i>
-					</a>
-						<div class="collapse" id="charts">
-							<ul class="nav flex-column sub-menu">
-								<li class="nav-item"><a class="nav-link" href="orders">訂單管理</a></li>
-								<li class="nav-item"><a class="nav-link" href="addorder">新增訂單</a></li>
-							</ul>
-						</div></li>
+							<span class="menu-title" href="orders">訂單管理</span> <i
+							class="menu-arrow"></i>
+					</a></li>
 					<li class="nav-item"><a class="nav-link"
 						data-toggle="collapse" href="#tables" aria-expanded="false"
 						aria-controls="tables"> <i class="icon-grid-2 menu-icon"></i>
@@ -390,7 +515,7 @@
 					<li class="nav-item"><a class="nav-link"
 						data-toggle="collapse" href="#icons" aria-expanded="false"
 						aria-controls="icons"> <i class="icon-contract menu-icon"></i>
-							<span class="menu-title">AD</span> <i class="menu-arrow"></i>
+							<span class="menu-title">Forum</span> <i class="menu-arrow"></i>
 					</a>
 						<div class="collapse" id="icons">
 							<ul class="nav flex-column sub-menu">
@@ -401,82 +526,112 @@
 				</ul>
 			</nav>
 			<!-- partial -->
-			<div class="main-panel">
-				<div class="content-wrapper">
-					<div class="row">
+			<!-- 			<div class="main-panel"> -->
+			<div class="content-wrapper">
+				<div class="row" style="margin: auto;">
 
-						<div class="col-lg-6 grid-margin stretch-card">
-							<div class="card">
-								<div class="card-body">
-									<h2 class="card-title" style="text-align: center;">贊助訂單</h2>
-									<!--                   <p class="card-description"> -->
-									<%--                     Add class <code>.table-hover</code> --%>
-									<!--                   </p> -->
-									<div class="table-responsive">
-										<table class="table table-hover" style="text-align: center;">
-											<thead>
-												<tr>
-													<th><i class="mdi mdi-nutrition"></i>訂單編號</th>
-													<th><i class="mdi mdi-account-star"></i> 贊助人</th>
-													<th> <i class="mdi mdi-file-image"></i> 專案圖片</th>
-													<th><i class="mdi mdi-counter"></i>專案編號</th>
-													<th><i class="mdi mdi-book"></i>專案名稱</th>
-													<th><i class="mdi mdi-coin"></i>贊助金額</th>
-													<th><i class="mdi mdi-pencil"></i></th>
-													<th><i class="mdi mdi-delete"></i></th>
-												</tr>
-											</thead>
-											<c:forEach items='${orders}' var='order'>
-												<tr>
-													<td>${order.sID}</td>
-													<td>${order.sName}</td>
-													<td><img width='50' height='50'
-														src="<c:url value='/getPicture/${order.sID}'/>"
-														class="img-rounded" /></td>
-													<td>${order.sPID}</td>
-													<td>${order.sPName}</td>
-													<td>${order.sAmount}</td>
-													<td>
-														<button type="button" id="update"
-															class="btn btn-inverse-warning btn-fw"
-															onclick='location.href="<c:url value='/order/${order.sID}'/>"'>修改</button>
-													</td>
-													<td>
-														<button type="button" id="delete"
-															class="btn btn-inverse-danger btn-fw"
-															onclick="deleteOrder(${order.sID})">刪除</button>
-													</td>
-												</tr>
-											</c:forEach>
-										</table>
-									</div>
-								</div>
+					<div class="card" style="margin-left: 3px;">
+						<div class="card-body" >
+						<button id="csv" class="btn btn-inverse-secondary btn-fw" style="font-size:14px">匯出csv檔</button>
+							<h1 class="card-title"
+								style="text-align: center; position: relative; right: 45px;font-size: 30px">贊助訂單</h1>
+<!-- 							<div> -->
+<!-- 								<input -->
+<!-- 									style="border-radius: 40px; border-width: 2px; border-color: lightgrey; margin-left: 940px" -->
+<!-- 									class="search-bar" type="text" name="search" id="searchBar" -->
+<!-- 									placeholder="搜尋..."> -->
+<!-- 								<p class="btn btn-primary py-2 px-3" id="searchBtn"> -->
+<!-- 									<i class="fas fa-search-dollar"></i> -->
+<!-- 								</p> -->
+<!-- 							</div> -->
+
+							<div >
+								<table class="table table-hover"
+									style="text-align: center; width: 10%;font-size: 10px" id="ordersTable">
+									<thead>
+										<tr >
+											<th><span class="tableSpan"><i class="mdi mdi-nutrition"></i>訂單編號<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-account-star"></i> 贊助人編號<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-file-image"></i> 專案圖片<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-counter"></i>專案編號<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-book"></i>專案名稱<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-coin"></i>贊助金額<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-pencil"></i><span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-delete"></i><span></th>
+										</tr>
+									</thead>
+									<c:forEach items='${orders}' var='order' varStatus="status">
+										<tr>
+											<td><span class="tableSpan">${order.sID}<span></td>
+											<td><span>
+
+												<div class="con-tooltip bottom">
+													<p><span class="tableSpan">${order.mID}</span></p>
+													<div class="tooltip" style="font-weight: bold;">
+
+														<p><span class="tableSpan">姓名 : ${order.sName}</span></p>
+														<p><span class="tableSpan">電話 : ${order.sPhone}</span></p>
+														<p><span class="tableSpan">地址 : ${order.sAddress}</span></p>
+														<p><span class="tableSpan">信箱 : ${order.sEmail}</span></p>
+													</div>
+												</div>
+											<span></td>
+
+											<td><span class="tableSpan"><img width='50' height='50'
+												src="${order.projectImage}" class="img-rounded" /><span></td>
+											<td class="sPID">
+												<%-- <button type="button"
+													class="btn btn-inverse-primary btn-rounded btn-icon"
+													onclick="data(${status.index})">${order.sPID}</button> --%>
+
+													<button type="button"
+													class="btn btn-inverse-primary btn-rounded btn-icon"
+													onclick="data(${status.index}, ${orders.size()})">${order.sPID}</button>
+
+											<span></td>
+											<td><span class="tableSpan">${order.sPName}<span></td>
+											<td><span class="tableSpan">$${order.sTotal}<span></td>
+											<td><span class="tableSpan">
+												<button type="button" id="update"
+													class="btn btn-inverse-warning btn-fw"
+													onclick='location.href="<c:url value='/order/${order.sID}'/>"'>修改</button>
+											<span></td>
+											<td><span class="tableSpan">
+												<button type="button" id="delete"
+													class="btn btn-inverse-danger btn-fw"
+													onclick="deleteOrder(${order.sID})">刪除</button>
+											<span></td>
+										</tr>
+									</c:forEach>
+								</table>
 							</div>
+
 						</div>
-
-
-						<!-- main-panel ends -->
 					</div>
-					<!-- page-body-wrapper ends -->
+
+
+					<!-- main-panel ends -->
 				</div>
-				<!-- container-scroller -->
-				<!-- plugins:js -->
-				<script src="vendors/js/vendor.bundle.base.js"></script>
-				<!-- endinject -->
-				<!-- Plugin js for this page -->
-				<!-- End plugin js for this page -->
-				<!-- inject:js -->
-				<script src="js/off-canvas.js"></script>
-				<script src="js/hoverable-collapse.js"></script>
-				<script src="js/template.js"></script>
-				<script src="js/settings.js"></script>
-				<script src="js/todolist.js"></script>
-				<!-- endinject -->
-				<!-- Custom js for this page-->
-				<!-- End custom js for this page-->
+				<!-- page-body-wrapper ends -->
+			</div>
+			<!-- container-scroller -->
+			<!-- plugins:js -->
+			<script src="vendors/js/vendor.bundle.base.js"></script>
+			<!-- endinject -->
+			<!-- Plugin js for this page -->
+			<!-- End plugin js for this page -->
+			<!-- inject:js -->
+			<script src="js/off-canvas.js"></script>
+			<script src="js/hoverable-collapse.js"></script>
+			<script src="js/template.js"></script>
+			<script src="js/settings.js"></script>
+			<script src="js/todolist.js"></script>
+			<!-- endinject -->
+			<!-- Custom js for this page-->
+			<!-- End custom js for this page-->
 
 
-				<script>
+			<script>
 		function deleteOrder(deleteId) {
             $.ajax({
               url: "<spring:url value='/order/delete/" + deleteId +"'/>",
@@ -510,12 +665,75 @@
 
           };
          
-       
+//           $("#searchBtn").click(function () {
+//   			var search = $("#searchBar").val()
+//   			location.href = "<spring:url value='/ordersSearch?search=" + search + "'/>"
+//   		})
+  		
+  		function data(index, length){
+			  if ($("#ordersTable .sorting.sorting_desc").length > 0) {
+				  //若為降冪排列
+				  index = length - index;
+			  }
+			  
+			  //每一頁10筆 取餘數找他在這頁的第幾筆
+			  var sPIDsinglePage = $('.sPID').eq(index%10).text()
+        	  var sPID=parseInt(sPIDsinglePage);
+        	  var data = {
+      				sPID:sPID,
+      			}
+        	  
+        	  $.ajax({
+        		  url: "<c:url value='/data/'/>"+sPID,
+//         		  url: "./data/"+sPID_test,
+  				  type: 'POST',
+  				  data:data,
+                  success: function () {
+                 	location.href= "<c:url value='/dataInfo/" + sPID +"'/>";
+//                        alert("hiiiiiii");
+                    },
+            
+                });
+        	  
+        	  
+          }
           
-
-        
 	
 	</script>
+	 <script>
+       $('#csv').click(function () {
+                  var url = "<c:url value='/Csv/'/>";
+                  $.ajax({
+                    url: url,
+                    type: 'get',
+                    contentType: "application/json; charset=utf-8",
+                    data: {},
+                    success: function (data) {
+                      Swal.fire({
+                        title: '匯出成功',
+                        icon: 'success',
+                        text: "已匯出全部訂單資料！ 按OK回訂單管理首頁！",
+                        position: 'center',
+
+                      })
+                    },
+                    error: function (xhr, text) {
+                      console.log("status code: " + xhr.status);
+                      console.log("error message: " + text);
+                      Swal.fire({
+                        title: '匯出失敗',
+                        icon: 'error',
+                        text: "匯出失敗，請重新嘗試!",
+                      })
+                    }
+                  });
+
+                });
+
+              
+     </script>
+	
+	
 </body>
 
 </html>

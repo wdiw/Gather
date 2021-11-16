@@ -109,15 +109,15 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
-              <img src="images/Members/${memberData.id}.jpg" alt="profile"/>
+            <a class="nav-link dropdown-toggle" href="/Gather/images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
+              <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="/Gather/showMemberCenter">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="/Gather/showLogout">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -310,7 +310,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../../index.html">
+            <a class="nav-link" href="/Gather/backend">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -384,10 +384,22 @@
 <table class="table table-hover">
 	<tr>
 		<td width="350">
-			<form action="/Gather/Forum/delete" method="POST">
-				文章編號: <input type="text" name="id" placeholder="請輸入編號"/><br><br>
-				<input type="submit" value="刪除文章" class="btn btn-primary mr-2"><br>
-			</form>
+<%-- 			<form action="/Gather/Forum/delete" method="POST"> --%>
+<%-- 			<form id="form" class="forms-sample"> --%>
+<!-- 				文章編號: <input type="text" name="id" placeholder="請輸入編號"/><br><br> -->
+<!-- 				<input type="submit" value="刪除文章" class="btn btn-primary mr-2"><br> -->
+<%-- 			</form> --%>
+				<div class="form-group">
+					<label for='id'>編號</label>
+					<input name="id" id="id" class="form-control" >
+				</div>
+				
+<!-- 			<a id="deleteButton" class="btn btn-default"> -->
+<!-- 				<span class="glyphicon-hand-left glyphicon"></span>刪除 -->
+<!-- 			</a> -->
+
+			<button type="button" id="deleteButton" 
+			class="btn btn-inverse-danger btn-fw" >刪除</button>
 		</td>
 	</tr>
 	
@@ -404,13 +416,89 @@
 	<tr>
 		<td width="350">
 			<p align="center">
+			<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">回討論區</a><br><br>
 			<a href="<c:url value='/' />"class="btn btn-primary">回首頁</a><br>
 			</p><br>
 		</td>
 	</tr>
-
-	
 	
 </table>
+	<!-- container-scroller -->
+	<!-- plugins:js -->
+	<script src="vendors/js/vendor.bundle.base.js"></script>
+	<!-- endinject -->
+	<!-- Plugin js for this page -->
+	<script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
+	<script src="vendors/select2/select2.min.js"></script>
+	<!-- End plugin js for this page -->
+	<!-- inject:js -->
+	<script src="../js/off-canvas.js"></script>
+	<script src="../js/hoverable-collapse.js"></script>
+	<script src="../js/template.js"></script>
+	<script src="../js/settings.js"></script>
+	<script src="../js/todolist.js"></script>
+	<!-- endinject -->
+	<!-- Custom js for this page-->
+	<script src="../js/file-upload.js"></script>
+	<script src="../js/typeahead.js"></script>
+	<script src="../js/select2.js"></script>
+	<!-- End custom js for this page-->
+	<!-- 要用Swal.fire需要引用下面兩個 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<!-- 若需相容 IE11，要加載 Promise Polyfill-->
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+	
+	<script>
+	$(document).ready(function(){ //用在預先載入，例如要先讓按鈕不能按；如果只是要寫按鈕功能可不寫這個
+		
+		//點刪除按鈕時，透過id刪除資料
+		$("#deleteButton").on('click',function () { //$("#deleteButton")抓id=deleteButton
+			
+			var id = $("#id").val(); //抓輸入的東西
+			
+			$.ajax({
+				url: "<spring:url value='/Forum/delete/" + id + "'/>", //要放@PostMapping對應的網址
+				type: "delete",
+				data: {  },//前面是標籤，後面是值，回傳
+				success: function (data) {
+					Swal.fire({
+						title: '您確定要刪除嗎？',
+		                icon: 'question',
+		                showCancelButton: true,
+		                cancelButtonText: '否',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							Swal.fire({
+								title: '已成功刪除！',
+								icon: 'success',
+						}).then((result) => {
+							if (result.isConfirmed) {
+								location.href= "<spring:url value='/Forum/queryAll'/>";
+							}
+						})
+						
+						}else if (result.dismiss === Swal.DismissReason.cancel) {
+							Swal.fire({
+								title: '已取消刪除！',
+								icon: 'error',
+							})
+						}
+						
+					}) //then
+				}, //success
+				error: function (xhr, text) {
+					swalWithBootstrapButtons.fire(
+							'失敗',
+							'刪除失敗，請確認有此紀錄 ',
+							'error'
+							)
+				}
+				
+			}) //$.ajax({
+		}) //$("#deleteButton")
+	}) //$(document)
+
+	</script>
+
 </body>
 </html>

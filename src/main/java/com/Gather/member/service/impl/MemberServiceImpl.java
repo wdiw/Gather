@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void addMember(Member theMember) {
+	public void insertOrUpdateMember(Member theMember) {
 		memberRepository.save(theMember);
 	}
 
@@ -72,8 +72,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member getMemberInfoByID(Integer mID) {
-		return memberRepository.getById(mID);
+	public Member findByAccount(String account) {
+		return memberRepository.findByAccount(account);
+	}
+
+	@Override
+	public Member findByPassword(String password) {
+		return memberRepository.findByPassword(password);
 	}
 	
 	
