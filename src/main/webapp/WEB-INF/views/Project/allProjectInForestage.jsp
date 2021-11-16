@@ -47,9 +47,14 @@
 	color: rgb(14, 124, 236) !important
 }
 
-/* .progress {
-							background-color: black
-						} */
+
+.collapsed{
+	font-size: 20px !important;
+}
+
+#collapseFour a{
+	font-size: 20px !important;
+}
 </style>
 </head>
 
@@ -88,7 +93,8 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="./">Gather</a>
+			<a href="/Gather">
+			<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -146,6 +152,7 @@
 								href="/Gather/myFav/${mBean.id}" class="nav-link"><i
 									class="fas fa-hand-holding-heart"></i>[${favCount}]</a></li>
 						</c:when>
+
 					</c:choose>
 					<!--購物車-->
 
@@ -163,7 +170,7 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<!-- <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Shop</span></p> -->
-					<h1 class="mb-0 bread">首頁</h1>
+					<h1 class="mb-0 bread">Gather</h1>
 				</div>
 			</div>
 		</div>
@@ -179,7 +186,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12 ">
 
-					<input id="searchBar" name="searchBar" />
+					<input id="searchBar" name="searchBar"  style="width: 120px;"/>
 					<button id="searchBtn" name="searchBtn" class="btn btn-primary">搜尋</button>
 				</div>
 			</div>
@@ -254,34 +261,48 @@
 
 
 
+
+					</div>
+					<!-- <div class="row mt-5">
+						<div class="col text-center">
+							<div class="block-27">
+								<ul>
+									<li><a href="#">&lt;</a></li>
+									<li class="active"><span>1</span></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">5</a></li>
+									<li><a href="#">&gt;</a></li>
 								</ul>
 							</div>
 						</div>
-					</div>
+					</div> -->
+				</div>
 
 
-
-					<section class="ftco-section bg-light">
 
 
 
 				<div class="col-md-4 col-lg-2">
 					<div class="sidebar">
 						<div class="sidebar-box-2">
-							<h2 class="heading">主題</h2>
+							
 							<div class="fancy-collapse-panel">
 
 
+								<div class="panel-group" id="accordion" role="tablist"
+									aria-multiselectable="true">
 
 
 									<div class="panel panel-default">
 										<div class="panel-heading" role="tab" id="headingFour">
-											<h4 class="panel-title">
+											<!-- <h4 class="panel-title"> -->
 												<a class="collapsed" data-toggle="collapse"
 													data-parent="#accordion" href="#collapseFour"
 													aria-expanded="false" aria-controls="collapseThree">主題
 												</a>
-											</h4>
+											<!-- </h4> -->
 										</div>
 										<div id="collapseFour" class="panel-collapse collapse"
 											role="tabpanel" aria-labelledby="headingFour">

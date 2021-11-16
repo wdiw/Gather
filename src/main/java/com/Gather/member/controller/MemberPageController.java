@@ -84,6 +84,7 @@ public class MemberPageController {
 			session.setAttribute("allProject", result);
 			Member member = (Member) session.getAttribute("memberData");
 			if (member != null) {
+				System.out.println("已經登入");
 				List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(member.getId());
 				int favCount = favoriteBeans.size();
 				session.setAttribute("favCount", favCount);
@@ -93,6 +94,8 @@ public class MemberPageController {
 				if (!sBean.isEmpty()) {
 					session.setAttribute("sBean", sBean);
 				}
+			}else {
+				System.out.println("沒有登入");
 			}
 //		}
 		return "Project/allProjectInForestage";
@@ -217,8 +220,12 @@ public class MemberPageController {
 	}
 
 	@GetMapping("/showLogout")
-	public String showLogout() {
+	public String showLogout(HttpSession session) {
 		System.out.println("透過頁面控制器，進入登出頁面");
+		session.removeAttribute("memberData");
+		session.removeAttribute("favCount");
+		session.removeAttribute("mBean");
+		session.removeAttribute("sBean");
 		return "Member/logout";
 	}
 

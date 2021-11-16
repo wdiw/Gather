@@ -43,6 +43,14 @@
           overflow: auto;
           height: auto;
         }
+
+        #navBarTop {
+    max-width: 1850px;
+}
+
+.nav-link{
+ font-size: 16px !important;
+}
       </style>
 
     </head>
@@ -59,7 +67,7 @@
       </div>
       <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 						id="ftco-navbar">
-						<div class="container">
+						<div class="container" id="navBarTop">
 							<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
