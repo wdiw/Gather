@@ -132,7 +132,7 @@
 
     <section class="ftco-section ftco-cart" >
     <div>
-    <p class="text-center"><a href="sponsoredInfo" class="btn btn-primary py-3 px-4">被贊助清單</a></p>
+    <p class="text-center"><a href="sponsoredInfo" class="btn btn-primary py-3 px-4" style="font-size:16px">被贊助清單</a></p>
     
     </div>
 
@@ -144,9 +144,9 @@
 						    
 						    <tbody>
 						  	
-						    <p align="center">目前尚未贊助任何方案</p>
+						    <p align="center" style="font-size:14px">目前尚未贊助任何方案</p>
 						   
-						    <p class="text-center"><a href="Project/allProjectInForest" class="btn btn-primary py-3 px-4">去逛逛有哪些方案!</a></p></tr>
+						    <p class="text-center"><a href="Project/allProjectInForest" class="btn btn-primary py-3 px-4" style="font-size:16px">去逛逛有哪些方案!</a></p></tr>
 						     
 						    </tbody>
 						   

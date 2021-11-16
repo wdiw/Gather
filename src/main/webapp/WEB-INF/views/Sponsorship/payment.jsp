@@ -186,7 +186,7 @@ font-size: 15px;
 							<input type="hidden" value="${pBean.pID}" name="sPID">
 							<input type="hidden" value="${pBean.mID}" name="proposerID">
 							<input type="hidden" value="${pPBean.projectPlanID}" name="projectPlanID"> 
-							<input type="hidden" value="300" name="sAmount">
+							<input type="hidden" value="${pPBean.projectPlanPrice}" name="sAmount">
 							
 							
 
@@ -275,7 +275,7 @@ font-size: 15px;
 										<div class="col-md-12">
 											<div class="radio">
 												<p><input type="radio" name="paymentMethod"
-													class="mr-2" value="信用卡">ECPay</p>
+													class="mr-2" value="網路ATM">ECPay</p>
 											</div>
 										</div>
 									</div>

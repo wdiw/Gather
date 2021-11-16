@@ -57,7 +57,7 @@ public class MemberPageController {
 		session.setAttribute("favCount", favCount);
 		session.setAttribute("mBean", member);
 		
-		
+
 		return "Project/allProjectInForestage";
 	}
 	//讓我的收藏正常顯示
@@ -73,6 +73,20 @@ public class MemberPageController {
 	
 		return "Project/allProjectInForestage";
 	}
+	
+	@GetMapping("/oneKeyloginBass")
+	public String oneKeyloginBass(HttpSession session) {
+		Member bass = memberService.queryMemberById(59);
+		session.setAttribute("memberData", bass);
+		List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(bass.getId());
+		int favCount = favoriteBeans.size();
+		session.setAttribute("favCount", favCount);
+		session.setAttribute("mBean", bass);
+		
+	
+		return "Project/allProjectInForestage";
+	}
+	
 	
 
 	// ==========================SHOW PAGE========================

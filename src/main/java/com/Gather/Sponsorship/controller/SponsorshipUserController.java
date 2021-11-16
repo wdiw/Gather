@@ -85,7 +85,7 @@ public class SponsorshipUserController {
 	  ProjectPlanBean pPBean = projectPlanService.getProjectPlanByProjectPlanID(pPID);
 	  Integer planAmount =pPBean.getProjectPlanPrice();
 	  List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
-	  ActivityBean discountActivity=activityService.getActivityById(2);
+	  ActivityBean discountActivity=activityService.getActivityById(18);
 	  int favCount = favoriteBeans.size();
 	  
 	  if(activityParticipationService.findActivityParticipationByM_idAndActivityId(discountActivity, member.getId())!=null) {

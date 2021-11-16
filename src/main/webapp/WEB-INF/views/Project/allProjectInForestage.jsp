@@ -124,8 +124,11 @@
 						<c:otherwise>
 						<li class="nav-item"><a href="/Gather/oneKeyloginMember"
 								class="nav-link">一鍵登入會員</a></li>
-					<li class="nav-item"><a href="/Gather/oneKeyloginAdmin"
+						<li class="nav-item"><a href="/Gather/oneKeyloginBass"
+								class="nav-link">一鍵登入提案者</a></li>
+				    	<li class="nav-item"><a href="/Gather/oneKeyloginAdmin"
 								class="nav-link">一鍵登入管理員</a></li>
+								
 							<li class="nav-item"><a
 								href="/Gather/pages/member/register.html" class="nav-link">註冊</a></li>
 							<li class="nav-item"><a

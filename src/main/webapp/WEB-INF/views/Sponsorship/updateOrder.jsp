@@ -41,8 +41,10 @@
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img
+					width="80px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a> <a
+					class="navbar-brand brand-logo-mini" href="index.html"><img
+					src="images/logo-mini.svg" alt="logo" /></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -368,7 +370,7 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">AD</span>
+              <span class="menu-title">Forum</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
@@ -386,10 +388,10 @@
            
             
             <div class="col-12 grid-margin stretch-card">
-              <div class="card" style="width: 600px;margin-left: 300px">
+              <div class="card" style="width: 600px;margin-left: 300px ;font-size:16px">
                 <div class="card-body" style="margin: auto;">
-                  <h4 class="card-title" style="text-align: center;">修改訂單</h4>
-                  <p class="card-description" style="text-align: center;">
+                  <h4 class="card-title" style="text-align: center; font-size:20px">修改訂單</h4>
+                  <p class="card-description" style="text-align: center; font-size:18px">
                     Edit Order
                   </p>
                   <form  id="form" class="forms-sample">

@@ -12,7 +12,7 @@
 	font-weight: bold;
 	
 }
-span{
+.tableSpan{
 	font-size:14px
 }
 
@@ -542,35 +542,35 @@ span{
 								<table class="table table-hover"
 									style="text-align: center; width: 10%;font-size: 10px" id="ordersTable">
 									<thead>
-										<tr ">
-											<th><span><i class="mdi mdi-nutrition"></i>訂單編號<span></th>
-											<th><span><i class="mdi mdi-account-star"></i> 贊助人編號<span></th>
-											<th><span><i class="mdi mdi-file-image"></i> 專案圖片<span></th>
-											<th><span><i class="mdi mdi-counter"></i>專案編號<span></th>
-											<th><span><i class="mdi mdi-book"></i>專案名稱<span></th>
-											<th><span><i class="mdi mdi-coin"></i>贊助金額<span></th>
-											<th><span><i class="mdi mdi-pencil"></i><span></th>
-											<th><span><i class="mdi mdi-delete"></i><span></th>
+										<tr >
+											<th><span class="tableSpan"><i class="mdi mdi-nutrition"></i>訂單編號<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-account-star"></i> 贊助人編號<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-file-image"></i> 專案圖片<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-counter"></i>專案編號<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-book"></i>專案名稱<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-coin"></i>贊助金額<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-pencil"></i><span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-delete"></i><span></th>
 										</tr>
 									</thead>
 									<c:forEach items='${orders}' var='order' varStatus="status">
 										<tr>
-											<td><span>${order.sID}<span></td>
+											<td><span class="tableSpan">${order.sID}<span></td>
 											<td><span>
 
 												<div class="con-tooltip bottom">
-													<p><span>${order.mID}</span></p>
+													<p><span class="tableSpan">${order.mID}</span></p>
 													<div class="tooltip" style="font-weight: bold;">
 
-														<p><span>姓名 : ${order.sName}</span></p>
-														<p><span>電話 : ${order.sPhone}</span></p>
-														<p><span>地址 : ${order.sAddress}</span></p>
-														<p><span>信箱 : ${order.sEmail}</span></p>
+														<p><span class="tableSpan">姓名 : ${order.sName}</span></p>
+														<p><span class="tableSpan">電話 : ${order.sPhone}</span></p>
+														<p><span class="tableSpan">地址 : ${order.sAddress}</span></p>
+														<p><span class="tableSpan">信箱 : ${order.sEmail}</span></p>
 													</div>
 												</div>
 											<span></td>
 
-											<td><span><img width='50' height='50'
+											<td><span class="tableSpan"><img width='50' height='50'
 												src="${order.projectImage}" class="img-rounded" /><span></td>
 											<td class="sPID">
 												<button type="button"
@@ -578,14 +578,14 @@ span{
 													onclick="data(${status.index})">${order.sPID}</button>
 
 											<span></td>
-											<td><span>${order.sPName}<span></td>
-											<td><span>$${order.sTotal}<span></td>
-											<td><span>
+											<td><span class="tableSpan">${order.sPName}<span></td>
+											<td><span class="tableSpan">$${order.sTotal}<span></td>
+											<td><span class="tableSpan">
 												<button type="button" id="update"
 													class="btn btn-inverse-warning btn-fw"
 													onclick='location.href="<c:url value='/order/${order.sID}'/>"'>修改</button>
 											<span></td>
-											<td><span>
+											<td><span class="tableSpan">
 												<button type="button" id="delete"
 													class="btn btn-inverse-danger btn-fw"
 													onclick="deleteOrder(${order.sID})">刪除</button>
