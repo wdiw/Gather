@@ -580,9 +580,13 @@
 											<td><span class="tableSpan"><img width='50' height='50'
 												src="${order.projectImage}" class="img-rounded" /><span></td>
 											<td class="sPID">
-												<button type="button"
+												<%-- <button type="button"
 													class="btn btn-inverse-primary btn-rounded btn-icon"
-													onclick="data(${status.index})">${order.sPID}</button>
+													onclick="data(${status.index})">${order.sPID}</button> --%>
+
+													<button type="button"
+													class="btn btn-inverse-primary btn-rounded btn-icon"
+													onclick="data(${status.index}, ${orders.size()})">${order.sPID}</button>
 
 											<span></td>
 											<td><span class="tableSpan">${order.sPName}<span></td>
@@ -666,14 +670,21 @@
 //   			location.href = "<spring:url value='/ordersSearch?search=" + search + "'/>"
 //   		})
   		
-  		function data(index){
-        	  var sPID=parseInt($('.sPID').eq(index).text());
+  		function data(index, length){
+			  if ($("#ordersTable .sorting.sorting_desc").length > 0) {
+				  //若為降冪排列
+				  index = length - index;
+			  }
+			  
+			  //每一頁10筆 取餘數找他在這頁的第幾筆
+			  var sPIDsinglePage = $('.sPID').eq(index%10).text()
+        	  var sPID=parseInt(sPIDsinglePage);
         	  var data = {
-      				sPID:$('.sPID').eq(index).text(),
+      				sPID:sPID,
       			}
         	  
         	  $.ajax({
-        		  url: "<c:url value='/data/'/>"+$('.sPID').eq(index).text(),
+        		  url: "<c:url value='/data/'/>"+sPID,
 //         		  url: "./data/"+sPID_test,
   				  type: 'POST',
   				  data:data,

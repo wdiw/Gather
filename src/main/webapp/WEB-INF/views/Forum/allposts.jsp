@@ -5,80 +5,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Minishop - Free Bootstrap 4 Template by Colorlib</title>
+<title>Gather</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<!-- bootstrap & jquery -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- summernote -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+<!-- datatables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.css" defer/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.js" defer></script>
+
+<!-- sweetalert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
-<link rel="stylesheet" href="/Gather/css/open-iconic-bootstrap.min.css">
-<link rel="stylesheet" href="/Gather/css/animate.css">
+<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="css/animate.css">
 
-<link rel="stylesheet" href="/Gather/css/owl.carousel.min.css">
-<link rel="stylesheet" href="/Gather/css/owl.theme.default.min.css">
-<link rel="stylesheet" href="/Gather/css/magnific-popup.css">
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
 
-<link rel="stylesheet" href="/Gather/css/aos.css">
+<link rel="stylesheet" href="css/aos.css">
 
-<link rel="stylesheet" href="/Gather/css/ionicons.min.css">
+<link rel="stylesheet" href="css/ionicons.min.css">
 
-<link rel="stylesheet" href="/Gather/css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="/Gather/css/jquery.timepicker.css">
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
 
 
-<link rel="stylesheet" href="/Gather/css/flaticon.css">
-<link rel="stylesheet" href="/Gather/css/icomoon.css">
-<link rel="stylesheet" href="/Gather/css/style.css">
+<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
+
+<script>
+
+
+// alert("!!!!");
+            
+
+</script>
+
 </head>
 <body class="goto-here">
+	
 		<div class="py-1 bg-black">
     	<div class="container">
-    		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+    		<!-- <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
 	    		<div class="col-lg-12 d-block">
 		    		<div class="row d-flex">
 		    			<div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <span class="text"></span>
+						    <span class="text">+ 1235 2355 98</span>
 					    </div>
 					    <div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text"></span>
+						    <span class="text">youremail@email.com</span>
 					    </div>
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
 						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
 					    </div>
 				    </div>
 			    </div>
-		    </div>
+		    </div> -->
 		  </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-						id="ftco-navbar">
-						<div class="container">
-							<a class="navbar-brand" href="./">Gather</a>
-							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-								<span class="oi oi-menu"></span> Menu
-							</button>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+			<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
 
-							<div class="collapse navbar-collapse" id="ftco-nav">
-								<ul class="navbar-nav ml-auto">
-
-									<li class="nav-item dropdown active">
-										
-										<div class="dropdown-menu" aria-labelledby="dropdown04">
-											<a class="dropdown-item" href="shop.html">Shop</a>
-											<a class="dropdown-item" href="product-single.html">Single Product</a>
-											<a class="dropdown-item" href="cart.html">Cart</a>
-											<a class="dropdown-item" href="checkout.html">Checkout</a>
-										</div>
-									</li>
-									<li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
-
-
-
-
-								<c:choose>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
+				
+				<c:choose>
                     <c:when test="${memberData!=null}">
                       <li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
                       <li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
@@ -107,19 +122,17 @@
 													</c:choose>
 													<!--購物車-->
 
-
-								</ul>
-							</div>
-						</div>
-					</nav>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
     <!-- END nav -->
-
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+	  <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
-            <h1 class="mb-0 bread">Blog</h1>
+<!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p> -->
+            <h1 class="mb-0 bread">Gather討論區</h1>
           </div>
         </div>
       </div>
@@ -219,34 +232,93 @@
 <!-- 		        </div> -->
           </div> <!-- .col-md-8 -->
           
+          <!-- 側邊列表 -->
           <div class="col-lg-4 sidebar ftco-animate">
             <div class="sidebar-box">
-<%--             <a href="<c:url value='/Forum/add' />" class="btn py-3 px-4 btn-primary">發表文章</a><br><br> --%>
-            <a href="<c:url value='/addposts' />" class="btn py-3 px-4 btn-primary">發表文章</a><br><br>
+              <div id="po" class="form-group">
+              <a href="<c:url value='/addposts' />" class="btn py-3 px-4 btn-primary">發表文章</a>
+              </div>
               <form action="#" class="search-form">
                 <div class="form-group">
                   <a id="search" style="cursor: pointer;"><span class="icon ion-ios-search"></span></a>
                   <input type="text" class="form-control" id="searchvalue" placeholder="輸入文章標題">
                 </div>
-              </form>
+              </form><br>
             </div>
+            
             <div class="sidebar-box ftco-animate">
             	<h3 class="heading">Categories</h3>
               <ul class="categories">
                 <li><a href="<spring:url value='/allposts'/>">全部</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=公告'/>">公告</a></li>
-                <li><a href="<spring:url value='/postcategory?postCategory=閒聊'/>">閒聊</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=問題'/>">問題</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=討論'/>">討論</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=心得'/>">心得</a></li>
               </ul>
             </div>
-
-
-        </div>
-      </div>
+          </div>
+          
+        </div> <!-- 外層row -->
+      </div> <!-- container -->
     </section> <!-- .section -->
 
-  
+    <section class="ftco-gallery">
+    	<div class="container">
+    		<div class="row justify-content-center">
+    			<div class="col-md-8 heading-section text-center mb-4 ftco-animate">
+            <h2 class="mb-4">Follow Us On Instagram</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+          </div>
+    		</div>
+    	</div>
+    	<div class="container-fluid px-0">
+    		<div class="row no-gutters">
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-1.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-1.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-2.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-2.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-3.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-3.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-4.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-4.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-5.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-5.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-4 col-lg-2 ftco-animate">
+						<a href="images/gallery-6.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-6.jpg);">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-instagram"></span>
+    					</div>
+						</a>
+					</div>
+        </div>
+    	</div>
+    </section>
+
     <footer class="ftco-footer ftco-section">
       <div class="container">
       	<div class="row">
@@ -345,6 +417,7 @@
   <script src="js/main.js"></script>
   
   
+  
 	<script>
 	
 	$('#search').click(function() {
@@ -353,6 +426,80 @@
 	    location.href=  "<spring:url value='/searchresults?searchvalue=" + searchvalue + "'/>" //跳轉進@GetMapping對應的方法，也是網址
 										   //@GetMapping對應網址 ? 方法的@RequestParam對應的參數，這裡就是@RequestParam("searchvalue")
 	})
+	
+	
+	$(document).ready(function(){
+		
+	
+	var mStatus = "${sessionScope.memberData.status}"//取得會員身分
+	var mID = "${sessionScope.memberData.id}"//取得會員身分
+	var mName = "${sessionScope.memberData.name}"//取得會員身分
+
+	if ( mStatus !== "" ) {
+		//已登入
+		if  ( mStatus == "管理員" ) {
+			//管理員
+			Swal.fire({
+            	title: '您好 '+ mStatus,
+            	text: '即將自動跳轉到後台',
+            	imageUrl: "/Gather/images/Members/${memberData.id}.jpg",
+            	imageWidth: 200, 
+            	imageHeight: 200,
+//             	imageClass:' rounded-circle',
+//             	customClass: {
+//             		icon: 'no-border'
+//             	},
+            	showClass: {
+            		popup: 'animate__animated animate__fadeInDown'
+            	},
+            	hideClass: {
+            		popup: 'animate__animated animate__fadeOutUp'
+            	},
+            	showConfirmButton: false,
+            	allowOutsideClick: false,
+            	timer: 1500,
+            }).then((result)=>{
+            	location.href= "<spring:url value='/Forum/queryAll'/>";
+            })
+            
+		} else{
+			//一般會員
+			Swal.fire({
+				title: '您好 '+ mName,
+				text: '歡迎光臨Gather討論區',
+				imageUrl: "/Gather/images/Members/${memberData.id}.jpg",
+				imageWidth: 200,
+				imageHeight: 200,
+				showClass: {
+					popup: 'animate__animated animate__fadeInDown'
+				},
+				hideClass: {
+					popup: 'animate__animated animate__fadeOutUp'
+				},
+				showConfirmButton: false,
+				timer: 1500,
+			})
+			$("#po").show();
+		}
+	} else {
+		//未登入
+		Swal.fire({
+			title: '您好 訪客',
+			text: '歡迎光臨Gather討論區',
+			showClass: {
+				popup: 'animate__animated animate__fadeInDown'
+			},
+			hideClass: {
+				popup: 'animate__animated animate__fadeOutUp'
+			},
+			showConfirmButton: false,
+			timer: 1500,
+		})
+		$("#po").hide();
+	}
+	
+	}) //$(document).ready(function()
+	
 	
 	</script>
 

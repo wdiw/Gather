@@ -55,18 +55,28 @@ public class ForumServiceImpl implements ForumService {
 		forumRepository.deleteById(fID);
 	}
 	
-	//搜尋
+	//文章搜尋
 	@Override
 	public List<ForumBean> findforumBytitle(Set<String> forumtitles) {
 		return forumRepository.findforumBytitle(forumtitles);
 	}
 	
-	//搜尋
+	//文章分類
 	@Override
 	public List<ForumBean> findByPostCategory(String forumcategory) {
-	
 		return forumRepository.findByPostCategory(forumcategory);
-		
+	}
+	
+	//會員分類 T
+	@Override
+	public List<ForumBean> getAllByPosterId(Integer posterID) {
+		return forumRepository.findByPosterID(posterID);
+	}
+	
+	//文章倒序排列
+	@Override
+	public List<ForumBean> findByIdOrderByIdDesc() {
+		return forumRepository.findByIdOrderByIdDesc();
 	}
 	
 	

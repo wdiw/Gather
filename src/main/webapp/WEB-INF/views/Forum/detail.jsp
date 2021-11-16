@@ -47,10 +47,13 @@
 		<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 			<div
 				class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-				<a class="navbar-brand brand-logo mr-5" href="../index.html"><img
-					src="../images/logo.svg" class="mr-2" alt="logo" /></a> <a
-					class="navbar-brand brand-logo-mini" href="../index.html"><img
-					src="../images/logo-mini.svg" alt="logo" /></a>
+<!-- 				<a class="navbar-brand brand-logo mr-5" href="../index.html"><img -->
+<!-- 					src="../images/logo.svg" class="mr-2" alt="logo" /></a> <a -->
+<!-- 					class="navbar-brand brand-logo-mini" href="../index.html"><img -->
+<!-- 					src="../images/logo-mini.svg" alt="logo" /></a> -->
+				<a class="navbar-brand brand-logo mr-5" href="/Gather">
+				<img  width="50px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" />
+				</a>
 			</div>
 			<div
 				class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -405,7 +408,7 @@
 						<div class="collapse" id="icons">
 							<ul class="nav flex-column sub-menu">
 								<li class="nav-item"><a class="nav-link"
-									href="/Gather/Forum/adMain">討論區管理</a></li>
+									href="/Gather/Forum/queryAll">討論區管理</a></li>
 							</ul>
 						</div></li>
 				</ul>
@@ -429,7 +432,7 @@
 										<label>文章分類</label> 
 <!-- 										<input id="name" name="name" -->
 <%-- 										class="form-control" value="${forum.postCategory}" type='text'> --%>
-										<select name="postCategory">
+										<select name="postCategory" class="form-control">
 <%-- 											<option selected>${forum.postCategory}</option> --%>
 											<option selected>公告</option>
 											<option>閒聊</option>
@@ -445,7 +448,7 @@
 									</div>
 
 									<div class="form-group">
-										<label>文章描述</label>
+										<label>文章內容</label>
 										<textarea rows="15" cols="50" 
 										id="post" name="post" class="form-control">${forum.post}</textarea>
 									</div>
@@ -457,7 +460,7 @@
 										class="btn btn-danger" onclick="deletebtn(${forum.id})">刪除</button>
 									
 									<button id="returnButton" type='button' name='returnButton'
-										class="btn btn-primary mr-2" onclick='location.href="<c:url value='/Forum/queryAll' />"'>回討論區</button>
+										class="btn btn-primary mr-2" onclick='location.href="<c:url value='/Forum/queryAll' />"'>回討論區管理</button>
 									
 									<br><br>
 <!-- 									<div class="form-group"> -->
@@ -479,25 +482,34 @@
 												<th>留言人</th>
 												<th>留言內容</th>
 												<th>留言時間</th>
+												<th>操作</th>
 											</tr>
 										</thead>
 										<c:forEach items='${AllForumComment}' var='forumcomments'>
-											<tr>
+											<tr onMouseOver="this.style.backgroundColor='pink';" onMouseOut="this.style.backgroundColor='';">
 												<td>${forumcomments.forumcommentID}</td>
 												<td>
 													<div
-														style="width: 100%; white-space: normal; word-wrap: break-word; word-break: break-all; cursor: pointer;">
+														style="width: 100%; white-space: normal; word-wrap: break-word; word-break: break-all; ">
 														${forumcomments.forumcommenter}</div>
 												</td>
-												<td onMouseOver="this.style.backgroundColor='pink';"
-													onMouseOut="this.style.backgroundColor='';">
+												<td>
 													<div id="post" name="post" class="showcontent"
-														style="width: 100%; white-space: normal; word-wrap: break-word; word-break: break-all; cursor: pointer;"
-														onMouseOver="this.style.backgroundColor='orange';"
-														onMouseOut="this.style.backgroundColor='';">
+														style="width: 100%; white-space: normal; word-wrap: break-word; word-break: break-all; ">
 														${forumcomments.forumcomment}</div>
 												</td>
-												<td>${forumcomments.forumcommentTime}</td>
+												
+												<td>
+												${forumcomments.forumcommentTime}
+												</td>
+												
+												<td>
+<!-- 												<button id="deleteButton" type='button' name='deleteButton'  -->
+<%-- 												class="btn btn-danger" onclick="deletebtn(${forum.id})">刪除</button> --%>
+												<button type='button' id="deleteCommentButton" name='deleteCommentButton' 
+												class="btn btn-danger" onclick="deleteCommentButton(${forumcomments.forumcommentID})">刪除留言</button>
+												
+												</td>
 											</tr>
 										</c:forEach>
 									</table>
@@ -505,7 +517,7 @@
 
 								<br><br>
 								
-								<h3>新增留言</h3>
+								<h3>管理員留言</h3>
 							
 									<div class="form-group">
 										<textarea id="forumcomment" name="forumcomment" cols="100" rows="10" 
@@ -573,6 +585,8 @@
 					var form = document.getElementById("form")
 					var formData = new FormData(form);
 					var url = "<spring:url value='/Forum/detail/" + id + "'/>";
+// 					alert(form);
+// 					alert(formData);
 
 					$.ajax({
 						url: url,
@@ -612,16 +626,16 @@
 					
 					Swal.fire({
 						title: '確定刪除?',
-						text: "你將刪除此計畫!",
+						text: "你將刪除此文章!",
 						icon: 'warning',
 						showCancelButton: true,
 						confirmButtonText: '刪除!',
 						cancelButtonText: '取消!',
-						reverseButtons: true
+// 						reverseButtons: true
 					}).then((result) => {
 						if (result.isConfirmed) {
 
-							var url = "<spring:url value='/Forum/detail/" + id + "'/>";
+							var url = "<spring:url value='/Forum/queryAll/" + id + "'/>";
 
 							$.ajax({
 								url: url,
@@ -634,7 +648,7 @@
 										icon: 'success',
 										title: '刪除成功',
 									
-										timer: 3000,
+// 										timer: 3000,
 										timerProgressBar: true,
 										showConfirmButton: false,
 									})
@@ -661,6 +675,60 @@
 						}
 					})
 				} //function deletebtn(id)
+				
+				
+			    //刪除留言按鈕
+			    function deleteCommentButton(forumcommentID) {
+			    	
+			    	Swal.fire({
+			    		
+			    		title: '確定刪除?', 
+			    		text: "你將刪除此留言!",
+			              icon: 'warning',
+			              showCancelButton: true,
+			              confirmButtonText: '刪除!',
+			              cancelButtonText: '取消!',
+			            }).then((result) => {
+			              if (result.isConfirmed) {
+			  
+			                var url = "<spring:url value='/Forum/deleteforumcomment/" + forumcommentID + "'/>";
+			                
+			                $.ajax({
+			                  url: url,
+			                  type: 'delete',
+			                  data: {},
+			                  
+			                  success: function (data) {
+			                    Swal.fire({
+			                      position: 'center',
+			                      icon: 'success',
+			                      title: '刪除成功',
+//			                       timerProgressBar: true,
+			                      showConfirmButton: false,
+			                    })
+			                    location.href = "<spring:url value='/Forum/detail?id=" + ${forum.id} + "'/>";
+			                  },
+			                  error: function (xhr, text) {
+			  // 									swalWithBootstrapButtons.fire(
+			                    Swal.fire(
+			                      '失敗', 
+			                      '刪除失敗，請確認 ', 
+			                      'error'
+			                    )
+			                  }
+			                })
+			              
+			              } else if (
+			                result.dismiss === Swal.DismissReason.cancel
+			              ) {
+			                Swal.fire(
+			                  '取消',
+			                  '已取消刪除 ',
+			                  'success'
+			                )
+			              }
+			            }) //then((result) 
+			          } //function deleteCommentButton(id)  
 				
 				
 // 					window.onload = function () {
@@ -700,7 +768,7 @@
            
 			            Swal.fire({
 			                title: '您確定要送出嗎？',
-							text:forumcomment,
+// 							text:forumcomment,
 			                icon: 'question',
 			                showCancelButton: true,
 //			                 closeOnConfirm: true,

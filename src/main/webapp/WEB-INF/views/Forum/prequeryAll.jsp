@@ -14,12 +14,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Gather Admin</title>
   <!-- plugins:css -->
-  <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
   <link rel="stylesheet" href="../vendors/feather/feather.css">
   <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
@@ -33,6 +33,41 @@
   <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../images/favicon.png" />
+  
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.css" defer/>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.js" defer></script>
+  <script>
+  	
+  	$(document).ready(function () {
+  		$('#allpostsb').DataTable({
+  			"language": {
+  				"processing": "處理中...",
+				"loadingRecords": "載入中...",
+				"lengthMenu": "顯示筆數 _MENU_ ",
+				"zeroRecords": "沒有符合的結果",
+				"info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+				"infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+				"infoFiltered": "(從 _MAX_ 項結果中過濾)",
+				"infoPostFix": "",
+				"search": "搜尋 : ",
+				"paginate": {
+					"first": "第一頁",
+					"previous": "上一頁",
+					"next": "下一頁",
+					"last": "最後一頁"
+				},
+				"aria": {
+					"sortAscending": ": 升冪排列",
+					"sortDescending": ": 降冪排列"
+				}
+  			}
+  		})
+  	})
+  	
+  </script>
+  
+  
+  
 </head>
 
 <body>
@@ -40,6 +75,7 @@
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <!-- logo -->
         <a class="navbar-brand brand-logo mr-5" href="../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
         <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
       </div>
@@ -51,9 +87,9 @@
           <li class="nav-item nav-search d-none d-lg-block">
             <div class="input-group">
               <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                <span class="input-group-text" id="search">
-                  <i class="icon-search"></i>
-                </span>
+<!--                 <span class="input-group-text" id="search"> -->
+<!--                   <i class="icon-search"></i> -->
+<!--                 </span> -->
               </div>
               <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
             </div>
@@ -109,6 +145,7 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
+            <!-- 會員頭貼 -->
             <a class="nav-link dropdown-toggle" href="/Gather/images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
               <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/>
             </a>
@@ -308,197 +345,294 @@
       <!-- partial -->
       <!-- partial:../../partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/Gather/backend">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Member</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">會員管理</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
-              <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Activity</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="form-elements">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">全部活動</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-              <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Sponsorship</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="orders">訂單管理</a></li>
-                <li class="nav-item"> <a class="nav-link" href="addorder">新增訂單</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-              <i class="icon-grid-2 menu-icon"></i>
-              <span class="menu-title">Projects</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="tables">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">專案管理</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="<spring:url value='/Forum/queryAll' />" aria-expanded="false" aria-controls="icons">
-              <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">討論區</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="icons">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<spring:url value='/Forum/queryAll' />">全部文章</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </nav>
-      <!-- partial -->
-      <div class="main-panel">        
-        <div class="content-wrapper">
-<table class="table table-hover">
-	<tr>
-		<td width="350">
-<%-- 			<form action="/Gather/Forum/delete" method="POST"> --%>
-<%-- 			<form id="form" class="forms-sample"> --%>
-<!-- 				文章編號: <input type="text" name="id" placeholder="請輸入編號"/><br><br> -->
-<!-- 				<input type="submit" value="刪除文章" class="btn btn-primary mr-2"><br> -->
-<%-- 			</form> --%>
-				<div class="form-group">
-					<label for='id'>編號</label>
-					<input name="id" id="id" class="form-control" >
+								<ul class="nav">
+									<li class="nav-item"><a class="nav-link" href="./backend">
+											<i class="icon-grid menu-icon"></i> <span
+												class="menu-title">Dashboard</span>
+										</a></li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#ui-basic"
+											aria-expanded="false" aria-controls="ui-basic"> <i
+												class="icon-layout menu-icon"></i>
+											<span class="menu-title">Member</span> <i class="menu-arrow"></i>
+										</a>
+										<div class="collapse" id="ui-basic">
+											<ul class="nav flex-column sub-menu">
+												<li class="nav-item"><a class="nav-link" href="showAllMember">會員管理</a>
+												</li>
+												<li class="nav-item"><a class="nav-link" href="./addMember">新增會員</a>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse"
+											href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+											<i class="icon-columns menu-icon"></i> <span
+												class="menu-title">Activity</span>
+											<i class="menu-arrow"></i>
+										</a>
+										<div class="collapse" id="form-elements">
+											<ul class="nav flex-column sub-menu">
+												<li class="nav-item"><a class="nav-link"
+														href="Activity/selectall">全部活動</a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#charts"
+											aria-expanded="false" aria-controls="charts"> <i
+												class="icon-bar-graph menu-icon"></i>
+											<span class="menu-title">Sponsorship</span> <i class="menu-arrow"></i>
+										</a>
+										<div class="collapse" id="charts">
+											<ul class="nav flex-column sub-menu">
+												<li class="nav-item"><a class="nav-link" href="orders">訂單管理</a></li>
+												<li class="nav-item"><a class="nav-link" href="addorder">新增訂單</a>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#tables"
+											aria-expanded="false" aria-controls="tables"> <i
+												class="icon-grid-2 menu-icon"></i>
+											<span class="menu-title">Projects</span> <i class="menu-arrow"></i>
+										</a>
+										<div class="collapse" id="tables">
+											<ul class="nav flex-column sub-menu">
+												<li class="nav-item"><a class="nav-link"
+														href="Project/allProjectInBackstage">專案管理</a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#icons"
+											aria-expanded="false" aria-controls="icons"> <i
+												class="icon-contract menu-icon"></i>
+											<span class="menu-title">Forum</span> <i class="menu-arrow"></i>
+										</a>
+										<div class="collapse" id="icons">
+											<ul class="nav flex-column sub-menu">
+												<li class="nav-item"><a class="nav-link"
+														href="/Gather/Forum/queryAll">討論區管理</a></li>
+											</ul>
+										</div>
+									</li>
+
+								</ul>
+
+							</nav>
+
+			
+			<br><br>
+
+
+<div class="main-panel">
+	<div class="content-wrapper">
+		<div class="col-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+				<h1 class="card-title" style="visibility: hidden">所有文章</h1>
+				<h1 style="font-family:sans-serif;">所有文章</h1>
+				<h1 class="card-title" style="visibility: hidden">所有文章</h1>
+					<div class="table-responsive">
+						<table id="allpostsb" class="table table-hover">
+						
+							<thead>
+								<tr>
+									<th>文章編號</th>
+									<th>文章分類</th>
+									<th>文章標題</th>
+									<th>文章內容</th>
+									<th>發文資訊</th>
+									<th>最後修改時間</th>
+<!-- 									<th>回覆數</th> -->
+									<th>操作</th>
+								</tr>
+							</thead>
+							<c:forEach items='${AllForum}' var='forum' >
+								<tr>
+				<!-- 			<tr onclick="test()" > -->
+				<%-- 			<tr onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
+				<%-- 			value='/Project/project?pID=${project.pID}' --%>
+									<td>
+										<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.id}</a>
+				<%-- 				缺分類${forum.id} --%>
+									</td>
+									
+									<td>
+										<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.postCategory}</a>
+									</td>
+									
+									<td style="">
+				<%-- 				<td onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
+										<div style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;">
+				<%-- 					${forum.name} --%>
+											<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.name}</a>
+										</div>
+									</td>
+									
+									<td onMouseOver="this.style.backgroundColor='pink';" onMouseOut="this.style.backgroundColor='';">
+										<div id="post" name="post" class="showcontent" style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;" 
+										onMouseOver="this.style.backgroundColor='orange';" 
+										onMouseOut="this.style.backgroundColor='';">
+										${forum.post}
+				<!-- 					<button onclick="init()">TEST</button> -->
+										</div>
+									</td>
+									
+									<td>
+									${forum.poster}<br>
+									${forum.postTime}
+									</td>
+									
+									<td><br>${forum.postUpdateTime}</td>
+<!-- 									<td>回覆數123</td> -->
+									<td><a onclick="deletebtn(${forum.id})" class="btn btn-danger">文章刪除</a></td>
+				<!-- 				<td> -->
+				<%-- 					<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">編輯</a> --%>
+				<%-- 					<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">文章刪除</a> --%>
+				<!-- 					<button type="button" id="update" class="btn btn-inverse-warning btn-fw" -->
+				<%-- 					onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"'>詳細資料</button> --%>
+				<%-- 					<a href="<c:url value='/Forum/adUpdate' />" class="btn btn-primary">文章修改</a><br><br> --%>
+				<!-- 				</td> -->
+								</tr>
+							</c:forEach>
+						</table>
+					
+				<!-- 	<div> -->
+				<!-- 		<input class='search-bar' type='text' id='searchvalue' placeholder='輸入文章標題'> -->
+				<!-- 		<button id='search'>搜尋</button> -->
+				<!-- 	</div> -->
+					
+					<br><br>
+				<!-- 	<div> -->
+				<!-- 		<ul> -->
+				<%-- 			<li><a href="<spring:url value='/Forum/queryAll'/>">全部</a></li> --%>
+				<%-- 			<li><a href="<spring:url value='/Forum/category?postCategory=公告'/>">公告</a></li> --%>
+				<%-- 			<li><a href="<spring:url value='/Forum/category?postCategory=閒聊'/>">閒聊</a></li> --%>
+				<%-- 			<li><a href="<spring:url value='/Forum/category?postCategory=討論'/>">討論</a></li> --%>
+				<%-- 			<li><a href="<spring:url value='/Forum/category?postCategory=心得'/>">心得</a></li> --%>
+				<!-- 		</ul> -->
+				<!-- 	</div> -->
+				
+					</div><!-- 	table結束 -->
 				</div>
-				
-<!-- 			<a id="deleteButton" class="btn btn-default"> -->
-<!-- 				<span class="glyphicon-hand-left glyphicon"></span>刪除 -->
-<!-- 			</a> -->
+			</div>
+       
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        
+        <!-- partial -->
+		</div>
+      <!-- main-panel ends -->
+	</div>
+    <!-- page-body-wrapper ends -->
+</div>	
+	
+<!--     <div align='center'> -->
+<!--     	<br> -->
+<%--     	<a href="<c:url value='/Forum/add1' />" class="btn btn-primary">測試</a><br><br> --%>
+<%--     	<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">發表文章</a><br><br> --%>
+<%--     	<a href="<c:url value='/Forum/add' />" class="btn btn-primary">發表文章add</a><br><br> --%>
+<%--     	<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">文章刪除</a><br><br> --%>
+<%--     	<a href="<c:url value='/Forum/adUpdate' />" class="btn btn-primary">文章修改</a><br><br> --%>
+<%--     	<a href="<c:url value='/Forum/queryAll' />" class="btn btn-primary">回討論區</a><br><br> --%>
+<%--     	<a href="<c:url value='/' />" class="btn btn-primary">回首頁</a><br><br> --%>
+<!--     </div> -->
+    
+    
+    
+<script>
 
-			<button type="button" id="deleteButton" 
-			class="btn btn-inverse-danger btn-fw" >刪除</button>
-		</td>
-	</tr>
-	
-	<tr>
-		<td width="350">
-			<p align="center">
-			<a href="<c:url value= '/Forum/queryAll' />"class="btn btn-primary">查詢所有文章
-			</a><br>
-			
-			</p><br>
-		</td>
-	</tr>
-	
-	<tr>
-		<td width="350">
-			<p align="center">
-			<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">回討論區</a><br><br>
-			<a href="<c:url value='/' />"class="btn btn-primary">回首頁</a><br>
-			</p><br>
-		</td>
-	</tr>
-	
-</table>
-	<!-- container-scroller -->
-	<!-- plugins:js -->
-	<script src="vendors/js/vendor.bundle.base.js"></script>
-	<!-- endinject -->
-	<!-- Plugin js for this page -->
-	<script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
-	<script src="vendors/select2/select2.min.js"></script>
-	<!-- End plugin js for this page -->
-	<!-- inject:js -->
-	<script src="../js/off-canvas.js"></script>
-	<script src="../js/hoverable-collapse.js"></script>
-	<script src="../js/template.js"></script>
-	<script src="../js/settings.js"></script>
-	<script src="../js/todolist.js"></script>
-	<!-- endinject -->
-	<!-- Custom js for this page-->
-	<script src="../js/file-upload.js"></script>
-	<script src="../js/typeahead.js"></script>
-	<script src="../js/select2.js"></script>
-	<!-- End custom js for this page-->
-	<!-- 要用Swal.fire需要引用下面兩個 -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-	<!-- 若需相容 IE11，要加載 Promise Polyfill-->
-	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-	
-	<script>
-	$(document).ready(function(){ //用在預先載入，例如要先讓按鈕不能按；如果只是要寫按鈕功能可不寫這個
-		
-		//點刪除按鈕時，透過id刪除資料
-		$("#deleteButton").on('click',function () { //$("#deleteButton")抓id=deleteButton
-			
-			var id = $("#id").val(); //抓輸入的東西
-			
-			$.ajax({
-				url: "<spring:url value='/Forum/delete/" + id + "'/>", //要放@PostMapping對應的網址
-				type: "delete",
-				data: {  },//前面是標籤，後面是值，回傳
-				success: function (data) {
-					Swal.fire({
-						title: '您確定要刪除嗎？',
-		                icon: 'question',
-		                showCancelButton: true,
-		                cancelButtonText: '否',
-					}).then((result) => {
-						if (result.isConfirmed) {
-							Swal.fire({
-								title: '已成功刪除！',
-								icon: 'success',
-						}).then((result) => {
-							if (result.isConfirmed) {
-								location.href= "<spring:url value='/Forum/queryAll'/>";
-							}
-						})
-						
-						}else if (result.dismiss === Swal.DismissReason.cancel) {
-							Swal.fire({
-								title: '已取消刪除！',
-								icon: 'error',
-							})
-						}
-						
-					}) //then
-				}, //success
-				error: function (xhr, text) {
-					swalWithBootstrapButtons.fire(
-							'失敗',
-							'刪除失敗，請確認有此紀錄 ',
-							'error'
-							)
-				}
-				
-			}) //$.ajax({
-		}) //$("#deleteButton")
-	}) //$(document)
+$('#search').click(function() {
+    var searchvalue = $('#searchvalue').val(); //用變數searchvalue放輸入的東西
+//     alert(searchvalue); //測試是否抓到輸入的東西
+    location.href=  "<spring:url value='/Forum/searchresult?searchvalue=" + searchvalue + "'/>" //跳轉進@GetMapping對應的方法，也是網址
+									   //@GetMapping對應網址 ? 方法的@RequestParam對應的參數，這裡就是@RequestParam("searchvalue")
+})
 
-	</script>
+//刪除按鈕
+          function deletebtn(id) {
+            
+            Swal.fire({
+              title: '確定刪除?',
+              text: "你將刪除此計畫!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: '刪除!',
+              cancelButtonText: '取消!',
+  // 						reverseButtons: true
+            }).then((result) => {
+              if (result.isConfirmed) {
+  
+                var url = "<spring:url value='/Forum/queryAll/" + id + "'/>";
+  
+                $.ajax({
+                  url: url,
+                  type: 'DELETE',
+                  data: {},
+                  
+                  success: function (data) {
+                    Swal.fire({
+                      position: 'center',
+                      icon: 'success',
+                      title: '刪除成功',
+                    
+  // 										timer: 3000,
+                      timerProgressBar: true,
+                      showConfirmButton: false,
+                    })
+                    location.href = "<spring:url value='/Forum/queryAll'/>";
+                  },
+                  error: function (xhr, text) {
+  // 									swalWithBootstrapButtons.fire(
+                    Swal.fire(
+                      '失敗', 
+                      '刪除失敗，請確認 ', 
+                      'error'
+                    )
+                  }
+                })
+              
+              } else if (
+                result.dismiss === Swal.DismissReason.cancel
+              ) {
+                Swal.fire(
+                  '取消',
+                  '已取消刪除 ',
+                  'success'
+                )
+              }
+            })
+          } //function deletebtn(id)  
 
+
+
+
+
+
+// $(document).ready(function () {
+// 		var projectID = ${ project.pID };//抓專案ID
+// 		var mStatus = "${sessionScope.memberData.status}"//取得會員身分
+// 		var mID = "${sessionScope.memberData.id}"//取得會員身分
+
+// 		if (mStatus == '管理員') {
+// 			//管理員身分
+// 			$("#passButton").show();
+// 			$("#NotPassButton").show();
+// 			$("#sendButton").hide();
+
+// 		} else {
+// 			//會員身分
+
+// 			$("#sendButton").show();
+// 			$("#passButton").hide();
+// 			$("#NotPassButton").hide();
+// 			$(".form-control").attr("disabled", true)
+// 			$("#pDescribe").attr("disabled", false);
+// 			$("#pContent").attr("disabled", false);
+// 		}
+// 	})
+
+</script>
+    
 </body>
 </html>
+    

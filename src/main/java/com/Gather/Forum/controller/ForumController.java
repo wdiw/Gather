@@ -1,6 +1,5 @@
 package com.Gather.Forum.controller;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,7 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.Gather.Forum.model.ForumBean;
 import com.Gather.Forum.model.ForumCommentBean;
@@ -53,38 +50,33 @@ public class ForumController {
 	
 	@GetMapping("/Forum/adMain") //跳轉
 	public String toAdMain(Model model) {
-		
 		return "/Forum/adMain";
-		
 	}
 	
-//	@GetMapping("/add") //這個網址套不到版
+	//jsp的跳轉，html不需要
+//	@GetMapping("/showLogin") //跳轉
+//	public String toLogin(Model model) {
+//		return "Member/login";
+//	}
+	
 	@GetMapping("/Forum/add") //跳轉到這個網址
-	public String toAdMainTest(Model model) {
-		
+	public String newToAdMain(Model model) {
 		return "/Forum/add"; //上面網址用的jsp
-		
 	}
 	
 	@GetMapping("/addposts") //跳轉到這個網址
-	public String toAddposts(Model model) {
-		
-		return "/Forum//addposts"; //上面網址用的jsp
-		
+	public String toAddPosts(Model model) {
+		return "/Forum/addposts"; //上面網址用的jsp
 	}
 	
 	@GetMapping("/Forum/adDelete") //跳轉
 	public String toAdDelete(Model model) {
-		
 		return "/Forum/adDelete"; //上面網址用的jsp
-		
 	}
 	
 	@GetMapping("/Forum/adUpdate") //跳轉
 	public String toAdUpdate(Model model) {
-		
 		return "/Forum/adUpdate"; //上面網址用的jsp
-		
 	}
 	
 	//搜尋 後
@@ -100,7 +92,6 @@ public class ForumController {
 		System.out.println(result); //應該要有類似[com.Gather.Forum.model.ForumBean@54cd744b]的東西
 		model.addAttribute("SearchResult",result);
 		return "/Forum/searchresult"; //上面網址用的jsp
-		
 	}
 	
 	//搜尋 前
@@ -116,49 +107,54 @@ public class ForumController {
 		System.out.println(result); //應該要有類似[com.Gather.Forum.model.ForumBean@54cd744b]的東西
 		model.addAttribute("SearchResult",result);
 		return "/Forum/searchresults"; //上面網址用的jsp
-		
 	}
 	
 	//分類 後
 	@GetMapping("/Forum/category")
 	public String categoryResult(@RequestParam("postCategory") String postcategory, Model model) { //把使用者輸入的值傳進方法
-		
 		List<ForumBean> result = forumservice.findByPostCategory(postcategory);
 		System.out.println(result); //應該要有類似[com.Gather.Forum.model.ForumBean@54cd744b]的東西
 		model.addAttribute("categoryResult",result);
 		return "/Forum/category"; //上面網址用的jsp
-		
 	}
 	
 	//分類 前
 	@GetMapping("/postcategory")
 	public String categoryResulto(@RequestParam("postCategory") String postcategory, Model model) { //把使用者輸入的值傳進方法
-		
 		List<ForumBean> result = forumservice.findByPostCategory(postcategory);
 		System.out.println(result); //應該要有類似[com.Gather.Forum.model.ForumBean@54cd744b]的東西
 		model.addAttribute("categoryResult",result);
 		return "/Forum/postcategory"; //上面網址用的jsp
-		
 	}
 	
-	//R全
+	//R全 顯示會員資料
 	@GetMapping("/Forum/queryAll")
-	public String queryAll(Model model) {
+	public String queryAll(Model model, HttpServletRequest request) {
 		
-		List<ForumBean> result = forumservice.getAllForum();
-		model.addAttribute("AllForum",result);
+		Member memberData = (Member)request.getSession().getAttribute("memberData");
+		String mStatus = memberData.getStatus();
+		
+		if(mStatus.equals("會員")) {
+			//會員
+			List<ForumBean> result = forumservice.getAllByPosterId(memberData.getId());
+			model.addAttribute("AllForum", result);
+			
+		} else {
+			//管理者
+			List<ForumBean> result = forumservice.getAllForum();
+			model.addAttribute("AllForum",result);
+		}
+		
 		return "/Forum/queryAll"; //上面網址用的jsp
-		
 	}
 	
-	//R全
+	//R全 前
 	@GetMapping("/allposts")
 	public String queryAllPost(Model model) {
-		
-		List<ForumBean> result = forumservice.getAllForum();
+//		List<ForumBean> result = forumservice.getAllForum();
+		List<ForumBean> result = forumservice.findByIdOrderByIdDesc();
 		model.addAttribute("AllForum",result);
 		return "/Forum/allposts"; //上面網址用的jsp
-		
 	}
 	
 	//R by id 用在點detail時
@@ -172,10 +168,9 @@ public class ForumController {
 		System.out.println(result); //測試是否印出
 		model.addAttribute("AllForumComment",result);
 		return "Forum/detail";
-								
 	}
 	
-	//R by id 用在點detail時
+	//R by id 用在點進文章時 前
 	@GetMapping("/postdetail") 
 	public String getForumByIdo(@RequestParam("id") Integer id, Model model) {
 		model.addAttribute("forum", forumservice.getForumById(id));
@@ -184,7 +179,17 @@ public class ForumController {
 		System.out.println(result); //測試是否印出
 		model.addAttribute("AllForumComments",result);
 		return "Forum/postdetail";
+	}
+	
+	//R by id 用在點更新文章時 前
+	@GetMapping("/postupdate") 
+	public String getForumByIdou(@RequestParam("id") Integer id, Model model) {
+		model.addAttribute("forum", forumservice.getForumById(id));
 		
+		List<ForumCommentBean> result = forumCommentService.findForumCommentbyforumid(forumservice.getForumById(id));
+		System.out.println(result); //測試是否印出
+		model.addAttribute("AllForumComments",result);
+		return "Forum/postupdate";
 	}
 	
 	
@@ -195,22 +200,43 @@ public class ForumController {
 //			@RequestParam("post") String post, 
 //			HttpServletRequest request) {
 //		System.out.println("測試");
-//		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd a hh:mm:ss");
+//		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 //		Date date = new Date();
 //		String postTime = timeFormat.format(date);
 //		
 //		ForumBean fBean=new ForumBean(name,post,postTime);
 //		forumservice.addForum(fBean);
 //		return "success";
-//		
 //	}
 	
-	//新C
+	//新C 後
 	@PostMapping(path = "/Forum/add") 
-	public ResponseEntity<String> add(@RequestParam("postCategory") String postCategory, 
+	public ResponseEntity<String> postAdd(@RequestParam("postCategory") String postCategory, 
 			@RequestParam("name") String name, 
 			@RequestParam("post") String post, 
-//			@RequestParam("fImage") MultipartFile fImage,
+//			@RequestParam("fImage") MultipartFile fImage, //T
+			HttpServletRequest request) throws MalformedURLException {
+		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		String postTime = timeFormat.format(date);
+		
+		Member member = (Member)request.getSession().getAttribute("memberData");
+		ForumBean fBean=new ForumBean(postCategory, name, post, postTime, postTime, member.getName(), member.getId());
+		forumservice.addForum(fBean);
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(fBean));
+//		return new ResponseEntity<String>("Y", HttpStatus.OK);
+	}
+	
+	//新C 前
+	@PostMapping(path = "/addposts") 
+	public ResponseEntity<String> postAddo(@RequestParam("postCategory") String postCategory, 
+			@RequestParam("name") String name, 
+			@RequestParam("post") String post, 
+//			@RequestParam("fImage") MultipartFile fImage, //T
 			HttpServletRequest request) throws MalformedURLException {
 		System.out.println("測試");
 		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -218,7 +244,7 @@ public class ForumController {
 		String postTime = timeFormat.format(date);
 		
 		Member member = (Member)request.getSession().getAttribute("memberData"); //T
-		ForumBean fBean=new ForumBean(postCategory, name, post, postTime, postTime, member.getName()); //T
+		ForumBean fBean=new ForumBean(postCategory, name, post, postTime, postTime, member.getName(), member.getId());
 		forumservice.addForum(fBean);
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -227,46 +253,30 @@ public class ForumController {
 //		return new ResponseEntity<String>("Y", HttpStatus.OK);
 	}
 	
-	//新C
-	@PostMapping(path = "/addposts") 
-	public ResponseEntity<String> addo(@RequestParam("postCategory") String postCategory, 
-			@RequestParam("name") String name, 
-			@RequestParam("post") String post, 
-//			@RequestParam("fImage") MultipartFile fImage,
-			HttpServletRequest request) throws MalformedURLException {
-		System.out.println("測試");
-		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
-		String postTime = timeFormat.format(date);
-		
-		Member member = (Member)request.getSession().getAttribute("memberData"); //T
-		ForumBean fBean=new ForumBean(postCategory, name, post, postTime, postTime, member.getName()); //T
-		forumservice.addForum(fBean);
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
-		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(fBean));
-//		return new ResponseEntity<String>("Y", HttpStatus.OK);
-	}
 	
 //	//舊D
 //	@PostMapping("/Forum/delete")
 //	public String delete(@RequestParam("id") int id,Model model) {
-//		
 //		forumservice.deleteForumById(id);
 //		return "/Forum/success";
-//		
 //	}
 	
-	//新D
+	//新D 後
 //	@DeleteMapping(path = "/Forum/delete/{id}") //path自己隨便設，要對應jsp?用adDelete.jsp刪除
-	@DeleteMapping(path = "/Forum/detail/{id}") //path自己隨便設，要對應jsp?用detail.jsp刪除
+//	@DeleteMapping(path = "/Forum/detail/{id}") //path自己隨便設，要對應jsp?用detail.jsp刪除
+	@DeleteMapping(path = "/Forum/queryAll/{id}") //path自己隨便設，要對應jsp?用detail.jsp刪除
 	@ResponseBody
 	public String deleteForumById(@PathVariable("id") int id) {
-		
 		forumservice.deleteForumById(id);
 		return "Delete OK"; //不會顯示因為有@ResponseBody
-		
+	}
+	
+	//新D 前
+	@DeleteMapping(path = "/postdetail/{id}")
+	@ResponseBody
+	public String deleteForumByIdo(@PathVariable("id") int id) {
+		forumservice.deleteForumById(id);
+		return "Delete OK"; //不會顯示因為有@ResponseBody
 	}
 	
 	//舊U
@@ -274,36 +284,55 @@ public class ForumController {
 	public String update(@RequestParam("id") int id, 
 			@RequestParam("name") String name, 
 			@RequestParam("post") String post, Model model) {
-		
-		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd a hh:mm:ss");
+		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		String postUpdatetime = timeFormat.format(date);
 		
 		ForumBean getForumById = forumservice.getForumById(id); //透過id取資料庫的表單
 		ForumBean fBean=new ForumBean(id, name, post, getForumById.getPostTime(), postUpdatetime);
 		forumservice.updateForum(fBean);
-		return "/Forum/success"; //回傳頁面
-		
+		return "/Forum/success"; //跳轉頁面
 	}
 	
-	//新U
+	//新U 後
 	@PutMapping(path = "/Forum/detail/{id}")
 	@ResponseBody
-	public String newupdate(@PathVariable("id") int id, 
+	public String postUpdate(@PathVariable("id") int id, 
 			@RequestParam("postCategory") String postCategory, 
 			@RequestParam("name") String name, 
 			@RequestParam("post") String post, Model model, HttpServletRequest request) {
-		
-		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd a hh:mm:ss");
+		System.out.println(id);
+		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		String postUpdatetime = timeFormat.format(date);
 		
 		ForumBean getForumById = forumservice.getForumById(id); //透過id取資料庫的表單
 		Member member = (Member)request.getSession().getAttribute("memberData"); //T
-		ForumBean fBean=new ForumBean(id, postCategory, name, post, getForumById.getPostTime(), postUpdatetime, member.getName());
+		ForumBean fBean=new ForumBean(id, postCategory, name, post, getForumById.getPostTime(), postUpdatetime, member.getName(),member.getId());
 		forumservice.updateForum(fBean);
 		return "success"; //不會顯示因為有@ResponseBody
+	}
+	
+	//新U 前
+	@PutMapping(path = "/postupdates/{id}")
+	@ResponseBody
+	public String postUpdateo(@PathVariable("id") Integer id, 
+			@RequestParam("postCategory") String postCategory, 
+			@RequestParam("name") String name, 
+			@RequestParam("post") String post, Model model, HttpServletRequest request) {
+		System.out.println(id);
+		System.out.println(postCategory+name+post);
+		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		String postUpdatetime = timeFormat.format(date);
 		
+		ForumBean getForumById = forumservice.getForumById(id); //透過id取資料庫的表單
+	    
+		Member member = (Member)request.getSession().getAttribute("memberData"); //T
+		System.out.println(member.getName()+member.getId());
+		ForumBean fBean=new ForumBean(id, postCategory, name, post, getForumById.getPostTime(), postUpdatetime, member.getName(),member.getId());
+		forumservice.updateForum(fBean);
+		return "success"; //不會顯示因為有@ResponseBody
 	}
 	
 }

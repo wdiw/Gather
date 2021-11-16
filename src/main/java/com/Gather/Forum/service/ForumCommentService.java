@@ -8,20 +8,20 @@ import com.Gather.Forum.model.ForumCommentBean;
 
 public interface ForumCommentService {
 	
-	//新增
+	//R all
+	List<ForumCommentBean> getAllForumComment();
+	
+	//R by id
+	public ForumCommentBean getForumCommentByForumCommentId(Integer forumcommentID);
+	
+	//C
 	public void addForumComment(ForumCommentBean forumcommentBean);
 	
-	//依據id刪單筆資料
-	public void deleteForumCommentByForumCommentId(Integer forumcommentID);
-	
-	//修改
+	//U
 	public void updateForumComment(ForumCommentBean forumcommentBean);
 	
-	//找所有計畫資料
-    List<ForumCommentBean> getAllForumComment();
-	
-    //依據id 找單筆資料
-	public ForumCommentBean getForumCommentByForumCommentId(Integer forumcommentID);
+	//D
+	public void deleteForumCommentByForumCommentId(Integer forumcommentID);
 	
 	//一對多留言
 	List<ForumCommentBean> findForumCommentbyforumid (ForumBean forumId);

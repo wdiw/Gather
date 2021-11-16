@@ -17,7 +17,7 @@ canvas{
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>Gather Admin</title>
   <!-- plugins:css -->
   
   <link rel="stylesheet" href="../vendors/feather/feather.css">
@@ -39,7 +39,7 @@ canvas{
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
- <a class="navbar-brand brand-logo mr-5" href="index.html"><img
+ <a class="navbar-brand brand-logo mr-5" href="/Gather"><img
 					width="50px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a> <a
 					class="navbar-brand brand-logo-mini" href="index.html"><img
 					src="images/logo-mini.svg" alt="logo" /></a>

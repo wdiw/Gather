@@ -87,7 +87,6 @@ public class SponsorshipUserController {
 	  List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
 	  ActivityBean discountActivity=activityService.getActivityById(18);
 	  int favCount = favoriteBeans.size();
-	  
 	  if(activityParticipationService.findActivityParticipationByM_idAndActivityId(discountActivity, member.getId())!=null) {
 	   System.out.println("方案金額:"+planAmount);
 	   
