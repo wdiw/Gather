@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Forum")
 public class ForumBean implements Serializable {
@@ -30,21 +32,16 @@ public class ForumBean implements Serializable {
 	private String postUpdateTime;
 	private String postCategory;
 	private String poster; //發文人
+	@Column(name = "posterId")
 	private Integer posterID; //發文人id
-	// T
-	private String fImageCover;
+	
+
 	
 	//一對多
-	@OneToMany(fetch = FetchType.EAGER,mappedBy ="forumBean",cascade = CascadeType.ALL )
-    private Set<ForumCommentBean> forumcomment=new LinkedHashSet<ForumCommentBean>(0);
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER, mappedBy ="forumBean", cascade = CascadeType.ALL )
+	private Set<ForumCommentBean> forumcomment=new LinkedHashSet<ForumCommentBean>(0);
 	
-    public Set<ForumCommentBean> getForumcomment() {
-		return forumcomment;
-	}
-
-	public void setForumcomment(Set<ForumCommentBean> forumcomment) {
-		this.forumcomment = forumcomment;
-	}
 	
 	
 	//Constructors
@@ -67,6 +64,7 @@ public class ForumBean implements Serializable {
 		this.postTime = postTime;
 		this.postUpdateTime = postUpdateTime;
 		this.poster = poster;
+		
 	}
 	
 	//新C T
@@ -86,15 +84,18 @@ public class ForumBean implements Serializable {
 		this.id = id;
 		this.name = name;
 	}
+	
 	//新U
 	public ForumBean(Integer id, String postCategory, String name, 
-			String post, String postTime, String postUpdateTime, String poster) {
+			String post, String postTime, String postUpdateTime, String poster,Integer posterID) {
 		this.id = id;
 		this.name = name;
 		this.post = post;
 		this.postTime = postTime;
 		this.postUpdateTime = postUpdateTime;
 		this.postCategory = postCategory;
+		this.poster=poster;
+		this.posterID=posterID;
 	}
 	
 	
@@ -140,13 +141,13 @@ public class ForumBean implements Serializable {
 		this.postUpdateTime = postUpdateTime;
 	}
 
-	public String getfImageCover() {
-		return fImageCover;
-	}
-
-	public void setfImageCover(String fImageCover) {
-		this.fImageCover = fImageCover;
-	}
+//	public String getfImageCover() { //T
+//		return fImageCover;
+//	}
+//
+//	public void setfImageCover(String fImageCover) { //T
+//		this.fImageCover = fImageCover;
+//	}
 	
 	public String getPoster() {
 		return poster;
@@ -167,9 +168,17 @@ public class ForumBean implements Serializable {
 	public Integer getPosterID() {
 		return posterID;
 	}
-
+	
 	public void setPosterID(Integer posterID) {
 		this.posterID = posterID;
+	}
+	
+	public Set<ForumCommentBean> getForumcomment() {
+		return forumcomment;
+	}
+	
+	public void setForumcomment(Set<ForumCommentBean> forumcomment) {
+		this.forumcomment = forumcomment;
 	}
 	
 	

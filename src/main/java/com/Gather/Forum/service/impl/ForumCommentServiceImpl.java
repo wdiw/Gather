@@ -49,16 +49,21 @@ public class ForumCommentServiceImpl implements ForumCommentService {
 		forumcommentRepository.save(forumcommentBean);
 	}
 	
-	//D
+//	//D
+//	@Override
+//	public void deleteForumCommentByForumCommentId(Integer forumcommentID) {
+//		forumcommentRepository.deleteById(forumcommentID);
+//	}
+	
+	//D 內建的失效，自行改寫
 	@Override
 	public void deleteForumCommentByForumCommentId(Integer forumcommentID) {
-		forumcommentRepository.deleteById(forumcommentID);
+		forumcommentRepository.deleteForumCommentByForumCommentIdo(forumcommentID);
 	}
-
-
+	
+	//留言
 	@Override
 	public List<ForumCommentBean> findForumCommentbyforumid(ForumBean forumId) {
-		// TODO Auto-generated method stub
 		return forumcommentRepository.findForumCommentbyforumid(forumId);
 	}
 	

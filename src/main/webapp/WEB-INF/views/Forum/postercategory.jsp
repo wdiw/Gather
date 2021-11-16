@@ -14,12 +14,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Gather Admin</title>
   <!-- plugins:css -->
-  <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
   <link rel="stylesheet" href="../vendors/feather/feather.css">
   <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
@@ -51,9 +51,9 @@
           <li class="nav-item nav-search d-none d-lg-block">
             <div class="input-group">
               <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                <span class="input-group-text" id="search">
-                  <i class="icon-search"></i>
-                </span>
+<!--                 <span class="input-group-text" id="search"> -->
+<!--                   <i class="icon-search"></i> -->
+<!--                 </span> -->
               </div>
               <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
             </div>
@@ -364,7 +364,7 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="<spring:url value='/Forum/queryAll' />" aria-expanded="false" aria-controls="icons">
               <i class="icon-contract menu-icon"></i>
               <span class="menu-title">討論區</span>
@@ -378,127 +378,104 @@
           </li>
         </ul>
       </nav>
-      <!-- partial -->
-      <div class="main-panel">        
-        <div class="content-wrapper">
-<table class="table table-hover">
-	<tr>
-		<td width="350">
-<%-- 			<form action="/Gather/Forum/delete" method="POST"> --%>
-<%-- 			<form id="form" class="forms-sample"> --%>
-<!-- 				文章編號: <input type="text" name="id" placeholder="請輸入編號"/><br><br> -->
-<!-- 				<input type="submit" value="刪除文章" class="btn btn-primary mr-2"><br> -->
-<%-- 			</form> --%>
-				<div class="form-group">
-					<label for='id'>編號</label>
-					<input name="id" id="id" class="form-control" >
-				</div>
-				
-<!-- 			<a id="deleteButton" class="btn btn-default"> -->
-<!-- 				<span class="glyphicon-hand-left glyphicon"></span>刪除 -->
-<!-- 			</a> -->
 
-			<button type="button" id="deleteButton" 
-			class="btn btn-inverse-danger btn-fw" >刪除</button>
-		</td>
-	</tr>
-	
-	<tr>
-		<td width="350">
-			<p align="center">
-			<a href="<c:url value= '/Forum/queryAll' />"class="btn btn-primary">查詢所有文章
-			</a><br>
 			
-			</p><br>
-		</td>
-	</tr>
-	
-	<tr>
-		<td width="350">
-			<p align="center">
-			<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">回討論區</a><br><br>
-			<a href="<c:url value='/' />"class="btn btn-primary">回首頁</a><br>
-			</p><br>
-		</td>
-	</tr>
-	
-</table>
-	<!-- container-scroller -->
-	<!-- plugins:js -->
-	<script src="vendors/js/vendor.bundle.base.js"></script>
-	<!-- endinject -->
-	<!-- Plugin js for this page -->
-	<script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
-	<script src="vendors/select2/select2.min.js"></script>
-	<!-- End plugin js for this page -->
-	<!-- inject:js -->
-	<script src="../js/off-canvas.js"></script>
-	<script src="../js/hoverable-collapse.js"></script>
-	<script src="../js/template.js"></script>
-	<script src="../js/settings.js"></script>
-	<script src="../js/todolist.js"></script>
-	<!-- endinject -->
-	<!-- Custom js for this page-->
-	<script src="../js/file-upload.js"></script>
-	<script src="../js/typeahead.js"></script>
-	<script src="../js/select2.js"></script>
-	<!-- End custom js for this page-->
-	<!-- 要用Swal.fire需要引用下面兩個 -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-	<!-- 若需相容 IE11，要加載 Promise Polyfill-->
-	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-	
-	<script>
-	$(document).ready(function(){ //用在預先載入，例如要先讓按鈕不能按；如果只是要寫按鈕功能可不寫這個
-		
-		//點刪除按鈕時，透過id刪除資料
-		$("#deleteButton").on('click',function () { //$("#deleteButton")抓id=deleteButton
-			
-			var id = $("#id").val(); //抓輸入的東西
-			
-			$.ajax({
-				url: "<spring:url value='/Forum/delete/" + id + "'/>", //要放@PostMapping對應的網址
-				type: "delete",
-				data: {  },//前面是標籤，後面是值，回傳
-				success: function (data) {
-					Swal.fire({
-						title: '您確定要刪除嗎？',
-		                icon: 'question',
-		                showCancelButton: true,
-		                cancelButtonText: '否',
-					}).then((result) => {
-						if (result.isConfirmed) {
-							Swal.fire({
-								title: '已成功刪除！',
-								icon: 'success',
-						}).then((result) => {
-							if (result.isConfirmed) {
-								location.href= "<spring:url value='/Forum/queryAll'/>";
-							}
-						})
-						
-						}else if (result.dismiss === Swal.DismissReason.cancel) {
-							Swal.fire({
-								title: '已取消刪除！',
-								icon: 'error',
-							})
-						}
-						
-					}) //then
-				}, //success
-				error: function (xhr, text) {
-					swalWithBootstrapButtons.fire(
-							'失敗',
-							'刪除失敗，請確認有此紀錄 ',
-							'error'
-							)
-				}
-				
-			}) //$.ajax({
-		}) //$("#deleteButton")
-	}) //$(document)
+			<br><br>
 
-	</script>
+			<div class="table-responsive">
+      <table class="table table-hover">
+      
+    	<thead>
+    		<tr>
+    			<th>文章編號</th>
+				<th>文章標題</th>
+				<th>文章內容</th>
+				<th>發文資訊</th>
+				<th>最後修改時間</th>
+				<th>回覆數</th>
+			</tr>
+		</thead>
+		<c:forEach items='${postercategoryResult}' var='postercategoryresult' >
+			<tr>
+				<td>
+				<a href="<c:url value='/Forum/detail?id=${postercategoryresult.id}' />" style="color:black;" >${postercategoryresult.id}</a>
+<%-- 				缺分類${forum.id} --%>
+				</td>
+				<td>
+				<a href="<c:url value='/Forum/detail?id=${postercategoryresult.id}' />" style="color:black;" >${postercategoryresult.postCategory}</a>
+				</td>
+				<td style="">
+<%-- 				<td onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
+					<div style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;">
+<%-- 					${forum.name} --%>
+						<a href="<c:url value='/Forum/detail?id=${postercategoryresult.id}' />" style="color:black;" >${postercategoryresult.name}</a>
+					</div>
+				</td>
+				<td onMouseOver="this.style.backgroundColor='pink';" onMouseOut="this.style.backgroundColor='';">
+					<div id="post" name="post" class="showcontent" style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;" 
+					onMouseOver="this.style.backgroundColor='orange';" 
+					onMouseOut="this.style.backgroundColor='';">
+					${postercategoryresult.post}
+<!-- 					<button onclick="init()">TEST</button> -->
+					</div>
+				</td>
+				<td>
+				${postercategoryresult.poster}<br>
+				${postercategoryresult.postTime}
+				</td>
+				<td>${postercategoryresult.postUpdateTime}</td>
+				<td>回覆數123</td>
+<!-- 				<td> -->
+<%-- 					<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">編輯</a> --%>
+<%-- 					<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">文章刪除</a> --%>
+<!-- 					<button type="button" id="update" class="btn btn-inverse-warning btn-fw" -->
+<%-- 					onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"'>詳細資料</button> --%>
+<%-- 					<a href="<c:url value='/Forum/adUpdate' />" class="btn btn-primary">文章修改</a><br><br> --%>
+<!-- 				</td> -->
+			</tr>
+		</c:forEach>
+	</table>
+	
+<!-- 	TTTTTTTTTTTTTTTTT -->
+	
+	<div>
+		<input class='search-bar' type='text' name='searchvalue' id='searchvalue' placeholder='輸入文章標題'>
+		<button id='search'>搜尋</button>
+   
+	</div>
+	
+	
+<!-- 	TTTTTTTTTTTTTTTTT -->
+	
+	</div>
+	
+	
+    <div align='center'>
+    	<br>
+<%--     	<a href="<c:url value='/Forum/add1' />" class="btn btn-primary">測試</a><br><br> --%>
+<%--     	<a href="<c:url value='/Forum/adMain' />" class="btn btn-primary">發表文章</a><br><br> --%>
+    	<a href="<c:url value='/Forum/add' />" class="btn btn-primary">發表文章add</a><br><br>
+    	<a href="<c:url value='/Forum/adDelete' />" class="btn btn-primary">文章刪除</a><br><br>
+    	<a href="<c:url value='/Forum/adUpdate' />" class="btn btn-primary">文章修改</a><br><br>
+    	<a href="<c:url value='/Forum/queryAll' />" class="btn btn-primary">回討論區</a><br><br>
+    	<a href="<c:url value='/' />" class="btn btn-primary">回首頁</a><br><br>
+    </div>
+    
+    
+    
+<script>
 
+$('#search').click(function() {
+    var searchvalue = $('#searchvalue').val(); //抓輸入的東西
+    alert(searchvalue);
+    location.href=  "<spring:url value='/Forum/searchresult?searchvalue=" + searchvalue + "'/>" //跳轉
+
+})
+
+
+
+</script>
+    
 </body>
 </html>
+    

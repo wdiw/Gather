@@ -33,7 +33,7 @@
 <body class="goto-here">
 		<div class="py-1 bg-black">
     	<div class="container">
-    		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+    		<!-- <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
 	    		<div class="col-lg-12 d-block">
 		    		<div class="row d-flex">
 		    			<div class="col-md pr-4 d-flex topper align-items-center">
@@ -49,21 +49,21 @@
 					    </div>
 				    </div>
 			    </div>
-		    </div>
+		    </div> -->
 		  </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Minishop</a>
+			<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item active"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
-	          	<c:choose>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
+				
+				<c:choose>
                     <c:when test="${memberData!=null}">
                       <li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
                       <li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
@@ -111,7 +111,7 @@
 
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 order-lg-last ftco-animate">
+          <div class="col-lg-8 order-lg-last">
 						<div class="row">
 					
 					<br>
@@ -127,8 +127,8 @@
 									<div class="select-wrap">
 <!-- 										<div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
 										<select name="postCategory" class="form-control">
-											<option selected>公告</option>
-											<option>閒聊</option>
+											<option id="notice">公告</option>
+											<option selected>問題</option>
 											<option>討論</option>
 											<option>心得</option>
 										</select>
@@ -158,6 +158,7 @@
 							<br><br>
           </div> <!-- .col-md-8 -->
           
+          <!-- 側邊列表 -->
           <div class="col-lg-4 sidebar ftco-animate">
             <div class="sidebar-box">
               <form action="#" class="search-form">
@@ -168,16 +169,17 @@
               </form>
             </div>
             <div class="sidebar-box ftco-animate">
-            	<h3 class="heading">Categories</h3>
+            	<h3 CLASS="heading">Categories</h3>
               <ul class="categories">
                 <li><a href="<spring:url value='/allposts'/>">全部</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=公告'/>">公告</a></li>
-                <li><a href="<spring:url value='/postcategory?postCategory=閒聊'/>">閒聊</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=問題'/>">問題</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=討論'/>">討論</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=心得'/>">心得</a></li>
               </ul>
             </div>
-          
+            
+            
           </div>
         </div> <!-- 外層row -->
       </div> <!-- container -->
@@ -352,7 +354,8 @@
 	var mStatus = "${sessionScope.memberData.status}"//取得會員身分
 	var mID = "${sessionScope.memberData.id}"//取得會員id
 
-	if (mStatus == '管理員') {
+	if (mStatus == "") {
+		
 		//管理員身分
 // 		$("#passButton").show();
 // 		$("#NotPassButton").show();
@@ -360,6 +363,12 @@
 		$("#addbtn").hide();
 
 	} else {
+		
+		if ( mStatus == "管理員" ) {
+			$("#notice").show();
+		} else {
+			$("#notice").hide();
+		}
 		//會員身分
 // 		if ( mID ==  ) {
 			

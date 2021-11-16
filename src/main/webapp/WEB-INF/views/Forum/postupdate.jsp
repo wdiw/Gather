@@ -38,47 +38,32 @@
 		    		<div class="row d-flex">
 		    			<div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <span class="text"></span>
+						    <span class="text">+ 1235 2355 98</span>
 					    </div>
 					    <div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text"></span>
+						    <span class="text">youremail@email.com</span>
 					    </div>
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-						   
+						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
 					    </div>
 				    </div>
 			    </div>
 		    </div> -->
 		  </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-						id="ftco-navbar">
-						<div class="container">
-							<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
-							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-								<span class="oi oi-menu"></span> Menu
-							</button>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+			<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
 
-							<div class="collapse navbar-collapse" id="ftco-nav">
-								<ul class="navbar-nav ml-auto">
-
-									<li class="nav-item dropdown active">
-										
-										<div class="dropdown-menu" aria-labelledby="dropdown04">
-											<a class="dropdown-item" href="shop.html">Shop</a>
-											<a class="dropdown-item" href="product-single.html">Single Product</a>
-											<a class="dropdown-item" href="cart.html">Cart</a>
-											<a class="dropdown-item" href="checkout.html">Checkout</a>
-										</div>
-									</li>
-									<li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
-
-
-
-
-								<c:choose>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
+				
+				<c:choose>
                     <c:when test="${memberData!=null}">
                       <li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
                       <li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
@@ -107,118 +92,81 @@
 													</c:choose>
 													<!--購物車-->
 
-
-								</ul>
-							</div>
-						</div>
-					</nav>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
     <!-- END nav -->
-
+	
+	
+	
     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-<!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p> -->
-            <h1 class="mb-0 bread">Gather討論區</h1>
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
+            <h1 class="mb-0 bread">Blog</h1>
           </div>
         </div>
       </div>
     </div>
 
-    <section class="ftco-section ftco-degree-bg">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 order-lg-last ftco-animate">
+          <div class="col-lg-8 order-lg-last">
 						<div class="row">
-		          <c:forEach items='${SearchResult}' var='searchresult'>
-		          <div class="col-md-12 d-flex ftco-animate">
-		            <div class="blog-entry align-self-stretch d-md-flex">
-<!-- 		              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');"> -->
-<!-- 		              </a> -->
-		              <div class="text d-block pl-md-4">
-		              	<div class="meta mb-3">
-		                  <div><a href="#">${searchresult.postTime}</a></div>
-		                  <div><a href="#">${searchresult.poster}</a></div>
-<!-- 		                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div> -->
-		                </div>
-		                <h3 class="heading"><a href="<c:url value='/postdetail?id=${searchresult.id}' />">[${searchresult.postCategory}] ${searchresult.name}</a></h3>
-		                <!-- 文章內容顯示有問題 -->
-<%-- 		                <p style="width:400px; white-space:nowrap;overflow: hidden; text-overflow:ellipsis; ">${forum.post}</p> --%>
-		                <p>..........</p>
-		                <p><a href="<c:url value='/postdetail?id=${searchresult.id}' />	" class="btn btn-primary py-2 px-3">Read more</a></p>
-		              </div>
-		            </div>
-		          </div>
-		          </c:forEach>
-		          
-<!-- 		          <table class="table table-hover"> -->
-
-<!-- 							<thead> -->
-<!-- 								<tr width=""> -->
-<!-- 									<th width="10%">文章分類</th> -->
-<!-- 									<th width="55%">文章標題</th> -->
-<!-- 									<th width="35%">發文資訊</th> -->
-<!-- 								</tr> -->
-<!-- 							</thead> -->
-<%-- 							<c:forEach items='${AllForum}' var='forum'> --%>
-<%-- 								<tr onclick='location.href="<c:url value='/postdetail?id=${forum.id}' />"' style="cursor: pointer;" > --%>
-<!-- 									<td> -->
-<%-- 										<a href="<c:url value='/Forum/detail?id=${forum.id}' />" --%>
-<%-- 										style="color: black;">${forum.postCategory}</a> --%>
-<!-- 									</td> -->
-<!-- 									<td style=""> -->
-<%-- 										<div style="width: 100%; white-space: normal; word-wrap: break-word;  --%>
-<%-- <!-- 										word-break: break-all; cursor: pointer;"> --> --%>
-<%-- 											<a href="<c:url value='/Forum/detail?id=${forum.id}' />" --%>
-<%-- 											style="color: black;">${forum.name}</a> --%>
-<!-- 										</div> -->
-<!-- 									</td> -->
-<!-- 									<td> -->
-<%-- 										${forum.poster}<br>  --%>
-<%-- 										${forum.postTime}<br> --%>
-<!-- 										最後修改時間<br> -->
-<%-- 										${forum.postUpdateTime} --%>
-<!-- 									</td> -->
-<!-- 								</tr> -->
-<%-- 							</c:forEach> --%>
-<!-- 						</table> -->
-		          
-<!-- 		          <div class="col-md-12 d-flex ftco-animate"> -->
-<!-- 		            <div class="blog-entry align-self-stretch d-md-flex"> -->
-<!-- 		              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_6.jpg');"> -->
-<!-- 		              </a> -->
-<!-- 		              <div class="text d-block pl-md-4"> -->
-<!-- 		              	<div class="meta mb-3"> -->
-<!-- 		                  <div><a href="#">TESTApril 9, 2019</a></div> -->
-<!-- 		                  <div><a href="#">TEST</a></div> -->
-<!-- 		                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div> -->
-<!-- 		                </div> -->
-<!-- 		                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3> -->
-<!-- 		                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p> -->
-<!-- 		                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p> -->
-<!-- 		              </div> -->
-<!-- 		            </div> -->
-<!-- 		          </div> -->
+					
+					<br>
+<%-- 					<form id="form" class="billing-form"> --%>
+					<form id="form">
+						<h3 class="mb-4 billing-heading">修改文章</h3>
+						<div class="row align-items-end">
+							
+							<div class="w-100"></div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>文章分類</label>
+									<div class="select-wrap">
+<!-- 										<div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
+										<select name="postCategory" class="form-control">
+											<option id="notice">公告</option>
+											<option selected>問題</option>
+											<option>討論</option>
+											<option>心得</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="w-100"></div>
+							
+							
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>文章標題</label>
+									<input id="name" name="name"
+									class="form-control" value="${forum.name}" type='text'>
+								</div>
+							</div>
+							
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>文章內容</label>
+									<textarea rows="15" cols="50"
+									id="post" name="post" class="form-control">${forum.post}</textarea>
+								</div>
+								<button id="updatebtnn" name='updatebutton' 
+								class="btn btn-primary mr-2" onclick="updatebtn(${forum.id})">送出</button>
+								
+							</div>
+							
 						</div>
-						
-		        <!-- 頁數 -->
-<!-- 		        <div class="row mt-2"> -->
-<!-- 		          <div class="col"> -->
-<!-- 		            <div class="block-27"> -->
-<!-- 		              <ul> -->
-<!-- 		                <li><a href="#">&lt;</a></li> -->
-<!-- 		                <li class="active"><span>1</span></li> -->
-<!-- 		                <li><a href="#">2</a></li> -->
-<!-- 		                <li><a href="#">3</a></li> -->
-<!-- 		                <li><a href="#">4</a></li> -->
-<!-- 		                <li><a href="#">5</a></li> -->
-<!-- 		                <li><a href="#">&gt;</a></li> -->
-<!-- 		              </ul> -->
-<!-- 		            </div> -->
-<!-- 		          </div> -->
-<!-- 		        </div> -->
+					</form>
+						</div>
+							<br><br>
+							<br><br>
           </div> <!-- .col-md-8 -->
           
+          <!-- 側邊列表 -->
           <div class="col-lg-4 sidebar ftco-animate">
             <div class="sidebar-box">
               <form action="#" class="search-form">
@@ -229,21 +177,21 @@
               </form>
             </div>
             <div class="sidebar-box ftco-animate">
-            	<h3 class="heading">Categories</h3>
+            	<h3 CLASS="heading">Categories</h3>
               <ul class="categories">
                 <li><a href="<spring:url value='/allposts'/>">全部</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=公告'/>">公告</a></li>
-                <li><a href="<spring:url value='/postcategory?postCategory=閒聊'/>">閒聊</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=問題'/>">問題</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=討論'/>">討論</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=心得'/>">心得</a></li>
               </ul>
             </div>
-
-
-        </div>
-      </div>
+            
+            
+          </div>
+        </div> <!-- 外層row -->
+      </div> <!-- container -->
     </section> <!-- .section -->
-
 
     <section class="ftco-gallery">
     	<div class="container">
@@ -302,7 +250,6 @@
     	</div>
     </section>
 
->>>>>>> refs/heads/forum
     <footer class="ftco-footer ftco-section">
       <div class="container">
       	<div class="row">
@@ -315,7 +262,7 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Minishop</h2>
+              <h2 class="ftco-heading-2">Gather</h2>
               <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -400,8 +347,58 @@
 <!--   <script src="js/google-map.js"></script> -->
   <script src="js/main.js"></script>
   
+  <!-- 要用Swal.fire需要引用下面兩個 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <!-- 若需相容 IE11，要加載 Promise Polyfill-->
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  
   
 	<script>
+	
+	
+	var mStatus = "${sessionScope.memberData.status}"//取得會員身分
+	var mID = "${sessionScope.memberData.id}"//取得會員id
+
+	if (mStatus == "") {
+		
+		//管理員身分
+// 		$("#passButton").show();
+// 		$("#NotPassButton").show();
+// 		$("#sendButton").hide();
+		$("#updatebtn").hide();
+
+	} else {
+		
+		if ( mStatus == "管理員" ) {
+			$("#notice").show();
+		} else {
+			$("#notice").hide();
+		}
+		//會員身分
+// 		if ( mID ==  ) {
+			
+// 		}
+
+// 		$("#sendButton").show();
+// 		$("#passButton").hide();
+// 		$("#NotPassButton").hide();
+// 		$(".form-control").attr("disabled", true)
+// 		$("#pDescribe").attr("disabled", false);
+// 		$("#pContent").attr("disabled", false);
+		$("#updatebtn").show();
+	}	
+	
+	
+	
+	$('#post').summernote({  //#後面放id屬性值
+		placeholder: '請輸入文章內容',
+		tabsize: 2,
+		height: 100,
+	});
+	
 	
 	$('#search').click(function() {
 	    var searchvalue = $('#searchvalue').val(); //用變數searchvalue放輸入的東西
@@ -409,6 +406,56 @@
 	    location.href=  "<spring:url value='/searchresults?searchvalue=" + searchvalue + "'/>" //跳轉進@GetMapping對應的方法，也是網址
 										   //@GetMapping對應網址 ? 方法的@RequestParam對應的參數，這裡就是@RequestParam("searchvalue")
 	})
+	
+	
+
+		 
+//更新按鈕
+	function updatebtn(id) {
+		$("#form").on("submit", function (e) {
+			e.preventDefault();
+
+		var form = document.getElementById("form");
+		var formData = new FormData(form);
+		// var url = "<spring:url value='/Forum/detail/" + id + "'/>";
+// 		var url = "<spring:url value='/postupdate?id=" + ${forum.id} + "'/>";
+		var url = "<spring:url value='/postupdates/" + id + "'/>";
+//		alert(form);
+//		alert(formData);
+
+		$.ajax({
+			url: url,
+			type: 'put',
+			data: formData,
+			contentType: false, //required
+			processData: false, // required
+			mimeType: 'multipart/form-data',
+			success: function (data) {
+				Swal.fire({
+					title: '更新成功',
+					icon: 'success',
+					text: "已經更新！",
+					position: 'center',
+
+				 }).then((result)=>{
+					 if (result.isConfirmed) {
+						 location.href= "<spring:url value='/postdetail?id=" + ${forum.id} + "'/>";
+						}
+				})
+
+			},
+			error: function (xhr, text) {
+			
+				Swal.fire({
+					title: '更新失敗',
+					icon: 'error',
+					text: "更新失敗",
+				})
+			}
+		});
+	})};
+		 
+		 
 	
 	</script>
 

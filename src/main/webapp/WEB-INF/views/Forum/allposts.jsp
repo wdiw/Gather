@@ -5,9 +5,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Minishop - Free Bootstrap 4 Template by Colorlib</title>
+<title>Gather</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- bootstrap & jquery -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- summernote -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+<!-- datatables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.css" defer/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.js" defer></script>
+
+<!-- sweetalert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
@@ -29,11 +49,21 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+
+<script>
+
+
+// alert("!!!!");
+            
+
+</script>
+
 </head>
 <body class="goto-here">
+	
 		<div class="py-1 bg-black">
     	<div class="container">
-    		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+    		<!-- <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
 	    		<div class="col-lg-12 d-block">
 		    		<div class="row d-flex">
 		    			<div class="col-md pr-4 d-flex topper align-items-center">
@@ -49,21 +79,21 @@
 					    </div>
 				    </div>
 			    </div>
-		    </div>
+		    </div> -->
 		  </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Minishop</a>
+			<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item active"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
-	          	<c:choose>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a href="/Gather/allposts" class="nav-link">Blog</a></li>
+				
+				<c:choose>
                     <c:when test="${memberData!=null}">
                       <li class="nav-item"><a href="/Gather/showMemberCenter" class="nav-link">會員中心</a></li>
                       <li class="nav-item"><a href="/Gather/showLogout" class="nav-link">登出</a></li>
@@ -101,8 +131,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
-            <h1 class="mb-0 bread">Blog</h1>
+<!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p> -->
+            <h1 class="mb-0 bread">Gather討論區</h1>
           </div>
         </div>
       </div>
@@ -202,23 +232,26 @@
 <!-- 		        </div> -->
           </div> <!-- .col-md-8 -->
           
+          <!-- 側邊列表 -->
           <div class="col-lg-4 sidebar ftco-animate">
             <div class="sidebar-box">
-<%--             <a href="<c:url value='/Forum/add' />" class="btn py-3 px-4 btn-primary">發表文章</a><br><br> --%>
-            <a id="po" href="<c:url value='/addposts' />" class="btn py-3 px-4 btn-primary">發表文章</a><br><br>
+              <div id="po" class="form-group">
+              <a href="<c:url value='/addposts' />" class="btn py-3 px-4 btn-primary">發表文章</a>
+              </div>
               <form action="#" class="search-form">
                 <div class="form-group">
                   <a id="search" style="cursor: pointer;"><span class="icon ion-ios-search"></span></a>
                   <input type="text" class="form-control" id="searchvalue" placeholder="輸入文章標題">
                 </div>
-              </form>
+              </form><br>
             </div>
+            
             <div class="sidebar-box ftco-animate">
             	<h3 class="heading">Categories</h3>
               <ul class="categories">
                 <li><a href="<spring:url value='/allposts'/>">全部</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=公告'/>">公告</a></li>
-                <li><a href="<spring:url value='/postcategory?postCategory=閒聊'/>">閒聊</a></li>
+                <li><a href="<spring:url value='/postcategory?postCategory=問題'/>">問題</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=討論'/>">討論</a></li>
                 <li><a href="<spring:url value='/postcategory?postCategory=心得'/>">心得</a></li>
               </ul>
@@ -384,6 +417,7 @@
   <script src="js/main.js"></script>
   
   
+  
 	<script>
 	
 	$('#search').click(function() {
@@ -392,33 +426,81 @@
 	    location.href=  "<spring:url value='/searchresults?searchvalue=" + searchvalue + "'/>" //跳轉進@GetMapping對應的方法，也是網址
 										   //@GetMapping對應網址 ? 方法的@RequestParam對應的參數，這裡就是@RequestParam("searchvalue")
 	})
-
-
-
-		var mStatus = "${sessionScope.memberData.status}"//取得會員身分
-		var mID = "${sessionScope.memberData.id}"//取得會員身分
-
-		if ( mStatus !== "" ) {
-				$("#po").show();
-		} else {
-			$("#po").hide();
-		}
-			
-
-
-
-// 		var mStatus = "${sessionScope.memberData.status}"//取得會員身分
-// 		var mID = "${sessionScope.memberData.id}"//取得會員身分
-
-// 		if (mStatus == '管理員') {
-// 			//管理員身分
-// 			$("#po").hide();
-
-// 		} else {
-// 			//會員身分
-// 			$("#po").show();
-// 		}
+	
+	
+	$(document).ready(function(){
 		
+	
+	var mStatus = "${sessionScope.memberData.status}"//取得會員身分
+	var mID = "${sessionScope.memberData.id}"//取得會員身分
+	var mName = "${sessionScope.memberData.name}"//取得會員身分
+
+	if ( mStatus !== "" ) {
+		//已登入
+		if  ( mStatus == "管理員" ) {
+			//管理員
+			Swal.fire({
+            	title: '您好 '+ mStatus,
+            	text: '即將自動跳轉到後台',
+            	imageUrl: "/Gather/images/Members/${memberData.id}.jpg",
+            	imageWidth: 200, 
+            	imageHeight: 200,
+//             	imageClass:' rounded-circle',
+//             	customClass: {
+//             		icon: 'no-border'
+//             	},
+            	showClass: {
+            		popup: 'animate__animated animate__fadeInDown'
+            	},
+            	hideClass: {
+            		popup: 'animate__animated animate__fadeOutUp'
+            	},
+            	showConfirmButton: false,
+            	allowOutsideClick: false,
+            	timer: 1500,
+            }).then((result)=>{
+            	location.href= "<spring:url value='/Forum/queryAll'/>";
+            })
+            
+		} else{
+			//一般會員
+			Swal.fire({
+				title: '您好 '+ mName,
+				text: '歡迎光臨Gather討論區',
+				imageUrl: "/Gather/images/Members/${memberData.id}.jpg",
+				imageWidth: 200,
+				imageHeight: 200,
+				showClass: {
+					popup: 'animate__animated animate__fadeInDown'
+				},
+				hideClass: {
+					popup: 'animate__animated animate__fadeOutUp'
+				},
+				showConfirmButton: false,
+				timer: 1500,
+			})
+			$("#po").show();
+		}
+	} else {
+		//未登入
+		Swal.fire({
+			title: '您好 訪客',
+			text: '歡迎光臨Gather討論區',
+			showClass: {
+				popup: 'animate__animated animate__fadeInDown'
+			},
+			hideClass: {
+				popup: 'animate__animated animate__fadeOutUp'
+			},
+			showConfirmButton: false,
+			timer: 1500,
+		})
+		$("#po").hide();
+	}
+	
+	}) //$(document).ready(function()
+	
+	
 	</script>
 
 </body>

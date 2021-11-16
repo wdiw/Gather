@@ -2,6 +2,7 @@ package com.Gather.Project.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.Gather.Forum.model.CommentBean;
+import com.Gather.Forum.model.ForumCommentBean;
 import com.Gather.Sponsorship.model.FavoriteBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -44,9 +47,17 @@ public class ProjectBean implements Serializable {
 	@OneToMany(mappedBy = "projectBean",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<ProjectPlanBean> projectPlanBeans=new HashSet<>();
 
+	
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "projectBean",cascade = CascadeType.ALL)
 	Set<FavoriteBean> favoriteBeans=new HashSet<>();
+	
+	
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER, mappedBy ="commentBean", cascade = CascadeType.ALL )
+	private Set<CommentBean> comment=new LinkedHashSet<CommentBean>(0);
 	
 	
 
@@ -230,6 +241,16 @@ public class ProjectBean implements Serializable {
 	public void setFavoriteBeans(Set<FavoriteBean> favoriteBeans) {
 		this.favoriteBeans = favoriteBeans;
 	}
+
+	public Set<CommentBean> getComment() {
+		return comment;
+	}
+
+	public void setComment(Set<CommentBean> comment) {
+		this.comment = comment;
+	}
+	
+	
 
 
 	

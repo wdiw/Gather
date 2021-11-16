@@ -5,7 +5,9 @@ import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +28,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.Gather.Activity.service.ActivityParticipationService;
+import com.Gather.Activity.service.ActivityService;
 import com.Gather.Forum.model.CommentBean;
+import com.Gather.Forum.model.ForumBean;
+import com.Gather.Forum.model.ForumCommentBean;
 import com.Gather.Forum.service.CommentService;
+import com.Gather.Project.model.ProjectBean;
+import com.Gather.Project.model.ProjectPlanBean;
+import com.Gather.Project.service.ProjectPlanService;
+import com.Gather.Project.service.ProjectService;
+import com.Gather.Sponsorship.model.FavoriteBean;
+import com.Gather.Sponsorship.service.SponsorOrderService;
+import com.Gather.member.entity.Member;
+import com.Gather.member.service.MemberService;
 import com.google.gson.Gson;
 
 @Controller
@@ -35,12 +49,31 @@ public class CommentController {
 	
 	CommentService commentservice;
 	ServletContext servletContext;
-	
+	ProjectService projectService;
+	ProjectPlanService projectPlanService;
+	MemberService memberService;
+	SponsorOrderService sponsorOrderService;
+	ActivityService activityService;
+	ActivityParticipationService activityParticipationService;
 	
 	@Autowired
-	public CommentController(CommentService commentservice, ServletContext servletContext) {
+	public CommentController(CommentService commentservice, 
+			ServletContext servletContext, 
+			ProjectService projectService,
+			ProjectPlanService projectPlanService,
+			MemberService memberService, 
+			SponsorOrderService sponsorOrderService, 
+			ActivityService activityService, 
+			ActivityParticipationService activityParticipationService ) {
 		this.commentservice = commentservice;
 		this.servletContext = servletContext;
+		this.projectService = projectService;
+		this.projectPlanService = projectPlanService;
+		this.memberService = memberService;
+		this.sponsorOrderService = sponsorOrderService;
+		this.activityService = activityService;
+		this.activityParticipationService = activityParticipationService;
+		
 	}
 	
 	
@@ -57,6 +90,28 @@ public class CommentController {
 		
 		return "/Forum/addcomment"; //上面網址用的jsp
 		
+	}
+	
+	//R全
+	@GetMapping("/showProject/comments/{pID}") //連線到這個網址
+	public String showProject(@PathVariable("pID") Integer pID, HttpServletRequest request) {
+		ProjectBean pBean = projectService.getProjectById(pID);
+		Member member = (Member) request.getSession().getAttribute("memberData");
+		
+		if(member!=null) {
+			Member mBean = memberService.queryMemberById(member.getId());
+			FavoriteBean favoriteBean = sponsorOrderService.getFavoriteByMemberIDAndProjectID(mBean.getId(), pID);
+			List<FavoriteBean> favoriteBeans = sponsorOrderService.getFavoriteByMemberID(mBean.getId());
+			int favCount = favoriteBeans.size();
+			request.getSession().setAttribute("favoriteBean", favoriteBean);
+			request.getSession().setAttribute("favCount", favCount);
+			request.getSession().setAttribute("mBean", mBean);
+		}
+
+		List<ProjectPlanBean> projectPlanList = projectPlanService.getProjectPlansByProjectBean(pBean);
+		request.getSession().setAttribute("projectPlanList", projectPlanList);
+		request.getSession().setAttribute("pBean", pBean);
+		return "Forum/project"; //上面網址用的jsp
 	}
 	
 	//R全
@@ -78,49 +133,79 @@ public class CommentController {
 //	}
 	
 	
-	//C
-	@PostMapping(path = "/Forum/addcomment") 
-	public ResponseEntity<String> add(@RequestParam("commenter") String commenter, 
-			@RequestParam("comment") String comment, 
-//			@RequestParam("fImage") MultipartFile fImage,
-			HttpServletRequest request) throws MalformedURLException {
-		System.out.println("測試");
-		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd a hh:mm:ss");
+//	//C
+//	@PostMapping(path = "/Forum/addcomment") 
+//	public ResponseEntity<String> add(@RequestParam("commenter") String commenter, 
+//			@RequestParam("comment") String comment, 
+////			@RequestParam("fImage") MultipartFile fImage,
+//			HttpServletRequest request) throws MalformedURLException {
+//		System.out.println("測試");
+//		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd a hh:mm:ss");
+//		Date date = new Date();
+//		String commentTime = timeFormat.format(date);
+//		
+////		// 處理圖片
+////		String originalFilename = fImage.getOriginalFilename();// 得到原始名稱，如xxx.jpg
+////		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
+////		String rootDirectory = servletContext.getRealPath("/").replace("webapp", "resources");
+////		// 找到應用系統的根目錄 // C:\_JSP\tomcat9\webapps\mvcExercise
+////		rootDirectory = rootDirectory + "\\static\\images\\Forum";
+////
+////		String filePath = "images/Forum/";// 存檔於static相對路徑，如images/Forum/xxx.jpg
+////		File file = null;
+////		try {
+////			File imageFolder = new File(rootDirectory, name);
+////			if (!imageFolder.exists())
+////				imageFolder.mkdirs();// C:\_JSP\tomcat9\webapps\mvcExercise路徑下沒有images資料夾就建
+////
+////			file = new File(imageFolder, name + "_Cover" + ext);// File(路徑,檔名.副檔名)
+////			System.out.println("檔案路徑為:" + file);
+////			fImage.transferTo(file);// 把圖檔搬過去
+////		} catch (Exception e) {
+////			e.printStackTrace();
+////		}
+////
+////		filePath += name + "/" + name + "_Cover" + ext;
+////		ForumBean fBean=new ForumBean(name,post,postTime,postTime,filePath);
+//		
+//		CommentBean commentBean=new CommentBean(commenter,comment,commentTime);
+//		commentservice.addComment(commentBean);
+//		HttpHeaders responseHeaders = new HttpHeaders();
+//		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+//		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(commentBean));
+////		return new ResponseEntity<String>("Y", HttpStatus.OK);
+//	}
+	
+	//C 新增留言
+	@PostMapping(path = "/Forum/addcomment")
+	@ResponseBody
+	public ResponseEntity<String> add(@RequestParam("forumcomment") String forumcomment,
+			@RequestParam("id")Integer id,
+			HttpServletRequest request,Model model)  {
+		//取文章留言時間
+		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		String commentTime = timeFormat.format(date);
 		
-//		// 處理圖片
-//		String originalFilename = fImage.getOriginalFilename();// 得到原始名稱，如xxx.jpg
-//		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));// 取出副檔名 .png , .jpeg , .gif
-//		String rootDirectory = servletContext.getRealPath("/").replace("webapp", "resources");
-//		// 找到應用系統的根目錄 // C:\_JSP\tomcat9\webapps\mvcExercise
-//		rootDirectory = rootDirectory + "\\static\\images\\Forum";
-//
-//		String filePath = "images/Forum/";// 存檔於static相對路徑，如images/Forum/xxx.jpg
-//		File file = null;
-//		try {
-//			File imageFolder = new File(rootDirectory, name);
-//			if (!imageFolder.exists())
-//				imageFolder.mkdirs();// C:\_JSP\tomcat9\webapps\mvcExercise路徑下沒有images資料夾就建
-//
-//			file = new File(imageFolder, name + "_Cover" + ext);// File(路徑,檔名.副檔名)
-//			System.out.println("檔案路徑為:" + file);
-//			fImage.transferTo(file);// 把圖檔搬過去
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		filePath += name + "/" + name + "_Cover" + ext;
-//		ForumBean fBean=new ForumBean(name,post,postTime,postTime,filePath);
+		ProjectBean projectBean = projectService.getProjectById(id);
+//		ForumBean forumBean = forumService.getForumById(id);
+		Member member = (Member)request.getSession().getAttribute("memberData"); //member.getId()
+		CommentBean commentBean = new CommentBean(member.getName(),forumcomment,commentTime,projectBean,member.getId()); //T
+		Set<CommentBean> list = new LinkedHashSet<CommentBean>();
+		list.add(commentBean);
 		
-		CommentBean commentBean=new CommentBean(commenter,comment,commentTime);
-		commentservice.addComment(commentBean);
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
-		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(commentBean));
-//		return new ResponseEntity<String>("Y", HttpStatus.OK);
+		projectBean.setComment(list);
+		projectService.addProject(projectBean);
+		
+		List<CommentBean> result = commentservice.getAllComment();
+		System.out.println("全部留言");
+		System.out.println(result);
+		model.addAttribute("AllComment",result);
+
+		return new ResponseEntity<String>( HttpStatus.OK);
 	}
+	
 	
 	//D
 	@DeleteMapping(path = "/Forum/comments/{commentID}") //path自己隨便設，要對應jsp?用detail.jsp刪除

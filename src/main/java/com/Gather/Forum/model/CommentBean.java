@@ -23,10 +23,11 @@ public class CommentBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer commentID; //留言id
-	private String commenter; //留言人
 	@Column(columnDefinition = "nvarchar(max)") //通常不建議用，因為換資料庫的話這行指令不一定能用
 	private String comment; //留言
 	private String commentTime; //留言時間
+	private Integer commenterID; //留言人id
+	private String commenter; //留言人
 	
 //	private Integer pID; //留言對應的project ID
 	
@@ -35,6 +36,8 @@ public class CommentBean implements Serializable {
 	@JoinColumn(name = "pID")
 	ProjectBean commentBean;
 	
+	
+	//Constructors
 	public CommentBean() {
 	}
 	
@@ -52,58 +55,61 @@ public class CommentBean implements Serializable {
 		this.commentTime = commentTime;
 	}
 	
-//	public CommentBean(Integer commentID, String comment, String commentTime, ProjectBean commentBean) {
-//		this.commentID = commentID;
-//		this.comment = comment;
-//		this.commentTime = commentTime;
-//		this.commentBean = commentBean;
-//	}
-
-
+	public CommentBean(String commenter, String comment, String commentTime, ProjectBean commentBean, Integer commentID) {
+		this.commentID = commentID;
+		this.comment = comment;
+		this.commentTime = commentTime;
+		this.commentBean = commentBean;
+		this.commenter = commenter;
+	}
+	
+	
+	
+	
+	//Getters and Setters
 	public Integer getCommentID() {
 		return commentID;
 	}
-
 
 	public void setCommentID(Integer commentID) {
 		this.commentID = commentID;
 	}
 
-
-	public String getCommenter() {
-		return commenter;
-	}
-
-
-	public void setCommenter(String commenter) {
-		this.commenter = commenter;
-	}
-
-
 	public String getComment() {
 		return comment;
 	}
-
 
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
 
-
 	public String getCommentTime() {
 		return commentTime;
 	}
-
 
 	public void setCommentTime(String commentTime) {
 		this.commentTime = commentTime;
 	}
 
+	public Integer getCommenterID() {
+		return commenterID;
+	}
+
+	public void setCommenterID(Integer commenterID) {
+		this.commenterID = commenterID;
+	}
+
+	public String getCommenter() {
+		return commenter;
+	}
+
+	public void setCommenter(String commenter) {
+		this.commenter = commenter;
+	}
 
 	public ProjectBean getCommentBean() {
 		return commentBean;
 	}
-
 
 	public void setCommentBean(ProjectBean commentBean) {
 		this.commentBean = commentBean;

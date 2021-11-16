@@ -44,8 +44,11 @@
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
+<!--         <a class="navbar-brand brand-logo mr-5" href="../../../index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a> -->
+<!--         <a class="navbar-brand brand-logo-mini" href="../../../index.html"><img src="../images/logo-mini.svg" alt="logo"/></a> -->
+        <a class="navbar-brand brand-logo mr-5" href="/Gather">
+        <img  width="50px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" />
+        </a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -313,73 +316,67 @@
       <!-- partial:../../partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../../index.html">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Member</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">會員管理</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
-              <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Activity</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="form-elements">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">全部活動</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-              <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Sponsorship</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="orders">訂單管理</a></li>
-                <li class="nav-item"> <a class="nav-link" href="addorder">新增訂單</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-              <i class="icon-grid-2 menu-icon"></i>
-              <span class="menu-title">Projects</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="tables">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">專案管理</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-              <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">AD</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="icons">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">廣告管理</a></li>
-              </ul>
-            </div>
-          </li>
+          <li class="nav-item"><a class="nav-link"
+						href="/Gather/backend"> <i class="icon-grid menu-icon"></i> <span
+							class="menu-title">Dashboard</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#ui-basic" aria-expanded="false"
+						aria-controls="ui-basic"> <i class="icon-layout menu-icon"></i>
+							<span class="menu-title">Member</span> <i class="menu-arrow"></i>
+					</a>
+						<div class="collapse" id="ui-basic">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"><a class="nav-link"
+									href="../pages/ui-features/buttons.html">會員管理</a></li>
+							</ul>
+						</div></li>
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#form-elements" aria-expanded="false"
+						aria-controls="form-elements"> <i
+							class="icon-columns menu-icon"></i> <span class="menu-title">Activity</span>
+							<i class="menu-arrow"></i>
+					</a>
+						<div class="collapse" id="form-elements">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"><a class="nav-link"
+									href="../pages/forms/basic_elements.html">全部活動</a></li>
+							</ul>
+						</div></li>
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#charts" aria-expanded="false"
+						aria-controls="charts"> <i class="icon-bar-graph menu-icon"></i>
+							<span class="menu-title">Sponsorship</span> <i class="menu-arrow"></i>
+					</a>
+						<div class="collapse" id="charts">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"><a class="nav-link" href="../orders">訂單管理</a></li>
+								<li class="nav-item"><a class="nav-link" href="../addorder">新增訂單</a>
+								</li>
+							</ul>
+						</div></li>
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#tables" aria-expanded="false"
+						aria-controls="tables"> <i class="icon-grid-2 menu-icon"></i>
+							<span class="menu-title">Projects</span> <i class="menu-arrow"></i>
+					</a>
+						<div class="collapse" id="tables">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"><a class="nav-link"
+									href="../pages/tables/basic-table.html">專案管理</a></li>
+							</ul>
+						</div></li>
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#icons" aria-expanded="false"
+						aria-controls="icons"> <i class="icon-contract menu-icon"></i>
+							<span class="menu-title">Forum</span> <i class="menu-arrow"></i>
+					</a>
+						<div class="collapse" id="icons">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"><a class="nav-link"
+									href="/Gather/Forum/queryAll">討論區管理</a></li>
+							</ul>
+						</div>
         </ul>
       </nav>
       
@@ -391,7 +388,7 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h2 class="card-title">新增文章</h2>
+                  <h2 >發布公告</h2><br>
                   <form  id="form" class="forms-sample">
                     <div class="form-group">
                       <label>文章分類</label>

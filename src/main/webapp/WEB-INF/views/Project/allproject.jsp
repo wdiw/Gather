@@ -439,9 +439,9 @@
 											<div class="card">
 												<div class="card-body">
 													<h4 class="card-title">計畫清單</h4>
-													<button type="button" id="update"
-																			class="btn btn-inverse-warning btn-fw" 
-																			onclick='location.href="<c:url value='/Project/addProject' />"'>新增計畫</button>
+													<button type="button" id="update" 
+													class="btn btn-inverse-warning btn-fw" 
+													onclick='location.href="<c:url value='/Project/addProject' />"'>新增計畫</button>
 													<div class="table-responsive">
 														<table id="allProjectTable" class="table table-hover">
 															<thead>

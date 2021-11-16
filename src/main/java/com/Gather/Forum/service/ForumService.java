@@ -8,29 +8,32 @@ import com.Gather.Forum.model.ForumBean;
 
 public interface ForumService {
 	
-	//新增
-	public void addForum(ForumBean fBean);
+	//R all
+	List<ForumBean> getAllForum();
 	
-	//依據id刪單筆資料
-	public void deleteForumById(Integer fID);
-	
-	//修改
-	public void updateForum(ForumBean fBean);
-	
-	//找所有計畫資料
-    List<ForumBean> getAllForum();
-	
-    //依據id 找單筆資料
+	//R by id
 	public ForumBean getForumById(Integer fID);
 	
-	//搜尋
+	//C
+	public void addForum(ForumBean fBean);
+	
+	//U
+	public void updateForum(ForumBean fBean);
+	
+	//D by id
+	public void deleteForumById(Integer fID);
+	
+	//文章搜尋
 	List<ForumBean> findforumBytitle(Set<String> forumtitles);
 	
-	//搜尋
+	//文章分類
 	List<ForumBean> findByPostCategory(String forumcategory);
 	
-//	//倒序排列
-//	List<ForumBean> findByIdOrderByidDesc();
+	//會員分類 T
+	List<ForumBean> getAllByPosterId(Integer posterID);
+	
+	//文章倒序排列
+	List<ForumBean> findByIdOrderByIdDesc();
 	
 	
 }

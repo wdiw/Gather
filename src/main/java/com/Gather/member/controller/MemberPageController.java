@@ -128,7 +128,7 @@ public class MemberPageController {
 				continue;
 			}
 			// 登入次數，先放到Array 之後再用泡沫排序法
-			loginArray[count] = member.getLoginTimes();
+			loginArray[count] = 1;
 			loginArrayName[count] = member.getName();
 			count++;
 
