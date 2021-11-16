@@ -407,7 +407,7 @@
 										<div class="col-lg-6 grid-margin stretch-card">
 											<div class="card">
 												<div class="card-body">
-													<h4 class="card-title">會員性別比</h4>
+													<h4 class="card-title" style="text-align: center;">會員性別比</h4>
 													<canvas id="doughnutChart" width="131" height="55"
 														style="display: block; height: 210px; width: 421px;"
 														class="chartjs-render-monitor"></canvas>
@@ -418,7 +418,7 @@
 										<div class="col-lg-6 grid-margin stretch-card">
 											<div class="card">
 												<div class="card-body">
-													<h4 class="card-title">造訪網站排行</h4>
+													<h4 class="card-title" style="text-align: center;">造訪網站排行</h4>
 													<canvas id="barChart"
 														style="display: block; height: 210px; width: 421px;" width="631"
 														height="315" class="chartjs-render-monitor"></canvas>
@@ -430,7 +430,7 @@
 									<div class="col-lg-6 grid-margin stretch-card">
 										<div class="card">
 											<div class="card-body">
-												<h4 class="card-title">會員年齡分布</h4>
+												<h4 class="card-title" style="text-align: center;">會員年齡分布</h4>
 												<canvas id="areaChart" width="631" height="315"
 													style="display: block; height: 210px; width: 421px;"
 													class="chartjs-render-monitor"></canvas>

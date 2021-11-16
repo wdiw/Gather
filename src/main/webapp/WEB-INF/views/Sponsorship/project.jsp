@@ -54,7 +54,7 @@
 
 
 #content{
-  font-size: 16px !important;
+  font-size: 28px !important;
 }
       </style>
 
@@ -195,9 +195,7 @@
                   role="tab" aria-controls="v-pills-1" aria-selected="true" style="width:1116px ;font-size: 20px;"><span id="content">贊助內容</span></a>
 
             
-<!-- 
-                <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab"
-                  aria-controls="v-pills-3" aria-selected="false" style="width:553px">討論區</a> -->
+
 
               </div>
             </div>
@@ -224,11 +222,15 @@
                           <div class="card-body">
                             <!-- style="background-color: rgb(255, 255, 255);" -->
                             <img src="../${projectPlan.projectPlanImage}" class="card-img-top" alt="...">
-                            <h5 class="card-title">預計實現日期:${projectPlan.ETA}</h5>
+                            <p></p>
+                            <h5 style="color: rgb(38, 114, 228); ">$${projectPlan.projectPlanPrice}.NTD</h5>
                             <p class="card-text">${projectPlan.projectPlanContent}</p>
+                           
                             <a name="sponsorBtn" href="../payment?pPID=${projectPlan.projectPlanID}"
-                              class="btn btn-primary">贊助方案</a>
-                            <span class="planStatus">寫狀態</span>
+                              class="btn btn-primary" style="font-size:14px">贊助方案</a>
+                            <span class="planStatus">寫狀態</span><p></p>
+                          
+                            <p class="card-title" style="color: gray;font-weight: bolder;">預計實現日期:${projectPlan.ETA}</p>
                           </div>
                         </div>
                       </div>
