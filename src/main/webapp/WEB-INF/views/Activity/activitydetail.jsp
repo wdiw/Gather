@@ -32,6 +32,27 @@
 <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="../images/favicon.png" />
+<style type="text/css">
+						.btn {
+       font-size: 20px;
+      }
+      
+     
+
+      /* 調整按鈕顏色 */
+      .btn.btn-primary {
+       background: #3288d8;
+       border: 1px solid #3288d8;
+       color: #fff;
+      }
+
+      /* 調整按鈕hover */
+      .btn.btn-primary:hover {
+       background: #fff;
+       border: 1px solid #3288d8;
+       color: #3288d8;
+      }
+</style>
 </head>
 <body>
 	<section>
@@ -50,7 +71,7 @@
            <div class="card-body">
                   <h4 class="card-title">活動內容編輯</h4>
                   
-                  <form  id="form" class="forms-sample">
+                  <form  id="form" class="forms-sample"  >
                     <div class="form-group">
                       <label for='id'>活動編號</label>
                       <input name="id" id="id" disabled="disabled" class="form-control" value="${activity.id}" readonly="readonly">
@@ -271,8 +292,8 @@
 				var formdata=new FormData(form);
 
 				Swal.fire({
-                title: '確定修改活動資訊如下?',
-				text:  str       ,
+                title: '確定修改活動資訊?',
+				
                 icon: 'question',
                 imageUrl: pic,
                 imageWidth: 400,

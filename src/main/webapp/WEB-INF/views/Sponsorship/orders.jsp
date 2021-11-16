@@ -166,7 +166,7 @@ span{
 			<div
 				class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
 				<a class="navbar-brand brand-logo mr-5" href="index.html"><img
-					 width="80px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a> <a
+					width="80px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a> <a
 					class="navbar-brand brand-logo-mini" href="index.html"><img
 					src="images/logo-mini.svg" alt="logo" /></a>
 			</div>
@@ -238,11 +238,9 @@ span{
 								</div>
 							</a>
 						</div></li>
-					<li class="nav-item nav-profile dropdown"><a
-						class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-						id="profileDropdown"> <img src="images/faces/face28.jpg"
-							alt="profile" />
-					</a>
+					<li class="nav-item nav-profile dropdown"> <a class="nav-link dropdown-toggle" href="/Gather/images/Members/${memberData.id}.jpg"data-toggle="dropdown" id="profileDropdown">
+              <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/>
+            </a>
 						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
 							aria-labelledby="profileDropdown">
 							<a class="dropdown-item"> <i class="ti-settings text-primary"></i>

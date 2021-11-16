@@ -37,13 +37,42 @@
 
 
 					<script>
-						$(function () {
+						// $(function () {
 
 
-							$('#allActivityTable').DataTable();
+						// 	$('#allActivityTable').DataTable();
 
 
-						})
+
+
+						// })
+
+						$(document).ready(function () {
+							$('#allActivityTable').DataTable({
+								"language": {
+									"processing": "處理中...",
+									"loadingRecords": "載入中...",
+									"lengthMenu": "顯示筆數 MENU ",
+									"zeroRecords": "沒有符合的結果",
+									"info": "顯示第 START 至 END 項結果，共 TOTAL 項",
+									"infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+									"infoFiltered": "(從 MAX 項結果中過濾)",
+									"infoPostFix": "",
+									"search": "搜尋:",
+									"paginate": {
+										"first": "第一頁",
+										"previous": "上一頁",
+										"next": "下一頁",
+										"last": "最後一頁"
+									},
+									"aria": {
+										"sortAscending": ": 升冪排列",
+										"sortDescending": ": 降冪排列"
+									}
+								},
+								"order": [[0, "desc"]]
+							});
+						});
 
 					</script>
 
@@ -61,6 +90,59 @@
 							word-wrap: break-word;
 							word-break: break-all;
 						}
+
+						
+
+						/* 調整按鈕顏色 */
+						.btn.btn-primary {
+							background: #3288d8;
+							border: 1px solid #3288d8;
+							color: #fff;
+						}
+
+						/* 調整按鈕hover */
+						.btn.btn-primary:hover {
+							background: #fff;
+							border: 1px solid #3288d8;
+							color: #3288d8;
+						}
+
+
+
+						.btn {
+       font-size: 16px;
+      }
+
+      #managerProjectOutputCSV,#managerProjectOutputJson{
+       font-size: 8px;
+      }
+
+      /* 調整按鈕顏色 */
+      .btn-inverse-warning:not(.btn-inverse-light) {
+       background: #3288d8;
+       border: 1px solid #3288d8;
+       color: #fff;
+      }
+
+      /* 調整按鈕hover */
+      .btn-inverse-warning:not(.btn-inverse-light):hover {
+       background: #fff;
+       border: 1px solid #3288d8;
+       color: #3288d8;
+      }
+
+
+      .sidebar .nav .nav-item .nav-link .menu-title {
+       color: inherit;
+       display: inline-block;
+       font-size: 18px;
+       line-height: 1;
+       vertical-align: middle;
+      }
+      
+      span{
+       font-size: 18px;
+      }
 					</style>
 				</head>
 
@@ -70,9 +152,8 @@
 						<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 							<div
 								class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-								<a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg"
-										class="mr-2" alt="logo" /></a> <a class="navbar-brand brand-logo-mini"
-									href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
+								<a class="navbar-brand brand-logo mr-5" href="index.html"><img
+									width="80px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a>
 							</div>
 							<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
 								<button class="navbar-toggler navbar-toggler align-self-center" type="button"
@@ -450,7 +531,7 @@
 										<div class="col-lg-12 grid-margin stretch-card">
 											<div class="card">
 												<div class="card-body">
-													<h4 class="card-title">活動登錄清單</h4>
+													<h2 class="card-title">活動登錄清單</h2>
 
 													<button class="btn btn-primary" id='outputdata'>資料輸出</button>
 													<!--                   <p class="card-description"> -->
@@ -460,12 +541,12 @@
 															<table class="table table-hover" id='allActivityTable'>
 																<thead>
 																	<tr>
-																		<th>活動登錄編號</th>
-																		<th>活動名稱</th>
-																		<th>會員ID</th>
-																		<th>會員名稱</th>
-																		<th>活動登錄時間</th>
-																		<th>編輯</th>
+																		<th><span>活動登錄編號</span></th>
+																		<th><span>活動名稱</span></th>
+																		<th><span>會員ID</span></th>
+																		<th><span>會員名稱</span></th>
+																		<th><span>活動登錄時間</span></th>
+																		<th><span>編輯</span></th>
 
 
 																	</tr>
@@ -473,23 +554,23 @@
 
 																<c:forEach items='${activitylogins}' var='activity'>
 																	<tr>
-																		<td>${activity.activityParticipationid}</td>
-																		<td>${activity.activityname}</td>
-																		<td>${activity.m_id}</td>
-																		<td>${activity.membername}</td>
-																		<td>${activity.logintime}</td>
-																		<td><button class="btn btn-primary"
+																		<td><span>${activity.activityParticipationid}</span></td>
+																		<td><span>${activity.activityname}</span></td>
+																		<td><span>${activity.m_id}</span></td>
+																		<td><span>${activity.membername}</span></td>
+																		<td><span>${activity.logintime}</span></td>
+																		<td><span><button class="btn btn-primary"
 																				onclick=" deleteActivityLogin(${activity.activityParticipationid})">
 
-																				刪除登錄</button></td>
+																				刪除登錄</button></span></td>
 
 
 
 																	</tr>
 																</c:forEach>
 															</table>
-														
-														
+
+
 														</div>
 												</div>
 											</div>
@@ -589,37 +670,37 @@
 
 
 
-									 $(document).ready(function () {
-									var activitynames=[];
-									var participationcounts=[];
+									$(document).ready(function () {
+										var activitynames = [];
+										var participationcounts = [];
 
-                                        
-                                  var activityBeans="${sessionScope.activityBeans}";
-                                  
-									  var activityBeanSize="${activityBeanSize}";
-									  var activityBeansArray=[];
-									  activityBeansArray.push(activityBeans);
 
-                                    
-										
-						
-									            
+										var activityBeans = "${sessionScope.activityBeans}";
+
+										var activityBeanSize = "${activityBeanSize}";
+										var activityBeansArray = [];
+										activityBeansArray.push(activityBeans);
 
 
 
 
-									   }
 
 
-									 
 
 
-									 )
+
+									}
 
 
-							
 
-									
+
+
+									)
+
+
+
+
+
 
 
 									// var activitylogincounts='${activitylogincounts.name}'

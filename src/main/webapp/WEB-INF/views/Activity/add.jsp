@@ -30,6 +30,26 @@
           <link rel="stylesheet" href="css/vertical-layout-light/style.css">
           <!-- endinject -->
           <link rel="shortcut icon" href="images/favicon.png" />
+          <style type="text/css">
+          
+          						.btn {
+       font-size: 20px;
+      }
+
+      /* 調整按鈕顏色 */
+      .btn.btn-primary {
+       background: #3288d8;
+       border: 1px solid #3288d8;
+       color: #fff;
+      }
+
+      /* 調整按鈕hover */
+      .btn.btn-primary:hover {
+       background: #fff;
+       border: 1px solid #3288d8;
+       color: #3288d8;
+      }
+          </style>
         </head>
 
         <body>
@@ -462,7 +482,7 @@
                           </div>
                           <button id="btnAdd" type='submit' name='submit' class="btn btn-primary mr-2">送出</button>
 
-                          <a href="<spring:url value='/sapage' />" class="btn btn-primary mr-2">
+                          <a href="<spring:url value='/sapageactivity' />" class="btn btn-primary mr-2">
                             返回
                           </a>
                           <button id='inputalldata' class="btn btn-light">一鍵輸入</button>

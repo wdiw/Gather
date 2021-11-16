@@ -55,6 +55,13 @@
 #collapseFour a{
 	font-size: 20px !important;
 }
+#navBarTop {
+    max-width: 1850px;
+}
+
+.nav-link{
+ font-size: 16px !important;
+}
 </style>
 </head>
 
@@ -65,25 +72,7 @@
 				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
 				<div class="col-lg-12 d-block">
 					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">+ 1235 2355 98</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">Gather.WebService@gmail.com</span>
-						</div>
-						<div
-							class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-							<span class="text">3-5 Business days delivery &amp; Free
-								Returns</span>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -92,7 +81,7 @@
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
-		<div class="container">
+		<div class="container" id="navBarTop">
 			<a href="/Gather">
 			<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
