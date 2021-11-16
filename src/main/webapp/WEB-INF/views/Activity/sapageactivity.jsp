@@ -128,9 +128,10 @@
        vertical-align: middle;
       }
       
-      span{
+      
+	  .tableSpan{
        font-size: 18px;
-      }
+      } 
 					</style>
 				</head>
 
@@ -140,8 +141,8 @@
 						<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 							<div
 								class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-								<a class="navbar-brand brand-logo mr-5" href="index.html"><img
-									width="80px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a>
+								<a class="navbar-brand brand-logo mr-5" href="/Gather">
+									<img  width="50px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a>
 							</div>
 							<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
 								<button class="navbar-toggler navbar-toggler align-self-center" type="button"
@@ -530,14 +531,14 @@
 															<table class="table table-hover" id='allActivityTable' >
 																<thead>
 																	<tr>
-																		<th><span>活動編號</span></th>
-																		<th><span>活動名稱</span></th>
-																		<th><span>活動圖片</span></th>
-																		<th><span>開始日期</span></th>
-																		<th><span>結束日期</span></th>
-																		<th><span>活動內容</span></th>
-																		<th><span>活動登錄人數</span></th>
-																		<th><span>活動編輯</span></th>
+																		<th><span class='tableSpan'>活動編號</span></th>
+																		<th><span class='tableSpan'>活動名稱</span></th>
+																		<th><span class='tableSpan'>活動圖片</span></th>
+																		<th><span class='tableSpan'>開始日期</span></th>
+																		<th><span class='tableSpan'>結束日期</span></th>
+																		<th><span class='tableSpan'>活動內容</span></th>
+																		<th><span class='tableSpan'>活動登錄人數</span></th>
+																		<th><span class='tableSpan'>活動編輯</span></th>
 
 																	</tr>
 																</thead>
@@ -545,22 +546,22 @@
 																<c:forEach items='${activities}' var='activity'>
 																	<tr>
 																		<td class='activityid'>${activity.id}</span></td>
-																		<td><span>
+																		<td><span class='tableSpan'>
 																			<div class='warp'><span class='activityname'>${activity.name}</span></div>
 																		</span></td>
-																		<td><span><img width='50' height='50'
+																		<td><img width='200' height='200'
 																				src="<c:url value='/ActivitygetPicture/${activity.id}'/>"
-																				class="img-rounded" /></span></td>
-																		<td><span>${activity.beginDate}</span></td>
-																		<td><span>${activity.endDate}</span></td>
-																		<td><span>
+																				class="img-rounded" /></td>
+																		<td><span class='tableSpan'>${activity.beginDate}</span></td>
+																		<td><span class='tableSpan'>${activity.endDate}</span></td>
+																		<td><span class='tableSpan'>
 																			<div class="warp">${activity.description}
 																			</div>
 																		</span></td>
 																		<td class="participationcount">${activity.participationcount}</span></td>
 
 
-																		<td><span>
+																		<td><span class='tableSpan'>
 
 																			<a href="<spring:url value='/Activity/activity?id=${activity.id}' />"
 																				class="btn btn-primary">詳細內容
@@ -614,7 +615,8 @@
 											success: function (data) {
 												Swal.fire({
 													icon: 'success',
-													title: '資料輸出成功'
+													title: '資料輸出成功',
+                                                   text:'路徑: C:\Gather'
 												})
 											},
 											error: function (jqXHR, textStatus, errorThrown) {

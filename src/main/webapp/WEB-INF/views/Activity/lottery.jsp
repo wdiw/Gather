@@ -30,6 +30,14 @@
 					<link rel="stylesheet" href="css/flaticon.css">
 					<link rel="stylesheet" href="css/icomoon.css">
 					<link rel="stylesheet" href="css/style.css">
+					<style>
+					#navBarTop {
+						max-width: 1850px;
+					}
+					
+					.nav-link{
+					 font-size: 16px !important;
+					}</style>
 				</head>
 
 				<body class="goto-here">
@@ -60,7 +68,7 @@
 					</div>
 					<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 						id="ftco-navbar">
-						<div class="container">
+						<div class="container" id="navBarTop">
 							<a class="navbar-brand" href="index.html">Gather</a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">

@@ -158,8 +158,8 @@
                   <div class="col-md-3 d-flex">
                     <div class="info bg-white p-4" style="font-size: 26px;">
                       <h2><b>會員功能</b></h2>
-                      <a href="/Gather/userpage" class="btn btn-inverse-success btn-fw" style="font-size: 26px;">
-                        活動登陸
+                      <a href="/Gather/memberactivitylogin" class="btn btn-inverse-success btn-fw" style="font-size: 26px;">
+                        活動登錄
                       </a><br>
                       <a href="/Gather/Project/userProjects" class="btn btn-inverse-success btn-fw"
                         style="font-size: 26px;">

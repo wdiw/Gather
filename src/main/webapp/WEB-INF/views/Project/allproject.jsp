@@ -92,13 +92,13 @@
 						}
 
 
-						/* .sidebar .nav .nav-item .nav-link .menu-title {
+						.sidebar .nav .nav-item .nav-link .menu-title {
 							color: inherit;
 							display: inline-block;
 							font-size: 18px;
 							line-height: 1;
 							vertical-align: middle;
-						} */
+						}
 						
 						.tableSpan{
 							font-size: 18px;
@@ -210,7 +210,7 @@
 						<!-- partial -->
 						<div class="container-fluid page-body-wrapper">
 							<!-- partial:/Gather/partials/_settings-panel.html -->
-							<div class="theme-setting-wrapper">
+							<!-- <div class="theme-setting-wrapper">
 								<div id="settings-trigger">
 									<i class="ti-settings"></i>
 								</div>
@@ -235,7 +235,7 @@
 										<div class="tiles default"></div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<div id="right-sidebar" class="settings-panel">
 								<i class="settings-close ti-close"></i>
 								<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
@@ -407,7 +407,7 @@
 							<!-- partial:/Gather/partials/_sidebar.html -->
 							<nav class="sidebar sidebar-offcanvas" id="sidebar">
 								<ul class="nav">
-									<li class="nav-item"><a class="nav-link" href="/Gather/index.html"> <i
+									<li class="nav-item"><a class="nav-link" href="/Gather/backend"> <i
 												class="icon-grid menu-icon"></i> <span
 												class="menu-title">Dashboard</span>
 										</a></li>
@@ -511,7 +511,7 @@
 																	<td><span class="tableSpan">${project.pTarget}</span></td>
 																	<td><span class="tableSpan">${project.pStatus}</span></td>
 
-																	<td><span >
+																	<td><span class="tableSpan">
 																		<button type="button" id="update"
 																			class="btn btn-inverse-warning btn-fw"
 																			onclick='location.href="<c:url value='/Project/managerProjectDetail?pID=${project.pID}' />"'>詳細資料</button>

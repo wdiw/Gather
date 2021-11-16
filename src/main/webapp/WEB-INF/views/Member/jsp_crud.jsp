@@ -34,7 +34,15 @@
 							img.onerror = null; //控制不要一直觸發錯誤
 						}
 					</script>
-
+<style>
+	.sidebar .nav .nav-item .nav-link .menu-title {
+       color: inherit;
+       display: inline-block;
+       font-size: 18px;
+       line-height: 1;
+       vertical-align: middle;
+      }
+</style>
 				</head>
 
 				<body>
@@ -43,8 +51,8 @@
 						<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 							<div
 								class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-								<a class="navbar-brand brand-logo mr-5" href="./"><img src="images/logo.svg"
-										class="mr-2" alt="logo" /></a> <a class="navbar-brand brand-logo-mini"
+								<a href="/Gather">
+									<img style="margin-left:10px;" width="50px" height="40px"  src="/Gather/images/G.png"></a><a class="navbar-brand brand-logo-mini"
 									href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
 							</div>
 							<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">

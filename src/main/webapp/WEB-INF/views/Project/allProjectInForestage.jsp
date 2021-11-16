@@ -104,6 +104,10 @@
 						</div>
 					</li>
 					
+					
+					<li class="nav-item">
+					<a  class="nav-link" href="<spring:url value='/userpage'/>">活動</a></li>
+					
 					<li class="nav-item"><a href="/Gather/allposts"
 						class="nav-link">Blog</a></li>
 

@@ -33,8 +33,9 @@
 						<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 							<div
 								class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-								<a class="navbar-brand brand-logo mr-5" href="./"><img src="images/logo.svg"
-										class="mr-2" alt="logo" /></a> <a class="navbar-brand brand-logo-mini"
+								<a href="/Gather">
+									<img style="margin-left:10px;" width="50px" height="40px"  src="/Gather/images/G.png"></a>
+										<a class="navbar-brand brand-logo-mini"
 									href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
 							</div>
 							<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -340,8 +341,7 @@
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"><a class="nav-link" href="showAllMember">會員管理</a>
 												</li>
-												<li class="nav-item"><a class="nav-link" href="./addMember">新增會員</a>
-												</li>
+												
 											</ul>
 										</div>
 									</li>
@@ -353,8 +353,10 @@
 										</a>
 										<div class="collapse" id="form-elements">
 											<ul class="nav flex-column sub-menu">
-												<li class="nav-item"><a class="nav-link"
-														href="Activity/selectall">全部活動</a></li>
+													<li class="nav-item"><a class="nav-link"
+														href="/Gather/sapageactivity">活動管理</a></li>
+														<li class="nav-item"><a class="nav-link"
+														href="/Gather/sapageactivitylogin">活動登錄管理</a></li>
 											</ul>
 										</div>
 									</li>

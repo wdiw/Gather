@@ -140,9 +140,9 @@
        vertical-align: middle;
       }
       
-      span{
+       .tableSpan{
        font-size: 18px;
-      }
+      } 
 					</style>
 				</head>
 
@@ -152,8 +152,8 @@
 						<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 							<div
 								class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-								<a class="navbar-brand brand-logo mr-5" href="index.html"><img
-									width="80px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a>
+								<a class="navbar-brand brand-logo mr-5" href="/Gather">
+									<img  width="50px" height="500px"  src="/Gather/images/G.png" class="mr-2" alt="logo" /></a>
 							</div>
 							<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
 								<button class="navbar-toggler navbar-toggler align-self-center" type="button"
@@ -541,12 +541,12 @@
 															<table class="table table-hover" id='allActivityTable'>
 																<thead>
 																	<tr>
-																		<th><span>活動登錄編號</span></th>
-																		<th><span>活動名稱</span></th>
-																		<th><span>會員ID</span></th>
-																		<th><span>會員名稱</span></th>
-																		<th><span>活動登錄時間</span></th>
-																		<th><span>編輯</span></th>
+																		<th><span class='tableSpan'>活動登錄編號</span></th>
+																		<th><span class='tableSpan'>活動名稱</span></th>
+																		<th><span class='tableSpan'>會員ID</span></th>
+																		<th><span class='tableSpan'>會員名稱</span></th>
+																		<th><span class='tableSpan'>活動登錄時間</span></th>
+																		<th><span class='tableSpan'>編輯</span></th>
 
 
 																	</tr>
@@ -554,12 +554,12 @@
 
 																<c:forEach items='${activitylogins}' var='activity'>
 																	<tr>
-																		<td><span>${activity.activityParticipationid}</span></td>
-																		<td><span>${activity.activityname}</span></td>
-																		<td><span>${activity.m_id}</span></td>
-																		<td><span>${activity.membername}</span></td>
-																		<td><span>${activity.logintime}</span></td>
-																		<td><span><button class="btn btn-primary"
+																		<td><span class='tableSpan'>${activity.activityParticipationid}</span></td>
+																		<td><span class='tableSpan'>${activity.activityname}</span></td>
+																		<td><span class='tableSpan'>${activity.m_id}</span></td>
+																		<td><span class='tableSpan'>${activity.membername}</span></td>
+																		<td><span class='tableSpan'>${activity.logintime}</span></td>
+																		<td><span class='tableSpan'><button class="btn btn-primary"
 																				onclick=" deleteActivityLogin(${activity.activityParticipationid})">
 
 																				刪除登錄</button></span></td>
@@ -659,7 +659,8 @@
 											success: function (data) {
 												Swal.fire({
 													icon: 'success',
-													title: '資料輸出成功'
+													title: '資料輸出成功',
+													text:'路徑: C:\Gather'
 												})
 											},
 											error: function (jqXHR, textStatus, errorThrown) {
