@@ -30,6 +30,8 @@
           <link rel="stylesheet" href="css/flaticon.css">
           <link rel="stylesheet" href="css/icomoon.css">
           <link rel="stylesheet" href="css/style.css">
+          <link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
           <style>
             #navBarTop {
     max-width: 1850px;
@@ -272,70 +274,7 @@
 
               </div>
             </section>
-            <section class="ftco-gallery ftco-section ftco-no-pb">
-              <div class="container">
-                <div class="row justify-content-center">
-                  <div class="col-md-8 heading-section text-center mb-4 ftco-animate">
-                    <h2 class="mb-4">Follow Us On Instagram</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                      live the
-                      blind texts. Separated they live in</p>
-                  </div>
-                </div>
-              </div>
-              <div class="container-fluid px-0">
-                <div class="row no-gutters">
-                  <div class="col-md-4 col-lg-2 ftco-animate">
-                    <a href="images/gallery-1.jpg" class="gallery image-popup img d-flex align-items-center"
-                      style="background-image: url(images/gallery-1.jpg);">
-                      <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                        <span class="icon-instagram"></span>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-md-4 col-lg-2 ftco-animate">
-                    <a href="images/gallery-2.jpg" class="gallery image-popup img d-flex align-items-center"
-                      style="background-image: url(images/gallery-2.jpg);">
-                      <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                        <span class="icon-instagram"></span>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-md-4 col-lg-2 ftco-animate">
-                    <a href="images/gallery-3.jpg" class="gallery image-popup img d-flex align-items-center"
-                      style="background-image: url(images/gallery-3.jpg);">
-                      <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                        <span class="icon-instagram"></span>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-md-4 col-lg-2 ftco-animate">
-                    <a href="images/gallery-4.jpg" class="gallery image-popup img d-flex align-items-center"
-                      style="background-image: url(images/gallery-4.jpg);">
-                      <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                        <span class="icon-instagram"></span>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-md-4 col-lg-2 ftco-animate">
-                    <a href="images/gallery-5.jpg" class="gallery image-popup img d-flex align-items-center"
-                      style="background-image: url(images/gallery-5.jpg);">
-                      <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                        <span class="icon-instagram"></span>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-md-4 col-lg-2 ftco-animate">
-                    <a href="images/gallery-6.jpg" class="gallery image-popup img d-flex align-items-center"
-                      style="background-image: url(images/gallery-6.jpg);">
-                      <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                        <span class="icon-instagram"></span>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </section>
+           
             <!----------------------------------------------------------------------->
             <!-- 更改大頭照 開始-->
             <div id="changeUserPhoto" class="modal fade">
@@ -463,11 +402,7 @@
                     <p>
                       <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                       Copyright &copy;
-                      <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is
-                      made
-                      with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                        target="_blank">Colorlib</a>. Downloaded from <a href="https://themeslab.org/"
-                        target="_blank">Themeslab</a>
+                      <script>document.write(new Date().getFullYear());</script> All rights reserved | Gahter
                       <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                   </div>

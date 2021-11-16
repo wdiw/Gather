@@ -102,7 +102,9 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container"  id="navBarTop">
-			<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+			<a href="/Gather">
+				<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -127,30 +129,37 @@
 
 					
 					
-					<c:choose>
-						<c:when test="${memberData!=null}">
-							<li class="nav-item"><a href="/Gather/showMemberCenter"
-								class="nav-link">會員中心</a></li>
-							<li class="nav-item"><a href="/Gather/showLogout"
-								class="nav-link">登出</a></li>
-							<c:choose>
-								<c:when test="${memberData.status eq '管理員'}">
-									<li class="nav-item"><a href="/Gather/backend"
-										class="nav-link">管理員後台</a></li>
-								</c:when>
-							</c:choose>
-						</c:when>
-						<c:otherwise>
-						<li class="nav-item"><a href="/Gather/oneKeyloginMember"
-								class="nav-link">一鍵登入會員</a></li>
-					<li class="nav-item"><a href="/Gather/oneKeyloginAdmin"
-								class="nav-link">一鍵登入管理員</a></li>
-							<li class="nav-item"><a
-								href="/Gather/pages/member/register.html" class="nav-link">註冊</a></li>
-							<li class="nav-item"><a
-								href="/Gather/pages/member/login.html" class="nav-link">登入</a></li>
-						</c:otherwise>
-					</c:choose>
+						<c:choose>
+							<c:when test="${memberData!=null}">
+								<li class="nav-item"><a href="/Gather/showMemberCenter"
+									class="nav-link">會員中心</a></li>
+								<li class="nav-item"><a href="/Gather/showLogout"
+									class="nav-link">登出</a></li>
+								<c:choose>
+									
+									<c:when test="${memberData.status eq '管理員'}">
+										<li class="nav-item"><a href="/Gather/backend"
+											class="nav-link">管理員後台</a></li>
+									</c:when>
+								</c:choose>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">快速登入</a>
+									<div class="dropdown-menu" aria-labelledby="dropdown04">
+									 <a class="dropdown-item" href="/Gather/oneKeyloginMember">會員</a>
+									  <a class="dropdown-item" href="/Gather/oneKeyloginBass">提案者</a>
+									  <a class="dropdown-item" href="/Gather/oneKeyloginAdmin">管理員</a>
+									</div>
+								</li>
+								  
+		
+								<li class="nav-item"><a
+									href="/Gather/pages/member/register.html" class="nav-link">註冊</a></li>
+								<li class="nav-item"><a
+									href="/Gather/pages/member/login.html" class="nav-link">登入</a></li>
+							</c:otherwise>
+						</c:choose>
 
 
 					<!--我的最愛-->
@@ -399,10 +408,7 @@
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;
 						<script>document.write(new Date().getFullYear());</script>
-						All rights reserved | This template is made with <i
-							class="icon-heart color-danger" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>.
-						Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
+						All rights reserved | Gather
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					</p>
 				</div>
