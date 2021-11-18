@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Minishop - Free Bootstrap 4 Template by Colorlib</title>
+<title>Gather</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -241,7 +241,7 @@
 			<div class="row mb-5">
 				<div class="col-md">
 					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Minishop</h2>
+						<h2 class="ftco-heading-2">Gather</h2>
 						<p>Far far away, behind the word mountains, far from the
 							countries Vokalia and Consonantia.</p>
 						<ul

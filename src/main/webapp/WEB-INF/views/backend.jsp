@@ -380,7 +380,7 @@
 										<div class="collapse" id="tables">
 											<ul class="nav flex-column sub-menu">
 												<li class="nav-item"><a class="nav-link"
-														href="Project/allProjectInBackstage">專案管理</a></li>
+														href="Project/allProjectInBackstage">計畫管理</a></li>
 											</ul>
 										</div>
 									</li>
@@ -391,7 +391,7 @@
 										</a>
 										<div class="collapse" id="icons">
 											<ul class="nav flex-column sub-menu">
-												<li class="nav-item"><a class="nav-link"
+												<li class="nav-item"><a class="nav-link" style="text-align: center;"
 														href="/Gather/Forum/adMain">討論區管理</a></li>
 											</ul>
 										</div>

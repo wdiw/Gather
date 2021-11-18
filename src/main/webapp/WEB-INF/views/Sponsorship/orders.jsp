@@ -552,9 +552,9 @@
 										<tr >
 											<th><span class="tableSpan"><i class="mdi mdi-nutrition"></i>訂單編號<span></th>
 											<th><span class="tableSpan"><i class="mdi mdi-account-star"></i> 贊助人編號<span></th>
-											<th><span class="tableSpan"><i class="mdi mdi-file-image"></i> 專案圖片<span></th>
-											<th><span class="tableSpan"><i class="mdi mdi-counter"></i>專案編號<span></th>
-											<th><span class="tableSpan"><i class="mdi mdi-book"></i>專案名稱<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-file-image"></i>計畫圖片<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-counter"></i>計畫編號<span></th>
+											<th><span class="tableSpan"><i class="mdi mdi-book"></i>計畫名稱<span></th>
 											<th><span class="tableSpan"><i class="mdi mdi-coin"></i>贊助金額<span></th>
 											<th><span class="tableSpan"><i class="mdi mdi-pencil"></i><span></th>
 											<th><span class="tableSpan"><i class="mdi mdi-delete"></i><span></th>

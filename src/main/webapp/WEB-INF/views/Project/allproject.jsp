@@ -541,7 +541,7 @@
 
 								<script>
 									$("#managerProjectOutputCSV").click(function () {
-										var url = "<spring:url value='/Project/projectsOutput'/>"
+										var url = "<spring:url value='/Project/managerProjectsOutput'/>"
 										$.ajax({
 											url: url,
 											type: "GET",
@@ -569,7 +569,7 @@
 
 
 									$("#managerProjectOutputJson").click(function () {
-										var url = "<spring:url value='/Project/projectsOutput'/>"
+										var url = "<spring:url value='/Project/managerProjectsOutput'/>"
 										$.ajax({
 											url: url,
 											type: "GET",

@@ -410,12 +410,12 @@
 					
                     <div class="form-group">
                     <i class="mdi mdi-counter" style="position: relative;left: -60px;top:29px"></i>
-                      <label for="sPID" style="position: relative;left: -60px;top:29px">專案編號</label>
+                      <label for="sPID" style="position: relative;left: -60px;top:29px">計畫編號</label>
                       <input id="sPID" name="sPID" class="form-control" value="${sBean.sPID}" type='text' readonly="readonly" style="width: 270px;text-align: center;position: relative;left: 40px ">
                     </div>
                     <div class="form-group">
                     <i class="mdi mdi-book" style="position: relative;left: -60px;top:29px"></i>
-                      <label for="sPName" style="position: relative;left: -60px;top:29px">專案名稱</label>
+                      <label for="sPName" style="position: relative;left: -60px;top:29px">計畫名稱</label>
                       <input id="sPName" name="sPName" class="form-control" value="${sBean.sPName}"  type='text' readonly="readonly" style="width: 270px;text-align: center;position: relative;left: 40px ">
                     </div>
                   

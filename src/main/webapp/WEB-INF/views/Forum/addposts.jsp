@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Minishop - Free Bootstrap 4 Template by Colorlib</title>
+<title>Gather討論區</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -29,6 +29,15 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+<style>
+	#navBarTop {
+			max-width: 1850px;
+		}
+
+		.nav-link {
+			font-size: 16px !important;
+		}
+</style>
 </head>
 <body class="goto-here">
 		<div class="py-1 bg-black">
@@ -53,8 +62,10 @@
 		  </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-			<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+	    <div class="container" id="navBarTop">
+			<a href="/Gather">
+				<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+			</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -102,8 +113,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
-            <h1 class="mb-0 bread">Blog</h1>
+<!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p> -->
+            <h1 class="mb-0 bread">Gather討論區</h1>
           </div>
         </div>
       </div>
@@ -148,6 +159,7 @@
 									<textarea id="post" name="post" cols="200" rows="15" class="form-control" ></textarea>
 								</div>
 								<button type='submit' id="addbtn" name="submit" class="btn btn-primary mr-2">送出</button>
+								<button id="oneclick" name='oneclick' class="btn btn-primary mr-2">一鍵輸入</button>
 							</div>
 							
 						</div>
@@ -388,7 +400,8 @@
 	$('#post').summernote({  //#後面放id屬性值
 		placeholder: '請輸入文章內容',
 		tabsize: 2,
-		height: 100,
+		height: 200,
+		disableResizeEditor: true,
 	});
 	
 	
@@ -458,7 +471,19 @@ $("#addbtn").click(function() { //對應button的id屬性值，也就是addbtn
 }) //$("#form").on("submit", function(e){
 
  }) //$("#addbtn").click(function
-	
+
+
+
+	//一鍵輸入
+	$("#oneclick").click(function (e) {
+		e.preventDefault();
+		$('#name').val("商品可以退貨嗎？");
+		$('#post').summernote('editor.pasteHTML', '<span style="font-size: 14px;">如題</span><p><span style="font-size: 14px;">一直對募資平台上賣的某款耳機很心動</span></p><p><span style="font-size: 14px;">但是看了半天說明</span></p><p><span style="font-size: 14px;">都沒有寫要是需要退貨退款</span></p><p><span style="font-size: 14px;">會有什麼處理辦法</span></p><p><span style="font-size: 14px;">畢竟耳機算是高單價物品</span></p><p><span style="font-size: 14px;">有點擔心要是買來音質不好怎麼辦（沒聽過的牌子）</span></p><p><span style="font-size: 14px;">可是聯名款真的蠻燒…</span></p><p><span style="font-size: 14px;">不過嘖嘖商品又很多爭議…好猶豫…</span></p><p><span style="font-size: 14px;">有人有相關經驗的嗎？</span></p><p></p>');
+	})//一鍵輸入結束
+
+
+
+
 	</script>
 
 </body>

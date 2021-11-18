@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Gather</title>
+<title>Gather討論區</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -50,13 +50,15 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 
-<script>
+<style>
+		#navBarTop {
+				max-width: 1850px;
+			}
 
-
-// alert("!!!!");
-            
-
-</script>
+			.nav-link {
+				font-size: 16px !important;
+			}
+</style>
 
 </head>
 <body class="goto-here">
@@ -83,8 +85,10 @@
 		  </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-			<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+	    <div class="container" id="navBarTop">
+			<a href="/Gather">
+				<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+			</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -158,7 +162,7 @@
 		                <!-- 文章內容顯示有問題 -->
 <%-- 		                <p style="width:400px; white-space:nowrap;overflow: hidden; text-overflow:ellipsis; ">${forum.post}</p> --%>
 		                <p>..........</p>
-		                <p><a href="<c:url value='/postdetail?id=${forum.id}' />	" class="btn btn-primary py-2 px-3">Read more</a></p>
+		                <p><a href="<c:url value='/postdetail?id=${forum.id}' />	" class="btn btn-primary py-2 px-3">...更多</a></p>
 		              </div>
 		            </div>
 		          </div>
@@ -244,6 +248,9 @@
                   <input type="text" class="form-control" id="searchvalue" placeholder="輸入文章標題">
                 </div>
               </form><br>
+              <div id="po" class="form-group">
+              <button id="oneclick" name='oneclick' class="btn py-3 px-4 btn-primary">一鍵輸入</button>
+              </div>
             </div>
             
             <div class="sidebar-box ftco-animate">
@@ -500,6 +507,14 @@
 	
 	}) //$(document).ready(function()
 	
+	
+	//一鍵輸入
+	$("#oneclick").click(function (e) {
+	e.preventDefault();
+	$('#searchvalue').val('退貨');
+	})//一鍵輸入結束
+			
+			
 	
 	</script>
 

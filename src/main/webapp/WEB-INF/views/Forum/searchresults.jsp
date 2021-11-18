@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Gather</title>
+<title>Gather討論區</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -29,6 +29,15 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+<style>
+	#navBarTop {
+			max-width: 1850px;
+		}
+
+		.nav-link {
+			font-size: 16px !important;
+		}
+</style>
 </head>
 <body class="goto-here">
 		<div class="py-1 bg-black">
@@ -54,8 +63,10 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 						id="ftco-navbar">
-						<div class="container">
-							<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+						<div class="container" id="navBarTop">
+							<a href="/Gather">
+								<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+							</a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="oi oi-menu"></span> Menu

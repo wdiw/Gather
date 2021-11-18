@@ -1,7 +1,7 @@
 $(function () {
 
     var data = {
-        "name": "王凱富",
+        "name": "簡慕槐",
         "sex": "男",
         "email": "ChillSeph0729@gmail.com",
         "pwd": "0729ChillSeph",

@@ -570,12 +570,14 @@
 				$('#post').summernote({  //#後面放id屬性值
   					placeholder: '請輸入文章內容',
   					tabsize: 2,
-  	        		height: 100,
+  	        		height: 200,
+  	        		disableResizeEditor: true,
   				});
 				$('#forumcomment').summernote({  //#後面放id屬性值
   					placeholder: '請輸入留言',
   					tabsize: 2,
   	        		height: 100,
+  	        		disableResizeEditor: true,
   				});
 				});
 				

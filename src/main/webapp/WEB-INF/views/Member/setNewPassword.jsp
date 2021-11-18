@@ -29,20 +29,19 @@
         <div class="row w-100 mx-0">
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-              <div class="brand-logo" style="padding-left: 27%;">
-                <img src="/Gather/images/G.png" alt="logo">
+              <div class="brand-logo">
+                <img src="/Gather/images/logo.svg" alt="logo">
               </div>
-              <div style="text-align: center;">
-                <h3>"${memberData.name}" 歡迎回來!</h3>
-                <h4 class="font-weight-medium">    讓我們重新設定密碼</h4>
-              </div>
+              
+              <h4>會員 "${memberData.name}" 歡迎回來!</h4>
+              <h6 class="font-weight-light">讓我們重新設定密碼</h6>
               <form class="pt-3">
                 <div class="form-group">
-                  <b><a style="color: darkblue;">新密碼</a></b>
+                  新密碼
                   <input type="text" class="form-control form-control-lg" id="new_password" placeholder="New Password">
                 </div>
                 <div class="form-group">
-                  <b><a style="color: darkblue;">再次輸入</a></b>
+                  再次輸入
                   <input type="password" class="form-control form-control-lg" id="new_password_again" placeholder="New Password Again">
                 </div>
                 <div class="mt-3">

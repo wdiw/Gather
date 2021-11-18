@@ -72,7 +72,7 @@
 
     //一鍵填入開始
     var data = {
-        "name": "王凱富",
+        "name": "許效舜",
         "sex": "男",
         "email": "SmileEveryDay0212@gmail.com",
         "pwd": "ZA399sa",

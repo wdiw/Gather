@@ -6,7 +6,7 @@
         <html lang="en">
 
         <head>
-          <title>Minishop - Free Bootstrap 4 Template by Colorlib</title>
+          <title>Gather</title>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -433,7 +433,7 @@
                 <div class="row mb-5">
                   <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                      <h2 class="ftco-heading-2">Minishop</h2>
+                      <h2 class="ftco-heading-2">Gather</h2>
                       <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
                       <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                         <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -532,7 +532,7 @@
 
 			<script>
 				$("#userProjectOutputCSV").click(function () {
-					var url = "<spring:url value='/Project/projectsOutput'/>"
+					var url = "<spring:url value='/Project/userProjectsOutput'/>"
 					$.ajax({
 						url: url,
 						type: "GET",
@@ -560,11 +560,11 @@
 
 
 				$("#userProjectOutputJson").click(function () {
-					var url = "<spring:url value='/Project/projectsOutput'/>"
+					var url = "<spring:url value='/Project/userProjectsOutput'/>"
 					$.ajax({
 						url: url,
 						type: "GET",
-						data: { type: "csv", pStatus: "user" },
+						data: { type: "json", pStatus: "user" },
 						success: function (data) {
 							Swal.fire({
 								title: '已轉出',
@@ -584,35 +584,10 @@
 
 					})
 
-				})
+				})//Json END
 
 
-				$("#userProjectOutputJson").click(function () {
-					var url = "<spring:url value='/Project/projectsOutput'/>"
-					$.ajax({
-						url: url,
-						type: "GET",
-						data: { type: "json", pStatus: "user" },
-						success: function (data) {
-							Swal.fire({
-								title: '已轉出',
-								icon: 'success',
-								text: "資料已轉出！",
-								position: 'center',
-
-							})
-						}, error: function (xhr, text) {
-
-							Swal.fire({
-								title: '失敗',
-								icon: 'error',
-								text: "失敗",
-							})
-						}
-
-					})
-
-				})
+				
 
 			</script>
         </body>

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.mail.Session;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -119,6 +120,7 @@ public class ProjectController {
 			@RequestParam("pStatus") String pStatus,
 			@RequestParam(name = "changeImageCover",required = false) MultipartFile pImage,
 			@RequestParam("reason") String reason,
+			@RequestParam("pCategory") String pCategory,
 			HttpServletRequest request
 			
 			
@@ -137,7 +139,7 @@ public class ProjectController {
 			String filePath = projectService.getProjectById(pID).getpImageCover();
 			
 			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pSDate, pEDate, filePath, pDescribe, pContent, mID,
-					pStatus,reason,sponsorCount,pAmountNow);
+					pStatus,reason,sponsorCount,pAmountNow,pCategory);
 			projectService.updateProject(pBean);
 
 		} else {
@@ -164,7 +166,7 @@ public class ProjectController {
 
 			filePath += pName + "/" + pName + "_Cover" + ext;
 			ProjectBean pBean = new ProjectBean(pID, pName, pTarget, pSDate, pEDate, filePath, pDescribe, pContent, mID,
-					pStatus,reason,sponsorCount,pAmountNow);
+					pStatus,reason,sponsorCount,pAmountNow,pCategory);
 			projectService.updateProject(pBean);
 		}
 
@@ -459,8 +461,8 @@ public class ProjectController {
 //	 }
 	 
 	 
-//	//輸出資料
-			@GetMapping("Project/projectsOutput")
+	//管理者輸出全部計畫資料
+			@GetMapping("Project/managerProjectsOutput")
 			public ResponseEntity<String> managerProjectsOutput(
 					@RequestParam("type") String type,
 					@RequestParam("pStatus") String pStatus
@@ -495,5 +497,41 @@ public class ProjectController {
 			}
 	 
 	
+			//使用者輸出全部計畫資料
+			@GetMapping("Project/userProjectsOutput")
+			public ResponseEntity<String> userProjectsOutput(
+					@RequestParam("type") String type,
+					@RequestParam("pStatus") String pStatus,
+					HttpServletRequest request
+					
+					) throws SQLException, IOException {
+				
+				Member memberData = (Member) request.getSession().getAttribute("memberData");
+				File file = new File("C://Gather//FileOutput//");
+				
+				if(!file.exists()) {
+					file.mkdirs();
+				}
+				
+				FileOutputStream fos=new FileOutputStream(new File(file,pStatus+"ProjectsOutput."+type));
+				
+				OutputStreamWriter osw=new OutputStreamWriter(fos,"MS950");
+				BufferedWriter fileWriter = new BufferedWriter(osw);
+				
+			    fileWriter.write("計畫編號, 計畫名稱,計畫目標,計畫狀態");
+			    
+			    List<ProjectBean> allProjects = projectService.getAllProjectBymID(memberData.getId());
+			    
+			    for (ProjectBean projectBean : allProjects) {
+			    	String line = String.format("%s,%s,%s,%s",projectBean.getpID(),projectBean.getpName(),
+			    			projectBean.getpTarget(),projectBean.getpStatus() );
+		                 
+		                fileWriter.newLine();
+		                fileWriter.write(line); 
+				}
+			    fileWriter.close();
+			    osw.close();
+			    return new ResponseEntity<String>(HttpStatus.OK);
+			}
 	
 }

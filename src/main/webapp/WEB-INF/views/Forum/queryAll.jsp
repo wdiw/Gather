@@ -483,9 +483,9 @@
 															<c:forEach items='${AllForum}' var='forum' >
 <!-- 								<tr> -->
 				<!-- 			<tr onclick="test()" > -->
-							<tr>
+							<tr onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' style="cursor: pointer;">
 				<%-- 			value='/Project/project?pID=${project.pID}' --%>
-									<td  onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' style="cursor: pointer;" >
+									<td>
 										<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.id}</a>
 				<%-- 				缺分類${forum.id} --%>
 									</td>
@@ -494,9 +494,10 @@
 										<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.postCategory}</a>
 									</td>
 									
-									<td style="">
-				<%-- 				<td onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' > --%>
-										<div style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;">
+									<td>
+				<%-- 				<td onclick='location.href="<c:url value='/Forum/detail?id=${forum.id}' />"' style=""> --%>
+<!-- 										<div style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;cursor: pointer;"> -->
+										<div style="width:100%;white-space:normal;word-wrap:break-word;word-break:break-all;">
 				<%-- 					${forum.name} --%>
 											<a href="<c:url value='/Forum/detail?id=${forum.id}' />" style="color:black;" >${forum.name}</a>
 										</div>
@@ -516,7 +517,10 @@
 									${forum.postTime}
 									</td>
 									
-									<td><br>${forum.postUpdateTime}</td>
+									<td>
+									${forum.poster}<br>
+									${forum.postUpdateTime}
+									</td>
 <!-- 									<td>回覆數123</td> -->
 <%-- 									<td><a onclick="deletebtn(${forum.id})" class="btn btn-danger">文章刪除</a></td> --%>
 				<!-- 				<td> -->

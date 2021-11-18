@@ -76,20 +76,23 @@ public class MemberRESTController {
 	  System.out.println("登入: 前端收到的資料" + theMember);
 	  Member result = memberService.getMemberByAccountAndPassword(theMember);
 	  System.out.println("登入:資料庫搜尋的結果" + result);
-	  if (result != null && !result.getStatus().equals("停權")) {
-	   // 找到會員
-	   // 更新登入次數，存入資料庫
-	   result.setLoginTimes(result.getLoginTimes()+1);
-	   memberService.insertOrUpdateMember(result);
-	   // 將會員資料放入session 供前端使用
-	   request.getSession().setAttribute("memberData", result);
-	   return new ResponseEntity<String>("Y", HttpStatus.OK);
-	//   return new ResponseEntity<String>("<meta http-equiv='refresh' content=0;URL='https://www.baidu.com/'>", HttpStatus.OK);
-	  } else if(result.getStatus().equals("停權")){
-	   return new ResponseEntity<String>("NN", HttpStatus.OK);
-	  }
-	   
-	  return new ResponseEntity<String>("N", HttpStatus.OK);
+	  try {
+		    if (result != null && !result.getStatus().equals("停權")) {
+		      // 找到會員
+		      // 更新登入次數，存入資料庫
+//		      result.setLoginTimes(result.getLoginTimes()+1);
+		      memberService.insertOrUpdateMember(result);
+		      // 將會員資料放入session 供前端使用
+		      request.getSession().setAttribute("memberData", result);
+		      return new ResponseEntity<String>("Y", HttpStatus.OK);
+		   //   return new ResponseEntity<String>("<meta http-equiv='refresh' content=0;URL='https://www.baidu.com/'>", HttpStatus.OK);
+		     } else if(result.getStatus().equals("停權")){
+		      return new ResponseEntity<String>("NN", HttpStatus.OK);
+		     }
+		     return new ResponseEntity<String>("N", HttpStatus.OK);
+		 } catch (Exception e) {
+		  return new ResponseEntity<String>("N", HttpStatus.OK);
+		 }
 	 }
 	// 註冊認證
 		@PostMapping("/register")
@@ -135,7 +138,7 @@ public class MemberRESTController {
 			System.out.println("驗證成功，準備加入資料庫");
 			Member theMember = (Member) req.getSession().getAttribute("registerData");
 			theMember.setStatus("會員");//賦予會員的身分
-			theMember.setLoginTimes(0);
+//			theMember.setLoginTimes(1);
 			memberService.insertOrUpdateMember(theMember);
 			System.out.println("會員資料加入資料庫成功");
 			//使用預設大頭貼
@@ -166,7 +169,7 @@ public class MemberRESTController {
 		theMember.setId(null);
 		//預設一般會員
 		theMember.setStatus("會員");
-		theMember.setLoginTimes(0);
+//		theMember.setLoginTimes(1);
 		System.out.println(theMember);
 		memberService.insertOrUpdateMember(theMember);
 		//使用預設大頭貼

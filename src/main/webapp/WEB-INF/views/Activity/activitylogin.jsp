@@ -46,6 +46,8 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
 
 <style>
 
@@ -300,7 +302,7 @@
 			<div class="row mb-5">
 				<div class="col-md">
 					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Minishop</h2>
+						<h2 class="ftco-heading-2">Gather</h2>
 						<p>Far far away, behind the word mountains, far from the
 							countries Vokalia and Consonantia.</p>
 						<ul

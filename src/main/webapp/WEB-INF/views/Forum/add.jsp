@@ -429,6 +429,7 @@
 					</div>
 					
 					<button type='submit' id="addbtn" name="submit" class="btn btn-primary mr-2">送出</button>
+					<button id="oneclick" name='oneclick' class="btn btn-primary mr-2">一鍵輸入</button>
                   </form>
                 </div>
               
@@ -484,7 +485,8 @@
 //   			alert("進入summernote"); //沒跳
   			placeholder: '請輸入文章內容',
   			tabsize: 2,
-  	        height: 100,
+  	        height: 250,
+  	      disableResizeEditor: true,
 //   	        callbacks: {
 //   	        	onImageUpload: function(files) {
 //   	        		// upload image to server and create imgNode
@@ -592,8 +594,18 @@
             }) //then((result) => {
         }) //$("#form").on("submit", function(e){
         
-		 }) //$("#addbtn").click(function
-    </script>
+	}) //$("#addbtn").click(function
+			
+	//一鍵輸入
+	$("#oneclick").click(function (e) {
+		e.preventDefault();
+		$('#name').val("2021/11/20 緊急停機公告");
+		$('#post').summernote('editor.pasteHTML','<span style="font-size: 8.75px;">配合 2021/11/20 高壓電設備年度檢驗</span><p><span style="font-size: 8.75px;">將於 05:00 至 18:00 暫停服務</span></p><p><span style="font-size: 8.75px;">造成不便，敬請見諒</span></p>')
+	})//一鍵輸入結束		
+			
+			
+			
+	</script>
   
 </body>
 

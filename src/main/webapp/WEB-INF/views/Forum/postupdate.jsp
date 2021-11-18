@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Gather</title>
+<title>Gather討論區</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -29,6 +29,15 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+<style>
+	#navBarTop {
+			max-width: 1850px;
+		}
+
+		.nav-link {
+			font-size: 16px !important;
+		}
+</style>
 </head>
 <body class="goto-here">
 		<div class="py-1 bg-black">
@@ -53,8 +62,10 @@
 		  </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-			<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+	    <div class="container" id="navBarTop">
+			<a href="/Gather">
+				<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+			</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -104,8 +115,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
-            <h1 class="mb-0 bread">Blog</h1>
+<!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p> -->
+            <h1 class="mb-0 bread">Gather討論區</h1>
           </div>
         </div>
       </div>
@@ -156,7 +167,7 @@
 								</div>
 								<button id="updatebtnn" name='updatebutton' 
 								class="btn btn-primary mr-2" onclick="updatebtn(${forum.id})">送出</button>
-								
+<!-- 								<button id="oneclick" name='oneclick' class="btn btn-primary mr-2">一鍵輸入</button> -->
 							</div>
 							
 						</div>
@@ -396,7 +407,7 @@
 	$('#post').summernote({  //#後面放id屬性值
 		placeholder: '請輸入文章內容',
 		tabsize: 2,
-		height: 100,
+		height: 200,
 	});
 	
 	
@@ -454,7 +465,17 @@
 			}
 		});
 	})};
-		 
+
+
+
+	
+	//一鍵輸入
+	$("#oneclick").click(function (e) {
+	e.preventDefault();
+	$('#name').val("商品可以退貨嗎？");
+	$('#forumcomment').summernote('editor.pasteHTML','專案還沒結束的話可以退款，寫信到客服就好了');
+	})//一鍵輸入結束
+
 		 
 	
 	</script>

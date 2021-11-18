@@ -9,7 +9,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <head>
-    <title>Minishop - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Gather討論區</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -46,7 +46,15 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     
-    
+    <style>
+      #navBarTop {
+          max-width: 1850px;
+        }
+  
+        .nav-link {
+          font-size: 16px !important;
+        }
+  </style>
     
     
   </head>
@@ -74,8 +82,10 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 						id="ftco-navbar">
-						<div class="container">
-							<img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+						<div class="container" id="navBarTop">
+              <a href="/Gather">
+                <img style="margin-left:10px;" width="130px" height="100px"  src="/Gather/images/G.png">
+              </a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 								aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="oi oi-menu"></span> Menu
@@ -148,7 +158,7 @@
 		<section class="ftco-section ftco-degree-bg">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 ">
+          <div class="col-lg-8">
             
             <!-- 內文 -->
             <h1 class="mb-3">[${forum.postCategory}] ${forum.name}</h1>
@@ -271,13 +281,14 @@
 <%--                   <img src="/Gather/images/Members/${memberData.id}.jpg" alt="profile"/> --%>
 <!--                   </a> -->
                   <label for="message">留言</label>
-                  <textarea id="forumcomment" name="forumcomment" cols="30" rows="10" 
+                  <textarea id="forumcomment" name="forumcomment" cols="130" rows="130" 
                   class="form-control" placeholder="請輸入留言"></textarea>
                   </div>
                   
                   <div class="form-group">
                   <button type='submit' id="addcomment" name='addcomment'
                   class="btn py-3 px-4 btn-primary">送出留言</button>
+                  <button id="oneclick" name='oneclick' class="btn py-3 px-4 btn-primary">一鍵輸入</button>
                   </div>
                   
                   </div>
@@ -516,6 +527,7 @@
         placeholder: '請輸入留言',
         tabsize: 2,
         height: 100,
+        disableResizeEditor: true,
       });
       
     });
@@ -707,9 +719,17 @@
                             })
                         }
                     })
-              }   
-             }) //$("#addbtn").click(function
-            
+              }//$("#addbtn").click(function
+			})
+			
+			
+			//一鍵輸入
+			$("#oneclick").click(function (e) {
+				e.preventDefault();
+				$('#forumcomment').summernote('editor.pasteHTML','最多人用的應該是嘖嘖');
+			})//一鍵輸入結束
+			
+			
         </script>
     
   

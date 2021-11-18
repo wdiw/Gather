@@ -292,6 +292,11 @@
 														<input id="pEDate" name="pEDate" class="form-control"
 															value="${project.pEDate}" type='Date'>
 													</div>
+													<div class="form-group">
+														<label for="pCategory">計畫類別</label>
+														<input id="pCategory" name="pCategory" class="form-control"
+														 value="${project.pCategory}" type='text'>
+													   </div>
 
 
 													<div class="form-group">
@@ -461,7 +466,7 @@
 								<div class="row mb-5">
 									<div class="col-md">
 										<div class="ftco-footer-widget mb-4">
-											<h2 class="ftco-heading-2">Minishop</h2>
+											<h2 class="ftco-heading-2">Gather</h2>
 											<p>Far far away, behind the word mountains, far from the countries Vokalia
 												and Consonantia.</p>
 											<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
